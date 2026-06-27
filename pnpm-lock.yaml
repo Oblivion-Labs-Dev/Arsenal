@@ -29,7 +29,7 @@ importers:
 
   packages/backend:
     dependencies:
-      '@oblivion-labs/arsenal-shared':
+      '@oblivion-labs-dev/arsenal-shared':
         specifier: workspace:*
         version: link:../shared
       zod:
@@ -48,7 +48,7 @@ importers:
 
   packages/frontend:
     dependencies:
-      '@oblivion-labs/arsenal-shared':
+      '@oblivion-labs-dev/arsenal-shared':
         specifier: workspace:*
         version: link:../shared
     devDependencies:

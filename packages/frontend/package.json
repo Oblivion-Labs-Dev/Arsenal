@@ -1,5 +1,5 @@
 {
-  "name": "@oblivion-labs/arsenal-frontend",
+  "name": "@oblivion-labs-dev/arsenal-frontend",
   "version": "0.1.0",
   "description": "Frontend-safe utilities: fetch client, localStorage helpers, and shared UI helpers",
   "type": "module",
@@ -23,7 +23,7 @@
     "react": ">=18"
   },
   "dependencies": {
-    "@oblivion-labs/arsenal-shared": "workspace:*"
+    "@oblivion-labs-dev/arsenal-shared": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^19.2.14",

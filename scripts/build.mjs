@@ -10,7 +10,7 @@ const packages = ["shared", "backend", "frontend"];
 
 for (const name of packages) {
   const cwd = path.join(root, "packages", name);
-  console.log(`\nBuilding @oblivion-labs/arsenal-${name}...`);
+  console.log(`\nBuilding @oblivion-labs-dev/arsenal-${name}...`);
   execSync(`node "${tsupCli}"`, { cwd, stdio: "inherit" });
 }
 

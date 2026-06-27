@@ -1,5 +1,5 @@
 {
-  "name": "@oblivion-labs/arsenal-backend",
+  "name": "@oblivion-labs-dev/arsenal-backend",
   "version": "0.1.0",
   "description": "Backend utilities: OpenRouter client, retry, logging, env validation, and API helpers",
   "type": "module",
@@ -20,7 +20,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@oblivion-labs/arsenal-shared": "workspace:*",
+    "@oblivion-labs-dev/arsenal-shared": "workspace:*",
     "zod": "^3.24.2"
   },
   "devDependencies": {

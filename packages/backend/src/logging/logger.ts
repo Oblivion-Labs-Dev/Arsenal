@@ -1,4 +1,4 @@
-import type { JSONValue } from "@oblivion-labs/arsenal-shared";
+import type { JSONValue } from "@oblivion-labs-dev/arsenal-shared";
 
 export type LogLevel = "debug" | "info" | "warn" | "error";
 

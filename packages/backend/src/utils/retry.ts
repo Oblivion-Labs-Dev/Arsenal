@@ -1,5 +1,5 @@
-import type { JSONValue } from "@oblivion-labs/arsenal-shared";
-import { TRANSIENT_HTTP_STATUS_CODES } from "@oblivion-labs/arsenal-shared";
+import type { JSONValue } from "@oblivion-labs-dev/arsenal-shared";
+import { TRANSIENT_HTTP_STATUS_CODES } from "@oblivion-labs-dev/arsenal-shared";
 
 /**
  * Parse JSON from LLM output, stripping markdown fences and extracting embedded objects.

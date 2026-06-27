@@ -1,5 +1,5 @@
 {
-  "name": "@oblivion-labs/arsenal-shared",
+  "name": "@oblivion-labs-dev/arsenal-shared",
   "version": "0.1.0",
   "description": "Shared types, schemas, and constants for Oblivion Labs projects",
   "type": "module",

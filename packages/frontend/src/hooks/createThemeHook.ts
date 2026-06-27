@@ -1,4 +1,4 @@
-import type { ThemeMode } from "@oblivion-labs/arsenal-shared";
+import type { ThemeMode } from "@oblivion-labs-dev/arsenal-shared";
 import { useCallback, useEffect, useState } from "react";
 import { safeLocalStorage } from "../storage/localStorage.js";
 

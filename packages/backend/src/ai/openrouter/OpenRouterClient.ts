@@ -3,7 +3,7 @@ import {
   DEFAULT_RETRY_ATTEMPTS,
   OPENROUTER_CHAT_COMPLETIONS_PATH,
   OPENROUTER_DEFAULT_BASE_URL,
-} from "@oblivion-labs/arsenal-shared";
+} from "@oblivion-labs-dev/arsenal-shared";
 import { AppError } from "../../errors/AppError.js";
 import {
   endpointLabel,

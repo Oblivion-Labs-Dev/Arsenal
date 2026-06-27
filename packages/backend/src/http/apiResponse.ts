@@ -1,4 +1,4 @@
-import type { JSONValue } from "@oblivion-labs/arsenal-shared";
+import type { JSONValue } from "@oblivion-labs-dev/arsenal-shared";
 import { isAppError } from "../errors/AppError.js";
 
 /** Standard success response shape. */

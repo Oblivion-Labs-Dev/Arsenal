@@ -1,4 +1,4 @@
-import type { JSONValue } from "@oblivion-labs/arsenal-shared";
+import type { JSONValue } from "@oblivion-labs-dev/arsenal-shared";
 
 /** Returns true when running in a browser environment. */
 export function isBrowser(): boolean {

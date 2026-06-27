@@ -1,4 +1,4 @@
-import type { JSONValue } from "@oblivion-labs/arsenal-shared";
+import type { JSONValue } from "@oblivion-labs-dev/arsenal-shared";
 import { useCallback, useEffect, useState } from "react";
 import { safeLocalStorage } from "../storage/localStorage.js";
 

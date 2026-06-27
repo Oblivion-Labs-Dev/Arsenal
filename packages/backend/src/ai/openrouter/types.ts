@@ -1,4 +1,4 @@
-import type { JSONValue } from "@oblivion-labs/arsenal-shared";
+import type { JSONValue } from "@oblivion-labs-dev/arsenal-shared";
 
 /** OpenRouter chat message role. */
 export type ChatRole = "system" | "user" | "assistant";
