@@ -1,0 +1,38 @@
+{
+  "name": "@oblivion-labs/arsenal-frontend",
+  "version": "0.1.0",
+  "description": "Frontend-safe utilities: fetch client, localStorage helpers, and shared UI helpers",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "dependencies": {
+    "@oblivion-labs/arsenal-shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "react": "^19.2.4",
+    "tsup": "^8.5.0",
+    "typescript": "^5.7.2",
+    "vitest": "^4.1.9"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  }
+}
