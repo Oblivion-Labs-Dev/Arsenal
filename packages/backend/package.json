@@ -28,7 +28,12 @@
     "typescript": "^5.7.2",
     "vitest": "^4.1.9"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Oblivion-Labs-Dev/Arsenal.git"
+  },
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
     "access": "restricted"
   }
 }
