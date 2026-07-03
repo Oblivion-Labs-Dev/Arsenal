@@ -33,7 +33,7 @@ importers:
         specifier: ^3.24.2
         version: 3.25.76
 
-  packages/applypilot-extension:
+  packages/jobfill-extension:
     dependencies:
       '@oblivion-labs-dev/arsenal-shared':
         specifier: workspace:*
