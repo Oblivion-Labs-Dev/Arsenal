@@ -1,0 +1,8235 @@
+[
+  {
+    "company": "Bostik",
+    "recruiters": [
+      {
+        "name": "Mac Carpenter",
+        "email": "mac.carpenter@bostik.com"
+      }
+    ]
+  },
+  {
+    "company": "Workday",
+    "recruiters": [
+      {
+        "name": "Sara Reindl",
+        "email": "sara.reindl@workday.com"
+      },
+      {
+        "name": "Nikoo Nakhai",
+        "email": "nikoo.nakhai@workday.com"
+      },
+      {
+        "name": "Marilou Alejo-Phung",
+        "email": "marilou.alejo-phung@workday.com   University Recruiter"
+      },
+      {
+        "name": "Kamryn Ralph",
+        "email": "kamryn.ralph@workday.com"
+      },
+      {
+        "name": "Jenny Ratzel",
+        "email": "jenny.ratzel@workday.com"
+      },
+      {
+        "name": "Brittany Turcott",
+        "email": "brittany.turcott@workday.com"
+      }
+    ]
+  },
+  {
+    "company": "NVIDIA",
+    "recruiters": [
+      {
+        "name": "Ashley Jetson",
+        "email": "ajetson@nvidia.com"
+      },
+      {
+        "name": "Olga Nikolaev",
+        "email": "onikolaev@nvidia.com"
+      },
+      {
+        "name": "Samantha C.",
+        "email": "sc@nvidia.com"
+      },
+      {
+        "name": "Linda Trias",
+        "email": "ltrias@nvidia.com"
+      },
+      {
+        "name": "Crystal Aggarwal",
+        "email": "caggarwal@nvidia.com"
+      },
+      {
+        "name": "Daniel Yang",
+        "email": "dyang@nvidia.com"
+      },
+      {
+        "name": "Ashley Hogue",
+        "email": "ahogue@nvidia.com"
+      }
+    ]
+  },
+  {
+    "company": "Visa",
+    "recruiters": [
+      {
+        "name": "Vanessa Dastmalchi",
+        "email": "vdastmalchi@visa.com"
+      },
+      {
+        "name": "Debora Pavon",
+        "email": "dpavon@visa.com"
+      },
+      {
+        "name": "Audrey Ench",
+        "email": "aench@visa.com"
+      },
+      {
+        "name": "Casey Sprau",
+        "email": "csprau@visa.com"
+      },
+      {
+        "name": "Melanie Campbell-Alva",
+        "email": "mcampbell-alva@visa.com"
+      },
+      {
+        "name": "Julie Prinner",
+        "email": "jprinner@visa.com"
+      },
+      {
+        "name": "Lindsay Peters",
+        "email": "lpeters@visa.com"
+      },
+      {
+        "name": "Joe Guiler",
+        "email": "jguiler@visa.com"
+      }
+    ]
+  },
+  {
+    "company": "Google",
+    "recruiters": [
+      {
+        "name": "Haylee Gani",
+        "email": "hgani@google.com"
+      },
+      {
+        "name": "Allyssa Perez",
+        "email": "aperez@google.com"
+      },
+      {
+        "name": "Lindsay Roland",
+        "email": "lroland@google.com"
+      },
+      {
+        "name": "Dana Schaffer",
+        "email": "dschaffer@google.com"
+      },
+      {
+        "name": "Lauran Woodward",
+        "email": "lwoodward@google.com"
+      },
+      {
+        "name": "Heather Henderson",
+        "email": "hhenderson@google.com"
+      },
+      {
+        "name": "Aiminh Phan",
+        "email": "aphan@google.com"
+      },
+      {
+        "name": "Sara Jo Whitfield",
+        "email": "swhitfield@google.com"
+      },
+      {
+        "name": "Erica Combopiano",
+        "email": "ecombopiano@google.com"
+      },
+      {
+        "name": "Julie Emerson",
+        "email": "jemerson@google.com"
+      },
+      {
+        "name": "Allison Cullington",
+        "email": "acullington@google.com"
+      },
+      {
+        "name": "Shea Bastedo",
+        "email": "sbastedo@google.com"
+      },
+      {
+        "name": "Shaina Conrad",
+        "email": "sconrad@google.com"
+      },
+      {
+        "name": "Noël Elgamal",
+        "email": "nelgamal@google.com"
+      },
+      {
+        "name": "Anne Parker",
+        "email": "aparker@google.com"
+      },
+      {
+        "name": "Megan Ford",
+        "email": "mford@google.com"
+      },
+      {
+        "name": "Rob Georgiefski",
+        "email": "rgeorgiefski@google.com"
+      },
+      {
+        "name": "Katie Papadonis",
+        "email": "kpapadonis@google.com"
+      },
+      {
+        "name": "Tamar Woodbury",
+        "email": "twoodbury@google.com"
+      },
+      {
+        "name": "Jesse Talaugon",
+        "email": "jtalaugon@google.com"
+      },
+      {
+        "name": "Nicole Tarantino",
+        "email": "ntarantino@google.com"
+      },
+      {
+        "name": "Jessica Wickers",
+        "email": "jwickers@google.com"
+      },
+      {
+        "name": "Amy Morimoto",
+        "email": "amorimoto@google.com"
+      },
+      {
+        "name": "Matt Breidenbach",
+        "email": "mbreidenbach@google.com"
+      },
+      {
+        "name": "Bryan Amidon",
+        "email": "bamidon@google.com"
+      },
+      {
+        "name": "Kelly Bailey",
+        "email": "kbailey@google.com"
+      },
+      {
+        "name": "Kelly Boysen",
+        "email": "kboysen@google.com"
+      },
+      {
+        "name": "William Tsui",
+        "email": "wtsui@google.com"
+      },
+      {
+        "name": "Avery Walker",
+        "email": "awalker@google.com"
+      },
+      {
+        "name": "Alexandra Muller",
+        "email": "amuller@google.com"
+      },
+      {
+        "name": "Isabella",
+        "email": "Kornbleet, PHR, SH ikornbleet@google.com"
+      },
+      {
+        "name": "Taylar Haney",
+        "email": "thaney@google.com"
+      },
+      {
+        "name": "Mukai Matsiga",
+        "email": "mmatsiga@google.com"
+      },
+      {
+        "name": "Kaio Miranda",
+        "email": "kmiranda@google.com"
+      },
+      {
+        "name": "Ashley McMillan",
+        "email": "amcmillan@google.com"
+      },
+      {
+        "name": "Meghan",
+        "email": "(Anderson) O'Neil   mmeghan@google.com"
+      },
+      {
+        "name": "Natalie Genco",
+        "email": "ngenco@google.com"
+      },
+      {
+        "name": "Katie Papadonis",
+        "email": "kpapadonis@google.com"
+      },
+      {
+        "name": "Lauren Anderson",
+        "email": "landerson@google.com"
+      },
+      {
+        "name": "Daryan Rahimzadeh",
+        "email": "drahimzadeh@google.com"
+      },
+      {
+        "name": "Melanie Olson",
+        "email": "molson@google.com"
+      },
+      {
+        "name": "Rayna Sun",
+        "email": "rsun@google.com"
+      },
+      {
+        "name": "Karly Moll",
+        "email": "kmoll@google.com"
+      },
+      {
+        "name": "Willow Marcon",
+        "email": "wmarcon@google.com"
+      },
+      {
+        "name": "Amanda A.",
+        "email": "aa@google.com"
+      },
+      {
+        "name": "Taara Sajnani",
+        "email": "tsajnani@google.com"
+      },
+      {
+        "name": "Heather Henderson",
+        "email": "hhenderson@google.com"
+      },
+      {
+        "name": "Claire Calero, PHR",
+        "email": "ccalero@google.com"
+      },
+      {
+        "name": "Shea Bastedo",
+        "email": "sbastedo@google.com"
+      },
+      {
+        "name": "Rayna Sun",
+        "email": "rsun@google.com"
+      },
+      {
+        "name": "Mohanan Priya",
+        "email": "mpriya@google.com"
+      },
+      {
+        "name": "Brittany Chassey",
+        "email": "bchassey@google.com"
+      },
+      {
+        "name": "Julie Samuel",
+        "email": "jsamuel@google.com"
+      },
+      {
+        "name": "Christina N. Batka",
+        "email": "cbatka@google.com"
+      },
+      {
+        "name": "Tiffany Nealy",
+        "email": "tnealy@google.com"
+      },
+      {
+        "name": "Nikki Riccoboni",
+        "email": "nriccoboni@google.com"
+      }
+    ]
+  },
+  {
+    "company": "TEKsystems",
+    "recruiters": [
+      {
+        "name": "Nikki (Reusch) Bynum",
+        "email": "nnikki@teksystems.com"
+      },
+      {
+        "name": "Teron Foster",
+        "email": "tfoster@teksystems.com"
+      },
+      {
+        "name": "Lauren Peters",
+        "email": "lpeters@teksystems.com"
+      },
+      {
+        "name": "Jay Burda",
+        "email": "jburda@teksystems.com"
+      },
+      {
+        "name": "Colby Jenkins",
+        "email": "cjenkins@teksystems.com"
+      },
+      {
+        "name": "Jelicza Thomas",
+        "email": "jthomas@teksystems.com"
+      },
+      {
+        "name": "Matthew Kauppi",
+        "email": "mkauppi@teksystems.com"
+      },
+      {
+        "name": "Karen Lopera",
+        "email": "klopera@teksystems.com"
+      },
+      {
+        "name": "Alyssa Barnes",
+        "email": "abarnes@teksystems.com"
+      },
+      {
+        "name": "Morgan Ingram",
+        "email": "mingram@teksystems.com"
+      },
+      {
+        "name": "Morgan Ingram",
+        "email": "mingram@teksystems.com"
+      },
+      {
+        "name": "Nandi Howard",
+        "email": "nhoward@teksystems.com"
+      }
+    ]
+  },
+  {
+    "company": "Microsoft",
+    "recruiters": [
+      {
+        "name": "NEHA SINGH",
+        "email": "singhn@microsoft.com"
+      },
+      {
+        "name": "Rakesh Das",
+        "email": "dasr@microsoft.com"
+      },
+      {
+        "name": "Britney Sligh",
+        "email": "slighb@microsoft.com"
+      },
+      {
+        "name": "Jesse Sparks",
+        "email": "sparksj@microsoft.com"
+      },
+      {
+        "name": "Annie Werner",
+        "email": "wernera@microsoft.com"
+      },
+      {
+        "name": "Abby Newton",
+        "email": "newtona@microsoft.com"
+      },
+      {
+        "name": "Brian Cuadra",
+        "email": "cuadrab@microsoft.com"
+      },
+      {
+        "name": "Katherine Safar",
+        "email": "safark@microsoft.com"
+      },
+      {
+        "name": "Tuva Chaudhry",
+        "email": "chaudhryt@microsoft.com"
+      },
+      {
+        "name": "Ellen Thorley",
+        "email": "thorleye@microsoft.com"
+      },
+      {
+        "name": "Sarah AboHana",
+        "email": "abohanas@microsoft.com"
+      },
+      {
+        "name": "Chase Butler",
+        "email": "butlerc@microsoft.com"
+      },
+      {
+        "name": "Katie Pinney",
+        "email": "pinneyk@microsoft.com"
+      },
+      {
+        "name": "Arianna Maag",
+        "email": "maaga@microsoft.com"
+      },
+      {
+        "name": "Georgia Jamieson",
+        "email": "jamiesong@microsoft.com"
+      },
+      {
+        "name": "Kelsey Saboori",
+        "email": "saboorik@microsoft.com"
+      },
+      {
+        "name": "Kaisa Larson",
+        "email": "larsonk@microsoft.com"
+      },
+      {
+        "name": "Meredith Bogguess",
+        "email": "bogguessm@microsoft.com"
+      },
+      {
+        "name": "Tim Kimball",
+        "email": "kimballt@microsoft.com"
+      },
+      {
+        "name": "Clare G.",
+        "email": "gc@microsoft.com"
+      },
+      {
+        "name": "Darren Lo",
+        "email": "lod@microsoft.com"
+      },
+      {
+        "name": "Briana M.",
+        "email": "mb@microsoft.com"
+      },
+      {
+        "name": "Alex DeDonker",
+        "email": "dedonkera@microsoft.com"
+      },
+      {
+        "name": "Dipika Ramachandran",
+        "email": "ramachandrand@microsoft.com"
+      },
+      {
+        "name": "Sarah Kaiser",
+        "email": "kaisers@microsoft.com"
+      },
+      {
+        "name": "Keisha Ebbesen",
+        "email": "ebbesenk@microsoft.com"
+      },
+      {
+        "name": "Michael Watkins",
+        "email": "watkinsm@microsoft.com"
+      },
+      {
+        "name": "Devi Sawhney",
+        "email": "sawhneyd@microsoft.com"
+      },
+      {
+        "name": "Kelsea Pullin",
+        "email": "pullink@microsoft.com"
+      },
+      {
+        "name": "Chelsea Mitchell",
+        "email": "mitchellc@microsoft.com"
+      },
+      {
+        "name": "Theresa Brown",
+        "email": "brownt@microsoft.com"
+      },
+      {
+        "name": "Rashard Fleming, PHR",
+        "email": "flemingr@microsoft.com"
+      },
+      {
+        "name": "Amy Siebenthaler",
+        "email": "siebenthalera@microsoft.com"
+      },
+      {
+        "name": "Erin Creighton",
+        "email": "creightone@microsoft.com"
+      },
+      {
+        "name": "Joshua Ng",
+        "email": "ngj@microsoft.com"
+      },
+      {
+        "name": "Stefanie Chorianopoulos",
+        "email": "chorianopouloss@microsoft.com"
+      },
+      {
+        "name": "Kristin Straube",
+        "email": "straubek@microsoft.com"
+      },
+      {
+        "name": "Alex DuBose",
+        "email": "dubosea@microsoft.com"
+      },
+      {
+        "name": "Lidia Hernandez",
+        "email": "hernandezl@microsoft.com"
+      },
+      {
+        "name": "Rafael Williams, CDR",
+        "email": "williamsr@microsoft.com"
+      },
+      {
+        "name": "Keisha Ebbesen",
+        "email": "ebbesenk@microsoft.com"
+      },
+      {
+        "name": "Lyann Trang",
+        "email": "trangl@microsoft.com"
+      },
+      {
+        "name": "Sarah Gordon",
+        "email": "gordons@microsoft.com"
+      },
+      {
+        "name": "Katie Maillet",
+        "email": "mailletk@microsoft.com"
+      },
+      {
+        "name": "Jillian Hynynen, MSW",
+        "email": "hynynenj@microsoft.com"
+      },
+      {
+        "name": "Erin Jonason",
+        "email": "jonasone@microsoft.com"
+      },
+      {
+        "name": "Damon Coupe",
+        "email": "couped@microsoft.com"
+      },
+      {
+        "name": "Cassandra Aguilar, MNPL",
+        "email": "aguilarc@microsoft.com"
+      },
+      {
+        "name": "Mason Cooley",
+        "email": "cooleym@microsoft.com"
+      },
+      {
+        "name": "Vicannia Merisma",
+        "email": "merismav@microsoft.com"
+      },
+      {
+        "name": "Michael Toole",
+        "email": "toolem@microsoft.com"
+      },
+      {
+        "name": "Lauri Puchalski",
+        "email": "puchalskil@microsoft.com"
+      },
+      {
+        "name": "Igor Legin",
+        "email": "legini@microsoft.com"
+      },
+      {
+        "name": "Jill Lloyd MPA",
+        "email": "mpaj@microsoft.com"
+      },
+      {
+        "name": "Erin McLaughlin",
+        "email": "mclaughline@microsoft.com"
+      },
+      {
+        "name": "Justin Blake Yim",
+        "email": "yimj@microsoft.com"
+      },
+      {
+        "name": "Som Mounarath",
+        "email": "mounaraths@microsoft.com"
+      },
+      {
+        "name": "Tori Uphoff",
+        "email": "uphofft@microsoft.com"
+      },
+      {
+        "name": "James Spaan",
+        "email": "spaanj@microsoft.com"
+      },
+      {
+        "name": "Lawrence A. Lucas III",
+        "email": "iiil@microsoft.com"
+      },
+      {
+        "name": "Kajal Verma",
+        "email": "vermak@microsoft.com"
+      },
+      {
+        "name": "Keisha Ebbesen",
+        "email": "ebbesenk@microsoft.com"
+      }
+    ]
+  },
+  {
+    "company": "Amazon Lab126",
+    "recruiters": [
+      {
+        "name": "Amra Tuzla",
+        "email": "tuzla@lab126.com"
+      },
+      {
+        "name": "Chanelle O'Connell",
+        "email": "o'connell@lab126.com"
+      }
+    ]
+  },
+  {
+    "company": "eBay",
+    "recruiters": [
+      {
+        "name": "Jennifer Takato",
+        "email": "jennifer@ebayinc.com"
+      },
+      {
+        "name": "CJ Burk",
+        "email": "cj@ebayinc.com"
+      },
+      {
+        "name": "Kelly-Anne Cheung",
+        "email": "kelly-anne@ebayinc.com"
+      },
+      {
+        "name": "Melody M.",
+        "email": "melody@ebayinc.com"
+      }
+    ]
+  },
+  {
+    "company": "Lumileds",
+    "recruiters": [
+      {
+        "name": "Bret Cisneros",
+        "email": "bret.cisneros@lumileds.com"
+      }
+    ]
+  },
+  {
+    "company": "Tesla",
+    "recruiters": [
+      {
+        "name": "Nuray Molla",
+        "email": "nmolla@tesla.com"
+      },
+      {
+        "name": "Janelle Bullock",
+        "email": "jbullock@tesla.com"
+      },
+      {
+        "name": "Ekta Bathija",
+        "email": "ebathija@tesla.com"
+      },
+      {
+        "name": "Charlotte Corley",
+        "email": "ccorley@tesla.com"
+      },
+      {
+        "name": "Matthew Redhead",
+        "email": "mredhead@tesla.com"
+      },
+      {
+        "name": "Layne Austin",
+        "email": "laustin@tesla.com"
+      },
+      {
+        "name": "Amandeep Kaur",
+        "email": "akaur@tesla.com"
+      },
+      {
+        "name": "Gigi Masarie",
+        "email": "gmasarie@tesla.com"
+      },
+      {
+        "name": "Aimee Akimoff, MBA",
+        "email": "aakimoff@tesla.com"
+      },
+      {
+        "name": "Kyle Clark",
+        "email": "kclark@tesla.com"
+      },
+      {
+        "name": "Brittni Lundie",
+        "email": "blundie@tesla.com"
+      },
+      {
+        "name": "Tim Rivera",
+        "email": "trivera@tesla.com"
+      },
+      {
+        "name": "Chris Garinger",
+        "email": "cgaringer@tesla.com"
+      },
+      {
+        "name": "Nam Cao",
+        "email": "ncao@tesla.com"
+      },
+      {
+        "name": "Amandeep Kaur",
+        "email": "akaur@tesla.com"
+      },
+      {
+        "name": "Charlotte Corley",
+        "email": "ccorley@tesla.com"
+      }
+    ]
+  },
+  {
+    "company": "Exponent",
+    "recruiters": [
+      {
+        "name": "Patricia Mafioletti",
+        "email": "pmafioletti@exponent.com"
+      },
+      {
+        "name": "Rodney Rael",
+        "email": "rrael@exponent.com"
+      }
+    ]
+  },
+  {
+    "company": "Stripe",
+    "recruiters": [
+      {
+        "name": "Marlene Guardado",
+        "email": "marlene@stripe.com"
+      },
+      {
+        "name": "Chad Rogers",
+        "email": "chad@stripe.com"
+      },
+      {
+        "name": "Samineh Heppner",
+        "email": "samineh@stripe.com"
+      }
+    ]
+  },
+  {
+    "company": "Teradata",
+    "recruiters": [
+      {
+        "name": "Frances Tam",
+        "email": "frances.tam@teradata.com"
+      }
+    ]
+  },
+  {
+    "company": "Unknown",
+    "recruiters": [
+      {
+        "name": "Rachel Turner",
+        "email": "rachelturner@usps.com"
+      },
+      {
+        "name": "Swathi Dinavahi",
+        "email": "swathi.dinavahi@artechinfo.com"
+      },
+      {
+        "name": "Eshrat Jahan",
+        "email": "ejahan@jpmorganchase.com"
+      },
+      {
+        "name": "Monica Diaz Chamberlin",
+        "email": "mchamberlin@google.com"
+      },
+      {
+        "name": "Vaishnavy Chandramouli",
+        "email": "vchandramouli@visa.com"
+      },
+      {
+        "name": "Isaac Saucedo",
+        "email": "isaac.saucedo@valero.com"
+      },
+      {
+        "name": "Maggie Bott",
+        "email": "bottm@microsoft.com"
+      },
+      {
+        "name": "Travis Royall",
+        "email": "travis@invohealthcare.com"
+      },
+      {
+        "name": "Christina Young",
+        "email": "cyoung@massmutual.com"
+      },
+      {
+        "name": "Sharon Herz",
+        "email": "sharonherz@discover.com"
+      },
+      {
+        "name": "Amy Sanchez",
+        "email": "amy.sanchez@nasa.gov"
+      },
+      {
+        "name": "Lauren Kurle",
+        "email": "lkurle@shamrocktradingcorp.com"
+      },
+      {
+        "name": "Emily Wargo",
+        "email": "ewargo@northropgrumman.com"
+      },
+      {
+        "name": "Selma",
+        "email": "Handzar- Mercedes smercedes@google.com"
+      },
+      {
+        "name": "Jayme Grant",
+        "email": "jgrant@careered.com"
+      },
+      {
+        "name": "Ashton Ragsdale",
+        "email": "aragsdale@gannett.com"
+      },
+      {
+        "name": "Elisabeth Mox, SHRM-CP",
+        "email": "elisabeth.mox@capitalone.com"
+      },
+      {
+        "name": "Lindsey Rickett, PHR",
+        "email": "lindsey.rickett@valero.com"
+      },
+      {
+        "name": "Anitha Ramareddy",
+        "email": "ramareddya@satellitehealth.com"
+      },
+      {
+        "name": "Morgan McDaniel",
+        "email": "mmcdaniel@air.org"
+      },
+      {
+        "name": "Isaac Saucedo",
+        "email": "isaac.saucedo@valero.com"
+      },
+      {
+        "name": "Maggie Bott",
+        "email": "bottm@microsoft.com"
+      },
+      {
+        "name": "Sherry Dowdy",
+        "email": "sherry.dowdy@manpowergroup.com Senior Recruiter"
+      },
+      {
+        "name": "Ramya Stuti",
+        "email": "ramya@eastnwestsolutions.com"
+      },
+      {
+        "name": "Kara Allen",
+        "email": "kara.allen@aegislabs.com"
+      },
+      {
+        "name": "Mariah Wills",
+        "email": "mariah.wills@academy.com"
+      },
+      {
+        "name": "Allyn Snow",
+        "email": "allyn.snow@sykes.com"
+      },
+      {
+        "name": "Kate Esterman",
+        "email": "kesterman@predictivetechnologies.c Corporate Recruiter"
+      },
+      {
+        "name": "Lindsay Fisher",
+        "email": "fisherl@aetna.com"
+      },
+      {
+        "name": "Laurisa Canini",
+        "email": "lcanini@jackhenry.com"
+      },
+      {
+        "name": "Stephanie May",
+        "email": "smay@westernu.edu"
+      },
+      {
+        "name": "Candice",
+        "email": "Killebrew, MSHRM  candice.killebrew@suntrust.com"
+      },
+      {
+        "name": "Kristina Ruidas-Bene",
+        "email": "kristina.ruidas-bene@forescout.com  Sr. Technical Recruiter"
+      },
+      {
+        "name": "Scott Johnson, PHR",
+        "email": "scott.johnson@pge.com"
+      },
+      {
+        "name": "Peter Wentis",
+        "email": "peter.wentis@hpe.com"
+      },
+      {
+        "name": "Bryson Kelly",
+        "email": "bryson.kelly@unco.edu"
+      },
+      {
+        "name": "Jennifer Kahle",
+        "email": "jennifer.kahle@wizards.com"
+      },
+      {
+        "name": "Katie",
+        "email": "Hendrickson O'Connkatie.o'connell@boeing.com"
+      },
+      {
+        "name": "Taylor Rahe",
+        "email": "trahe@shamrocktradingcorp.com"
+      },
+      {
+        "name": "Quincy Wimbish",
+        "email": "quincy.wimbish@marshall.usc.edu   Associate Director"
+      },
+      {
+        "name": "Soumi Ghosh",
+        "email": "soumi.ghosh@artechinfo.com"
+      },
+      {
+        "name": "Keiyana Arnold, MSOM",
+        "email": "keiyana.arnold@turner.com"
+      },
+      {
+        "name": "Quinn Meunier",
+        "email": "quinn.meunier@stjude.org"
+      },
+      {
+        "name": "Danielle Fine",
+        "email": "danielle.fine@bakertilly.com"
+      },
+      {
+        "name": "Hailey Lann",
+        "email": "hlann@brasfieldgorrie.com"
+      },
+      {
+        "name": "Katherine Savage",
+        "email": "katherine.savage@accenture.com"
+      },
+      {
+        "name": "Keavy Gill",
+        "email": "keavygill@crd.com"
+      },
+      {
+        "name": "Blair Scott",
+        "email": "bscott@predictivetechnologies.com  Campus Recruiter"
+      },
+      {
+        "name": "Britni Burnett",
+        "email": "britni.burnett@accenture.com"
+      },
+      {
+        "name": "Maddie Swartzwelder",
+        "email": "maddie.swartzwelder@accenture.comCampus Recruiter"
+      },
+      {
+        "name": "Hannah Russo",
+        "email": "hannah.russo@rutgers.edu"
+      },
+      {
+        "name": "Andrea Highbloom",
+        "email": "andrea.highbloom@sig.com"
+      },
+      {
+        "name": "Whitney Smith",
+        "email": "wsmith@jpmorganchase.com"
+      },
+      {
+        "name": "Emily Nagele",
+        "email": "enagele@jpmorganchase.com"
+      },
+      {
+        "name": "Alex Valdez",
+        "email": "alex.valdez@thirdbridge.com"
+      },
+      {
+        "name": "Kristy McFaul",
+        "email": "kristy.mcfaul@bakertilly.com"
+      },
+      {
+        "name": "Keiyana Arnold, MSOM",
+        "email": "keiyana.arnold@turner.com"
+      },
+      {
+        "name": "Elliott",
+        "email": "Jones-Poulson, M.S ejones-poulson@bimbobakeriesusa.cCampus Recruiter"
+      },
+      {
+        "name": "Asya Hopps",
+        "email": "asya.hopps@mmc.com"
+      },
+      {
+        "name": "Jill Diamond",
+        "email": "jill_diamond@mckinsey.com"
+      },
+      {
+        "name": "Heather Daly",
+        "email": "heatherdaly@crd.com"
+      },
+      {
+        "name": "Eleni Nikolakis",
+        "email": "enikolakis@unionhomemortgage.comCampus Recruiter"
+      },
+      {
+        "name": "Solana Ma",
+        "email": "sma@jpmorganchase.com"
+      },
+      {
+        "name": "Hemashree Kalavakolanu",
+        "email": "hemashree.kalavakolanu@novartis.c Campus Recruiter"
+      },
+      {
+        "name": "Lauren",
+        "email": "Mirel-Movshovich   lmirel-movshovich@tripadvisor.com  Campus Recruiter"
+      },
+      {
+        "name": "Elizabeth Goldenberg",
+        "email": "elizabeth.goldenberg@sig.com"
+      },
+      {
+        "name": "Amy McNair",
+        "email": "amy.mcnair@philips.com"
+      },
+      {
+        "name": "Nora Walsh",
+        "email": "nwalsh@unionhomemortgage.com   Campus Recruiter"
+      },
+      {
+        "name": "Kathleen McDermott",
+        "email": "kmcdermott@jpmorganchase.com"
+      },
+      {
+        "name": "Jaiden Bonapart",
+        "email": "jaiden.bonapart@dimensional.com   Campus Recruiter"
+      },
+      {
+        "name": "Ashley Palaggo",
+        "email": "ashley.palaggo@westernsouthern.co Campus Recruiter"
+      },
+      {
+        "name": "Danielle W.",
+        "email": "dw@jpmorganchase.com"
+      },
+      {
+        "name": "Glenay Coleman",
+        "email": "gcoleman@jpmorganchase.com"
+      },
+      {
+        "name": "Abby Motson",
+        "email": "amotson@uasystem.ua.edu"
+      },
+      {
+        "name": "Julianne Fiori",
+        "email": "jfiori@jpmorganchase.com"
+      },
+      {
+        "name": "Ian Aronson",
+        "email": "iaronson@disneycareers.com"
+      },
+      {
+        "name": "Jillian Smiley, CPC",
+        "email": "jsmiley@brasfieldgorrie.com"
+      },
+      {
+        "name": "Kaleigh Motz",
+        "email": "kmotz@disneycareers.com"
+      },
+      {
+        "name": "Kristin Ryan",
+        "email": "kryan@jpmorganchase.com"
+      },
+      {
+        "name": "Amy Bennett",
+        "email": "abennett@disneycareers.com"
+      },
+      {
+        "name": "Jennifer Stuart",
+        "email": "jstuart@researchinnovations.com"
+      },
+      {
+        "name": "Allison Gentry",
+        "email": "agentry@bowenengineering.com"
+      },
+      {
+        "name": "Makenzie Kate Newkirk",
+        "email": "makenzie kate.newkirk@rsmus.com  Campus Recruiter"
+      },
+      {
+        "name": "Charisse Trotman",
+        "email": "ctrotman@disneycareers.com"
+      },
+      {
+        "name": "Renaé Schuler",
+        "email": "renae_schuler@northwesternmutual. Campus Recruiter"
+      },
+      {
+        "name": "Jennifer Pittman",
+        "email": "jennifer_pittman@mckinsey.com"
+      },
+      {
+        "name": "Elisabeth Mox, SHRM-CP",
+        "email": "elisabeth.mox@capitalone.com"
+      },
+      {
+        "name": "Sarah Abt",
+        "email": "sabt@jpmorganchase.com"
+      },
+      {
+        "name": "Caroline Presley",
+        "email": "cpresley@brasfieldgorrie.com"
+      },
+      {
+        "name": "MaryBeth Kuntz",
+        "email": "marybeth.kuntz@luxottica.com"
+      },
+      {
+        "name": "Nora Walsh",
+        "email": "nwalsh@unionhomemortgage.com   Campus Recruiter"
+      },
+      {
+        "name": "Chloe Ford",
+        "email": "cford@jpmorganchase.com"
+      },
+      {
+        "name": "Elisa Hysa",
+        "email": "ehysa@newyorkfed.org"
+      },
+      {
+        "name": "Edzen Cortez",
+        "email": "edzen_cortez@mckinsey.com"
+      },
+      {
+        "name": "Deadra Doctor",
+        "email": "ddoctor@cwsc.com"
+      },
+      {
+        "name": "Anna Salas",
+        "email": "asalas@summit-companies.com"
+      },
+      {
+        "name": "Katie Newell",
+        "email": "katie.newell@dimensional.com"
+      },
+      {
+        "name": "Hayley Morrison",
+        "email": "hmorrison@glg.it"
+      },
+      {
+        "name": "Megan Forman",
+        "email": "mforman@jpmorganchase.com"
+      },
+      {
+        "name": "Kevin L.",
+        "email": "kl@edf.org"
+      },
+      {
+        "name": "Lindsey K. Flanagan",
+        "email": "lflanagan@rei.com"
+      },
+      {
+        "name": "Megan Forman",
+        "email": "mforman@jpmorganchase.com"
+      },
+      {
+        "name": "Kevin L.",
+        "email": "kl@edf.org"
+      },
+      {
+        "name": "Lindsey K. Flanagan",
+        "email": "lflanagan@rei.com"
+      },
+      {
+        "name": "Kimberly Toler",
+        "email": "ktoler@disneycareers.com"
+      },
+      {
+        "name": "Hadley Martin",
+        "email": "hadley_martin@mckinsey.com"
+      },
+      {
+        "name": "Kelly Henry",
+        "email": "kelly.henry@sig.com"
+      },
+      {
+        "name": "Dede",
+        "email": "Philbrick-Wheaton  dede.philbrick-wheaton@blackrock.c US Head of Campus Recruiting"
+      },
+      {
+        "name": "Todd Kahn",
+        "email": "tkahn@jpmorganchase.com"
+      },
+      {
+        "name": "Sonya McDonald",
+        "email": "smcdonald@mfs.com"
+      },
+      {
+        "name": "Christi Cocilo",
+        "email": "christi.cocilo@dimensional.com"
+      },
+      {
+        "name": "Alexandra Shillinglaw",
+        "email": "alexandra.shillinglaw@rsmus.com"
+      },
+      {
+        "name": "Tara Dodge",
+        "email": "tdodge@lordabbett.com"
+      },
+      {
+        "name": "Rachel Nobbs",
+        "email": "rachel.nobbs@mossadams.com"
+      },
+      {
+        "name": "Anna Malatestinic",
+        "email": "anna.malatestinic@dimensional.com Campus Recruiter"
+      },
+      {
+        "name": "Walter Christmas",
+        "email": "walter_christmas@mckinsey.com"
+      },
+      {
+        "name": "Leah Langford",
+        "email": "leah.langford@mcggroup.com"
+      },
+      {
+        "name": "Kaleigh Motz",
+        "email": "kmotz@disneycareers.com"
+      },
+      {
+        "name": "Kristin Ryan",
+        "email": "kryan@jpmorganchase.com"
+      },
+      {
+        "name": "Elizabeth F.",
+        "email": "elizabeth_f@mckinsey.com"
+      },
+      {
+        "name": "Elizabeth F.",
+        "email": "elizabeth_f@mckinsey.com"
+      }
+    ]
+  },
+  {
+    "company": "adidas",
+    "recruiters": [
+      {
+        "name": "Liz Connelly",
+        "email": "liz.connelly@adidas-group.com"
+      },
+      {
+        "name": "Jonathan Orrala",
+        "email": "jonathan.orrala@adidas-group.com   University Recruiter"
+      },
+      {
+        "name": "Hanna Gately",
+        "email": "hanna.gately@adidas-group.com"
+      }
+    ]
+  },
+  {
+    "company": "Electronic Arts (EA)",
+    "recruiters": [
+      {
+        "name": "Tolu Lola Adesina",
+        "email": "tadesina@ea.com"
+      },
+      {
+        "name": "Iris Lin",
+        "email": "ilin@ea.com"
+      },
+      {
+        "name": "Rachel Ibarra",
+        "email": "ribarra@ea.com"
+      },
+      {
+        "name": "Shawn Sigona",
+        "email": "ssigona@ea.com"
+      }
+    ]
+  },
+  {
+    "company": "L.E.K. Consulting",
+    "recruiters": [
+      {
+        "name": "Renee Ann Ortega-Go",
+        "email": "r.ortega-go@lek.com"
+      }
+    ]
+  },
+  {
+    "company": "E*TRADE",
+    "recruiters": [
+      {
+        "name": "Tanya Luddy, MHRM",
+        "email": "tanya.luddy@etrade.com"
+      }
+    ]
+  },
+  {
+    "company": "AECOM",
+    "recruiters": [
+      {
+        "name": "Jennifer Montes",
+        "email": "jennifer.montes@aecom.com"
+      },
+      {
+        "name": "Kurt Wildforster",
+        "email": "kurt.wildforster@aecom.com"
+      },
+      {
+        "name": "Catrina Marsh",
+        "email": "catrina.marsh@aecom.com"
+      },
+      {
+        "name": "Jeff Douglas",
+        "email": "jeff.douglas@aecom.com"
+      }
+    ]
+  },
+  {
+    "company": "Arconic",
+    "recruiters": [
+      {
+        "name": "Rose Devine",
+        "email": "rose.devine@arconic.com"
+      },
+      {
+        "name": "Renee Davis",
+        "email": "renee.davis@arconic.com"
+      }
+    ]
+  },
+  {
+    "company": "Fitbit",
+    "recruiters": [
+      {
+        "name": "Alex Dunton",
+        "email": "adunton@fitbit.com"
+      }
+    ]
+  },
+  {
+    "company": "Comcast",
+    "recruiters": [
+      {
+        "name": "Reethika Nayar, PHR",
+        "email": "reethikanayar@comcast.com"
+      },
+      {
+        "name": "Kim Hall",
+        "email": "kimhall@comcast.com"
+      },
+      {
+        "name": "Christine Kane",
+        "email": "christinekane@comcast.com"
+      },
+      {
+        "name": "Kristina (Aceto) Cirilli",
+        "email": "kristinakristina@comcast.com"
+      },
+      {
+        "name": "Matt Lorman",
+        "email": "mattlorman@comcast.com"
+      },
+      {
+        "name": "Kristina (Aceto) Cirilli",
+        "email": "kristinakristina@comcast.com"
+      },
+      {
+        "name": "Michelle Raphael",
+        "email": "michelleraphael@comcast.com"
+      },
+      {
+        "name": "Holly (Hunter) Doyle",
+        "email": "hollyholly@comcast.com"
+      },
+      {
+        "name": "Kim Hall",
+        "email": "kimhall@comcast.com"
+      }
+    ]
+  },
+  {
+    "company": "FireEye, Inc.",
+    "recruiters": [
+      {
+        "name": "Alex Lawrence",
+        "email": "alex.lawrence@fireeye.com"
+      },
+      {
+        "name": "Kelly Leyte-Vidal",
+        "email": "kelly.leyte-vidal@fireeye.com"
+      }
+    ]
+  },
+  {
+    "company": "Lyft",
+    "recruiters": [
+      {
+        "name": "Courtney Chacon",
+        "email": "cchacon@lyft.com"
+      },
+      {
+        "name": "Kayleigh Bottini",
+        "email": "kbottini@lyft.com"
+      },
+      {
+        "name": "Thomas Hughes",
+        "email": "thughes@lyft.com"
+      }
+    ]
+  },
+  {
+    "company": "PayPal",
+    "recruiters": [
+      {
+        "name": "Whitney Anderson",
+        "email": "wanderson@paypal.com"
+      },
+      {
+        "name": "Angeline Dao",
+        "email": "adao@paypal.com"
+      },
+      {
+        "name": "Holger Steinmetzger",
+        "email": "hsteinmetzger@paypal.com"
+      },
+      {
+        "name": "Jaclyn Barry",
+        "email": "jbarry@paypal.com"
+      }
+    ]
+  },
+  {
+    "company": "SAP",
+    "recruiters": [
+      {
+        "name": "Sarena Riggi",
+        "email": "sarena.riggi@sap.com"
+      },
+      {
+        "name": "Kathleen O'Hara",
+        "email": "kathleen.o'hara@sap.com"
+      },
+      {
+        "name": "Mohammed Fahad",
+        "email": "mohammed.fahad@sap.com"
+      }
+    ]
+  },
+  {
+    "company": "Dropbox",
+    "recruiters": [
+      {
+        "name": "Skyla Lambeth",
+        "email": "skyla@dropbox.com"
+      },
+      {
+        "name": "Lucy Tobias",
+        "email": "lucy@dropbox.com"
+      },
+      {
+        "name": "Jeff Calvin",
+        "email": "jeff@dropbox.com"
+      },
+      {
+        "name": "Liz Heath",
+        "email": "liz@dropbox.com"
+      },
+      {
+        "name": "Jeff Calvin",
+        "email": "jeff@dropbox.com"
+      },
+      {
+        "name": "Tuhina Das",
+        "email": "tuhina@dropbox.com"
+      }
+    ]
+  },
+  {
+    "company": "Intuit",
+    "recruiters": [
+      {
+        "name": "Cindy Ng",
+        "email": "cindy_ng@intuit.com"
+      },
+      {
+        "name": "Gabrielle Woody",
+        "email": "gabrielle_woody@intuit.com"
+      },
+      {
+        "name": "Kacie Kaneyuki",
+        "email": "kacie_kaneyuki@intuit.com"
+      },
+      {
+        "name": "Krista Corsentino",
+        "email": "krista_corsentino@intuit.com"
+      },
+      {
+        "name": "Ailina Heim",
+        "email": "ailina_heim@intuit.com"
+      },
+      {
+        "name": "Elizabeth Klak",
+        "email": "elizabeth_klak@intuit.com"
+      },
+      {
+        "name": "zubin sethna",
+        "email": "zubin_sethna@intuit.com"
+      },
+      {
+        "name": "Rajshekar G",
+        "email": "rajshekar_g@intuit.com"
+      }
+    ]
+  },
+  {
+    "company": "Adobe",
+    "recruiters": [
+      {
+        "name": "Gina Willett",
+        "email": "gwillett@adobe.com"
+      },
+      {
+        "name": "Kelly Orasin",
+        "email": "korasin@adobe.com"
+      },
+      {
+        "name": "Sohrab Madani",
+        "email": "smadani@adobe.com"
+      }
+    ]
+  },
+  {
+    "company": "Pure Storage",
+    "recruiters": [
+      {
+        "name": "Carolyn Chiao",
+        "email": "carolyn@purestorage.com"
+      },
+      {
+        "name": "Madoree P.",
+        "email": "madoree@purestorage.com"
+      },
+      {
+        "name": "Christine Dickinson",
+        "email": "christine@purestorage.com"
+      },
+      {
+        "name": "Michelle Petrocelli",
+        "email": "michelle@purestorage.com"
+      }
+    ]
+  },
+  {
+    "company": "AppNexus",
+    "recruiters": [
+      {
+        "name": "Eiley Stern",
+        "email": "estern@appnexus.com"
+      },
+      {
+        "name": "Olivia Eckert",
+        "email": "oeckert@appnexus.com"
+      }
+    ]
+  },
+  {
+    "company": "Uber",
+    "recruiters": [
+      {
+        "name": "Kelley Yamate",
+        "email": "kelleyy@uber.com"
+      },
+      {
+        "name": "Ali Reedy",
+        "email": "alir@uber.com"
+      },
+      {
+        "name": "Matt Garcia",
+        "email": "mattg@uber.com"
+      },
+      {
+        "name": "Louise Zhang",
+        "email": "louisez@uber.com"
+      },
+      {
+        "name": "Shelby Ikeda",
+        "email": "shelbyi@uber.com"
+      },
+      {
+        "name": "Catherine Neils",
+        "email": "catherinen@uber.com"
+      },
+      {
+        "name": "Tina Ardehali",
+        "email": "tinaa@uber.com"
+      }
+    ]
+  },
+  {
+    "company": "ViaSat Inc.",
+    "recruiters": [
+      {
+        "name": "Christina",
+        "email": "Hepburn (Paredes)  christina.hepburn@viasat.com"
+      },
+      {
+        "name": "Ashley Gosselin, M.Ed.",
+        "email": "ashley.gosselin@viasat.com"
+      }
+    ]
+  },
+  {
+    "company": "Coinbase",
+    "recruiters": [
+      {
+        "name": "Charlene Delapena",
+        "email": "charlene@coinbase.com"
+      }
+    ]
+  },
+  {
+    "company": "BBVA Compass",
+    "recruiters": [
+      {
+        "name": "Sherri Brown",
+        "email": "sherri.brown@bbvacompass.com"
+      }
+    ]
+  },
+  {
+    "company": "Indeed.com",
+    "recruiters": [
+      {
+        "name": "Jonathan Rodriguez",
+        "email": "jonathan@indeed.com"
+      },
+      {
+        "name": "Leslie Vasquez",
+        "email": "leslie@indeed.com"
+      },
+      {
+        "name": "Jill Sears",
+        "email": "jill@indeed.com"
+      },
+      {
+        "name": "Dominic Romero",
+        "email": "dominic@indeed.com"
+      },
+      {
+        "name": "Maeve Condon",
+        "email": "maeve@indeed.com"
+      }
+    ]
+  },
+  {
+    "company": "PlayStation",
+    "recruiters": [
+      {
+        "name": "Rebecca Bjorklund",
+        "email": "rebecca@playstation.com"
+      }
+    ]
+  },
+  {
+    "company": "Airbnb",
+    "recruiters": [
+      {
+        "name": "Nathalie Grandy",
+        "email": "nathalie.grandy@airbnb.com"
+      },
+      {
+        "name": "Allison Vicencio",
+        "email": "allison.vicencio@airbnb.com"
+      },
+      {
+        "name": "Naomi Gabriel",
+        "email": "naomi.gabriel@airbnb.com"
+      },
+      {
+        "name": "Genevieve O'Gara",
+        "email": "genevieve.o'gara@airbnb.com"
+      },
+      {
+        "name": "Paulette Kang",
+        "email": "paulette.kang@airbnb.com"
+      },
+      {
+        "name": "Tessa D.",
+        "email": "tessa.d@airbnb.com"
+      },
+      {
+        "name": "Genevieve O'Gara",
+        "email": "genevieve.o'gara@airbnb.com"
+      },
+      {
+        "name": "Ian Waldron",
+        "email": "ian.waldron@airbnb.com"
+      },
+      {
+        "name": "Bern Coh",
+        "email": "bern.coh@airbnb.com"
+      },
+      {
+        "name": "Gabe Stoutimore",
+        "email": "gabe.stoutimore@airbnb.com"
+      },
+      {
+        "name": "Paulette Kang",
+        "email": "paulette.kang@airbnb.com"
+      },
+      {
+        "name": "Tessa D.",
+        "email": "tessa.d@airbnb.com"
+      }
+    ]
+  },
+  {
+    "company": "Merck",
+    "recruiters": [
+      {
+        "name": "Phil Rathosky",
+        "email": "phil_rathosky@merck.com"
+      },
+      {
+        "name": "Rachael Devlin, PHR",
+        "email": "rachael_devlin@merck.com"
+      }
+    ]
+  },
+  {
+    "company": "Tesla Motors",
+    "recruiters": [
+      {
+        "name": "Roshan Patel",
+        "email": "rpatel@tesla.com"
+      },
+      {
+        "name": "Matt Sachse",
+        "email": "msachse@tesla.com"
+      },
+      {
+        "name": "Amanda Jensen",
+        "email": "ajensen@tesla.com"
+      }
+    ]
+  },
+  {
+    "company": "Raytheon",
+    "recruiters": [
+      {
+        "name": "Katie Tuthill",
+        "email": "katie_tuthill@raytheon.com"
+      },
+      {
+        "name": "Jennifer Dunning",
+        "email": "jennifer_dunning@raytheon.com"
+      },
+      {
+        "name": "Amy Rosenblum",
+        "email": "amy_rosenblum@raytheon.com"
+      }
+    ]
+  },
+  {
+    "company": "Ericsson",
+    "recruiters": [
+      {
+        "name": "Cressa Mast",
+        "email": "cressa.mast@ericsson.com"
+      },
+      {
+        "name": "Morris Lyons",
+        "email": "morris.lyons@ericsson.com"
+      },
+      {
+        "name": "Sierra Wheatley",
+        "email": "sierra.wheatley@ericsson.com"
+      }
+    ]
+  },
+  {
+    "company": "Bristol-Myers Squibb",
+    "recruiters": [
+      {
+        "name": "Atiba Page",
+        "email": "atiba.page@bms.com"
+      },
+      {
+        "name": "Eberunkeh Rusch (LION)",
+        "email": "eberunkeh.rusch@bms.com"
+      }
+    ]
+  },
+  {
+    "company": "Cisco",
+    "recruiters": [
+      {
+        "name": "Erica Cox, SHRM",
+        "email": "ecox@cisco.com"
+      },
+      {
+        "name": "Justin Danko",
+        "email": "jdanko@cisco.com"
+      },
+      {
+        "name": "Shannon Rausenberger",
+        "email": "srausenberger@cisco.com"
+      },
+      {
+        "name": "Sinam Lenin Singh",
+        "email": "ssingh@cisco.com"
+      },
+      {
+        "name": "Shannon Oertel",
+        "email": "soertel@cisco.com"
+      },
+      {
+        "name": "Amy Grant",
+        "email": "agrant@cisco.com"
+      },
+      {
+        "name": "Michelle Goodfriend",
+        "email": "mgoodfriend@cisco.com"
+      },
+      {
+        "name": "Iram Jamil",
+        "email": "ijamil@cisco.com"
+      },
+      {
+        "name": "Nicole Mincin - LION",
+        "email": "nlion@cisco.com"
+      }
+    ]
+  },
+  {
+    "company": "Okta, Inc.",
+    "recruiters": [
+      {
+        "name": "Kathy Mason",
+        "email": "kathy.mason@okta.com"
+      },
+      {
+        "name": "Sarah Schiff",
+        "email": "sarah.schiff@okta.com"
+      }
+    ]
+  },
+  {
+    "company": "Pinterest",
+    "recruiters": [
+      {
+        "name": "Kristyn Richter",
+        "email": "kristyn@pinterest.com"
+      },
+      {
+        "name": "Kristen Ervin",
+        "email": "kristen@pinterest.com"
+      },
+      {
+        "name": "Elia Ma",
+        "email": "elia@pinterest.com"
+      },
+      {
+        "name": "Isabelle Cruz",
+        "email": "isabelle@pinterest.com"
+      },
+      {
+        "name": "Crishia Davis",
+        "email": "crishia@pinterest.com"
+      },
+      {
+        "name": "Crishia Davis",
+        "email": "crishia@pinterest.com"
+      }
+    ]
+  },
+  {
+    "company": "SAP Concur",
+    "recruiters": [
+      {
+        "name": "Leigh Storm",
+        "email": "leigh.storm@concur.com"
+      },
+      {
+        "name": "Madison Cooley",
+        "email": "madison.cooley@concur.com"
+      },
+      {
+        "name": "Christopher Krieger",
+        "email": "christopher.krieger@concur.com"
+      }
+    ]
+  },
+  {
+    "company": "DICK'S Sporting Goods",
+    "recruiters": [
+      {
+        "name": "Nick Rivers",
+        "email": "nick@dicks.com"
+      },
+      {
+        "name": "Carrie Whisel",
+        "email": "carrie@dicks.com"
+      },
+      {
+        "name": "A. Brooks Renoll",
+        "email": "a@dicks.com"
+      }
+    ]
+  },
+  {
+    "company": "Salesforce",
+    "recruiters": [
+      {
+        "name": "Aoife O'Meara",
+        "email": "ao'meara@salesforce.com"
+      },
+      {
+        "name": "Katherine Schwartz",
+        "email": "kschwartz@salesforce.com"
+      },
+      {
+        "name": "Ryan McCombs",
+        "email": "rmccombs@salesforce.com"
+      },
+      {
+        "name": "Emily Shockley",
+        "email": "eshockley@salesforce.com"
+      },
+      {
+        "name": "Irene Soo",
+        "email": "isoo@salesforce.com"
+      },
+      {
+        "name": "Lauren McLeod",
+        "email": "lmcleod@salesforce.com"
+      },
+      {
+        "name": "Ruth Embaie",
+        "email": "rembaie@salesforce.com"
+      },
+      {
+        "name": "Katherine Schwartz",
+        "email": "kschwartz@salesforce.com"
+      },
+      {
+        "name": "Will Ellis",
+        "email": "wellis@salesforce.com"
+      }
+    ]
+  },
+  {
+    "company": "LendingClub",
+    "recruiters": [
+      {
+        "name": "Tina Filippi",
+        "email": "tfilippi@lendingclub.com"
+      }
+    ]
+  },
+  {
+    "company": "NetApp",
+    "recruiters": [
+      {
+        "name": "Stephanie White Chalk",
+        "email": "stephanie.chalk@netapp.com"
+      },
+      {
+        "name": "Rachel Conner",
+        "email": "rachel.conner@netapp.com"
+      },
+      {
+        "name": "Leigh Smith",
+        "email": "leigh.smith@netapp.com"
+      },
+      {
+        "name": "Andrea Rodriguez",
+        "email": "andrea.rodriguez@netapp.com"
+      }
+    ]
+  },
+  {
+    "company": "Accenture",
+    "recruiters": [
+      {
+        "name": "Kendrick Harris",
+        "email": "kendrick.harris@accenture.com"
+      },
+      {
+        "name": "Melissa Harper Jones",
+        "email": "melissa.jones@accenture.com"
+      },
+      {
+        "name": "Jessica Steciw",
+        "email": "jessica.steciw@accenture.com"
+      },
+      {
+        "name": "Annika Ayala",
+        "email": "annika.ayala@accenture.com"
+      },
+      {
+        "name": "Mark Acquaye",
+        "email": "mark.acquaye@accenture.com"
+      },
+      {
+        "name": "Julia Clark",
+        "email": "julia.clark@accenture.com"
+      },
+      {
+        "name": "Caroline Shook",
+        "email": "caroline.shook@accenture.com"
+      },
+      {
+        "name": "Mona Walker",
+        "email": "mona.walker@accenture.com"
+      },
+      {
+        "name": "Brooke Steele",
+        "email": "brooke.steele@accenture.com"
+      },
+      {
+        "name": "Adriana Olivares",
+        "email": "adriana.olivares@accenture.com"
+      },
+      {
+        "name": "Madeline McCooe",
+        "email": "madeline.mccooe@accenture.com   Campus Recruiter"
+      },
+      {
+        "name": "Shannon Gyarmathy",
+        "email": "shannon.gyarmathy@accenture.com Campus Recruiter"
+      },
+      {
+        "name": "Cody Majer",
+        "email": "cody.majer@accenture.com"
+      },
+      {
+        "name": "Casey Makovy",
+        "email": "casey.makovy@accenture.com"
+      },
+      {
+        "name": "LaRhonda Davis",
+        "email": "larhonda.davis@accenture.com"
+      },
+      {
+        "name": "Melissa Olson",
+        "email": "melissa.olson@accenture.com"
+      },
+      {
+        "name": "Nina Izaguirre",
+        "email": "nina.izaguirre@accenture.com"
+      },
+      {
+        "name": "John Gernon Glorioso",
+        "email": "john gernon.glorioso@accenture.com Campus Recruiter"
+      },
+      {
+        "name": "John Gernon Glorioso",
+        "email": "john gernon.glorioso@accenture.com Campus Recruiter"
+      },
+      {
+        "name": "Alexandrea Bittle",
+        "email": "alexandrea.bittle@accenture.com"
+      },
+      {
+        "name": "Mona Walker",
+        "email": "mona.walker@accenture.com"
+      },
+      {
+        "name": "Cody Majer",
+        "email": "cody.majer@accenture.com"
+      },
+      {
+        "name": "Casey Makovy",
+        "email": "casey.makovy@accenture.com"
+      },
+      {
+        "name": "Laura Bogacki",
+        "email": "laura.bogacki@accenture.com"
+      },
+      {
+        "name": "Megan Hopkins",
+        "email": "megan.hopkins@accenture.com"
+      }
+    ]
+  },
+  {
+    "company": "Pandora",
+    "recruiters": [
+      {
+        "name": "Anthony Chidoro",
+        "email": "achidoro@pandora.com"
+      }
+    ]
+  },
+  {
+    "company": "ECPI University",
+    "recruiters": [
+      {
+        "name": "Anna Reed",
+        "email": "areed@ecpi.edu"
+      }
+    ]
+  },
+  {
+    "company": "US Marine Corps",
+    "recruiters": [
+      {
+        "name": "Benjamin Pastor",
+        "email": "benjamin@marines.com"
+      }
+    ]
+  },
+  {
+    "company": "Grant Thornton LLP",
+    "recruiters": [
+      {
+        "name": "Molly Ross",
+        "email": "molly.ross@grantthornton.com"
+      },
+      {
+        "name": "Shannon Karpovich",
+        "email": "shannon.karpovich@grantthornton.coUniversity Recruiter"
+      },
+      {
+        "name": "Kelly Englert",
+        "email": "kelly.lert@grantthornton.com"
+      },
+      {
+        "name": "Kristin Peterson",
+        "email": "kristin.peterson@grantthornton.com  University Recruiter"
+      },
+      {
+        "name": "Molly Curran",
+        "email": "molly.curran@grantthornton.com"
+      },
+      {
+        "name": "Allie Crafton",
+        "email": "allie.crafton@grantthornton.com"
+      }
+    ]
+  },
+  {
+    "company": "Amazon",
+    "recruiters": [
+      {
+        "name": "Jessica Shellan",
+        "email": "jessicashellan@amazon.com"
+      },
+      {
+        "name": "Akash Panchal",
+        "email": "akashpanchal@amazon.com"
+      },
+      {
+        "name": "Jazmine Reeves",
+        "email": "jazminereeves@amazon.com"
+      },
+      {
+        "name": "Jessica Dodd",
+        "email": "jessicadodd@amazon.com"
+      },
+      {
+        "name": "Carolyn Kading",
+        "email": "carolynkading@amazon.com"
+      },
+      {
+        "name": "Ivan Vukovic",
+        "email": "ivanvukovic@amazon.com"
+      },
+      {
+        "name": "Channa Palmer, PHR",
+        "email": "channapalmer@amazon.com"
+      },
+      {
+        "name": "Chelsea Royal, M.S.",
+        "email": "chelsearoyal@amazon.com"
+      },
+      {
+        "name": "Leo Pichette",
+        "email": "leopichette@amazon.com"
+      },
+      {
+        "name": "Abigail Saez Gualberto",
+        "email": "abigailgualberto@amazon.com"
+      },
+      {
+        "name": "Claire Wesselhoeft",
+        "email": "clairewesselhoeft@amazon.com"
+      },
+      {
+        "name": "Bridget Cangany",
+        "email": "bridgetcangany@amazon.com"
+      },
+      {
+        "name": "Sydney Walter",
+        "email": "sydneywalter@amazon.com"
+      },
+      {
+        "name": "Tarah M.",
+        "email": "tarahm@amazon.com"
+      },
+      {
+        "name": "Tanisha McOmber",
+        "email": "tanishamcomber@amazon.com"
+      },
+      {
+        "name": "Cassandra Peltz",
+        "email": "cassandrapeltz@amazon.com"
+      },
+      {
+        "name": "Eric Paradis",
+        "email": "ericparadis@amazon.com"
+      },
+      {
+        "name": "Greg Geiger",
+        "email": "greggeiger@amazon.com"
+      },
+      {
+        "name": "Stephanie Heman",
+        "email": "stephanieheman@amazon.com"
+      },
+      {
+        "name": "Cody Xiaolei Nelson",
+        "email": "cody xiaoleinelson@amazon.com"
+      },
+      {
+        "name": "Carly Porter",
+        "email": "carlyporter@amazon.com"
+      },
+      {
+        "name": "Colin Matteson",
+        "email": "colinmatteson@amazon.com"
+      },
+      {
+        "name": "Shelby Talia",
+        "email": "shelbytalia@amazon.com"
+      },
+      {
+        "name": "Erica Ruth",
+        "email": "ericaruth@amazon.com"
+      },
+      {
+        "name": "Carolyn Kading",
+        "email": "carolynkading@amazon.com"
+      },
+      {
+        "name": "Lauren Marani Schoen",
+        "email": "laurenschoen@amazon.com"
+      },
+      {
+        "name": "Simren Saxena",
+        "email": "simrensaxena@amazon.com"
+      },
+      {
+        "name": "Anthony Miller",
+        "email": "anthonymiller@amazon.com"
+      },
+      {
+        "name": "Whitney Johnson",
+        "email": "whitneyjohnson@amazon.com"
+      },
+      {
+        "name": "David Magnotta",
+        "email": "davidmagnotta@amazon.com"
+      },
+      {
+        "name": "Kjirsten Eisentrout",
+        "email": "kjirsteneisentrout@amazon.com"
+      },
+      {
+        "name": "Kathleen Bennion, PHR",
+        "email": "kathleenbennion@amazon.com"
+      },
+      {
+        "name": "Sehee Thomas",
+        "email": "seheethomas@amazon.com"
+      },
+      {
+        "name": "Christopher Gentry",
+        "email": "christophergentry@amazon.com"
+      },
+      {
+        "name": "Cornelia Jobe",
+        "email": "corneliajobe@amazon.com"
+      },
+      {
+        "name": "Stacy Schall",
+        "email": "stacyschall@amazon.com"
+      },
+      {
+        "name": "Niyati Varma",
+        "email": "niyativarma@amazon.com"
+      },
+      {
+        "name": "Brooke Loehndorf",
+        "email": "brookeloehndorf@amazon.com"
+      },
+      {
+        "name": "John Lee",
+        "email": "johnlee@amazon.com"
+      }
+    ]
+  },
+  {
+    "company": "SAS",
+    "recruiters": [
+      {
+        "name": "Lindsay Whitfield",
+        "email": "lindsay.whitfield@sas.com"
+      },
+      {
+        "name": "Travis Knapp",
+        "email": "travis.knapp@sas.com"
+      },
+      {
+        "name": "Steve Babineau",
+        "email": "steve.babineau@sas.com"
+      }
+    ]
+  },
+  {
+    "company": "Stryker",
+    "recruiters": [
+      {
+        "name": "Danielle Rosenblatt",
+        "email": "danielle.rosenblatt@stryker.com"
+      },
+      {
+        "name": "Calli Conti",
+        "email": "calli.conti@stryker.com"
+      }
+    ]
+  },
+  {
+    "company": "SurveyMonkey",
+    "recruiters": [
+      {
+        "name": "Whitney Galindo",
+        "email": "whitneyg@surveymonkey.com"
+      }
+    ]
+  },
+  {
+    "company": "Samsung SARC | ACL",
+    "recruiters": [
+      {
+        "name": "Krissy Osborne",
+        "email": "krissy@jobvite.com"
+      }
+    ]
+  },
+  {
+    "company": "Booz Allen Hamilton",
+    "recruiters": [
+      {
+        "name": "Brittanie Bosselait",
+        "email": "b.bosselait@boozallen.com"
+      },
+      {
+        "name": "Jennifer Rodriguez",
+        "email": "j.rodriguez@boozallen.com"
+      },
+      {
+        "name": "Lindsey",
+        "email": "Jacob, PHR, SHRM l.jacob@boozallen.com"
+      },
+      {
+        "name": "Lindsey",
+        "email": "Jacob, PHR, SHRM l.jacob@boozallen.com"
+      }
+    ]
+  },
+  {
+    "company": "Cisco Systems",
+    "recruiters": [
+      {
+        "name": "Dawn Harvey",
+        "email": "dharvey@cisco.com"
+      }
+    ]
+  },
+  {
+    "company": "The MathWorks",
+    "recruiters": [
+      {
+        "name": "Michala Romano",
+        "email": "michala.romano@mathworks.com"
+      }
+    ]
+  },
+  {
+    "company": "OSIsoft",
+    "recruiters": [
+      {
+        "name": "Matthew Hill",
+        "email": "mhill@osisoft.com"
+      },
+      {
+        "name": "Jincy Varughese",
+        "email": "jvarughese@osisoft.com"
+      }
+    ]
+  },
+  {
+    "company": "Troy University",
+    "recruiters": [
+      {
+        "name": "Katie Hawkins Beall",
+        "email": "kbeall@troy.edu"
+      }
+    ]
+  },
+  {
+    "company": "Arm",
+    "recruiters": [
+      {
+        "name": "Jeffrey Runnels",
+        "email": "jeffrey.runnels@arm.com"
+      }
+    ]
+  },
+  {
+    "company": "Ellucian",
+    "recruiters": [
+      {
+        "name": "Sarah O'Melia",
+        "email": "sarah.o'melia@ellucian.com"
+      }
+    ]
+  },
+  {
+    "company": "Danaher Corporation",
+    "recruiters": [
+      {
+        "name": "Javon Rahmaan",
+        "email": "javon.rahmaan@danaher.com"
+      }
+    ]
+  },
+  {
+    "company": "ICF",
+    "recruiters": [
+      {
+        "name": "Terry Unger",
+        "email": "terry.unger@icf.com"
+      }
+    ]
+  },
+  {
+    "company": "Tenable Network Security",
+    "recruiters": [
+      {
+        "name": "Ashley Bush",
+        "email": "abush@tenable.com"
+      }
+    ]
+  },
+  {
+    "company": "Citrix",
+    "recruiters": [
+      {
+        "name": "Stacey Kubler",
+        "email": "stacey.kubler@citrix.com"
+      }
+    ]
+  },
+  {
+    "company": "Oracle",
+    "recruiters": [
+      {
+        "name": "Olivia Rusnak",
+        "email": "olivia.rusnak@oracle.com"
+      },
+      {
+        "name": "Trang-Jennie Bi",
+        "email": "trang-jennie.bi@oracle.com"
+      },
+      {
+        "name": "Sean Whited",
+        "email": "sean.whited@oracle.com"
+      },
+      {
+        "name": "Trang-Jennie Bi",
+        "email": "trang-jennie.bi@oracle.com"
+      },
+      {
+        "name": "Nicole Holliman",
+        "email": "nicole.holliman@oracle.com"
+      },
+      {
+        "name": "Christian Golofaro",
+        "email": "christian.golofaro@oracle.com"
+      },
+      {
+        "name": "Valerie Harris",
+        "email": "valerie.harris@oracle.com"
+      },
+      {
+        "name": "Erica Ablan-Go",
+        "email": "erica.ablan-go@oracle.com"
+      },
+      {
+        "name": "Nicole Holliman",
+        "email": "nicole.holliman@oracle.com"
+      },
+      {
+        "name": "Roxy Wolfe",
+        "email": "roxy.wolfe@oracle.com"
+      },
+      {
+        "name": "Madison Beaton",
+        "email": "madison.beaton@oracle.com"
+      }
+    ]
+  },
+  {
+    "company": "Equifax",
+    "recruiters": [
+      {
+        "name": "Andrea Skinner",
+        "email": "andrea.skinner@equifax.com"
+      },
+      {
+        "name": "Andrea Skinner",
+        "email": "andrea.skinner@equifax.com"
+      }
+    ]
+  },
+  {
+    "company": "Monsanto",
+    "recruiters": [
+      {
+        "name": "Justin Margherio",
+        "email": "justin.margherio@monsanto.com"
+      },
+      {
+        "name": "Justin Margherio",
+        "email": "justin.margherio@monsanto.com"
+      }
+    ]
+  },
+  {
+    "company": "Tinder, Inc.",
+    "recruiters": [
+      {
+        "name": "Devin Entmacher",
+        "email": "devin@tinder.com"
+      },
+      {
+        "name": "Devin Entmacher",
+        "email": "devin@tinder.com"
+      },
+      {
+        "name": "Pedram (Peddy) Farjad",
+        "email": "pedram@tinder.com"
+      }
+    ]
+  },
+  {
+    "company": "Thermo Fisher Scientific",
+    "recruiters": [
+      {
+        "name": "Sarah McAnespie",
+        "email": "sarah.mcanespie@thermofisher.com University Relations Recruiter"
+      },
+      {
+        "name": "Keri Riley",
+        "email": "keri.riley@thermofisher.com"
+      },
+      {
+        "name": "Andre Verardi",
+        "email": "andre.verardi@thermofisher.com"
+      }
+    ]
+  },
+  {
+    "company": "USAA",
+    "recruiters": [
+      {
+        "name": "Bobby Cook",
+        "email": "bobby.cook@usaajobs.com"
+      },
+      {
+        "name": "Bobby Cook",
+        "email": "bobby.cook@usaajobs.com"
+      },
+      {
+        "name": "Kelsey Kotzur",
+        "email": "kelsey.kotzur@usaajobs.com"
+      }
+    ]
+  },
+  {
+    "company": "Roku Inc.",
+    "recruiters": [
+      {
+        "name": "Brian Davis",
+        "email": "bdavis@roku.com"
+      },
+      {
+        "name": "Brian Davis",
+        "email": "bdavis@roku.com"
+      }
+    ]
+  },
+  {
+    "company": "Rubrik, Inc.",
+    "recruiters": [
+      {
+        "name": "Niki Patel",
+        "email": "niki.patel@rubrik.com"
+      },
+      {
+        "name": "Niki Patel",
+        "email": "niki.patel@rubrik.com"
+      }
+    ]
+  },
+  {
+    "company": "Shutterfly Inc.",
+    "recruiters": [
+      {
+        "name": "Janelle Hall",
+        "email": "janelle@shutterflyinc.com"
+      },
+      {
+        "name": "Janelle Hall",
+        "email": "janelle@shutterflyinc.com"
+      }
+    ]
+  },
+  {
+    "company": "Kaiser Permanente",
+    "recruiters": [
+      {
+        "name": "Nellie Bannister",
+        "email": "nellie.bannister@kp.org"
+      },
+      {
+        "name": "Chris Argate",
+        "email": "chris.argate@kp.org"
+      },
+      {
+        "name": "Nellie Bannister",
+        "email": "nellie.bannister@kp.org"
+      },
+      {
+        "name": "Chris Argate",
+        "email": "chris.argate@kp.org"
+      },
+      {
+        "name": "Jazmin Mora",
+        "email": "jazmin.mora@kp.org"
+      }
+    ]
+  },
+  {
+    "company": "MathWorks",
+    "recruiters": [
+      {
+        "name": "Angela Razzano",
+        "email": "angela.razzano@mathworks.com"
+      },
+      {
+        "name": "Angela Razzano",
+        "email": "angela.razzano@mathworks.com"
+      }
+    ]
+  },
+  {
+    "company": "Concur",
+    "recruiters": [
+      {
+        "name": "Luke Korthuis",
+        "email": "luke.korthuis@concur.com"
+      }
+    ]
+  },
+  {
+    "company": "Spark Foundry",
+    "recruiters": [
+      {
+        "name": "Brian Mason",
+        "email": "brian.mason@sparkfoundryww.com  Campus Recruiter"
+      },
+      {
+        "name": "Brian Mason",
+        "email": "brian.mason@sparkfoundryww.com  Campus Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "Equinix",
+    "recruiters": [
+      {
+        "name": "Sheba Asghar",
+        "email": "sasghar@equinix.com"
+      },
+      {
+        "name": "Sheba Asghar",
+        "email": "sasghar@equinix.com"
+      }
+    ]
+  },
+  {
+    "company": "GE Digital",
+    "recruiters": [
+      {
+        "name": "Ripan Singh",
+        "email": "ripan.singh@ge.com"
+      }
+    ]
+  },
+  {
+    "company": "Cisco Meraki",
+    "recruiters": [
+      {
+        "name": "Katie Fallon",
+        "email": "kfallon@cisco.com"
+      },
+      {
+        "name": "Leily Torson",
+        "email": "ltorson@cisco.com"
+      },
+      {
+        "name": "Amanda Camera",
+        "email": "acamera@cisco.com"
+      },
+      {
+        "name": "Nicole Ouellette",
+        "email": "nouellette@cisco.com"
+      }
+    ]
+  },
+  {
+    "company": "Informatica",
+    "recruiters": [
+      {
+        "name": "Jake Greenwald",
+        "email": "jgreenwald@informatica.com"
+      },
+      {
+        "name": "Denver Andrade",
+        "email": "dandrade@informatica.com"
+      }
+    ]
+  },
+  {
+    "company": "Kaztronix LLC",
+    "recruiters": [
+      {
+        "name": "Brittany Chapman",
+        "email": "bchapman@kaztronix.com"
+      }
+    ]
+  },
+  {
+    "company": "OneStream Software",
+    "recruiters": [
+      {
+        "name": "Tony Corneil",
+        "email": "tcorneil@onestreamsoftware.com"
+      }
+    ]
+  },
+  {
+    "company": "Cigna",
+    "recruiters": [
+      {
+        "name": "Allison Eastwood",
+        "email": "allison.eastwood@cigna.com"
+      }
+    ]
+  },
+  {
+    "company": "HackerOne",
+    "recruiters": [
+      {
+        "name": "Christina D'Ambrosio",
+        "email": "christina@hackerone.com"
+      }
+    ]
+  },
+  {
+    "company": "Palo Alto Networks",
+    "recruiters": [
+      {
+        "name": "Kristina Valenziano",
+        "email": "kvalenziano@paloaltonetworks.com  University Program Manager"
+      }
+    ]
+  },
+  {
+    "company": "Slack",
+    "recruiters": [
+      {
+        "name": "Jeunee Simon",
+        "email": "jeunee@slack.com"
+      }
+    ]
+  },
+  {
+    "company": "Nelson Technology",
+    "recruiters": [
+      {
+        "name": "Suzanna Gagnier",
+        "email": "sgagnier@nelsonjobs.com"
+      },
+      {
+        "name": "Suzanna Gagnier",
+        "email": "sgagnier@nelsonjobs.com"
+      }
+    ]
+  },
+  {
+    "company": "Dish Network",
+    "recruiters": [
+      {
+        "name": "Rebekah Crowley",
+        "email": "rebekah.crowley@dish.com"
+      }
+    ]
+  },
+  {
+    "company": "AppDynamics",
+    "recruiters": [
+      {
+        "name": "Michele Tse",
+        "email": "michele.tse@appdynamics.com"
+      }
+    ]
+  },
+  {
+    "company": "Dell",
+    "recruiters": [
+      {
+        "name": "Kellie Williams Laris",
+        "email": "kellie_laris@dell.com"
+      },
+      {
+        "name": "Lisa Hegner",
+        "email": "lisa_hegner@dell.com"
+      },
+      {
+        "name": "Kellie Williams Laris",
+        "email": "kellie_laris@dell.com"
+      }
+    ]
+  },
+  {
+    "company": "Fortinet",
+    "recruiters": [
+      {
+        "name": "Niki Maser",
+        "email": "nmaser@fortinet.com"
+      }
+    ]
+  },
+  {
+    "company": "VMware",
+    "recruiters": [
+      {
+        "name": "Danielle French",
+        "email": "dfrench@vmware.com"
+      },
+      {
+        "name": "Michelle Arendall, VSP",
+        "email": "marendall@vmware.com"
+      },
+      {
+        "name": "Melissa Mickleboro",
+        "email": "mmickleboro@vmware.com"
+      },
+      {
+        "name": "Amber Daniels",
+        "email": "adaniels@vmware.com"
+      },
+      {
+        "name": "Jennifer Purugganan",
+        "email": "jpurugganan@vmware.com"
+      },
+      {
+        "name": "Jennifer Panzer",
+        "email": "jpanzer@vmware.com"
+      },
+      {
+        "name": "Sandeep Palagani",
+        "email": "spalagani@vmware.com"
+      },
+      {
+        "name": "Kristina Buchanan",
+        "email": "kbuchanan@vmware.com"
+      },
+      {
+        "name": "Chris Peterson",
+        "email": "cpeterson@vmware.com"
+      },
+      {
+        "name": "Courtney Manning",
+        "email": "cmanning@vmware.com"
+      },
+      {
+        "name": "Jikado Hanna",
+        "email": "jhanna@vmware.com"
+      }
+    ]
+  },
+  {
+    "company": "Nutanix",
+    "recruiters": [
+      {
+        "name": "Andrea Slamkowski",
+        "email": "andrea.slamkowski@nutanix.com"
+      },
+      {
+        "name": "Austin Norfleet",
+        "email": "austin.norfleet@nutanix.com"
+      }
+    ]
+  },
+  {
+    "company": "ManpowerGroup",
+    "recruiters": [
+      {
+        "name": "Eric Pfeiffer",
+        "email": "eric.pfeiffer@manpowergroup.com   Recruiting Specialist"
+      }
+    ]
+  },
+  {
+    "company": "Lowe's Companies, Inc.",
+    "recruiters": [
+      {
+        "name": "Austin P Jessup",
+        "email": "austin p.jessup@lowes.com"
+      }
+    ]
+  },
+  {
+    "company": "Johnson &amp; Johnson",
+    "recruiters": [
+      {
+        "name": "Nick Vitale",
+        "email": "nvitale@jnj.com"
+      },
+      {
+        "name": "Taylor Ellett",
+        "email": "tellett@jnj.com"
+      },
+      {
+        "name": "Kevin Luis Snyder",
+        "email": "ksnyder@jnj.com"
+      },
+      {
+        "name": "Caitlin O'Shea",
+        "email": "co'shea@jnj.com"
+      },
+      {
+        "name": "LATIFFANY CAMPBELL",
+        "email": "lcampbell@jnj.com"
+      },
+      {
+        "name": "Nicole Borman",
+        "email": "nborman@jnj.com"
+      },
+      {
+        "name": "Krystal Brindley",
+        "email": "kbrindley@jnj.com"
+      },
+      {
+        "name": "Jason Holman",
+        "email": "jholman@jnj.com"
+      }
+    ]
+  },
+  {
+    "company": "SBH Fashion",
+    "recruiters": [
+      {
+        "name": "Madeleine Winer",
+        "email": "mwiner@sbhfashion.com"
+      }
+    ]
+  },
+  {
+    "company": "Aetna",
+    "recruiters": [
+      {
+        "name": "Kelly Harrigan",
+        "email": "harrigank@aetna.com"
+      },
+      {
+        "name": "Timothy Lefebvre",
+        "email": "lefebvret@aetna.com"
+      },
+      {
+        "name": "Madelyn Romero",
+        "email": "romerom@aetna.com"
+      },
+      {
+        "name": "Meghann Cocca",
+        "email": "coccam@aetna.com"
+      }
+    ]
+  },
+  {
+    "company": "Schneider Electric",
+    "recruiters": [
+      {
+        "name": "Tonya McCann",
+        "email": "tonya.mccann@schneider-electric.co University Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "Brightwing",
+    "recruiters": [
+      {
+        "name": "Julia Powell",
+        "email": "jpowell@gobrightwing.com"
+      },
+      {
+        "name": "Julia Powell",
+        "email": "jpowell@gobrightwing.com"
+      }
+    ]
+  },
+  {
+    "company": "Cirrus Logic",
+    "recruiters": [
+      {
+        "name": "Callen Campagna",
+        "email": "callen.campagna@cirrus.com"
+      }
+    ]
+  },
+  {
+    "company": "Snap Inc.",
+    "recruiters": [
+      {
+        "name": "Ryan McDaniel",
+        "email": "ryan@snap.com"
+      },
+      {
+        "name": "Adeline Tai",
+        "email": "adeline@snap.com"
+      },
+      {
+        "name": "Dayna Cano",
+        "email": "dayna@snap.com"
+      }
+    ]
+  },
+  {
+    "company": "Fiserv",
+    "recruiters": [
+      {
+        "name": "Kasey E. Harkins",
+        "email": "kasey e.harkins@fiserv.com"
+      }
+    ]
+  },
+  {
+    "company": "CSRA Inc",
+    "recruiters": [
+      {
+        "name": "Bridgette Wagner",
+        "email": "bridgette.wagner@csra.com"
+      }
+    ]
+  },
+  {
+    "company": "3M",
+    "recruiters": [
+      {
+        "name": "Heather Liedl",
+        "email": "hliedl@3m.com"
+      },
+      {
+        "name": "Ellen Kraft",
+        "email": "ekraft@3m.com"
+      }
+    ]
+  },
+  {
+    "company": "Coupang",
+    "recruiters": [
+      {
+        "name": "Dan St. Peter",
+        "email": "dan@coupang.com"
+      }
+    ]
+  },
+  {
+    "company": "Global Give Back Circle",
+    "recruiters": [
+      {
+        "name": "Erin Zuehlsdorff",
+        "email": "erin@globalgivebackcircle.org"
+      }
+    ]
+  },
+  {
+    "company": "CNN",
+    "recruiters": [
+      {
+        "name": "Bhumika Tharoor",
+        "email": "bhumika.tharoor@cnn.com"
+      }
+    ]
+  },
+  {
+    "company": "Akamai Technologies",
+    "recruiters": [
+      {
+        "name": "Jaime Perkins",
+        "email": "jperkins@akamai.com"
+      },
+      {
+        "name": "Mike McLaughlin",
+        "email": "mmclaughlin@akamai.com"
+      }
+    ]
+  },
+  {
+    "company": "Pluralsight",
+    "recruiters": [
+      {
+        "name": "Stefani Maudlin",
+        "email": "stefani-maudlin@pluralsight.com"
+      }
+    ]
+  },
+  {
+    "company": "Blackbaud",
+    "recruiters": [
+      {
+        "name": "Hannah Fellers",
+        "email": "hannah.fellers@blackbaud.com"
+      }
+    ]
+  },
+  {
+    "company": "Western Digital",
+    "recruiters": [
+      {
+        "name": "Cynthia Benjamin",
+        "email": "cynthia.benjamin@wdc.com"
+      },
+      {
+        "name": "Melanie Murray",
+        "email": "melanie.murray@wdc.com"
+      }
+    ]
+  },
+  {
+    "company": "Google via Artech",
+    "recruiters": [
+      {
+        "name": "JD Burkett",
+        "email": "jburkett@google.com"
+      }
+    ]
+  },
+  {
+    "company": "Twitter",
+    "recruiters": [
+      {
+        "name": "Lauren Zabel",
+        "email": "laurenzabel@twitter.com"
+      },
+      {
+        "name": "Fariha N.",
+        "email": "farihan@twitter.com"
+      },
+      {
+        "name": "Kelly Lim",
+        "email": "kellylim@twitter.com"
+      },
+      {
+        "name": "Keyaira Lock",
+        "email": "keyairalock@twitter.com"
+      }
+    ]
+  },
+  {
+    "company": "Zendesk",
+    "recruiters": [
+      {
+        "name": "Jasmin Kayhour",
+        "email": "jkayhour@zendesk.com"
+      }
+    ]
+  },
+  {
+    "company": "Grand Canyon University",
+    "recruiters": [
+      {
+        "name": "Erin Odell",
+        "email": "erin.odell@gcu.edu"
+      },
+      {
+        "name": "Tia Hillenbrand",
+        "email": "tia.hillenbrand@gcu.edu"
+      },
+      {
+        "name": "Thy Agustin",
+        "email": "thy.agustin@gcu.edu"
+      }
+    ]
+  },
+  {
+    "company": "BP",
+    "recruiters": [
+      {
+        "name": "Landy Cao",
+        "email": "landy.cao@bp.com"
+      }
+    ]
+  },
+  {
+    "company": "Axon",
+    "recruiters": [
+      {
+        "name": "Chantal Boules",
+        "email": "cboules@axon.com"
+      }
+    ]
+  },
+  {
+    "company": "Teach For America",
+    "recruiters": [
+      {
+        "name": "Carly Chittim",
+        "email": "carly.chittim@teachforamerica.org"
+      }
+    ]
+  },
+  {
+    "company": "Databricks",
+    "recruiters": [
+      {
+        "name": "Lucy Xu",
+        "email": "lucy@databricks.com"
+      }
+    ]
+  },
+  {
+    "company": "TD",
+    "recruiters": [
+      {
+        "name": "Ivo Futselaar",
+        "email": "ivo.futselaar@td.com"
+      },
+      {
+        "name": "Ivo Futselaar",
+        "email": "ivo.futselaar@td.com"
+      },
+      {
+        "name": "Samantha DiCastelnuovo",
+        "email": "samantha.dicastelnuovo@td.com"
+      }
+    ]
+  },
+  {
+    "company": "Palantir Technologies",
+    "recruiters": [
+      {
+        "name": "Lauren Smith",
+        "email": "lsmith@palantir.com"
+      },
+      {
+        "name": "Lily Sheung",
+        "email": "lsheung@palantir.com"
+      },
+      {
+        "name": "Tiffany Siu",
+        "email": "tsiu@palantir.com"
+      },
+      {
+        "name": "Carolina Mejia",
+        "email": "cmejia@palantir.com"
+      },
+      {
+        "name": "Elizabeth Watts",
+        "email": "ewatts@palantir.com"
+      },
+      {
+        "name": "May Babraitis",
+        "email": "mbabraitis@palantir.com"
+      }
+    ]
+  },
+  {
+    "company": "HackerRank",
+    "recruiters": [
+      {
+        "name": "Linda Condon",
+        "email": "linda@hackerrank.com"
+      },
+      {
+        "name": "Linda Condon",
+        "email": "linda@hackerrank.com"
+      }
+    ]
+  },
+  {
+    "company": "Yelp",
+    "recruiters": [
+      {
+        "name": "Lauren Withers",
+        "email": "lauren@yelp.com"
+      },
+      {
+        "name": "Kacy MacIntyre",
+        "email": "kacy@yelp.com"
+      }
+    ]
+  },
+  {
+    "company": "Orbital ATK",
+    "recruiters": [
+      {
+        "name": "Dana McCarren",
+        "email": "dana.mccarren@orbitalatk.com"
+      },
+      {
+        "name": "Kate Trevorrow",
+        "email": "kate.trevorrow@orbitalatk.com"
+      },
+      {
+        "name": "Kate Trevorrow",
+        "email": "kate.trevorrow@orbitalatk.com"
+      }
+    ]
+  },
+  {
+    "company": "HBO",
+    "recruiters": [
+      {
+        "name": "Cynthia Gomez",
+        "email": "cynthia.gomez@hbo.com"
+      }
+    ]
+  },
+  {
+    "company": "Allegis Group",
+    "recruiters": [
+      {
+        "name": "Sara Horne",
+        "email": "shorne@allegisgroup.com"
+      }
+    ]
+  },
+  {
+    "company": "Duo Security",
+    "recruiters": [
+      {
+        "name": "Kyle Beeler",
+        "email": "kbeeler@duo.com"
+      }
+    ]
+  },
+  {
+    "company": "Classy.org",
+    "recruiters": [
+      {
+        "name": "Kelly Goodall",
+        "email": "kgoodall@classy.org"
+      }
+    ]
+  },
+  {
+    "company": "ZS",
+    "recruiters": [
+      {
+        "name": "Tre McClure",
+        "email": "tre.mcclure@zs.com"
+      },
+      {
+        "name": "Jessica Franklin",
+        "email": "jessica.franklin@zs.com"
+      }
+    ]
+  },
+  {
+    "company": "Asana",
+    "recruiters": [
+      {
+        "name": "Krista Lynch",
+        "email": "krista@asana.com"
+      }
+    ]
+  },
+  {
+    "company": "Proofpoint",
+    "recruiters": [
+      {
+        "name": "Mercedes Sanchez",
+        "email": "msanchez@proofpoint.com"
+      }
+    ]
+  },
+  {
+    "company": "FactSet",
+    "recruiters": [
+      {
+        "name": "Ashley Peckham",
+        "email": "apeckham@factset.com"
+      }
+    ]
+  },
+  {
+    "company": "Leidos",
+    "recruiters": [
+      {
+        "name": "Amanda Braden",
+        "email": "amanda.braden@leidos.com"
+      }
+    ]
+  },
+  {
+    "company": "Siemens PLM Software",
+    "recruiters": [
+      {
+        "name": "Rina Kotak",
+        "email": "rina.kotak@siemens.com"
+      },
+      {
+        "name": "Holly Sterling",
+        "email": "holly.sterling@siemens.com"
+      }
+    ]
+  },
+  {
+    "company": "Jumpstart.",
+    "recruiters": [
+      {
+        "name": "Ben Verhoff",
+        "email": "ben@jumpstart.me"
+      }
+    ]
+  },
+  {
+    "company": "ZS Associates",
+    "recruiters": [
+      {
+        "name": "Charlotte Giglia",
+        "email": "charlotte.giglia@zs.com"
+      }
+    ]
+  },
+  {
+    "company": "Schlumberger",
+    "recruiters": [
+      {
+        "name": "Shibin Daniel",
+        "email": "sdaniel@slb.com"
+      }
+    ]
+  },
+  {
+    "company": "Janssen Inc.",
+    "recruiters": [
+      {
+        "name": "Tiffany Lasky",
+        "email": "tiffany@janssen.com"
+      }
+    ]
+  },
+  {
+    "company": "John Deere",
+    "recruiters": [
+      {
+        "name": "Traci Ferris",
+        "email": "ferristraci@johndeere.com"
+      },
+      {
+        "name": "Neelambari Ghare",
+        "email": "ghareneelambari@johndeere.com"
+      },
+      {
+        "name": "Megan Osterberg",
+        "email": "osterbergmegan@johndeere.com"
+      }
+    ]
+  },
+  {
+    "company": "Plymouth State University",
+    "recruiters": [
+      {
+        "name": "Bhola Gautam",
+        "email": "bgautam@plymouth.edu"
+      }
+    ]
+  },
+  {
+    "company": "Wealthfront Inc.",
+    "recruiters": [
+      {
+        "name": "Stephen Daniel",
+        "email": "stephen@wealthfront.com"
+      },
+      {
+        "name": "Molly Feehan",
+        "email": "molly@wealthfront.com"
+      }
+    ]
+  },
+  {
+    "company": "Varian Medical Systems",
+    "recruiters": [
+      {
+        "name": "Kimberly Lu",
+        "email": "kimberly.lu@varian.com"
+      },
+      {
+        "name": "Alexis E.",
+        "email": "alexis.e@varian.com"
+      }
+    ]
+  },
+  {
+    "company": "First Data Corporation",
+    "recruiters": [
+      {
+        "name": "Renee Dewitt",
+        "email": "renee.dewitt@firstdata.com"
+      },
+      {
+        "name": "Sarah Peers",
+        "email": "sarah.peers@firstdata.com"
+      }
+    ]
+  },
+  {
+    "company": "Kohl's Department Stores",
+    "recruiters": [
+      {
+        "name": "Erica Trotta",
+        "email": "erica.trotta@kohls.com"
+      }
+    ]
+  },
+  {
+    "company": "Duke University",
+    "recruiters": [
+      {
+        "name": "Chip Smith",
+        "email": "chip.smith@duke.edu"
+      }
+    ]
+  },
+  {
+    "company": "Macy's",
+    "recruiters": [
+      {
+        "name": "Sarina Caragan",
+        "email": "sarina.caragan@macysjobs.com"
+      }
+    ]
+  },
+  {
+    "company": "BASF",
+    "recruiters": [
+      {
+        "name": "Heidi Gerhard",
+        "email": "heidi.gerhard@basf.com"
+      },
+      {
+        "name": "Latasha Teemer",
+        "email": "latasha.teemer@basf.com"
+      }
+    ]
+  },
+  {
+    "company": "Zynga",
+    "recruiters": [
+      {
+        "name": "Matthew Davis",
+        "email": "mdavis@zynga.com"
+      }
+    ]
+  },
+  {
+    "company": "Unity Technologies",
+    "recruiters": [
+      {
+        "name": "Jenna Thomas",
+        "email": "jennat@unity3d.com"
+      }
+    ]
+  },
+  {
+    "company": "Garmin International",
+    "recruiters": [
+      {
+        "name": "Jordan Jobe",
+        "email": "jordan.jobe@garmin.com"
+      },
+      {
+        "name": "Jessica Zlab",
+        "email": "jessica.zlab@garmin.com"
+      }
+    ]
+  },
+  {
+    "company": "Alexander Mann Solutions",
+    "recruiters": [
+      {
+        "name": "Michelle Jones",
+        "email": "michelle.jones@alexandermannsoluti Senior Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "Lincoln Electric",
+    "recruiters": [
+      {
+        "name": "Gabriela Beni",
+        "email": "gabriela_beni@lincolnelectric.com"
+      }
+    ]
+  },
+  {
+    "company": "Convoy Inc",
+    "recruiters": [
+      {
+        "name": "Ryan Johnson",
+        "email": "ryan@convoy.com"
+      }
+    ]
+  },
+  {
+    "company": "Willis Towers Watson",
+    "recruiters": [
+      {
+        "name": "Tara",
+        "email": "Wozniak-Rochford  tara.wozniak-rochford@willistowersw University Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "Bankers Life",
+    "recruiters": [
+      {
+        "name": "John Gambino",
+        "email": "john.gambino@bankerslife.com"
+      }
+    ]
+  },
+  {
+    "company": "Chubb",
+    "recruiters": [
+      {
+        "name": "Allie Greenberger",
+        "email": "agreenberger@chubb.com"
+      },
+      {
+        "name": "Allie Greenberger",
+        "email": "agreenberger@chubb.com"
+      },
+      {
+        "name": "Allie Greenberger",
+        "email": "agreenberger@chubb.com"
+      },
+      {
+        "name": "Allie Greenberger",
+        "email": "agreenberger@chubb.com"
+      }
+    ]
+  },
+  {
+    "company": "Best Buy",
+    "recruiters": [
+      {
+        "name": "James McLean",
+        "email": "james.mclean@bestbuy.com"
+      },
+      {
+        "name": "Ellen Roth",
+        "email": "ellen.roth@bestbuy.com"
+      }
+    ]
+  },
+  {
+    "company": "Blizzard Entertainment",
+    "recruiters": [
+      {
+        "name": "Ellen Einkauf",
+        "email": "eeinkauf@blizzard.com"
+      },
+      {
+        "name": "Michelle Rosell",
+        "email": "mrosell@blizzard.com"
+      },
+      {
+        "name": "Hector Tang, aPHR",
+        "email": "htang@blizzard.com"
+      }
+    ]
+  },
+  {
+    "company": "Cargill",
+    "recruiters": [
+      {
+        "name": "Natalia Le",
+        "email": "natalia_le@cargill.com"
+      },
+      {
+        "name": "Alexa Silvers",
+        "email": "alexa_silvers@cargill.com"
+      },
+      {
+        "name": "Jill",
+        "email": "Spohn, M.A., H.R.M jill_spohn@cargill.com"
+      }
+    ]
+  },
+  {
+    "company": "Conduent",
+    "recruiters": [
+      {
+        "name": "Sabrina Little",
+        "email": "sabrina.little@conduent.com"
+      }
+    ]
+  },
+  {
+    "company": "Auth0",
+    "recruiters": [
+      {
+        "name": "Katie (Foley) Linn",
+        "email": "katie@auth0.com"
+      }
+    ]
+  },
+  {
+    "company": "LinkedIn",
+    "recruiters": [
+      {
+        "name": "Kabita Flores",
+        "email": "kabita.flores@lnkd.in"
+      },
+      {
+        "name": "Deya Bandyopadhyay",
+        "email": "deya.bandyopadhyay@lnkd.in"
+      },
+      {
+        "name": "Rozalin Pirnejad",
+        "email": "rozalin.pirnejad@lnkd.in"
+      },
+      {
+        "name": "Pedro Bañuelos",
+        "email": "pedro.banuelos@lnkd.in"
+      },
+      {
+        "name": "Rebecca Oommen",
+        "email": "rebecca.oommen@lnkd.in"
+      }
+    ]
+  },
+  {
+    "company": "Allscripts",
+    "recruiters": [
+      {
+        "name": "Matthew OConnor",
+        "email": "matthew.oconnor@allscripts.com"
+      }
+    ]
+  },
+  {
+    "company": "Cloudreach",
+    "recruiters": [
+      {
+        "name": "Kenan Duncan",
+        "email": "kenan.duncan@cloudreach.com"
+      }
+    ]
+  },
+  {
+    "company": "Nestle Nutrition",
+    "recruiters": [
+      {
+        "name": "Tracy Tinnirello",
+        "email": "tracy.tinnirello@nestle.com"
+      }
+    ]
+  },
+  {
+    "company": "Symantec",
+    "recruiters": [
+      {
+        "name": "Xandra Homan",
+        "email": "xandra_homan@symantec.com"
+      }
+    ]
+  },
+  {
+    "company": "GitHub",
+    "recruiters": [
+      {
+        "name": "Veronica Ramirez",
+        "email": "veronicaramirez@github.com"
+      }
+    ]
+  },
+  {
+    "company": "athenahealth",
+    "recruiters": [
+      {
+        "name": "Allie Winkelman",
+        "email": "awinkelman@athenahealth.com"
+      }
+    ]
+  },
+  {
+    "company": "Evidation Health",
+    "recruiters": [
+      {
+        "name": "Celia Avendano",
+        "email": "cavendano@evidation.com"
+      }
+    ]
+  },
+  {
+    "company": "Applus+",
+    "recruiters": [
+      {
+        "name": "April Olsen",
+        "email": "april.olsen@applus.com"
+      }
+    ]
+  },
+  {
+    "company": "A9.com",
+    "recruiters": [
+      {
+        "name": "Lauren Ng",
+        "email": "laurenng@a9.com"
+      }
+    ]
+  },
+  {
+    "company": "Edward Jones",
+    "recruiters": [
+      {
+        "name": "Sam Monroy",
+        "email": "sam.monroy@edwardjones.com"
+      },
+      {
+        "name": "Josh Lesniak",
+        "email": "josh.lesniak@edwardjones.com"
+      }
+    ]
+  },
+  {
+    "company": "Chegg Inc.",
+    "recruiters": [
+      {
+        "name": "Kami Dixon",
+        "email": "kami@chegg.com"
+      }
+    ]
+  },
+  {
+    "company": "Crowe Horwath LLP",
+    "recruiters": [
+      {
+        "name": "Alexa Stone",
+        "email": "alexa.stone@crowehorwath.com"
+      }
+    ]
+  },
+  {
+    "company": "Crystal Dynamics",
+    "recruiters": [
+      {
+        "name": "Nate Brown",
+        "email": "nbrown@crystald.com"
+      }
+    ]
+  },
+  {
+    "company": "Tenaris",
+    "recruiters": [
+      {
+        "name": "Gabriela Weller",
+        "email": "gweller@tenaris.com"
+      },
+      {
+        "name": "Bri O'Connell",
+        "email": "bo'connell@tenaris.com"
+      }
+    ]
+  },
+  {
+    "company": "McKesson",
+    "recruiters": [
+      {
+        "name": "Amanda Ford",
+        "email": "amanda.ford@mckesson.com"
+      }
+    ]
+  },
+  {
+    "company": "TripIt",
+    "recruiters": [
+      {
+        "name": "Wayne Lindsay",
+        "email": "wayne@tripit.com"
+      }
+    ]
+  },
+  {
+    "company": "Fred Hutch",
+    "recruiters": [
+      {
+        "name": "Donnie Owens",
+        "email": "dowens@fredhutch.org"
+      },
+      {
+        "name": "Samantha Bannon",
+        "email": "sbannon@fredhutch.org"
+      }
+    ]
+  },
+  {
+    "company": "Parallon",
+    "recruiters": [
+      {
+        "name": "Emily C.",
+        "email": "emily.c@parallon.com"
+      }
+    ]
+  },
+  {
+    "company": "Honeywell",
+    "recruiters": [
+      {
+        "name": "Jennifer Johnson",
+        "email": "jennifer.johnson@honeywell.com"
+      }
+    ]
+  },
+  {
+    "company": "Veritas Technologies LLC",
+    "recruiters": [
+      {
+        "name": "Cindy Chao",
+        "email": "cindy.chao@veritas.com"
+      },
+      {
+        "name": "Cindy Loggins",
+        "email": "cindy.loggins@veritas.com"
+      },
+      {
+        "name": "Kamlesh Jagdale",
+        "email": "kamlesh.jagdale@veritas.com"
+      }
+    ]
+  },
+  {
+    "company": "Viasat Inc.",
+    "recruiters": [
+      {
+        "name": "Rachel Gardinier",
+        "email": "rachel.gardinier@viasat.com"
+      }
+    ]
+  },
+  {
+    "company": "AeroVironment",
+    "recruiters": [
+      {
+        "name": "Tracy",
+        "email": "Trenham Davis, PH davis@avinc.com"
+      }
+    ]
+  },
+  {
+    "company": "DISYS",
+    "recruiters": [
+      {
+        "name": "Alyssa Morelock",
+        "email": "alyssa.morelock@disys.com"
+      }
+    ]
+  },
+  {
+    "company": "Insight Global",
+    "recruiters": [
+      {
+        "name": "Carly Newell",
+        "email": "carly.newell@insightglobal.com"
+      },
+      {
+        "name": "Zach Bogoshian",
+        "email": "zach.bogoshian@insightglobal.com  Recruiter"
+      },
+      {
+        "name": "Carly Zangla",
+        "email": "carly.zangla@insightglobal.com"
+      },
+      {
+        "name": "Carly Zangla",
+        "email": "carly.zangla@insightglobal.com"
+      },
+      {
+        "name": "Carly Zangla",
+        "email": "carly.zangla@insightglobal.com"
+      },
+      {
+        "name": "Greta Haupt",
+        "email": "greta.haupt@insightglobal.com"
+      }
+    ]
+  },
+  {
+    "company": "Twitch",
+    "recruiters": [
+      {
+        "name": "Thomas N. Tessier",
+        "email": "thomas@twitch.tv"
+      },
+      {
+        "name": "Michael Jaffe",
+        "email": "michael@twitch.tv"
+      },
+      {
+        "name": "Shaan Mehta",
+        "email": "shaan@twitch.tv"
+      }
+    ]
+  },
+  {
+    "company": "Esri",
+    "recruiters": [
+      {
+        "name": "Nick Kelch",
+        "email": "nkelch@esri.com"
+      }
+    ]
+  },
+  {
+    "company": "Goldman Sachs",
+    "recruiters": [
+      {
+        "name": "Meghan Burns Wilcox",
+        "email": "meghan burns.wilcox@goldmansach Campus Recruiter"
+      },
+      {
+        "name": "Jason Kesten",
+        "email": "jason.kesten@goldmansachs.com"
+      },
+      {
+        "name": "Kate Van Wagoner",
+        "email": "kate.wagoner@goldmansachs.com   Campus Recruiter"
+      },
+      {
+        "name": "Meghan Burns Wilcox",
+        "email": "meghan burns.wilcox@goldmansach Campus Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "Capital One",
+    "recruiters": [
+      {
+        "name": "Mike André",
+        "email": "mike.andre@capitalone.com"
+      },
+      {
+        "name": "Sarah Ziegenfuss",
+        "email": "sarah.ziegenfuss@capitalone.com   Campus Recruiter"
+      },
+      {
+        "name": "Alejandra Green",
+        "email": "alejandra.green@capitalone.com"
+      },
+      {
+        "name": "Jamie Coble",
+        "email": "jamie.coble@capitalone.com"
+      },
+      {
+        "name": "Karissa Helms",
+        "email": "karissa.helms@capitalone.com"
+      },
+      {
+        "name": "Mike André",
+        "email": "mike.andre@capitalone.com"
+      },
+      {
+        "name": "Lauren Wright",
+        "email": "lauren.wright@capitalone.com"
+      },
+      {
+        "name": "Ryan Chenault",
+        "email": "ryan.chenault@capitalone.com"
+      },
+      {
+        "name": "Carrie Webb",
+        "email": "carrie.webb@capitalone.com"
+      },
+      {
+        "name": "Addison Leftwich",
+        "email": "addison.leftwich@capitalone.com"
+      },
+      {
+        "name": "Khrysta Smithers",
+        "email": "khrysta.smithers@capitalone.com"
+      },
+      {
+        "name": "Rebecca Howie",
+        "email": "rebecca.howie@capitalone.com"
+      },
+      {
+        "name": "Khrysta Smithers",
+        "email": "khrysta.smithers@capitalone.com"
+      }
+    ]
+  },
+  {
+    "company": "State Street",
+    "recruiters": [
+      {
+        "name": "Nellie Avakov",
+        "email": "navakov@statestreet.com"
+      },
+      {
+        "name": "Julie Montrose",
+        "email": "jmontrose@statestreet.com"
+      }
+    ]
+  },
+  {
+    "company": "Wrike",
+    "recruiters": [
+      {
+        "name": "Alena Skelton",
+        "email": "askelton@wrike.com"
+      }
+    ]
+  },
+  {
+    "company": "Black and Veatch",
+    "recruiters": [
+      {
+        "name": "Kira Spring",
+        "email": "springk@bv.com"
+      }
+    ]
+  },
+  {
+    "company": "Square",
+    "recruiters": [
+      {
+        "name": "Elizabeth Carpenter",
+        "email": "elizabeth@squareup.com"
+      },
+      {
+        "name": "Kelsey Biggs",
+        "email": "kelsey@squareup.com"
+      }
+    ]
+  },
+  {
+    "company": "Gartner",
+    "recruiters": [
+      {
+        "name": "Kelly Liska",
+        "email": "kelly.liska@gartner.com"
+      },
+      {
+        "name": "Kelly Liska",
+        "email": "kelly.liska@gartner.com"
+      },
+      {
+        "name": "Kelly Liska",
+        "email": "kelly.liska@gartner.com"
+      },
+      {
+        "name": "Lexie Williams",
+        "email": "lexie.williams@gartner.com"
+      },
+      {
+        "name": "Jeff Stencel",
+        "email": "jeff.stencel@gartner.com"
+      },
+      {
+        "name": "Mitchell Mosley",
+        "email": "mitchell.mosley@gartner.com"
+      },
+      {
+        "name": "Jared Hoffmann",
+        "email": "jared.hoffmann@gartner.com"
+      },
+      {
+        "name": "Caitlin Craver",
+        "email": "caitlin.craver@gartner.com"
+      },
+      {
+        "name": "Michelle Myara",
+        "email": "michelle.myara@gartner.com"
+      }
+    ]
+  },
+  {
+    "company": "Waymo",
+    "recruiters": [
+      {
+        "name": "Katherine Ware",
+        "email": "katherineware@waymo.com"
+      }
+    ]
+  },
+  {
+    "company": "Philips Lighting",
+    "recruiters": [
+      {
+        "name": "Kenneth Reiss",
+        "email": "kenneth.reiss@philips.com"
+      },
+      {
+        "name": "Kenneth Reiss",
+        "email": "kenneth.reiss@philips.com"
+      }
+    ]
+  },
+  {
+    "company": "Samsara, Inc",
+    "recruiters": [
+      {
+        "name": "Brin Rustin",
+        "email": "brin@samsara.com"
+      }
+    ]
+  },
+  {
+    "company": "Allegis Global Solutions",
+    "recruiters": [
+      {
+        "name": "Petra Ross",
+        "email": "pross@allegisglobalsolutions.com"
+      },
+      {
+        "name": "Jenice R.",
+        "email": "jr@allegisglobalsolutions.com"
+      }
+    ]
+  },
+  {
+    "company": "Front",
+    "recruiters": [
+      {
+        "name": "Nali Weinstein",
+        "email": "nali@frontapp.com"
+      }
+    ]
+  },
+  {
+    "company": "Pinger",
+    "recruiters": [
+      {
+        "name": "VANI KRISHNAN",
+        "email": "vani@pinger.com"
+      }
+    ]
+  },
+  {
+    "company": "Quicken Loans",
+    "recruiters": [
+      {
+        "name": "Jen Fortuna",
+        "email": "jenfortuna@quickenloans.com"
+      },
+      {
+        "name": "Melissa Dondzila",
+        "email": "melissadondzila@quickenloans.com  Campus Recruiter"
+      },
+      {
+        "name": "Storm Garfield",
+        "email": "stormgarfield@quickenloans.com"
+      }
+    ]
+  },
+  {
+    "company": "Oculus VR",
+    "recruiters": [
+      {
+        "name": "Philipp Hoffmann",
+        "email": "philipp.hoffmann@oculus.com"
+      }
+    ]
+  },
+  {
+    "company": "Wilmington University",
+    "recruiters": [
+      {
+        "name": "Vernon Dupree Jr.",
+        "email": "vernon.dupree@wilmu.edu"
+      }
+    ]
+  },
+  {
+    "company": "Apex Life Sciences",
+    "recruiters": [
+      {
+        "name": "Blake Wheelock",
+        "email": "bwheelock@apexlifesciences.com"
+      }
+    ]
+  },
+  {
+    "company": "https://www.linkedin.com/in/angela-couture-shrm-scp-0baa324/  The Aerospace Corporation  aerospace.org",
+    "recruiters": [
+      {
+        "name": "Angela",
+        "email": "Couture, SHRM-SC acouture@aerospace.org"
+      }
+    ]
+  },
+  {
+    "company": "Monsanto Company",
+    "recruiters": [
+      {
+        "name": "Angela Perkins",
+        "email": "angela.perkins@monsanto.com"
+      }
+    ]
+  },
+  {
+    "company": "Roche",
+    "recruiters": [
+      {
+        "name": "Emily O'Neal",
+        "email": "emily.o'neal@roche.com"
+      }
+    ]
+  },
+  {
+    "company": "DuPont",
+    "recruiters": [
+      {
+        "name": "Marissa McMurray",
+        "email": "marissa.mcmurray@dupont.com"
+      }
+    ]
+  },
+  {
+    "company": "Flex",
+    "recruiters": [
+      {
+        "name": "Fang T.",
+        "email": "fang.t@flex.com"
+      }
+    ]
+  },
+  {
+    "company": "Genworth",
+    "recruiters": [
+      {
+        "name": "Lauren Lawler",
+        "email": "lauren.lawler@genworth.com"
+      }
+    ]
+  },
+  {
+    "company": "Tata Motors",
+    "recruiters": [
+      {
+        "name": "Saurav Kadam",
+        "email": "saurav.kadam@tatamotors.com"
+      }
+    ]
+  },
+  {
+    "company": "CenturyLink",
+    "recruiters": [
+      {
+        "name": "Nicole Jones",
+        "email": "nicole.jones@centurylink.com"
+      }
+    ]
+  },
+  {
+    "company": "Kellogg Company",
+    "recruiters": [
+      {
+        "name": "Elizabeth Dell",
+        "email": "elizabeth@kelloggcompany.com"
+      }
+    ]
+  },
+  {
+    "company": "Starbucks",
+    "recruiters": [
+      {
+        "name": "Parisa Mayfield",
+        "email": "pmayfield@starbucks.com"
+      },
+      {
+        "name": "Jonathan Lara",
+        "email": "jlara@starbucks.com"
+      }
+    ]
+  },
+  {
+    "company": "Northrop Grumman",
+    "recruiters": [
+      {
+        "name": "Luke Mann",
+        "email": "lmann@northropgrumman.com"
+      }
+    ]
+  },
+  {
+    "company": "Albemarle Corporation",
+    "recruiters": [
+      {
+        "name": "Alyssa Bearden",
+        "email": "alyssa.bearden@albemarle.com"
+      }
+    ]
+  },
+  {
+    "company": "Autodesk",
+    "recruiters": [
+      {
+        "name": "Monica Jimenez",
+        "email": "monica.jimenez@autodesk.com"
+      }
+    ]
+  },
+  {
+    "company": "Appirio",
+    "recruiters": [
+      {
+        "name": "Erin Davidson",
+        "email": "edavidson@appirio.com"
+      }
+    ]
+  },
+  {
+    "company": "Chan Zuckerberg Initiative",
+    "recruiters": [
+      {
+        "name": "Ashley Chinn",
+        "email": "ashley@chanzuckerberg.com"
+      }
+    ]
+  },
+  {
+    "company": "Liberty Mutual Insurance",
+    "recruiters": [
+      {
+        "name": "Meghan Johnston",
+        "email": "meghan@libertymutualgroup.com"
+      },
+      {
+        "name": "Aliyah Assani, MBA",
+        "email": "aliyah@libertymutualgroup.com"
+      },
+      {
+        "name": "Julia Viani",
+        "email": "julia@libertymutualgroup.com"
+      },
+      {
+        "name": "Brittiney Jones, MHRIR",
+        "email": "brittiney@libertymutualgroup.com"
+      },
+      {
+        "name": "Erika Howe Carter",
+        "email": "erika@libertymutualgroup.com"
+      },
+      {
+        "name": "Kelly Scott",
+        "email": "kelly@libertymutualgroup.com"
+      },
+      {
+        "name": "Jacquitta Pool",
+        "email": "jacquitta@libertymutualgroup.com"
+      },
+      {
+        "name": "Mindy Holt",
+        "email": "mindy@libertymutualgroup.com"
+      },
+      {
+        "name": "Paige Andrews",
+        "email": "paige@libertymutualgroup.com"
+      },
+      {
+        "name": "MacKenzie Sherman",
+        "email": "mackenzie@libertymutualgroup.com  Campus Recruiter"
+      },
+      {
+        "name": "MacKenzie Sherman",
+        "email": "mackenzie@libertymutualgroup.com  Campus Recruiter"
+      },
+      {
+        "name": "Steven Alibrandi",
+        "email": "steven@libertymutualgroup.com"
+      },
+      {
+        "name": "Lauren Fitzgibbon",
+        "email": "lauren@libertymutualgroup.com"
+      },
+      {
+        "name": "Natalie Landry",
+        "email": "natalie@libertymutualgroup.com"
+      },
+      {
+        "name": "Kayla Wheaton",
+        "email": "kayla@libertymutualgroup.com"
+      },
+      {
+        "name": "Erika Howe Carter",
+        "email": "erika@libertymutualgroup.com"
+      },
+      {
+        "name": "Kelly Scott",
+        "email": "kelly@libertymutualgroup.com"
+      },
+      {
+        "name": "Erika Howe Carter",
+        "email": "erika@libertymutualgroup.com"
+      },
+      {
+        "name": "Kelly Scott",
+        "email": "kelly@libertymutualgroup.com"
+      }
+    ]
+  },
+  {
+    "company": "InterSystems",
+    "recruiters": [
+      {
+        "name": "Hillary Hecht",
+        "email": "hillary.hecht@intersystems.com"
+      }
+    ]
+  },
+  {
+    "company": "Box",
+    "recruiters": [
+      {
+        "name": "Emily Vogel",
+        "email": "emily@box.com"
+      },
+      {
+        "name": "Molly Hiserman",
+        "email": "molly@box.com"
+      },
+      {
+        "name": "Stephanie Luu",
+        "email": "stephanie@box.com"
+      }
+    ]
+  },
+  {
+    "company": "NHS Human Services Inc.",
+    "recruiters": [
+      {
+        "name": "Mary Peters Robinson",
+        "email": "mrobinson@nhsonline.org"
+      }
+    ]
+  },
+  {
+    "company": "Exeter Finance",
+    "recruiters": [
+      {
+        "name": "Andrew Mahr",
+        "email": "andrew.mahr@exeterfinance.com"
+      }
+    ]
+  },
+  {
+    "company": "N Glantz &amp; Son",
+    "recruiters": [
+      {
+        "name": "Lauren Ann Mikruk",
+        "email": "lmikruk@nglantz.com"
+      }
+    ]
+  },
+  {
+    "company": "Dell EMC",
+    "recruiters": [
+      {
+        "name": "Linda Amorino",
+        "email": "l.amorino@dellemc.com"
+      }
+    ]
+  },
+  {
+    "company": "Alameda Health System",
+    "recruiters": [
+      {
+        "name": "Mary Rollock",
+        "email": "mrollock@alamedahealthsystem.org  Nurse Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "Genesis10",
+    "recruiters": [
+      {
+        "name": "Jason P. Sullivan, CIR",
+        "email": "jsullivan@genesis10.com"
+      }
+    ]
+  },
+  {
+    "company": "Mercedes-Benz USA",
+    "recruiters": [
+      {
+        "name": "Carl Taylor",
+        "email": "carl.taylor@mbusa.com"
+      }
+    ]
+  },
+  {
+    "company": "Bayer",
+    "recruiters": [
+      {
+        "name": "Janette Gardiner",
+        "email": "janette.gardiner@bayer.com"
+      },
+      {
+        "name": "Graham Knox",
+        "email": "graham.knox@bayer.com"
+      },
+      {
+        "name": "Candace Haywood",
+        "email": "candace.haywood@bayer.com"
+      },
+      {
+        "name": "Candace Haywood",
+        "email": "candace.haywood@bayer.com"
+      },
+      {
+        "name": "Candace Haywood",
+        "email": "candace.haywood@bayer.com"
+      }
+    ]
+  },
+  {
+    "company": "Andeavor",
+    "recruiters": [
+      {
+        "name": "Leah Fuentes",
+        "email": "leah.fuentes@andeavor.com"
+      }
+    ]
+  },
+  {
+    "company": "Silicon Labs",
+    "recruiters": [
+      {
+        "name": "Jenna Kay Boucher",
+        "email": "jenna kay.boucher@silabs.com"
+      }
+    ]
+  },
+  {
+    "company": "View | Dynamic Glass",
+    "recruiters": [
+      {
+        "name": ":::Heather Janine Scola:::",
+        "email": ":::heather janine.scola:::@viewglass.cRecruiter"
+      }
+    ]
+  },
+  {
+    "company": "Bluehawk",
+    "recruiters": [
+      {
+        "name": "Chris Jay",
+        "email": "chris@bluehawkconsulting.com"
+      }
+    ]
+  },
+  {
+    "company": "Inceed",
+    "recruiters": [
+      {
+        "name": "Rachel West",
+        "email": "rwest@inceed.com"
+      }
+    ]
+  },
+  {
+    "company": "Delta Air Lines",
+    "recruiters": [
+      {
+        "name": "A.L. Jones",
+        "email": "a.jones@delta.com"
+      }
+    ]
+  },
+  {
+    "company": "NTT DATA Americas",
+    "recruiters": [
+      {
+        "name": "Niki Jones",
+        "email": "niki.jones@nttdata.com"
+      }
+    ]
+  },
+  {
+    "company": "Roblox",
+    "recruiters": [
+      {
+        "name": "Tricia Mariz Redor",
+        "email": "tricia mariz@roblox.com"
+      }
+    ]
+  },
+  {
+    "company": "VitalSource IT",
+    "recruiters": [
+      {
+        "name": "Markelle Linstedt",
+        "email": "markelle@vitalsourceit.com"
+      }
+    ]
+  },
+  {
+    "company": "Calendly",
+    "recruiters": [
+      {
+        "name": "Kelly McDonald",
+        "email": "kelly@calendly.com"
+      }
+    ]
+  },
+  {
+    "company": "Amazon Web Services",
+    "recruiters": [
+      {
+        "name": "Sarah Bosco",
+        "email": "sarahbosco@amazon.com"
+      },
+      {
+        "name": "Marlon McWilliams",
+        "email": "marlonmcwilliams@amazon.com"
+      },
+      {
+        "name": "Marlon McWilliams",
+        "email": "marlonmcwilliams@amazon.com"
+      }
+    ]
+  },
+  {
+    "company": "NuVasive",
+    "recruiters": [
+      {
+        "name": "Lulu Perpetua",
+        "email": "lperpetua@nuvasive.com"
+      }
+    ]
+  },
+  {
+    "company": "Allyis",
+    "recruiters": [
+      {
+        "name": "Debarati Nag",
+        "email": "debarati@allyis.com"
+      }
+    ]
+  },
+  {
+    "company": "EY",
+    "recruiters": [
+      {
+        "name": "Catherine Nolff",
+        "email": "catherine.nolff@ey.com"
+      },
+      {
+        "name": "Marcella Gambino",
+        "email": "marcella.gambino@ey.com"
+      },
+      {
+        "name": "Cas Fangmbeng",
+        "email": "cas.fangmbeng@ey.com"
+      },
+      {
+        "name": "Catherine Nolff",
+        "email": "catherine.nolff@ey.com"
+      },
+      {
+        "name": "Lauren Garrone",
+        "email": "lauren.garrone@ey.com"
+      },
+      {
+        "name": "Deep Shikha",
+        "email": "deep.shikha@ey.com"
+      },
+      {
+        "name": "Greg Share",
+        "email": "greg.share@ey.com"
+      },
+      {
+        "name": "Crystal Hill",
+        "email": "crystal.hill@ey.com"
+      },
+      {
+        "name": "Alex Carr",
+        "email": "alex.carr@ey.com"
+      },
+      {
+        "name": "Michele Ripp",
+        "email": "michele.ripp@ey.com"
+      },
+      {
+        "name": "Mary Feighan",
+        "email": "mary.feighan@ey.com"
+      },
+      {
+        "name": "Greg Share",
+        "email": "greg.share@ey.com"
+      },
+      {
+        "name": "Crystal Hill",
+        "email": "crystal.hill@ey.com"
+      },
+      {
+        "name": "Alex Carr",
+        "email": "alex.carr@ey.com"
+      },
+      {
+        "name": "Michele Ripp",
+        "email": "michele.ripp@ey.com"
+      },
+      {
+        "name": "Mary Feighan",
+        "email": "mary.feighan@ey.com"
+      },
+      {
+        "name": "Bryan Ferretti",
+        "email": "bryan.ferretti@ey.com"
+      },
+      {
+        "name": "Christine Brennan",
+        "email": "christine.brennan@ey.com"
+      },
+      {
+        "name": "Sean Woolford",
+        "email": "sean.woolford@ey.com"
+      },
+      {
+        "name": "Rheanna Martino",
+        "email": "rheanna.martino@ey.com"
+      },
+      {
+        "name": "Ally Yawman",
+        "email": "ally.yawman@ey.com"
+      },
+      {
+        "name": "Jackie Cunningham",
+        "email": "jackie.cunningham@ey.com"
+      },
+      {
+        "name": "Anne Marie Miller",
+        "email": "anne marie.miller@ey.com"
+      },
+      {
+        "name": "Lily Chen",
+        "email": "lily.chen@ey.com"
+      },
+      {
+        "name": "Katie Williams",
+        "email": "katie.williams@ey.com"
+      },
+      {
+        "name": "Callie Jones",
+        "email": "callie.jones@ey.com"
+      },
+      {
+        "name": "Chelsea Cornell",
+        "email": "chelsea.cornell@ey.com"
+      },
+      {
+        "name": "MaryBeth Allen",
+        "email": "marybeth.allen@ey.com"
+      },
+      {
+        "name": "Joe Santulli",
+        "email": "joe.santulli@ey.com"
+      },
+      {
+        "name": "Jennifer Nienberg",
+        "email": "jennifer.nienberg@ey.com"
+      },
+      {
+        "name": "Amy Fondell",
+        "email": "amy.fondell@ey.com"
+      },
+      {
+        "name": "Alison Strohm",
+        "email": "alison.strohm@ey.com"
+      },
+      {
+        "name": "Ryan Emerson",
+        "email": "ryan.emerson@ey.com"
+      },
+      {
+        "name": "Melissa Contreras",
+        "email": "melissa.contreras@ey.com"
+      },
+      {
+        "name": "Ashley Lee",
+        "email": "ashley.lee@ey.com"
+      },
+      {
+        "name": "Meaghan Sansbury",
+        "email": "meaghan.sansbury@ey.com"
+      },
+      {
+        "name": "Sarah Tegen",
+        "email": "sarah.tegen@ey.com"
+      },
+      {
+        "name": "Cameron Smith",
+        "email": "cameron.smith@ey.com"
+      },
+      {
+        "name": "Jessica Morse",
+        "email": "jessica.morse@ey.com"
+      },
+      {
+        "name": "Jordan England",
+        "email": "jordan.land@ey.com"
+      },
+      {
+        "name": "Jill Wilson",
+        "email": "jill.wilson@ey.com"
+      },
+      {
+        "name": "Catherine Nolff",
+        "email": "catherine.nolff@ey.com"
+      },
+      {
+        "name": "Hannah Daluga",
+        "email": "hannah.daluga@ey.com"
+      },
+      {
+        "name": "Jefferson Johnson",
+        "email": "jefferson.johnson@ey.com"
+      },
+      {
+        "name": "Meg Struble",
+        "email": "meg.struble@ey.com"
+      },
+      {
+        "name": "Kati Lavarias",
+        "email": "kati.lavarias@ey.com"
+      },
+      {
+        "name": "Jessica Gruber",
+        "email": "jessica.gruber@ey.com"
+      },
+      {
+        "name": "Darci Curtin",
+        "email": "darci.curtin@ey.com"
+      },
+      {
+        "name": "Cas Fangmbeng",
+        "email": "cas.fangmbeng@ey.com"
+      },
+      {
+        "name": "Jackie Devitt",
+        "email": "jackie.devitt@ey.com"
+      },
+      {
+        "name": "Tria Charnas",
+        "email": "tria.charnas@ey.com"
+      },
+      {
+        "name": "Addison Goodwin",
+        "email": "addison.goodwin@ey.com"
+      },
+      {
+        "name": "Madison Gallagher",
+        "email": "madison.gallagher@ey.com"
+      },
+      {
+        "name": "Laura Lukens",
+        "email": "laura.lukens@ey.com"
+      },
+      {
+        "name": "Ritu M.",
+        "email": "ritu.m@ey.com"
+      },
+      {
+        "name": "Megan Pavalock",
+        "email": "megan.pavalock@ey.com"
+      },
+      {
+        "name": "Anuj Patel",
+        "email": "anuj.patel@ey.com"
+      },
+      {
+        "name": "Leslie Kinsey",
+        "email": "leslie.kinsey@ey.com"
+      },
+      {
+        "name": "Megan Pavalock",
+        "email": "megan.pavalock@ey.com"
+      },
+      {
+        "name": "Anuj Patel",
+        "email": "anuj.patel@ey.com"
+      },
+      {
+        "name": "Leslie Kinsey",
+        "email": "leslie.kinsey@ey.com"
+      },
+      {
+        "name": "Daniela Velasquez",
+        "email": "daniela.velasquez@ey.com"
+      },
+      {
+        "name": "Jackie Cunningham",
+        "email": "jackie.cunningham@ey.com"
+      },
+      {
+        "name": "Caroline Hudnall",
+        "email": "caroline.hudnall@ey.com"
+      },
+      {
+        "name": "Jessica Robson",
+        "email": "jessica.robson@ey.com"
+      },
+      {
+        "name": "Emily Deering",
+        "email": "emily.deering@ey.com"
+      },
+      {
+        "name": "Ruthie Strop",
+        "email": "ruthie.strop@ey.com"
+      },
+      {
+        "name": "Emily Berges",
+        "email": "emily.berges@ey.com"
+      },
+      {
+        "name": "Mark Paul",
+        "email": "mark.paul@ey.com"
+      },
+      {
+        "name": "Megan Bruce",
+        "email": "megan.bruce@ey.com"
+      },
+      {
+        "name": "Courtney Ward",
+        "email": "courtney.ward@ey.com"
+      },
+      {
+        "name": "Erin Kelly",
+        "email": "erin.kelly@ey.com"
+      },
+      {
+        "name": "Emily Ray",
+        "email": "emily.ray@ey.com"
+      },
+      {
+        "name": "Jennifer Garrard",
+        "email": "jennifer.garrard@ey.com"
+      },
+      {
+        "name": "Rachel",
+        "email": "Schachter Kessler  rachel.kessler@ey.com"
+      },
+      {
+        "name": "Jose L. Garcia",
+        "email": "jose l.garcia@ey.com"
+      },
+      {
+        "name": "Courtney Aldaco",
+        "email": "courtney.aldaco@ey.com"
+      },
+      {
+        "name": "Ashley Dawn Arbgast",
+        "email": "ashley dawn.arbgast@ey.com"
+      },
+      {
+        "name": "Max Hyland",
+        "email": "max.hyland@ey.com"
+      },
+      {
+        "name": "Courtney Aldaco",
+        "email": "courtney.aldaco@ey.com"
+      },
+      {
+        "name": "Ashley Dawn Arbgast",
+        "email": "ashley dawn.arbgast@ey.com"
+      },
+      {
+        "name": "Max Hyland",
+        "email": "max.hyland@ey.com"
+      },
+      {
+        "name": "Courtney Aldaco",
+        "email": "courtney.aldaco@ey.com"
+      },
+      {
+        "name": "Ashley Dawn Arbgast",
+        "email": "ashley dawn.arbgast@ey.com"
+      },
+      {
+        "name": "Max Hyland",
+        "email": "max.hyland@ey.com"
+      },
+      {
+        "name": "Ashleigh Butler",
+        "email": "ashleigh.butler@ey.com"
+      },
+      {
+        "name": "Stephanie Cartwright",
+        "email": "stephanie.cartwright@ey.com"
+      },
+      {
+        "name": "Thomas V. Serino",
+        "email": "thomas v.serino@ey.com"
+      },
+      {
+        "name": "Jordan W.",
+        "email": "jordan.w@ey.com"
+      },
+      {
+        "name": "Michael Rodriguez",
+        "email": "michael.rodriguez@ey.com"
+      },
+      {
+        "name": "Thomas Streed",
+        "email": "thomas.streed@ey.com"
+      },
+      {
+        "name": "Nicole Likos",
+        "email": "nicole.likos@ey.com"
+      },
+      {
+        "name": "Je'nell Griffin",
+        "email": "je'nell.griffin@ey.com"
+      },
+      {
+        "name": "Madison Pierini",
+        "email": "madison.pierini@ey.com"
+      },
+      {
+        "name": "Fawn Price",
+        "email": "fawn.price@ey.com"
+      },
+      {
+        "name": "Caroline Hudnall",
+        "email": "caroline.hudnall@ey.com"
+      },
+      {
+        "name": "Caroline Hudnall",
+        "email": "caroline.hudnall@ey.com"
+      }
+    ]
+  },
+  {
+    "company": "The Select Group",
+    "recruiters": [
+      {
+        "name": "Madison Hicks",
+        "email": "mhicks@selectgroup.com"
+      }
+    ]
+  },
+  {
+    "company": "FullDeck",
+    "recruiters": [
+      {
+        "name": "Laura Martin, M.A.",
+        "email": "lmartin@fulldeck.la"
+      }
+    ]
+  },
+  {
+    "company": "Eliassen Group",
+    "recruiters": [
+      {
+        "name": "Jwalant T.",
+        "email": "jt@eliassen.com"
+      }
+    ]
+  },
+  {
+    "company": "Georgia-Pacific LLC",
+    "recruiters": [
+      {
+        "name": "Hayley Johnson",
+        "email": "hayley@gp.com"
+      }
+    ]
+  },
+  {
+    "company": "Citi",
+    "recruiters": [
+      {
+        "name": "Jenna Sharp",
+        "email": "jenna.sharp@citigroup.com"
+      },
+      {
+        "name": "Jacqueline Waugh",
+        "email": "jacqueline.waugh@citigroup.com"
+      },
+      {
+        "name": "Kathryn Heck",
+        "email": "kathryn.heck@citigroup.com"
+      },
+      {
+        "name": "Megan Franklin",
+        "email": "megan.franklin@citigroup.com"
+      },
+      {
+        "name": "Samantha Robins",
+        "email": "samantha.robins@citigroup.com"
+      },
+      {
+        "name": "Samantha Robins",
+        "email": "samantha.robins@citigroup.com"
+      },
+      {
+        "name": "Jacqueline Waugh",
+        "email": "jacqueline.waugh@citigroup.com"
+      }
+    ]
+  },
+  {
+    "company": "Segment",
+    "recruiters": [
+      {
+        "name": "Hannah Spiegel",
+        "email": "hannah@segment.com"
+      }
+    ]
+  },
+  {
+    "company": "Marel",
+    "recruiters": [
+      {
+        "name": "Jennifer Phillips",
+        "email": "jennifer.phillips@marel.com"
+      }
+    ]
+  },
+  {
+    "company": "Source2",
+    "recruiters": [
+      {
+        "name": "Jessica Shaw",
+        "email": "jshaw@source2.com"
+      }
+    ]
+  },
+  {
+    "company": "Silicon Valley Bank",
+    "recruiters": [
+      {
+        "name": "Jerrelle Lockhart, BSB",
+        "email": "jlockhart@svb.com"
+      }
+    ]
+  },
+  {
+    "company": "Splunk",
+    "recruiters": [
+      {
+        "name": "Katia Ratkovich",
+        "email": "kratkovich@splunk.com"
+      }
+    ]
+  },
+  {
+    "company": "CBS Interactive",
+    "recruiters": [
+      {
+        "name": "Ashton Kendall",
+        "email": "ashton.kendall@cbsinteractive.com  Sr. Technical Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "PSI Services LLC",
+    "recruiters": [
+      {
+        "name": "Ally Nohr",
+        "email": "anohr@psionline.com"
+      }
+    ]
+  },
+  {
+    "company": "Amazon.com",
+    "recruiters": [
+      {
+        "name": "Albert Kim",
+        "email": "albertkim@amazon.com"
+      }
+    ]
+  },
+  {
+    "company": "Deloitte Consulting",
+    "recruiters": [
+      {
+        "name": "Bob Warmkessel",
+        "email": "bwarmkessel@deloitte.com"
+      },
+      {
+        "name": "Mark McKenzie",
+        "email": "mmckenzie@deloitte.com"
+      },
+      {
+        "name": "Bob Warmkessel",
+        "email": "bwarmkessel@deloitte.com"
+      },
+      {
+        "name": "Catherine Casey",
+        "email": "ccasey@deloitte.com"
+      }
+    ]
+  },
+  {
+    "company": "Guidebook Inc.",
+    "recruiters": [
+      {
+        "name": "Mallory Thompson",
+        "email": "mallory@guidebook.com"
+      }
+    ]
+  },
+  {
+    "company": "Clearwater Analytics",
+    "recruiters": [
+      {
+        "name": "Emily Ballweber",
+        "email": "eballweber@clearwateranalytics.com Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "Synopsys Inc",
+    "recruiters": [
+      {
+        "name": "Matt Summers",
+        "email": "matt.summers@synopsys.com"
+      }
+    ]
+  },
+  {
+    "company": "Bosch USA",
+    "recruiters": [
+      {
+        "name": "Joy Suber",
+        "email": "joysuber@bosch.us"
+      }
+    ]
+  },
+  {
+    "company": "Akuna Capital",
+    "recruiters": [
+      {
+        "name": "Sydney Heim",
+        "email": "sydney.heim@akunacapital.com"
+      },
+      {
+        "name": "Laura Martin-Richler",
+        "email": "laura.martin-richler@akunacapital.co Campus Recruiter"
+      },
+      {
+        "name": "Sydney Heim",
+        "email": "sydney.heim@akunacapital.com"
+      },
+      {
+        "name": "Laura Martin-Richler",
+        "email": "laura.martin-richler@akunacapital.co Campus Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "WePay, Inc.",
+    "recruiters": [
+      {
+        "name": "Rie Pham",
+        "email": "rie@wepay.com"
+      }
+    ]
+  },
+  {
+    "company": "SpaceX",
+    "recruiters": [
+      {
+        "name": "Kristen Brosseau",
+        "email": "kristen.brosseau@spacex.com"
+      },
+      {
+        "name": "Brittany Miller",
+        "email": "brittany.miller@spacex.com"
+      }
+    ]
+  },
+  {
+    "company": "ADP",
+    "recruiters": [
+      {
+        "name": "Aubrey Daly",
+        "email": "aubrey.daly@adp.com"
+      }
+    ]
+  },
+  {
+    "company": "MedPro Staffing",
+    "recruiters": [
+      {
+        "name": "Jacqualyn Lafaro, PHR",
+        "email": "jlafaro@medprostaffing.com"
+      }
+    ]
+  },
+  {
+    "company": "NCR Corporation",
+    "recruiters": [
+      {
+        "name": "Keoka C.",
+        "email": "keoka.c@ncr.com"
+      }
+    ]
+  },
+  {
+    "company": "Criteo",
+    "recruiters": [
+      {
+        "name": "Minette Licaros",
+        "email": "m.licaros@criteo.com"
+      }
+    ]
+  },
+  {
+    "company": "Piper Companies",
+    "recruiters": [
+      {
+        "name": "Joseph Gros",
+        "email": "jgros@pipercompanies.com"
+      }
+    ]
+  },
+  {
+    "company": "ONEOK",
+    "recruiters": [
+      {
+        "name": "Kate Montgomery",
+        "email": "kate.montgomery@oneok.com"
+      }
+    ]
+  },
+  {
+    "company": "TIBCO Software Inc.",
+    "recruiters": [
+      {
+        "name": "Lisa Cunico",
+        "email": "lcunico@tibco.com"
+      }
+    ]
+  },
+  {
+    "company": "BCG Digital Ventures",
+    "recruiters": [
+      {
+        "name": "Robert Jaime",
+        "email": "robert.jaime@bcgdv.com"
+      }
+    ]
+  },
+  {
+    "company": "Atos",
+    "recruiters": [
+      {
+        "name": "Aliyah F.",
+        "email": "aliyah.f@atos.net"
+      }
+    ]
+  },
+  {
+    "company": "Constant Contact",
+    "recruiters": [
+      {
+        "name": "Christina Caccavale",
+        "email": "ccaccavale@constantcontact.com"
+      }
+    ]
+  },
+  {
+    "company": "Autodesk, Inc.",
+    "recruiters": [
+      {
+        "name": "Laura Aghazadeh",
+        "email": "laura.aghazadeh@autodesk.com"
+      }
+    ]
+  },
+  {
+    "company": "The Climate Corporation",
+    "recruiters": [
+      {
+        "name": "Asumi S.",
+        "email": "asumi.s@climate.com"
+      }
+    ]
+  },
+  {
+    "company": "Cricut",
+    "recruiters": [
+      {
+        "name": "Jamie Mullens",
+        "email": "jmullens@cricut.com"
+      }
+    ]
+  },
+  {
+    "company": "Bazaarvoice",
+    "recruiters": [
+      {
+        "name": "Kindall Carlson",
+        "email": "kindall.carlson@bazaarvoice.com"
+      }
+    ]
+  },
+  {
+    "company": "SVB Financial Group",
+    "recruiters": [
+      {
+        "name": "Jennifer Schwab",
+        "email": "jschwab@svb.com"
+      }
+    ]
+  },
+  {
+    "company": "eBay Inc",
+    "recruiters": [
+      {
+        "name": "Katie Mirto",
+        "email": "katie@ebayinc.com"
+      }
+    ]
+  },
+  {
+    "company": "Boingo Wireless",
+    "recruiters": [
+      {
+        "name": "Jamie Koblinski",
+        "email": "jkoblinski@boingo.com"
+      }
+    ]
+  },
+  {
+    "company": "Shell",
+    "recruiters": [
+      {
+        "name": "Jennifer Bufalini",
+        "email": "jennifer.bufalini@shell.com"
+      }
+    ]
+  },
+  {
+    "company": "AIG",
+    "recruiters": [
+      {
+        "name": "Rebecca Schwenk",
+        "email": "rebecca.schwenk@aig.com"
+      },
+      {
+        "name": "Rebecca Kornstein",
+        "email": "rebecca.kornstein@aig.com"
+      },
+      {
+        "name": "Gabriela Palma",
+        "email": "gabriela.palma@aig.com"
+      }
+    ]
+  },
+  {
+    "company": "PRA Health Sciences",
+    "recruiters": [
+      {
+        "name": "Erick Abbey",
+        "email": "abbeyerick@prahs.com"
+      }
+    ]
+  },
+  {
+    "company": "Madewell",
+    "recruiters": [
+      {
+        "name": "Jessica Stanislaus",
+        "email": "jessica.stanislaus@jcrew.com"
+      }
+    ]
+  },
+  {
+    "company": "Xilinx",
+    "recruiters": [
+      {
+        "name": "Eric Yeung",
+        "email": "eric.yeung@xilinx.com"
+      }
+    ]
+  },
+  {
+    "company": "Respawn Entertainment",
+    "recruiters": [
+      {
+        "name": "Miriam Anderson",
+        "email": "miriam@respawn.com"
+      }
+    ]
+  },
+  {
+    "company": "Humana",
+    "recruiters": [
+      {
+        "name": "Samantha Scott",
+        "email": "sscott@humana.com"
+      }
+    ]
+  },
+  {
+    "company": "Aerotek",
+    "recruiters": [
+      {
+        "name": "Alyssa Wyson",
+        "email": "awyson@aerotek.com"
+      },
+      {
+        "name": "Christine Brodie",
+        "email": "cbrodie@aerotek.com"
+      },
+      {
+        "name": "Casey Gaynor",
+        "email": "cgaynor@aerotek.com"
+      }
+    ]
+  },
+  {
+    "company": "CrowdStrike",
+    "recruiters": [
+      {
+        "name": "Drake Jakovac",
+        "email": "ake.jakovac@crowdstrike.com"
+      }
+    ]
+  },
+  {
+    "company": "Intoxalock",
+    "recruiters": [
+      {
+        "name": "Abigail Weatherwax",
+        "email": "aweatherwax@intoxalock.com"
+      }
+    ]
+  },
+  {
+    "company": "Paycor",
+    "recruiters": [
+      {
+        "name": "Chris Hines, CPC",
+        "email": "chines@paycor.com"
+      }
+    ]
+  },
+  {
+    "company": "MongoDB",
+    "recruiters": [
+      {
+        "name": "Kate Wright",
+        "email": "kate.wright@mongodb.com"
+      },
+      {
+        "name": "Sara Naouai",
+        "email": "sara.naouai@mongodb.com"
+      },
+      {
+        "name": "Kate Wright",
+        "email": "kate.wright@mongodb.com"
+      },
+      {
+        "name": "Emily Cardner",
+        "email": "emily.cardner@mongodb.com"
+      }
+    ]
+  },
+  {
+    "company": "Northwestern Mutual",
+    "recruiters": [
+      {
+        "name": "Sofia Mastroianni",
+        "email": "sofia_mastroianni@northwesternmut Campus Recruiter"
+      },
+      {
+        "name": "Sofia Mastroianni",
+        "email": "sofia_mastroianni@northwesternmut Campus Recruiter"
+      },
+      {
+        "name": "Rickie Rizos",
+        "email": "rickie_rizos@northwesternmutual.comCampus Recruiter"
+      },
+      {
+        "name": "Kaitlyn Maurer",
+        "email": "kaitlyn_maurer@northwesternmutual. Campus Recruiter"
+      },
+      {
+        "name": "Amber Skogstad",
+        "email": "amber_skogstad@northwesternmutu Campus Recruiter"
+      },
+      {
+        "name": "Nicole Methven",
+        "email": "nicole_methven@northwesternmutua Campus Recruiter"
+      },
+      {
+        "name": "Sydney Roti",
+        "email": "sydney_roti@northwesternmutual.co Campus Recruiter"
+      },
+      {
+        "name": "Taylor Wilson",
+        "email": "taylor_wilson@northwesternmutual.c Campus Recruiter"
+      },
+      {
+        "name": "Chloe Verseput",
+        "email": "chloe_verseput@northwesternmutual Campus Recruiter"
+      },
+      {
+        "name": "Amey Langford",
+        "email": "amey_langford@northwesternmutual Campus Recruiter"
+      },
+      {
+        "name": "Emily Opheim",
+        "email": "emily_opheim@northwesternmutual.cCampus Recruiter"
+      },
+      {
+        "name": "Ashly Kelley, MS, LPC",
+        "email": "ashly_kelley@northwesternmutual.co Campus Recruiter"
+      },
+      {
+        "name": "Ashly Kelley, MS, LPC",
+        "email": "ashly_kelley@northwesternmutual.co Campus Recruiter"
+      },
+      {
+        "name": "Ashly Kelley, MS, LPC",
+        "email": "ashly_kelley@northwesternmutual.co Campus Recruiter"
+      },
+      {
+        "name": "Alyssa Sacco",
+        "email": "alyssa_sacco@northwesternmutual.c Campus Recruiter"
+      },
+      {
+        "name": "Briana Armand",
+        "email": "briana_armand@northwesternmutual Campus Recruiter"
+      },
+      {
+        "name": "Sanders Durham II",
+        "email": "sanders_ii@northwesternmutual.com Campus Recruiter"
+      },
+      {
+        "name": "Amber Skogstad",
+        "email": "amber_skogstad@northwesternmutu Campus Recruiter"
+      },
+      {
+        "name": "Nicole Methven",
+        "email": "nicole_methven@northwesternmutua Campus Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "RippleMatch",
+    "recruiters": [
+      {
+        "name": "Jon Adrien",
+        "email": "adrien@ripplematch.com"
+      },
+      {
+        "name": "Jon Adrien",
+        "email": "adrien@ripplematch.com"
+      },
+      {
+        "name": "Ricardo Palau",
+        "email": "palau@ripplematch.com"
+      }
+    ]
+  },
+  {
+    "company": "nextSource",
+    "recruiters": [
+      {
+        "name": "Katie Griffin",
+        "email": "kgriffin@nextsource.com"
+      },
+      {
+        "name": "Katie Griffin",
+        "email": "kgriffin@nextsource.com"
+      }
+    ]
+  },
+  {
+    "company": "POLITICO",
+    "recruiters": [
+      {
+        "name": "Jessica DiRocco",
+        "email": "jdirocco@politico.com"
+      }
+    ]
+  },
+  {
+    "company": "Two Sigma",
+    "recruiters": [
+      {
+        "name": "Francesca Dayre",
+        "email": "francesca.dayre@twosigma.com"
+      },
+      {
+        "name": "Catherine Kennedy",
+        "email": "catherine.kennedy@twosigma.com   Campus Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "CDK Global",
+    "recruiters": [
+      {
+        "name": "Dianna Chourarath",
+        "email": "dianna.chourarath@cdkglobal.com   Campus Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "Optiver",
+    "recruiters": [
+      {
+        "name": "Christine Murphy",
+        "email": "christinemurphy@optiver.com"
+      },
+      {
+        "name": "Melissa Machuta",
+        "email": "melissamachuta@optiver.com"
+      }
+    ]
+  },
+  {
+    "company": "PwC",
+    "recruiters": [
+      {
+        "name": "Samantha Koban",
+        "email": "samantha.koban@pwc.com"
+      },
+      {
+        "name": "Stephanie Angellotto",
+        "email": "stephanie.angellotto@pwc.com"
+      },
+      {
+        "name": "Vivek R. Rao",
+        "email": "vivek.r@pwc.com"
+      },
+      {
+        "name": "Sarah Wagner",
+        "email": "sarah.wagner@pwc.com"
+      },
+      {
+        "name": "Stephanie Angellotto",
+        "email": "stephanie.angellotto@pwc.com"
+      },
+      {
+        "name": "Amanda Garcia",
+        "email": "amanda.garcia@pwc.com"
+      },
+      {
+        "name": "Waffa Raza",
+        "email": "waffa.raza@pwc.com"
+      },
+      {
+        "name": "Leanne Wiley",
+        "email": "leanne.wiley@pwc.com"
+      },
+      {
+        "name": "Nini Asikin",
+        "email": "nini.asikin@pwc.com"
+      },
+      {
+        "name": "Amanda Garcia",
+        "email": "amanda.garcia@pwc.com"
+      }
+    ]
+  },
+  {
+    "company": "Geeks Who Drink",
+    "recruiters": [
+      {
+        "name": "Becca Bullard",
+        "email": "becca@geekswhodrink.com"
+      }
+    ]
+  },
+  {
+    "company": "Bank of America",
+    "recruiters": [
+      {
+        "name": "Sean Hille",
+        "email": "sean.hille@bankofamerica.com"
+      },
+      {
+        "name": "Mary Abbood",
+        "email": "mary.abbood@bankofamerica.com   Campus Recruiter"
+      },
+      {
+        "name": "Mary Abbood",
+        "email": "mary.abbood@bankofamerica.com   Campus Recruiter"
+      },
+      {
+        "name": "Stephanie Moss",
+        "email": "stephanie.moss@bankofamerica.comCampus Recruiter"
+      },
+      {
+        "name": "Blair Landen",
+        "email": "blair.landen@bankofamerica.com"
+      },
+      {
+        "name": "Brett Parker",
+        "email": "brett.parker@bankofamerica.com"
+      },
+      {
+        "name": "Danielle Kelly",
+        "email": "danielle.kelly@bankofamerica.com   Campus Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "Wayfair",
+    "recruiters": [
+      {
+        "name": "Sal Lisanti",
+        "email": "slisanti@wayfair.com"
+      },
+      {
+        "name": "Carly Flynn",
+        "email": "cflynn@wayfair.com"
+      },
+      {
+        "name": "Meryl McLellan",
+        "email": "mmclellan@wayfair.com"
+      },
+      {
+        "name": "Sarah Roberts",
+        "email": "sroberts@wayfair.com"
+      },
+      {
+        "name": "Lila Haffey",
+        "email": "lhaffey@wayfair.com"
+      },
+      {
+        "name": "Kalie Giatrelis",
+        "email": "kgiatrelis@wayfair.com"
+      },
+      {
+        "name": "Phillip Toomey",
+        "email": "ptoomey@wayfair.com"
+      },
+      {
+        "name": "Rae Schofield",
+        "email": "rschofield@wayfair.com"
+      },
+      {
+        "name": "Kristina Cleary",
+        "email": "kcleary@wayfair.com"
+      },
+      {
+        "name": "Stephanie Oteri",
+        "email": "soteri@wayfair.com"
+      },
+      {
+        "name": "Kristina Cleary",
+        "email": "kcleary@wayfair.com"
+      },
+      {
+        "name": "Kristina Cleary",
+        "email": "kcleary@wayfair.com"
+      }
+    ]
+  },
+  {
+    "company": "TiVo",
+    "recruiters": [
+      {
+        "name": "Manroop Singh",
+        "email": "msingh@tivo.com"
+      }
+    ]
+  },
+  {
+    "company": "CEB is now Gartner",
+    "recruiters": [
+      {
+        "name": "Laney Oaks",
+        "email": "loaks@cebglobal.com"
+      }
+    ]
+  },
+  {
+    "company": "Houlihan Lokey",
+    "recruiters": [
+      {
+        "name": "Nikki Volpert",
+        "email": "nvolpert@hl.com"
+      }
+    ]
+  },
+  {
+    "company": "BDO USA, LLP",
+    "recruiters": [
+      {
+        "name": "Amir Mazarei",
+        "email": "amazarei@bdo.com"
+      }
+    ]
+  },
+  {
+    "company": "Carbon Black, Inc.",
+    "recruiters": [
+      {
+        "name": "Maritza Gamboa",
+        "email": "mgamboa@carbonblack.com"
+      }
+    ]
+  },
+  {
+    "company": "Bloomberg LP",
+    "recruiters": [
+      {
+        "name": "Katherine Antonucci",
+        "email": "kantonucci@bloomberg.com"
+      },
+      {
+        "name": "Brittany Rodriguez",
+        "email": "brodriguez@bloomberg.com"
+      },
+      {
+        "name": "Kristen Galgano",
+        "email": "kgalgano@bloomberg.com"
+      },
+      {
+        "name": "Katie Golub",
+        "email": "kgolub@bloomberg.com"
+      },
+      {
+        "name": "Catherine Whelan",
+        "email": "cwhelan@bloomberg.com"
+      },
+      {
+        "name": "Brittany Rodriguez",
+        "email": "brodriguez@bloomberg.com"
+      },
+      {
+        "name": "Amy Petcoff",
+        "email": "apetcoff@bloomberg.com"
+      }
+    ]
+  },
+  {
+    "company": "Wipro",
+    "recruiters": [
+      {
+        "name": "Amanda Brown",
+        "email": "amanda.brown@wipro.com"
+      }
+    ]
+  },
+  {
+    "company": "MAXIMUS",
+    "recruiters": [
+      {
+        "name": "Thomas Griego",
+        "email": "thomasgriego@maximus.com"
+      }
+    ]
+  },
+  {
+    "company": "Toast, Inc.",
+    "recruiters": [
+      {
+        "name": "Christina Asadorian",
+        "email": "casadorian@toasttab.com"
+      }
+    ]
+  },
+  {
+    "company": "Walmart",
+    "recruiters": [
+      {
+        "name": "Lauren Blackmon",
+        "email": "lauren.blackmon@walmart.com"
+      },
+      {
+        "name": "Zoe Barton",
+        "email": "zoe.barton@walmart.com"
+      },
+      {
+        "name": "Kristin McCarter",
+        "email": "kristin.mccarter@walmart.com"
+      }
+    ]
+  },
+  {
+    "company": "Perella Weinberg Partners",
+    "recruiters": [
+      {
+        "name": "Laura Rivero",
+        "email": "lrivero@pwpartners.com"
+      }
+    ]
+  },
+  {
+    "company": "PNC",
+    "recruiters": [
+      {
+        "name": "Cara Poletti",
+        "email": "cara.poletti@pnc.com"
+      },
+      {
+        "name": "Jocilyn Delaney",
+        "email": "jocilyn.delaney@pnc.com"
+      },
+      {
+        "name": "Nasreen Harun",
+        "email": "nasreen.harun@pnc.com"
+      },
+      {
+        "name": "Dakota Becker",
+        "email": "dakota.becker@pnc.com"
+      },
+      {
+        "name": "Brenden Taylor",
+        "email": "brenden.taylor@pnc.com"
+      }
+    ]
+  },
+  {
+    "company": "CDM Smith",
+    "recruiters": [
+      {
+        "name": "Annie Morse",
+        "email": "morsea@cdmsmith.com"
+      },
+      {
+        "name": "Kate Kelley",
+        "email": "kelleyk@cdmsmith.com"
+      }
+    ]
+  },
+  {
+    "company": "FIS",
+    "recruiters": [
+      {
+        "name": "Noel Ross",
+        "email": "noel.ross@fisglobal.com"
+      },
+      {
+        "name": "Deanna Thornton, PHR",
+        "email": "deanna.thornton@fisglobal.com"
+      }
+    ]
+  },
+  {
+    "company": "Aramark",
+    "recruiters": [
+      {
+        "name": "Jose Preza",
+        "email": "preza-jose@aramark.com"
+      }
+    ]
+  },
+  {
+    "company": "Sony Music Entertainment",
+    "recruiters": [
+      {
+        "name": "Katie F.",
+        "email": "katie.f@sonymusic.com"
+      },
+      {
+        "name": "Katie F.",
+        "email": "katie.f@sonymusic.com"
+      }
+    ]
+  },
+  {
+    "company": "Ernst &amp; Young",
+    "recruiters": [
+      {
+        "name": "Eleni Athanasiou",
+        "email": "eleni.athanasiou@ey.com"
+      },
+      {
+        "name": "Eleni Athanasiou",
+        "email": "eleni.athanasiou@ey.com"
+      },
+      {
+        "name": "Julianne Miata, CPA",
+        "email": "julianne.miata@ey.com"
+      },
+      {
+        "name": "Kristin Schmidt",
+        "email": "kristin.schmidt@ey.com"
+      },
+      {
+        "name": "Thompson",
+        "email": "Harner, CPA (PA/VAthompson.harner@ey.com"
+      },
+      {
+        "name": "Kaitlin Kunsman",
+        "email": "kaitlin.kunsman@ey.com"
+      },
+      {
+        "name": "Grethel Gaitan",
+        "email": "grethel.gaitan@ey.com"
+      },
+      {
+        "name": "Katy Elliott Steinbach",
+        "email": "katy.steinbach@ey.com"
+      },
+      {
+        "name": "Katy Elliott Steinbach",
+        "email": "katy.steinbach@ey.com"
+      },
+      {
+        "name": "Katy Elliott Steinbach",
+        "email": "katy.steinbach@ey.com"
+      }
+    ]
+  },
+  {
+    "company": "Morgan Stanley",
+    "recruiters": [
+      {
+        "name": "Jaishree Bagul",
+        "email": "jaishree.bagul@morganstanley.com  Campus Recruiter"
+      },
+      {
+        "name": "Kelly Harrison",
+        "email": "kelly.harrison@morganstanley.com   Campus Recruiter"
+      },
+      {
+        "name": "Chloe Street",
+        "email": "chloe.street@morganstanley.com"
+      },
+      {
+        "name": "Natasha Bhalla",
+        "email": "natasha.bhalla@morganstanley.com Jr. Recruiter"
+      },
+      {
+        "name": "Emily O'Connor",
+        "email": "emily.o'connor@morganstanley.com  Campus Recruiter"
+      },
+      {
+        "name": "Trish Duford",
+        "email": "trish.duford@morganstanley.com"
+      }
+    ]
+  },
+  {
+    "company": "Deloitte",
+    "recruiters": [
+      {
+        "name": "Izys Ramos",
+        "email": "iramos@deloitte.com"
+      },
+      {
+        "name": "Jennifer Moats Faloon",
+        "email": "jfaloon@deloitte.com"
+      },
+      {
+        "name": "Danica DeVito",
+        "email": "ddevito@deloitte.com"
+      },
+      {
+        "name": "Agi Galecka, CPA",
+        "email": "agalecka@deloitte.com"
+      },
+      {
+        "name": "Flora Lee",
+        "email": "flee@deloitte.com"
+      },
+      {
+        "name": "McKenzie Ragan",
+        "email": "mragan@deloitte.com"
+      },
+      {
+        "name": "Megan Candee",
+        "email": "mcandee@deloitte.com"
+      },
+      {
+        "name": "Kim Machado",
+        "email": "kmachado@deloitte.com"
+      },
+      {
+        "name": "Brent Paskewicz",
+        "email": "bpaskewicz@deloitte.com"
+      },
+      {
+        "name": "Casey Comings",
+        "email": "ccomings@deloitte.com"
+      },
+      {
+        "name": "Jessica Cook",
+        "email": "jcook@deloitte.com"
+      },
+      {
+        "name": "Carrie Barrow",
+        "email": "cbarrow@deloitte.com"
+      },
+      {
+        "name": "Megan Gustafson",
+        "email": "mgustafson@deloitte.com"
+      },
+      {
+        "name": "Erika Hartwyk",
+        "email": "ehartwyk@deloitte.com"
+      },
+      {
+        "name": "Caroline Grosso",
+        "email": "cgrosso@deloitte.com"
+      },
+      {
+        "name": "Kelly Swartzfager",
+        "email": "kswartzfager@deloitte.com"
+      },
+      {
+        "name": "Amanda Runnalls",
+        "email": "arunnalls@deloitte.com"
+      },
+      {
+        "name": "Caroline Grosso",
+        "email": "cgrosso@deloitte.com"
+      },
+      {
+        "name": "Kelly Swartzfager",
+        "email": "kswartzfager@deloitte.com"
+      },
+      {
+        "name": "Amanda Runnalls",
+        "email": "arunnalls@deloitte.com"
+      },
+      {
+        "name": "Jenni Graham",
+        "email": "jgraham@deloitte.com"
+      },
+      {
+        "name": "McKenzie Ragan",
+        "email": "mragan@deloitte.com"
+      },
+      {
+        "name": "Krysta DiGregorio",
+        "email": "kdigregorio@deloitte.com"
+      },
+      {
+        "name": "Jessica Cook",
+        "email": "jcook@deloitte.com"
+      },
+      {
+        "name": "Ashley Josephson",
+        "email": "ajosephson@deloitte.com"
+      }
+    ]
+  },
+  {
+    "company": "Verizon Wireless",
+    "recruiters": [
+      {
+        "name": "Layne Cronin",
+        "email": "layne.cronin@verizonwireless.com   Campus Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "Yext",
+    "recruiters": [
+      {
+        "name": "Rachel Hirsch",
+        "email": "rhirsch@yext.com"
+      }
+    ]
+  },
+  {
+    "company": "Appian Corporation",
+    "recruiters": [
+      {
+        "name": "Christina Shushani",
+        "email": "christina.shushani@appian.com"
+      },
+      {
+        "name": "Christina Shushani",
+        "email": "christina.shushani@appian.com"
+      }
+    ]
+  },
+  {
+    "company": "BlackRock",
+    "recruiters": [
+      {
+        "name": "Danielle Kronenfeld",
+        "email": "danielle.kronenfeld@blackrock.com  Campus Recruiter"
+      },
+      {
+        "name": "Lauren Cintron",
+        "email": "lauren.cintron@blackrock.com"
+      },
+      {
+        "name": "Hannah Dince",
+        "email": "hannah.dince@blackrock.com"
+      },
+      {
+        "name": "Nancy Angelica",
+        "email": "nancy.angelica@blackrock.com"
+      }
+    ]
+  },
+  {
+    "company": "Lockheed Martin",
+    "recruiters": [
+      {
+        "name": "Karen McKamey",
+        "email": "karen.mckamey@lockheedmartin.comCampus Recruiter"
+      },
+      {
+        "name": "Jenna Shellhammer",
+        "email": "jenna.shellhammer@lockheedmartin. Campus Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "Arup",
+    "recruiters": [
+      {
+        "name": "Ana Karolina Mota",
+        "email": "ana karolina.mota@arup.com"
+      }
+    ]
+  },
+  {
+    "company": "Structural Group",
+    "recruiters": [
+      {
+        "name": "Kyle Reese",
+        "email": "kreese@structuralgroup.com"
+      }
+    ]
+  },
+  {
+    "company": "FTI Consulting",
+    "recruiters": [
+      {
+        "name": "Alexis Long",
+        "email": "alexis.long@fticonsulting.com"
+      },
+      {
+        "name": "Rina Patel",
+        "email": "rina.patel@fticonsulting.com"
+      }
+    ]
+  },
+  {
+    "company": "Fannie Mae",
+    "recruiters": [
+      {
+        "name": "Jenny Luecking",
+        "email": "jenny_luecking@fanniemae.com"
+      },
+      {
+        "name": "Mary Solomon",
+        "email": "mary_solomon@fanniemae.com"
+      }
+    ]
+  },
+  {
+    "company": "Dow Jones",
+    "recruiters": [
+      {
+        "name": "Robert Boehm",
+        "email": "robert.boehm@dowjones.com"
+      }
+    ]
+  },
+  {
+    "company": "BroadSoft",
+    "recruiters": [
+      {
+        "name": "Meisha Colbert",
+        "email": "mcolbert@broadsoft.com"
+      },
+      {
+        "name": "Meisha Colbert",
+        "email": "mcolbert@broadsoft.com"
+      }
+    ]
+  },
+  {
+    "company": "Cvent",
+    "recruiters": [
+      {
+        "name": "Lauren Simoncic",
+        "email": "lsimoncic@cvent.com"
+      },
+      {
+        "name": "Samantha Arbetter",
+        "email": "sarbetter@cvent.com"
+      },
+      {
+        "name": "Kristen Hotz",
+        "email": "khotz@cvent.com"
+      }
+    ]
+  },
+  {
+    "company": "Protiviti",
+    "recruiters": [
+      {
+        "name": "Keenan Woods-Scott",
+        "email": "keenan.woods-scott@protiviti.com"
+      }
+    ]
+  },
+  {
+    "company": "KeyBank",
+    "recruiters": [
+      {
+        "name": "Andrea Cole",
+        "email": "andrea.cole@key.com"
+      },
+      {
+        "name": "Sheila Byrne",
+        "email": "sheila.byrne@key.com"
+      },
+      {
+        "name": "Andrea Cole",
+        "email": "andrea.cole@key.com"
+      },
+      {
+        "name": "Kaitlin Bressler",
+        "email": "kaitlin.bressler@key.com"
+      }
+    ]
+  },
+  {
+    "company": "Chewy",
+    "recruiters": [
+      {
+        "name": "John (Jack) Schnog",
+        "email": "jschnog@chewy.com"
+      },
+      {
+        "name": "John (Jack) Schnog",
+        "email": "jschnog@chewy.com"
+      }
+    ]
+  },
+  {
+    "company": "Pontoon Solutions",
+    "recruiters": [
+      {
+        "name": "Lauren DeSilva",
+        "email": "lauren.desilva@pontoonsolutions.comRecruiter"
+      },
+      {
+        "name": "Lauren DeSilva",
+        "email": "lauren.desilva@pontoonsolutions.comRecruiter"
+      }
+    ]
+  },
+  {
+    "company": "Educatius Group",
+    "recruiters": [
+      {
+        "name": "Ruchi Goel, PHR",
+        "email": "ruchi.goel@educatius.org"
+      },
+      {
+        "name": "Ruchi Goel, PHR",
+        "email": "ruchi.goel@educatius.org"
+      }
+    ]
+  },
+  {
+    "company": "Wellington Management",
+    "recruiters": [
+      {
+        "name": "Lauren Schneiderhan",
+        "email": "lschneiderhan@wellington.com"
+      },
+      {
+        "name": "Lauren Schneiderhan",
+        "email": "lschneiderhan@wellington.com"
+      }
+    ]
+  },
+  {
+    "company": "CBRE",
+    "recruiters": [
+      {
+        "name": "Elisha Bejsovec",
+        "email": "elisha.bejsovec@cbre.com"
+      },
+      {
+        "name": "Christina (Bina) Carroll",
+        "email": "christina.carroll@cbre.com"
+      }
+    ]
+  },
+  {
+    "company": "Target",
+    "recruiters": [
+      {
+        "name": "Andrea Herrald",
+        "email": "andrea.herrald@target.com"
+      },
+      {
+        "name": "Zavier Lewis",
+        "email": "zavier.lewis@target.com"
+      },
+      {
+        "name": "Vanessa Kramer",
+        "email": "vanessa.kramer@target.com"
+      },
+      {
+        "name": "Melissa Irving",
+        "email": "melissa.irving@target.com"
+      },
+      {
+        "name": "Stacie Carpenter",
+        "email": "stacie.carpenter@target.com"
+      },
+      {
+        "name": "Lisa Holt",
+        "email": "lisa.holt@target.com"
+      },
+      {
+        "name": "Amanda Flood, MBA",
+        "email": "amanda.flood@target.com"
+      },
+      {
+        "name": "Emily Sjodin",
+        "email": "emily.sjodin@target.com"
+      },
+      {
+        "name": "Andi Christenson",
+        "email": "andi.christenson@target.com"
+      },
+      {
+        "name": "Stacie Carpenter",
+        "email": "stacie.carpenter@target.com"
+      },
+      {
+        "name": "Lisa Holt",
+        "email": "lisa.holt@target.com"
+      }
+    ]
+  },
+  {
+    "company": "Beacon Hill Staffing Group",
+    "recruiters": [
+      {
+        "name": "Jaci Pulice",
+        "email": "jpulice@beaconhillstaffing.com"
+      }
+    ]
+  },
+  {
+    "company": "NewDay USA",
+    "recruiters": [
+      {
+        "name": "Darby Sinunu",
+        "email": "dsinunu@newdayusa.com"
+      }
+    ]
+  },
+  {
+    "company": "Philips",
+    "recruiters": [
+      {
+        "name": "Brett Romary",
+        "email": "brett.romary@philips.com"
+      },
+      {
+        "name": "Melanie Kollmai",
+        "email": "melanie.kollmai@philips.com"
+      },
+      {
+        "name": "Rebecca Abrahams",
+        "email": "rebecca.abrahams@philips.com"
+      },
+      {
+        "name": "Theresa Mangan Lang",
+        "email": "theresa.lang@philips.com"
+      }
+    ]
+  },
+  {
+    "company": "U.S. Army Reserve",
+    "recruiters": [
+      {
+        "name": "JAMILLA SMITH",
+        "email": "jamilla.smith@army.mil"
+      }
+    ]
+  },
+  {
+    "company": "Robert Half",
+    "recruiters": [
+      {
+        "name": "Liz Martinez",
+        "email": "liz.martinez@roberthalf.com"
+      }
+    ]
+  },
+  {
+    "company": "CohnReznick LLP",
+    "recruiters": [
+      {
+        "name": "Tulsi Patel",
+        "email": "tulsi.patel@cohnreznick.com"
+      },
+      {
+        "name": "Jade Sims, M.Ed.",
+        "email": "jade.sims@cohnreznick.com"
+      }
+    ]
+  },
+  {
+    "company": "Aon",
+    "recruiters": [
+      {
+        "name": "Natalie Floersch",
+        "email": "natalie.floersch@aon.com"
+      },
+      {
+        "name": "Zackary Wheeler",
+        "email": "zackary.wheeler@aon.com"
+      },
+      {
+        "name": "Helen Luz",
+        "email": "helen.luz@aon.com"
+      },
+      {
+        "name": "Helen Luz",
+        "email": "helen.luz@aon.com"
+      }
+    ]
+  },
+  {
+    "company": "Bose Corporation",
+    "recruiters": [
+      {
+        "name": "Michelle Mullaney",
+        "email": "michelle_mullaney@bose.com"
+      }
+    ]
+  },
+  {
+    "company": "Medtronic",
+    "recruiters": [
+      {
+        "name": "Doris Ng",
+        "email": "doris.ng@medtronic.com"
+      }
+    ]
+  },
+  {
+    "company": "J.P. Morgan",
+    "recruiters": [
+      {
+        "name": "Elizabeth Caccia",
+        "email": "elizabeth.caccia@jpmorgan.com"
+      },
+      {
+        "name": "Jill Hitch",
+        "email": "jill.hitch@jpmorgan.com"
+      },
+      {
+        "name": "Chelsea Manowczak",
+        "email": "chelsea.manowczak@jpmorgan.com Campus Recruiter"
+      },
+      {
+        "name": "Claudia Suarez",
+        "email": "claudia.suarez@jpmorgan.com"
+      },
+      {
+        "name": "Claudia Suarez",
+        "email": "claudia.suarez@jpmorgan.com"
+      }
+    ]
+  },
+  {
+    "company": "Steelcase",
+    "recruiters": [
+      {
+        "name": "Amy Norris",
+        "email": "anorris@steelcase.com"
+      }
+    ]
+  },
+  {
+    "company": "Vaco",
+    "recruiters": [
+      {
+        "name": "Edward Burke",
+        "email": "eburke@vaco.com"
+      }
+    ]
+  },
+  {
+    "company": "CTS, Inc.",
+    "recruiters": [
+      {
+        "name": "Jessica Norton",
+        "email": "jnorton@askcts.com"
+      }
+    ]
+  },
+  {
+    "company": "Burlington Stores, Inc.",
+    "recruiters": [
+      {
+        "name": "Claire McCaskey",
+        "email": "claire.mccaskey@burlingtonstores.co Campus Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "LifeBridge Health",
+    "recruiters": [
+      {
+        "name": "Chris Boortz",
+        "email": "cboortz@lifebridgehealth.org"
+      }
+    ]
+  },
+  {
+    "company": "KPMG",
+    "recruiters": [
+      {
+        "name": "Julianna Kerrigan",
+        "email": "jkerrigan@kpmg.com"
+      },
+      {
+        "name": "Sarah Borchardt",
+        "email": "sborchardt@kpmg.com"
+      },
+      {
+        "name": "Carly Merrell",
+        "email": "cmerrell@kpmg.com"
+      },
+      {
+        "name": "Misty Abston",
+        "email": "mabston@kpmg.com"
+      },
+      {
+        "name": "Taylor Magids",
+        "email": "tmagids@kpmg.com"
+      }
+    ]
+  },
+  {
+    "company": "@WalmartLabs India",
+    "recruiters": [
+      {
+        "name": "Rajiv MG",
+        "email": "rmg@walmartlabs.com"
+      }
+    ]
+  },
+  {
+    "company": "Weaver",
+    "recruiters": [
+      {
+        "name": "Lindsey Hamidi",
+        "email": "lindsey.hamidi@weaver.com"
+      }
+    ]
+  },
+  {
+    "company": "AMERICAN SYSTEMS",
+    "recruiters": [
+      {
+        "name": "Connie Radley",
+        "email": "connie.radley@americansystems.comTechnical Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "Peace Corps",
+    "recruiters": [
+      {
+        "name": "Richard Garcia",
+        "email": "rgarcia@peacecorps.gov"
+      }
+    ]
+  },
+  {
+    "company": "Rehmann",
+    "recruiters": [
+      {
+        "name": "Abby Mandley",
+        "email": "abby.mandley@rehmann.com"
+      },
+      {
+        "name": "Paloma Shah",
+        "email": "paloma.shah@rehmann.com"
+      }
+    ]
+  },
+  {
+    "company": "Epsilon",
+    "recruiters": [
+      {
+        "name": "Lauren Kent",
+        "email": "lauren.kent@epsilon.com"
+      },
+      {
+        "name": "Erin Brown",
+        "email": "erin.brown@epsilon.com"
+      }
+    ]
+  },
+  {
+    "company": "Moody's Corporation",
+    "recruiters": [
+      {
+        "name": "Zack Graham",
+        "email": "zack.graham@moodys.com"
+      }
+    ]
+  },
+  {
+    "company": "Nestlé",
+    "recruiters": [
+      {
+        "name": "Lindsay Carmody",
+        "email": "lindsay.carmody@nestle.com"
+      }
+    ]
+  },
+  {
+    "company": "The Buckle, Inc.",
+    "recruiters": [
+      {
+        "name": "Taylor Scruggs",
+        "email": "taylor.scruggs@buckle.com"
+      }
+    ]
+  },
+  {
+    "company": "GroupM",
+    "recruiters": [
+      {
+        "name": "Ron Chen",
+        "email": "ron.chen@groupm.com"
+      }
+    ]
+  },
+  {
+    "company": "Belk",
+    "recruiters": [
+      {
+        "name": "Ashley Turner",
+        "email": "ashley_turner@belk.com"
+      },
+      {
+        "name": "Courtney Yearick",
+        "email": "courtney_yearick@belk.com"
+      }
+    ]
+  },
+  {
+    "company": "American Express",
+    "recruiters": [
+      {
+        "name": "Emily Hyman",
+        "email": "emily.hyman@americanexpress.com Campus Recruiter"
+      },
+      {
+        "name": "Aditi Arora",
+        "email": "aditi.arora@americanexpress.com"
+      },
+      {
+        "name": "Charity Fox Radway",
+        "email": "charity.radway@americanexpress.co U.S. Campus Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "Essence",
+    "recruiters": [
+      {
+        "name": "Maggie McDermott",
+        "email": "maggie.mcdermott@essenceglobal.c Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "WillowTree, Inc.",
+    "recruiters": [
+      {
+        "name": "Jamie Wright",
+        "email": "jamie.wright@willowtreeapps.com"
+      }
+    ]
+  },
+  {
+    "company": "Alcon",
+    "recruiters": [
+      {
+        "name": "Hannah Hutchins",
+        "email": "hannah.hutchins@alcon.com"
+      }
+    ]
+  },
+  {
+    "company": "Owens Corning",
+    "recruiters": [
+      {
+        "name": "Kyle Page",
+        "email": "kyle.page@owenscorning.com"
+      }
+    ]
+  },
+  {
+    "company": "Federal Reserve Bank of Newnewyorkfed.org",
+    "recruiters": [
+      {
+        "name": "Elisa Hysa",
+        "email": "ehysa@newyorkfed.org"
+      }
+    ]
+  },
+  {
+    "company": "McKinsey &amp; Company   mckinsey.com",
+    "recruiters": [
+      {
+        "name": "Edzen Cortez",
+        "email": "edzen_cortez@mckinsey.com"
+      },
+      {
+        "name": "Elizabeth F.",
+        "email": "elizabeth_f@mckinsey.com"
+      }
+    ]
+  },
+  {
+    "company": "SkillStorm",
+    "recruiters": [
+      {
+        "name": "Elizabeth Fisher",
+        "email": "efisher@skillstorm.com"
+      },
+      {
+        "name": "Elizabeth Fisher",
+        "email": "efisher@skillstorm.com"
+      }
+    ]
+  },
+  {
+    "company": "Blue Bottle Coffee",
+    "recruiters": [
+      {
+        "name": "Rika Arita",
+        "email": "rika@bluebottlecoffee.com"
+      }
+    ]
+  },
+  {
+    "company": "MedStar Health",
+    "recruiters": [
+      {
+        "name": "Tiffaney Purvis",
+        "email": "tpurvis@medstarhealth.org"
+      }
+    ]
+  },
+  {
+    "company": "Sensata Technologies",
+    "recruiters": [
+      {
+        "name": "Jennifer Porcelli",
+        "email": "jporcelli@sensata.com"
+      }
+    ]
+  },
+  {
+    "company": "NBCUniversal Media, LLC",
+    "recruiters": [
+      {
+        "name": "Lauren Coffelt",
+        "email": "lauren.coffelt@nbcuniversal.com"
+      },
+      {
+        "name": "Thomas Tibai",
+        "email": "thomas.tibai@nbcuniversal.com"
+      },
+      {
+        "name": "Catherine Salzman",
+        "email": "catherine.salzman@nbcuniversal.comCampus Recruiter"
+      },
+      {
+        "name": "Nicole Goolsby",
+        "email": "nicole.goolsby@nbcuniversal.com"
+      }
+    ]
+  },
+  {
+    "company": "Red Ventures",
+    "recruiters": [
+      {
+        "name": "Jackie Fortune",
+        "email": "jfortune@redventures.com"
+      }
+    ]
+  },
+  {
+    "company": "PepsiCo",
+    "recruiters": [
+      {
+        "name": "Sara Rode",
+        "email": "sara.rode@pepsico.com"
+      }
+    ]
+  },
+  {
+    "company": "Fahrenheit IT",
+    "recruiters": [
+      {
+        "name": "John Armstrong",
+        "email": "jarmstrong@fahrenheitit.com"
+      }
+    ]
+  },
+  {
+    "company": "Charles River Development   crd.com",
+    "recruiters": [
+      {
+        "name": "Melissa Monahan",
+        "email": "melissamonahan@crd.com"
+      }
+    ]
+  },
+  {
+    "company": "Turner (Turner Broadcasting  turner.com",
+    "recruiters": [
+      {
+        "name": "Desiree Booker",
+        "email": "desiree.booker@turner.com"
+      }
+    ]
+  },
+  {
+    "company": "HEB",
+    "recruiters": [
+      {
+        "name": "Lauren Flint",
+        "email": "flint.lauren@heb.com"
+      }
+    ]
+  },
+  {
+    "company": "Navistar Inc",
+    "recruiters": [
+      {
+        "name": "Leah Tefera",
+        "email": "leah.tefera@navistar.com"
+      }
+    ]
+  },
+  {
+    "company": "CA Technologies",
+    "recruiters": [
+      {
+        "name": "Hallie Pliner",
+        "email": "hallie.pliner@ca.com"
+      },
+      {
+        "name": "Maggie O'Shea",
+        "email": "maggie.o'shea@ca.com"
+      }
+    ]
+  },
+  {
+    "company": "Able",
+    "recruiters": [
+      {
+        "name": "Sophie Anne Jasinski",
+        "email": "sophie anne@able.co"
+      }
+    ]
+  },
+  {
+    "company": "CEB",
+    "recruiters": [
+      {
+        "name": "Kerri Heider",
+        "email": "kheider@cebglobal.com"
+      }
+    ]
+  },
+  {
+    "company": "HubSpot",
+    "recruiters": [
+      {
+        "name": "Brandon Davis",
+        "email": "bdavis@hubspot.com"
+      },
+      {
+        "name": "Bridget LeMon",
+        "email": "blemon@hubspot.com"
+      }
+    ]
+  },
+  {
+    "company": "UPMC",
+    "recruiters": [
+      {
+        "name": "Alexandra Sossi",
+        "email": "alexandra@upmc.com"
+      },
+      {
+        "name": "Adriana Stumpf",
+        "email": "adriana@upmc.com"
+      },
+      {
+        "name": "Chi Chi Contrucci",
+        "email": "chi chi@upmc.com"
+      }
+    ]
+  },
+  {
+    "company": "Gannett | USA TODAY NETWgannett.com",
+    "recruiters": [
+      {
+        "name": "Ashton Ragsdale",
+        "email": "aragsdale@gannett.com"
+      }
+    ]
+  },
+  {
+    "company": "Rang Technologies, Inc. (Ranrangtech.com",
+    "recruiters": [
+      {
+        "name": "Danny Shah",
+        "email": "dshah@rangtech.com"
+      }
+    ]
+  },
+  {
+    "company": "RBC Capital Markets",
+    "recruiters": [
+      {
+        "name": "Min Jee Choi",
+        "email": "min jee.choi@rbccm.com"
+      }
+    ]
+  },
+  {
+    "company": "Boston University Questrom Sbu.edu",
+    "recruiters": [
+      {
+        "name": "Alisia Devletoglou",
+        "email": "adevletoglou@bu.edu"
+      }
+    ]
+  },
+  {
+    "company": "Michelin",
+    "recruiters": [
+      {
+        "name": "Stacy Davis",
+        "email": "stacy.davis@michelin.com"
+      }
+    ]
+  },
+  {
+    "company": "Tata Consultancy Services   tcs.com",
+    "recruiters": [
+      {
+        "name": "Sneha Mohan",
+        "email": "sneha.mohan@tcs.com"
+      }
+    ]
+  },
+  {
+    "company": "S&amp;P Global",
+    "recruiters": [
+      {
+        "name": "Diego M. Santiago",
+        "email": "diego m.santiago@spglobal.com"
+      }
+    ]
+  },
+  {
+    "company": "Southwest Airlines",
+    "recruiters": [
+      {
+        "name": "Daniel Riskey II",
+        "email": "daniel.ii@southwest.com"
+      }
+    ]
+  },
+  {
+    "company": "Capgemini",
+    "recruiters": [
+      {
+        "name": "Steve Villa",
+        "email": "steve.villa@capgemini.com"
+      },
+      {
+        "name": "Anna Acenbrak",
+        "email": "anna.acenbrak@capgemini.com"
+      }
+    ]
+  },
+  {
+    "company": "Susquehanna International G sig.com",
+    "recruiters": [
+      {
+        "name": "Claire Bradshaw",
+        "email": "claire.bradshaw@sig.com"
+      }
+    ]
+  },
+  {
+    "company": "2U",
+    "recruiters": [
+      {
+        "name": "Shayna M. Bulluck",
+        "email": "sbulluck@2u.com"
+      }
+    ]
+  },
+  {
+    "company": "Deutsche Bank",
+    "recruiters": [
+      {
+        "name": "Leona S.",
+        "email": "leona.s@db.com"
+      }
+    ]
+  },
+  {
+    "company": "Ally",
+    "recruiters": [
+      {
+        "name": "Chris Rzeppa",
+        "email": "chris.rzeppa@ally.com"
+      }
+    ]
+  },
+  {
+    "company": "Barclays",
+    "recruiters": [
+      {
+        "name": "Tamara Joachim",
+        "email": "tamara.joachim@home.barclays"
+      },
+      {
+        "name": "Rachel A. Ginsberg",
+        "email": "rachel a.ginsberg@home.barclays"
+      }
+    ]
+  },
+  {
+    "company": "Chewy.com",
+    "recruiters": [
+      {
+        "name": "Lauren Witkowski",
+        "email": "lwitkowski@chewy.com"
+      }
+    ]
+  },
+  {
+    "company": "BKD CPAs &amp; Advisors   bkd.com",
+    "recruiters": [
+      {
+        "name": "Cheryl Jones",
+        "email": "cjones@bkd.com"
+      }
+    ]
+  },
+  {
+    "company": "Wells Fargo",
+    "recruiters": [
+      {
+        "name": "Shalaine Colbert, PHR",
+        "email": "shalaine.colbert@wellsfargo.com"
+      }
+    ]
+  },
+  {
+    "company": "Huron",
+    "recruiters": [
+      {
+        "name": "Cassie Rose",
+        "email": "crose@huronconsultinggroup.com"
+      }
+    ]
+  },
+  {
+    "company": "Atlassian",
+    "recruiters": [
+      {
+        "name": "Katrina Minoza",
+        "email": "kminoza@atlassian.com"
+      },
+      {
+        "name": "Rayna Olmos",
+        "email": "rolmos@atlassian.com"
+      }
+    ]
+  },
+  {
+    "company": "Cambridge Associates",
+    "recruiters": [
+      {
+        "name": "Melynda Gallagher",
+        "email": "mgallagher@cambridgeassociates.coCampus Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "Guggenheim Partners",
+    "recruiters": [
+      {
+        "name": "Talyse Hampton",
+        "email": "talyse.hampton@guggenheimpartner Campus Recruiter"
+      },
+      {
+        "name": "Jennifer Retzer",
+        "email": "jennifer.retzer@guggenheimpartners. Campus Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "igus Inc.",
+    "recruiters": [
+      {
+        "name": "Kayla Abbate",
+        "email": "kabbate@igus.com"
+      }
+    ]
+  },
+  {
+    "company": "The TJX Companies, Inc.",
+    "recruiters": [
+      {
+        "name": "Cassidy Rydberg",
+        "email": "cassidy_rydberg@tjx.com"
+      },
+      {
+        "name": "Caroline Douville",
+        "email": "caroline_douville@tjx.com"
+      },
+      {
+        "name": "Christopher Kuthy",
+        "email": "christopher_kuthy@tjx.com"
+      }
+    ]
+  },
+  {
+    "company": "Transamerica",
+    "recruiters": [
+      {
+        "name": "Foley Mackey",
+        "email": "foley.mackey@transamerica.com"
+      },
+      {
+        "name": "Foley Mackey",
+        "email": "foley.mackey@transamerica.com"
+      }
+    ]
+  },
+  {
+    "company": "Southern California Edison (S sce.com",
+    "recruiters": [
+      {
+        "name": "Lauren Carrera",
+        "email": "lauren.carrera@sce.com"
+      }
+    ]
+  },
+  {
+    "company": "Oki Golf",
+    "recruiters": [
+      {
+        "name": "Rebecca Stusser",
+        "email": "rebeccas@okigolf.com"
+      }
+    ]
+  },
+  {
+    "company": "Credit Suisse",
+    "recruiters": [
+      {
+        "name": "Karen Chung",
+        "email": "karen.chung@credit-suisse.com"
+      },
+      {
+        "name": "Kezia Gibbs",
+        "email": "kezia.gibbs@credit-suisse.com"
+      }
+    ]
+  },
+  {
+    "company": "RSM US LLP",
+    "recruiters": [
+      {
+        "name": "Jaclyn Vlastaras",
+        "email": "jaclyn.vlastaras@rsmus.com"
+      },
+      {
+        "name": "Allison Cenci",
+        "email": "allison.cenci@rsmus.com"
+      },
+      {
+        "name": "Andrea Fong",
+        "email": "andrea.fong@rsmus.com"
+      },
+      {
+        "name": "Ali Harper",
+        "email": "ali.harper@rsmus.com"
+      },
+      {
+        "name": "Jaclyn Vlastaras",
+        "email": "jaclyn.vlastaras@rsmus.com"
+      }
+    ]
+  },
+  {
+    "company": "zulily",
+    "recruiters": [
+      {
+        "name": "Sean Faherty",
+        "email": "sfaherty@zulily.com"
+      },
+      {
+        "name": "Sean Faherty",
+        "email": "sfaherty@zulily.com"
+      }
+    ]
+  },
+  {
+    "company": "Carbonite",
+    "recruiters": [
+      {
+        "name": "Lauren Thornton",
+        "email": "lthornton@carbonite.com"
+      },
+      {
+        "name": "Lauren Thornton",
+        "email": "lthornton@carbonite.com"
+      }
+    ]
+  },
+  {
+    "company": "KPMG US",
+    "recruiters": [
+      {
+        "name": "Torie Prothro",
+        "email": "tprothro@kpmg.com"
+      },
+      {
+        "name": "Melissa Miller",
+        "email": "mmiller@kpmg.com"
+      },
+      {
+        "name": "Laurie Barbosa",
+        "email": "lbarbosa@kpmg.com"
+      },
+      {
+        "name": "Torie Prothro",
+        "email": "tprothro@kpmg.com"
+      }
+    ]
+  },
+  {
+    "company": "Hertz",
+    "recruiters": [
+      {
+        "name": "James E. Green III",
+        "email": "jiii@hertz.com"
+      },
+      {
+        "name": "Kris Jackson",
+        "email": "kjackson@hertz.com"
+      },
+      {
+        "name": "James E. Green III",
+        "email": "jiii@hertz.com"
+      }
+    ]
+  },
+  {
+    "company": "Govig &amp; Associates",
+    "recruiters": [
+      {
+        "name": "Jade Gingras",
+        "email": "jade.gingras@govig.com"
+      },
+      {
+        "name": "Jade Gingras",
+        "email": "jade.gingras@govig.com"
+      }
+    ]
+  },
+  {
+    "company": "SPS Commerce",
+    "recruiters": [
+      {
+        "name": "Allie Davich",
+        "email": "adavich@spscommerce.com"
+      },
+      {
+        "name": "Allie Davich",
+        "email": "adavich@spscommerce.com"
+      }
+    ]
+  },
+  {
+    "company": "EY-Parthenon",
+    "recruiters": [
+      {
+        "name": "Mala Bingham",
+        "email": "mala.bingham@parthenon.ey.com   Campus Recruiter"
+      },
+      {
+        "name": "Mala Bingham",
+        "email": "mala.bingham@parthenon.ey.com   Campus Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "Total Quality Logistics",
+    "recruiters": [
+      {
+        "name": "Molly Mabes",
+        "email": "mmabes@tql.com"
+      },
+      {
+        "name": "Molly Mabes",
+        "email": "mmabes@tql.com"
+      }
+    ]
+  },
+  {
+    "company": "United Airlines",
+    "recruiters": [
+      {
+        "name": "Michelle Hall",
+        "email": "michelle.hall@united.com"
+      },
+      {
+        "name": "Danielle Goldberg",
+        "email": "danielle.goldberg@united.com"
+      },
+      {
+        "name": "Michelle Hall",
+        "email": "michelle.hall@united.com"
+      }
+    ]
+  },
+  {
+    "company": "Battelle",
+    "recruiters": [
+      {
+        "name": "Juli Garn",
+        "email": "garnj@battelle.org"
+      },
+      {
+        "name": "Juli Garn",
+        "email": "garnj@battelle.org"
+      }
+    ]
+  },
+  {
+    "company": "25Eight",
+    "recruiters": [
+      {
+        "name": "Pangfua Her",
+        "email": "pangfua@its25eight.com"
+      },
+      {
+        "name": "Pangfua Her",
+        "email": "pangfua@its25eight.com"
+      },
+      {
+        "name": "Pangfua Her",
+        "email": "pangfua@its25eight.com"
+      }
+    ]
+  },
+  {
+    "company": "Nielsen",
+    "recruiters": [
+      {
+        "name": "Perla",
+        "email": "Guerrero (Hoyos)   perla.guerrero@nielsen.com"
+      }
+    ]
+  },
+  {
+    "company": "CDW",
+    "recruiters": [
+      {
+        "name": "Thea Cassia",
+        "email": "theacassia@cdw.com"
+      },
+      {
+        "name": "Rachel Uric",
+        "email": "racheluric@cdw.com"
+      }
+    ]
+  },
+  {
+    "company": "BPM LLP",
+    "recruiters": [
+      {
+        "name": "Jessica Liston",
+        "email": "jliston@bpmcpa.com"
+      },
+      {
+        "name": "Adriana Lucero",
+        "email": "alucero@bpmcpa.com"
+      },
+      {
+        "name": "Adriana Lucero",
+        "email": "alucero@bpmcpa.com"
+      },
+      {
+        "name": "Adriana Lucero",
+        "email": "alucero@bpmcpa.com"
+      }
+    ]
+  },
+  {
+    "company": "Cantor Fitzgerald",
+    "recruiters": [
+      {
+        "name": "Thomas Frawley",
+        "email": "tfrawley@cantor.com"
+      }
+    ]
+  },
+  {
+    "company": "Moss Adams",
+    "recruiters": [
+      {
+        "name": "Kaitlyn Georgette",
+        "email": "kaitlyn.georgette@mossadams.com  Campus Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "US Foods",
+    "recruiters": [
+      {
+        "name": "Kristen Anthony",
+        "email": "kristen.anthony@usfoods.com"
+      }
+    ]
+  },
+  {
+    "company": "HealthEquity",
+    "recruiters": [
+      {
+        "name": "Kim",
+        "email": "Martin MBA [LION]  k[lion]@healthequity.com"
+      }
+    ]
+  },
+  {
+    "company": "Yeshiva University High Scho yuhsb.org",
+    "recruiters": [
+      {
+        "name": "Avi Sebbag",
+        "email": "asebbag@yuhsb.org"
+      }
+    ]
+  },
+  {
+    "company": "Infosys",
+    "recruiters": [
+      {
+        "name": "Robin Custodio",
+        "email": "robin_custodio@infosys.com"
+      }
+    ]
+  },
+  {
+    "company": "Armanino LLP",
+    "recruiters": [
+      {
+        "name": "Sunny Jeong",
+        "email": "sunny.jeong@armaninollp.com"
+      }
+    ]
+  },
+  {
+    "company": "Cortland Partners",
+    "recruiters": [
+      {
+        "name": "Kayley McCranie",
+        "email": "kayley.mccranie@cortlandpartners.coCampus Recruiter"
+      }
+    ]
+  },
+  {
+    "company": "Allstate",
+    "recruiters": [
+      {
+        "name": "Nicole Martin",
+        "email": "nmartin@al.st"
+      }
+    ]
+  },
+  {
+    "company": "Riot Games",
+    "recruiters": [
+      {
+        "name": "Mina Hur",
+        "email": "mhur@riotgames.com"
+      }
+    ]
+  },
+  {
+    "company": "BlueGrace Logistics",
+    "recruiters": [
+      {
+        "name": "Samantha Downing",
+        "email": "sdowning@mybluegrace.com"
+      }
+    ]
+  },
+  {
+    "company": "Aprio",
+    "recruiters": [
+      {
+        "name": "Nicole Westphal",
+        "email": "nicole.westphal@aprio.com"
+      }
+    ]
+  },
+  {
+    "company": "Broadridge",
+    "recruiters": [
+      {
+        "name": "Emma Peck",
+        "email": "emma.peck@broadridge.com"
+      }
+    ]
+  },
+  {
+    "company": "Heartland Dental",
+    "recruiters": [
+      {
+        "name": "Bradley Goodloe",
+        "email": "bgoodloe@heartland.com"
+      },
+      {
+        "name": "Bradley Goodloe",
+        "email": "bgoodloe@heartland.com"
+      },
+      {
+        "name": "Bradley Goodloe",
+        "email": "bgoodloe@heartland.com"
+      }
+    ]
+  },
+  {
+    "company": "Korn Ferry",
+    "recruiters": [
+      {
+        "name": "Michelle Warren",
+        "email": "michelle.warren@kornferry.com"
+      }
+    ]
+  },
+  {
+    "company": "Verizon",
+    "recruiters": [
+      {
+        "name": "Jessie Reimers",
+        "email": "jessie.reimers@verizon.com"
+      }
+    ]
+  },
+  {
+    "company": "Amedisys",
+    "recruiters": [
+      {
+        "name": "Jim Rusley",
+        "email": "jim.rusley@amedisys.com"
+      }
+    ]
+  },
+  {
+    "company": "Seton Hill University",
+    "recruiters": [
+      {
+        "name": "Crystal Joyce",
+        "email": "cjoyce@setonhill.edu"
+      }
+    ]
+  },
+  {
+    "company": "Fuze",
+    "recruiters": [
+      {
+        "name": "Kara Moffa",
+        "email": "kmoffa@fuze.com"
+      }
+    ]
+  },
+  {
+    "company": "A.T. Kearney",
+    "recruiters": [
+      {
+        "name": "Emily Pier",
+        "email": "emily.pier@atkearney.com"
+      }
+    ]
+  },
+  {
+    "company": "Rsam",
+    "recruiters": [
+      {
+        "name": "Jennifer Elgart",
+        "email": "jelgart@rsam.com"
+      }
+    ]
+  },
+  {
+    "company": "Intelligrated",
+    "recruiters": [
+      {
+        "name": "Marcus LaCour",
+        "email": "marcus.lacour@intelligrated.com"
+      }
+    ]
+  },
+  {
+    "company": "Inovalon",
+    "recruiters": [
+      {
+        "name": "Hayley Wrenn Myaing",
+        "email": "hmyaing@inovalon.com"
+      }
+    ]
+  },
+  {
+    "company": "Alight Solutions",
+    "recruiters": [
+      {
+        "name": "Tanya Perelygin",
+        "email": "tanya@alight.com"
+      }
+    ]
+  },
+  {
+    "company": "Santander Bank, N.A.",
+    "recruiters": [
+      {
+        "name": "Neha Jain",
+        "email": "njain@santanderbank.com"
+      },
+      {
+        "name": "Neha Jain",
+        "email": "njain@santanderbank.com"
+      }
+    ]
+  },
+  {
+    "company": "Wipro Limited",
+    "recruiters": [
+      {
+        "name": "Samantha Jeudy",
+        "email": "samantha.jeudy@wipro.com"
+      }
+    ]
+  },
+  {
+    "company": "Accenture Federal",
+    "recruiters": [
+      {
+        "name": "Miranda Miller",
+        "email": "miranda.miller@accenture.com"
+      }
+    ]
+  },
+  {
+    "company": "Jefferies",
+    "recruiters": [
+      {
+        "name": "Olivia Drimer",
+        "email": "oimer@jefferies.com"
+      }
+    ]
+  },
+  {
+    "company": "VOLANT TRADING",
+    "recruiters": [
+      {
+        "name": "Lauren Reinfeld",
+        "email": "lreinfeld@volanttrading.com"
+      }
+    ]
+  },
+  {
+    "company": "Thrivent",
+    "recruiters": [
+      {
+        "name": "Brittany Prather",
+        "email": "brittany.prather@thrivent.com"
+      }
+    ]
+  },
+  {
+    "company": "Counterpart International",
+    "recruiters": [
+      {
+        "name": "Hunter Morash",
+        "email": "hmorash@counterpart.org"
+      }
+    ]
+  },
+  {
+    "company": "CEB, now Gartner",
+    "recruiters": [
+      {
+        "name": "Mallory Nichols",
+        "email": "mnichols@cebglobal.com"
+      }
+    ]
+  },
+  {
+    "company": "HCVT",
+    "recruiters": [
+      {
+        "name": "Sarah Kim",
+        "email": "sarah.kim@hcvt.com"
+      }
+    ]
+  },
+  {
+    "company": "Pariveda Solutions",
+    "recruiters": [
+      {
+        "name": "Erin Bell",
+        "email": "erin.bell@parivedasolutions.com"
+      }
+    ]
+  },
+  {
+    "company": "Wakefern Food Corp.",
+    "recruiters": [
+      {
+        "name": "Samuel Zhou",
+        "email": "samuel.zhou@wakefern.com"
+      }
+    ]
+  },
+  {
+    "company": "UBS",
+    "recruiters": [
+      {
+        "name": "Jaclyn Bellino",
+        "email": "jaclyn.bellino@ubs.com"
+      }
+    ]
+  },
+  {
+    "company": "Belvedere Trading, LLC",
+    "recruiters": [
+      {
+        "name": "Caitlin Romani",
+        "email": "cromani@belvederetrading.com"
+      }
+    ]
+  },
+  {
+    "company": "Groupon",
+    "recruiters": [
+      {
+        "name": "Lauren (Fylstra) Mullins",
+        "email": "llauren@groupon.com"
+      }
+    ]
+  },
+  {
+    "company": "Amtrak",
+    "recruiters": [
+      {
+        "name": "Jamaal Burton",
+        "email": "burtonj@amtrak.com"
+      }
+    ]
+  },
+  {
+    "company": "Apptio",
+    "recruiters": [
+      {
+        "name": "Rochelle Omekanda",
+        "email": "romekanda@apptio.com"
+      }
+    ]
+  },
+  {
+    "company": "Navigant",
+    "recruiters": [
+      {
+        "name": "Laura Hamilton",
+        "email": "laura.hamilton@navigant.com"
+      }
+    ]
+  },
+  {
+    "company": "The D. E. Shaw Group",
+    "recruiters": [
+      {
+        "name": "Bradley Perot",
+        "email": "bradley.perot@deshaw.com"
+      }
+    ]
+  },
+  {
+    "company": "MicroStrategy",
+    "recruiters": [
+      {
+        "name": "Emalie Hoar",
+        "email": "ehoar@microstrategy.com"
+      }
+    ]
+  },
+  {
+    "company": "PricewaterhouseCoopers",
+    "recruiters": [
+      {
+        "name": "Kim Kueper",
+        "email": "kim.kueper@pwc.com"
+      }
+    ]
+  },
+  {
+    "company": "Cielo Talent",
+    "recruiters": [
+      {
+        "name": "Jennifer Wilkins",
+        "email": "jennifer.wilkins@cielotalent.com"
+      }
+    ]
+  },
+  {
+    "company": "JPMorgan Chase",
+    "recruiters": [
+      {
+        "name": "Katie Goldich",
+        "email": "kgoldich@jpmorganchase.com"
+      }
+    ]
+  },
+  {
+    "company": "KeyCorp",
+    "recruiters": [
+      {
+        "name": "Pete Catavolos",
+        "email": "pete.catavolos@key.com"
+      }
+    ]
+  },
+  {
+    "company": "T. Rowe Price",
+    "recruiters": [
+      {
+        "name": "Megan Bross Shank",
+        "email": "megan_shank@troweprice.com"
+      }
+    ]
+  }
+]

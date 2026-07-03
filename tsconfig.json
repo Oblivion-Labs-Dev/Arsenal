@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@forge/core": ["./packages/core/src/index.ts"],
+      "@forge/contracts": ["./packages/contracts/src/index.ts"],
+      "@forge/config": ["./packages/config/src/index.ts"],
+      "@forge/logging": ["./packages/logging/src/index.ts"],
+      "@forge/events": ["./packages/events/src/index.ts"],
+      "@forge/telemetry": ["./packages/telemetry/src/index.ts"],
+      "@forge/models": ["./packages/models/src/index.ts"],
+      "@forge/tools": ["./packages/tools/src/index.ts"],
+      "@forge/memory": ["./packages/memory/src/index.ts"],
+      "@forge/scheduler": ["./packages/scheduler/src/index.ts"],
+      "@forge/evaluation": ["./packages/evaluation/src/index.ts"],
+      "@forge/testing": ["./packages/testing/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}
