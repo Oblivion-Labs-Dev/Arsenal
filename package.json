@@ -3,22 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Oblivion Labs reusable utility clients, adapters, and shared types",
+  "description": "Oblivion Labs shared utilities and config-driven site builder",
   "engines": {
     "node": ">=20"
   },
+  "packageManager": "pnpm@9.15.0",
   "scripts": {
-    "build": "node scripts/build.mjs",
+    "build": "turbo run build",
+    "build:clients": "node scripts/build.mjs",
     "clean": "pnpm -r run clean",
-    "typecheck": "pnpm -r run typecheck",
-    "test": "pnpm -r run test"
+    "dev": "turbo run dev --filter=@arsenal/playground",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "vitest run",
+    "arsenal": "node packages/generator/dist/cli.js"
   },
   "devDependencies": {
     "@types/node": "^20.17.0",
     "dotenv": "^17.4.2",
     "eslint": "^9.39.4",
     "imapflow": "^1.4.3",
+    "prettier": "^3.4.2",
     "tsup": "^8.5.0",
+    "turbo": "^2.3.3",
     "typescript": "^5.7.2",
     "vitest": "^4.1.9",
     "zod": "^3.24.2"

@@ -1,0 +1,27 @@
+{
+  "name": "@arsenal/generator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": { "arsenal": "./dist/cli.js" },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "scripts": {
+    "build": "tsup src/cli.ts src/index.ts --format esm --dts --clean --external @arsenal/context-engine",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "lint": "tsc --noEmit",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@arsenal/config": "workspace:*",
+    "@arsenal/context-engine": "workspace:*",
+    "@arsenal/testing": "workspace:*"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "tsup": "^8.5.0",
+    "typescript": "^5.7.2"
+  }
+}

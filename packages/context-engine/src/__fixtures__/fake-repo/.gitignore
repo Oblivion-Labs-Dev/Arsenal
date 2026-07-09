@@ -1,0 +1,7 @@
+node_modules/
+dist/
+coverage/
+ignored-secret.txt
+.arsenal/
+
+.arsenal/cache/

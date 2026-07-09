@@ -203,12 +203,87 @@ Each package builds with **tsup** (ESM + `.d.ts`), tested with **Vitest**, and s
 | Command | Description |
 |---------|-------------|
 | `pnpm install` | Install all workspace dependencies |
-| `pnpm run build` | Build shared → backend → frontend |
+| `pnpm run build` | Build all packages (Turbo) |
+| `pnpm run build:clients` | Build `@oblivion-labs-dev/arsenal-*` clients only |
+| `pnpm run dev` | Site builder playground at http://localhost:3100 |
 | `pnpm run typecheck` | Type-check every package |
 | `pnpm run test` | Run all unit tests |
 | `pnpm run clean` | Remove build artifacts |
+| `pnpm arsenal` | Site builder CLI (`create`, `add`, `theme`, `preview`) |
 
-Build order matters — `scripts/build.mjs` compiles `shared` first so downstream packages resolve types correctly.
+For client packages, `scripts/build.mjs` compiles `shared` first so downstream packages resolve types correctly.
+
+---
+
+## Site builder
+
+Config-driven website/app builder — define `site.config.ts` and generate a production-ready site from themes, layouts, sections, motion, and modules.
+
+```
+Intent (site.config.ts)
+    → @arsenal/config     Zod validation, types, defineSite()
+    → @arsenal/themes     CSS variables + Tailwind tokens
+    → @arsenal/sections   Hero, Bento, FAQ, CTA, …
+    → @arsenal/layouts    Marketing, Dashboard, Docs, Auth, Admin
+    → @arsenal/motion     Cursor, reveal, parallax, Lenis, magnetic
+    → @arsenal/ui         GlassCard, BentoCard, nav, buttons
+    → @arsenal/generator  CLI scaffolding
+    → Production Next.js site
+```
+
+```bash
+cd Arsenal
+pnpm install
+pnpm build
+pnpm dev          # playground at http://localhost:3100
+```
+
+Site builder packages live under `packages/site-config` (`@arsenal/config`), `packages/themes`, `packages/sections`, `packages/tokens`, `packages/plugins`, `packages/catalog`, `packages/motion`, etc. Templates are in `templates/`.
+
+### Project blueprints
+
+Declare product intent once — Arsenal resolves layouts, pages, modules, and SEO:
+
+```ts
+import { defineProject, resolveProjectToSite } from "@arsenal/config";
+
+const blueprint = defineProject({
+  domain: "finance",
+  audience: "consumers",
+  brand: "FinanceOS",
+  capabilities: ["dashboard", "ai-chat", "analytics", "docs", "landing-page"],
+});
+
+export const site = resolveProjectToSite(blueprint);
+```
+
+```bash
+pnpm arsenal blueprint my-product   # writes project.config.ts + site.config.ts
+pnpm arsenal doctor
+pnpm arsenal audit
+```
+
+### Design language
+
+```ts
+import { generateDesignTokens } from "@arsenal/tokens";
+
+const tokens = generateDesignTokens({ material: "glass", mood: "luxury" });
+```
+
+### Plugins
+
+```ts
+import { definePlugin, mergePlugins } from "@arsenal/plugins";
+
+export default definePlugin({
+  name: "Stripe",
+  components: [{ id: "checkout", exportName: "StripeCheckout" }],
+  routes: [{ path: "/billing", component: "StripeCheckout" }],
+});
+```
+
+---
 
 ### Local linking (sibling repos)
 

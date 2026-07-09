@@ -1,0 +1,76 @@
+:root,
+[data-theme="deep-forge"] {
+  --arsenal-background: #030201;
+  --arsenal-surface: #0a0705;
+  --arsenal-elevated: #14100c;
+  --arsenal-border: #3d2818;
+  --arsenal-text-primary: #fff8f0;
+  --arsenal-text-secondary: #e8c9a8;
+  --arsenal-muted: #9a7a5c;
+  --arsenal-accent: #ff6a00;
+  --arsenal-ember: #ff6a00;
+  --arsenal-molten-gold: #ffb020;
+  --arsenal-steel-blue: #5aa9e6;
+  --arsenal-danger: #ff4466;
+  --arsenal-success: #3dd68c;
+  --arsenal-radius: 1rem;
+  --arsenal-radius-sm: 0.5rem;
+  --arsenal-radius-lg: 1.5rem;
+  --arsenal-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --arsenal-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --arsenal-duration-fast: 150ms;
+  --arsenal-duration-normal: 280ms;
+  --arsenal-duration-slow: 500ms;
+}
+
+[data-theme="obsidian-cyber"] {
+  --arsenal-background: #070a12;
+  --arsenal-surface: #0d111c;
+  --arsenal-elevated: #131a2a;
+  --arsenal-border: #263044;
+  --arsenal-text-primary: #f4f7fb;
+  --arsenal-text-secondary: #aab4c3;
+  --arsenal-muted: #687386;
+  --arsenal-accent: #47e6ff;
+  --arsenal-accent-cyan: #47e6ff;
+  --arsenal-accent-violet: #8b5cf6;
+  --arsenal-accent-gold: #f6c85f;
+  --arsenal-danger: #ff5c7a;
+  --arsenal-success: #44d19d;
+}
+
+[data-theme="ivory-graphite"] {
+  --arsenal-background: #f7f3ea;
+  --arsenal-surface: #ffffff;
+  --arsenal-elevated: #efe7da;
+  --arsenal-border: #ddd2bf;
+  --arsenal-text-primary: #171717;
+  --arsenal-text-secondary: #515151;
+  --arsenal-muted: #79716b;
+  --arsenal-accent: #2f3542;
+  --arsenal-accent-graphite: #2f3542;
+  --arsenal-accent-blue: #3b82f6;
+  --arsenal-accent-amber: #d99a29;
+  --arsenal-danger: #dc2626;
+  --arsenal-success: #16a34a;
+}
+
+body {
+  background-color: var(--arsenal-background);
+  background-image:
+    radial-gradient(ellipse 90% 55% at 50% -15%, color-mix(in srgb, var(--arsenal-accent) 18%, transparent), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 85% 20%, color-mix(in srgb, var(--arsenal-molten-gold, #ffb020) 8%, transparent), transparent 50%),
+    radial-gradient(ellipse 40% 35% at 10% 80%, color-mix(in srgb, var(--arsenal-accent) 6%, transparent), transparent 45%);
+  color: var(--arsenal-text-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

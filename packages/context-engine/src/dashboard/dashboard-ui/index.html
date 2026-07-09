@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arsenal Context Intelligence</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <span class="brand-mark">A</span>
+      <div>
+        <h1>Arsenal Context Intelligence</h1>
+        <p class="subtitle">Token savings, quality, and learning loop</p>
+      </div>
+    </div>
+    <button id="refreshBtn" class="btn">Refresh</button>
+  </header>
+
+  <main class="grid">
+    <section class="card overview" id="overview"></section>
+    <section class="card" id="trends">
+      <h2>Usage Trends</h2>
+      <div id="trendsContent" class="trends"></div>
+    </section>
+    <section class="card" id="hotspots">
+      <h2>Hotspots</h2>
+      <div id="hotspotsContent"></div>
+    </section>
+    <section class="card" id="quality">
+      <h2>Context Quality</h2>
+      <div id="qualityContent"></div>
+    </section>
+    <section class="card wide" id="suggestions">
+      <h2>Improvement Suggestions</h2>
+      <ul id="suggestionsList" class="suggestions"></ul>
+    </section>
+    <section class="card wide" id="recent">
+      <h2>Recent Tasks</h2>
+      <div id="recentTasks"></div>
+    </section>
+    <section class="card wide" id="details">
+      <h2>Details</h2>
+      <div id="detailsContent" class="muted">Loading…</div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Arsenal Context Engine</span>
+    <span id="lastUpdated"></span>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

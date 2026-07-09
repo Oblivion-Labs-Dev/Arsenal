@@ -1,0 +1,37 @@
+{
+  "name": "@arsenal/sections",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --external react --external react-dom --external framer-motion --external @arsenal/ui --external @arsenal/motion --external @arsenal/config --external @arsenal/themes --clean",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "lint": "tsc --noEmit",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@arsenal/config": "workspace:*",
+    "@arsenal/motion": "workspace:*",
+    "@arsenal/themes": "workspace:*",
+    "@arsenal/ui": "workspace:*",
+    "@radix-ui/react-accordion": "^1.2.2"
+  },
+  "peerDependencies": {
+    "framer-motion": "^11.0.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.18",
+    "framer-motion": "^11.15.0",
+    "react": "^18.3.1",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.5.0",
+    "typescript": "^5.7.2"
+  }
+}

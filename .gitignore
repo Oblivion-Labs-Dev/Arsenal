@@ -1,7 +1,11 @@
 node_modules/
 dist/
 .turbo/
+.next/
 *.tsbuildinfo
 .env
 .env.*
 !.env.example
+
+.arsenal/
+!.arsenal/config.json.example
