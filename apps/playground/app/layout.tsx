@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import { AppProviders } from "@/components/app-providers";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { AppProviders } from '@/components/app-providers';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "Arsenal — AI Context Library",
+  title: 'Arsenal - Developer Repository Vault',
   description:
-    "Modular TypeScript library for repo preprocessing, knowledge graphs, prompt optimization, and token usage reduction.",
+    'Modular TypeScript library for repo preprocessing, knowledge graphs, prompt optimization, and token usage reduction.',
   openGraph: {
-    title: "Arsenal by Oblivion Labs",
-    description: "AI context engine — cut token usage, compile prompts, build knowledge graphs.",
-    type: "website",
+    title: 'Arsenal by Oblivion Labs',
+    description: 'AI context engine for token savings, prompt compilation, and knowledge graphs.',
+    type: 'website',
   },
 };
 

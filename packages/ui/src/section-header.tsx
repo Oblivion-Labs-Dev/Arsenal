@@ -56,9 +56,9 @@ export function PrimaryButton({ children, className, forge, onClick }: PrimaryBu
       onClick={onClick}
       data-cursor={forge ? "forge" : "button"}
       className={cn(
-        "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold",
-        "bg-arsenal-accent text-arsenal-background shadow-arsenal-glow",
-        "transition hover:brightness-110",
+        "inline-flex items-center justify-center rounded-full px-6 py-3 text-xs font-bold uppercase tracking-wider",
+        "bg-gradient-to-r from-arsenal-accent to-orange-500 text-black shadow-arsenal-glow",
+        "transition-all duration-250 ease-out hover:brightness-110 hover:scale-[1.04] active:scale-[0.98]",
         className,
       )}
     >
@@ -73,8 +73,9 @@ export function SecondaryButton({ children, className, onClick }: PrimaryButtonP
       onClick={onClick}
       data-cursor="button"
       className={cn(
-        "inline-flex items-center justify-center rounded-full border border-arsenal-border px-6 py-3 text-sm font-semibold",
-        "bg-arsenal-elevated text-arsenal-primary transition hover:border-arsenal-accent",
+        "inline-flex items-center justify-center rounded-full border border-arsenal-border px-6 py-3 text-xs font-semibold uppercase tracking-wider",
+        "bg-arsenal-elevated/40 text-arsenal-primary backdrop-blur-md",
+        "transition-all duration-250 ease-out hover:border-arsenal-accent/80 hover:bg-arsenal-elevated hover:scale-[1.04] active:scale-[0.98]",
         className,
       )}
     >

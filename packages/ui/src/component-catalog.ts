@@ -1,10 +1,13 @@
 export type ComponentCategory =
-  | "cards"
-  | "buttons"
-  | "typography"
-  | "navigation"
-  | "backgrounds"
-  | "utilities";
+  | 'hero'
+  | 'cards'
+  | 'buttons'
+  | 'typography'
+  | 'navigation'
+  | 'backgrounds'
+  | 'motion'
+  | 'dashboards'
+  | 'utilities';
 
 export interface ComponentCatalogEntry {
   id: string;
@@ -12,13 +15,17 @@ export interface ComponentCatalogEntry {
   description: string;
   category: ComponentCategory;
   importLine: string;
+  props: string[];
+  usage: string;
+  accessibility: string;
+  performance: string;
   code: string;
 }
 
-export const UI_SETUP_SNIPPET = `// 1. Install dependencies
-pnpm add @arsenal/ui @arsenal/themes framer-motion
+export const UI_SETUP_SNIPPET = `// 1. Install shared UI dependencies
+pnpm add @arsenal/ui framer-motion
 
-// 2. globals.css — theme tokens + CSS variables
+// 2. globals.css
 @import "@arsenal/ui/styles.css";
 
 @tailwind base;
@@ -38,16 +45,78 @@ export default {
   ],
 } satisfies Config;
 
-// 4. Import components in your app
-import { GlassCard, PrimaryButton } from "@arsenal/ui";`;
+// 4. Use one component or an entire module
+import { GlassCard, NetworkBackground, PrimaryButton } from "@arsenal/ui";`;
 
 export const UI_COMPONENT_CATALOG: ComponentCatalogEntry[] = [
   {
-    id: "glass-card",
-    name: "GlassCard",
-    description: "Frosted glass surface with optional glow hover and spring motion.",
-    category: "cards",
+    id: 'vault-hero',
+    name: 'VaultHeroPattern',
+    description:
+      'First-screen composition for repository tools: living mesh, hard metrics, and direct module entry.',
+    category: 'hero',
+    importLine: 'import { NetworkBackground, PrimaryButton } from "@arsenal/ui";',
+    props: ['NetworkBackground density', 'NetworkBackground accent', 'PrimaryButton forge'],
+    usage:
+      'Use on product front doors where the background should feel reactive without taking over the workflow.',
+    accessibility:
+      'Keep all hero copy in regular HTML. The canvas remains decorative and aria-hidden.',
+    performance:
+      'Use the calm or standard mesh density for full-viewport heroes with other heavy content.',
+    code: `import { NetworkBackground, PrimaryButton } from "@arsenal/ui";
+
+export function VaultHero() {
+  return (
+    <section className="relative overflow-hidden rounded-arsenal-lg border border-arsenal-border p-8">
+      <NetworkBackground density="standard" accent="ember" />
+      <div className="relative z-10 max-w-3xl">
+        <p className="text-xs uppercase tracking-[0.24em] text-arsenal-accent">Developer vault</p>
+        <h1 className="mt-4 text-5xl font-semibold">Build with context that reacts.</h1>
+        <PrimaryButton forge className="mt-6">Open modules</PrimaryButton>
+      </div>
+    </section>
+  );
+}`,
+  },
+  {
+    id: 'network-background',
+    name: 'NetworkBackground',
+    description:
+      'Interactive canvas mesh migrated from the portfolio language and rebuilt as a reusable primitive.',
+    category: 'backgrounds',
+    importLine: 'import { NetworkBackground } from "@arsenal/ui";',
+    props: [
+      'density: calm | standard | dense',
+      'accent: ember | cyan | steel',
+      'interactive: boolean',
+    ],
+    usage:
+      'Use behind heroes, dashboards, and labs where cursor movement should imply living repository relationships.',
+    accessibility: 'Canvas is aria-hidden and respects prefers-reduced-motion.',
+    performance:
+      'Canvas density is area-aware and capped to avoid runaway particle counts on ultra-wide displays.',
+    code: `import { NetworkBackground } from "@arsenal/ui";
+
+export function HeroBackdrop() {
+  return (
+    <section className="relative min-h-[420px] overflow-hidden rounded-arsenal-lg">
+      <NetworkBackground density="dense" accent="ember" />
+      <div className="relative z-10 p-8">Developer vault content</div>
+    </section>
+  );
+}`,
+  },
+  {
+    id: 'glass-card',
+    name: 'GlassCard',
+    description: 'Frosted industrial panel with optional glow hover and spring motion.',
+    category: 'cards',
     importLine: 'import { GlassCard } from "@arsenal/ui";',
+    props: ['glow?: boolean', 'className?: string', 'onClick?: () => void'],
+    usage: 'Use for repeated modules, dashboard tiles, and component previews.',
+    accessibility:
+      'Use semantic children. Add button/link semantics outside when the card is an action.',
+    performance: 'Small Framer Motion hover transform only; no layout shift.',
     code: `import { GlassCard } from "@arsenal/ui";
 
 export function Example() {
@@ -62,126 +131,122 @@ export function Example() {
 }`,
   },
   {
-    id: "bento-card",
-    name: "BentoCard",
-    description: "Grid tile with icon slot and optional two-column span.",
-    category: "cards",
+    id: 'bento-card',
+    name: 'BentoCard',
+    description: 'Grid tile with icon slot and optional two-column span.',
+    category: 'cards',
     importLine: 'import { BentoCard } from "@arsenal/ui";',
+    props: ['title: string', 'description: string', 'icon?: ReactNode', 'span?: 1 | 2'],
+    usage: 'Use in landing-page bento grids for module summaries and repository capabilities.',
+    accessibility: 'Keep headings in document order; decorative icons should be aria-hidden.',
+    performance: 'Static markup with no client state.',
     code: `import { BentoCard } from "@arsenal/ui";
 
 export function Example() {
   return (
     <div className="grid gap-4 md:grid-cols-2">
-      <BentoCard
-        title="Hybrid retrieval"
-        description="TF-IDF ranking with graph-aware boosts."
-        icon={<span>⚡</span>}
-      />
-      <BentoCard
-        span="2"
-        title="Token budget engine"
-        description="Profiles that cap context before it hits the model."
-      />
+      <BentoCard title="Hybrid retrieval" description="TF-IDF ranking with graph-aware boosts." />
+      <BentoCard span="2" title="Budget engine" description="Cap context before the model." />
     </div>
   );
 }`,
   },
   {
-    id: "feature-card",
-    name: "FeatureCard",
-    description: "Compact feature block with optional badge and children slot.",
-    category: "cards",
-    importLine: 'import { FeatureCard } from "@arsenal/ui";',
-    code: `import { FeatureCard } from "@arsenal/ui";
-
-export function Example() {
-  return (
-    <FeatureCard
-      badge="New"
-      title="Knowledge graph"
-      description="Link files, symbols, and summaries for smarter retrieval."
-    />
-  );
-}`,
-  },
-  {
-    id: "dashboard-card",
-    name: "DashboardCard",
-    description: "Metric tile with value, change line, and trend coloring.",
-    category: "cards",
+    id: 'dashboard-card',
+    name: 'DashboardCard',
+    description: 'Metric tile with value, change line, and trend coloring.',
+    category: 'dashboards',
     importLine: 'import { DashboardCard } from "@arsenal/ui";',
+    props: ['title: string', 'value: string', 'change?: string', 'trend?: up | down | neutral'],
+    usage: 'Use for repository health, token savings, test coverage, and deployment metrics.',
+    accessibility: 'Trend color is accompanied by text; do not rely on color alone.',
+    performance: 'Pure display component suitable for dense dashboard grids.',
     code: `import { DashboardCard } from "@arsenal/ui";
 
 export function Example() {
-  return (
-    <div className="grid gap-4 sm:grid-cols-3">
-      <DashboardCard title="Tokens saved" value="42%" change="+12% vs last week" trend="up" />
-      <DashboardCard title="Context size" value="8.2k" change="-1.1k" trend="down" />
-      <DashboardCard title="Cache hits" value="94%" trend="neutral" />
-    </div>
-  );
+  return <DashboardCard title="Tokens saved" value="92%" change="+14%" trend="up" />;
 }`,
   },
   {
-    id: "timeline-card",
-    name: "TimelineCard",
-    description: "Roadmap or changelog entry with optional active highlight.",
-    category: "cards",
+    id: 'feature-card',
+    name: 'FeatureCard',
+    description: 'Compact feature block with optional badge and children slot.',
+    category: 'cards',
+    importLine: 'import { FeatureCard } from "@arsenal/ui";',
+    props: ['badge?: string', 'title: string', 'description: string', 'children?: ReactNode'],
+    usage: 'Use to describe capability modules and installation paths.',
+    accessibility: 'Badge text is plain text, not a status-only color indicator.',
+    performance: 'Server-safe component with no effects.',
+    code: `import { FeatureCard } from "@arsenal/ui";
+
+export function Example() {
+  return <FeatureCard badge="Module" title="Knowledge graph" description="Map code relationships." />;
+}`,
+  },
+  {
+    id: 'timeline-card',
+    name: 'TimelineCard',
+    description: 'Roadmap, release, or bootstrap step with optional active highlight.',
+    category: 'cards',
     importLine: 'import { TimelineCard } from "@arsenal/ui";',
+    props: ['year: string', 'title: string', 'description: string', 'active?: boolean'],
+    usage: 'Use for setup sequences, migration plans, and release pipelines.',
+    accessibility: 'Works inside ordered lists for step-by-step flows.',
+    performance: 'Static card; active state only changes classes.',
     code: `import { TimelineCard } from "@arsenal/ui";
 
 export function Example() {
-  return (
-    <TimelineCard
-      year="2026"
-      title="Context compiler"
-      description="Pipeline that assembles prompts within budget."
-      active
-    />
-  );
+  return <TimelineCard year="01" title="Scan repo" description="Build the graph." active />;
 }`,
   },
   {
-    id: "section-header",
-    name: "SectionHeader",
-    description: "Page section title with eyebrow, subtitle, and optional action.",
-    category: "typography",
+    id: 'section-header',
+    name: 'SectionHeader',
+    description: 'Page section title with eyebrow, subtitle, and optional action.',
+    category: 'typography',
     importLine: 'import { SectionHeader } from "@arsenal/ui";',
+    props: [
+      'eyebrow?: string',
+      'title: string',
+      'subtitle?: string',
+      'action?: ReactNode',
+      'align?: left | center',
+    ],
+    usage: 'Use at the top of major content blocks.',
+    accessibility: 'Preserves heading hierarchy through caller-provided placement.',
+    performance: 'No runtime effects.',
     code: `import { SectionHeader, PrimaryButton } from "@arsenal/ui";
 
 export function Example() {
-  return (
-    <SectionHeader
-      eyebrow="Arsenal UI"
-      title="Composable surfaces"
-      subtitle="Import cards, buttons, and backgrounds into any React app."
-      action={<PrimaryButton>Get started</PrimaryButton>}
-    />
-  );
+  return <SectionHeader title="Composable systems" action={<PrimaryButton>Copy</PrimaryButton>} />;
 }`,
   },
   {
-    id: "primary-button",
-    name: "PrimaryButton",
-    description: "Accent-filled CTA with magnetic hover motion.",
-    category: "buttons",
+    id: 'primary-button',
+    name: 'PrimaryButton',
+    description: 'Accent-filled CTA with magnetic hover motion.',
+    category: 'buttons',
     importLine: 'import { PrimaryButton } from "@arsenal/ui";',
+    props: ['forge?: boolean', 'children: ReactNode', 'onClick?: () => void'],
+    usage: 'Use for one primary action in a viewport or panel.',
+    accessibility: 'Native button semantics; visible focus inherited from design tokens.',
+    performance: 'Small transform animation; honors reduced-motion through global token policy.',
     code: `import { PrimaryButton } from "@arsenal/ui";
 
 export function Example() {
-  return (
-    <PrimaryButton forge onClick={() => console.log("clicked")}>
-      Launch dashboard
-    </PrimaryButton>
-  );
+  return <PrimaryButton forge>Launch dashboard</PrimaryButton>;
 }`,
   },
   {
-    id: "secondary-button",
-    name: "SecondaryButton",
-    description: "Outlined secondary action with magnetic hover.",
-    category: "buttons",
+    id: 'secondary-button',
+    name: 'SecondaryButton',
+    description: 'Outlined secondary action with magnetic hover.',
+    category: 'buttons',
     importLine: 'import { SecondaryButton } from "@arsenal/ui";',
+    props: ['children: ReactNode', 'onClick?: () => void'],
+    usage: 'Use beside a primary CTA or for lower-risk actions.',
+    accessibility: 'Native button semantics.',
+    performance: 'No expensive effects.',
     code: `import { SecondaryButton } from "@arsenal/ui";
 
 export function Example() {
@@ -189,254 +254,114 @@ export function Example() {
 }`,
   },
   {
-    id: "theme-toggle",
-    name: "ThemeToggle",
-    description: "Cycles Deep Forge, Obsidian Cyber, and Ivory Graphite themes.",
-    category: "utilities",
-    importLine: 'import { ThemeToggle } from "@arsenal/ui";',
-    code: `import { ThemeToggle } from "@arsenal/ui";
-
-export function Example() {
-  return <ThemeToggle className="fixed bottom-6 right-6" />;
-}`,
-  },
-  {
-    id: "floating-nav",
-    name: "FloatingNav",
-    description: "Fixed top pill navigation bar with blur backdrop.",
-    category: "navigation",
-    importLine: 'import { FloatingNav } from "@arsenal/ui";',
-    code: `import { FloatingNav } from "@arsenal/ui";
-
-export function Example() {
-  return <FloatingNav />;
-}`,
-  },
-  {
-    id: "command-palette",
-    name: "CommandPalette",
-    description: "⌘K / Ctrl+K overlay for quick commands.",
-    category: "navigation",
+    id: 'command-palette',
+    name: 'CommandPalette',
+    description: 'Keyboard-first command surface for quick navigation and actions.',
+    category: 'navigation',
     importLine: 'import { CommandPalette } from "@arsenal/ui";',
+    props: ['none'],
+    usage: 'Mount once near the app root; users open it with Cmd/Ctrl+K.',
+    accessibility: 'Uses Radix Dialog primitives for focus trapping and escape handling.',
+    performance: 'Idle until opened; command list is small and local.',
     code: `import { CommandPalette } from "@arsenal/ui";
 
-export function Example() {
+export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <p className="text-sm text-arsenal-secondary">Press ⌘K or Ctrl+K</p>
+      {children}
       <CommandPalette />
     </>
   );
 }`,
   },
   {
-    id: "orb-background",
-    name: "OrbBackground",
-    description: "Layered accent orbs for hero sections.",
-    category: "backgrounds",
+    id: 'orb-background',
+    name: 'OrbBackground',
+    description: 'Layered industrial glow for hero sections.',
+    category: 'backgrounds',
     importLine: 'import { OrbBackground } from "@arsenal/ui";',
+    props: ['className?: string'],
+    usage: 'Use as a subtle light source behind panels.',
+    accessibility: 'aria-hidden decorative layer.',
+    performance: 'CSS-only gradients.',
     code: `import { OrbBackground } from "@arsenal/ui";
 
 export function Example() {
-  return (
-    <section className="relative min-h-[240px] overflow-hidden rounded-arsenal border border-arsenal-border">
-      <OrbBackground />
-      <div className="relative z-10 p-8">
-        <h2 className="text-2xl font-semibold">Hero content</h2>
-      </div>
-    </section>
-  );
+  return <OrbBackground />;
 }`,
   },
   {
-    id: "grid-background",
-    name: "GridBackground",
-    description: "Radial-masked grid overlay for depth.",
-    category: "backgrounds",
+    id: 'grid-background',
+    name: 'GridBackground',
+    description: 'Radial-masked engineering grid overlay.',
+    category: 'backgrounds',
     importLine: 'import { GridBackground } from "@arsenal/ui";',
+    props: ['className?: string'],
+    usage: 'Use in hero and dashboard backgrounds to suggest precision.',
+    accessibility: 'aria-hidden decorative layer.',
+    performance: 'CSS-only background image.',
     code: `import { GridBackground } from "@arsenal/ui";
 
 export function Example() {
-  return (
-    <section className="relative min-h-[200px] overflow-hidden rounded-arsenal border border-arsenal-border">
-      <GridBackground />
-      <div className="relative z-10 p-8">Content on grid</div>
-    </section>
-  );
+  return <GridBackground />;
 }`,
   },
   {
-    id: "gradient-border",
-    name: "GradientBorder",
-    description: "Accent gradient frame around any children.",
-    category: "backgrounds",
-    importLine: 'import { GradientBorder } from "@arsenal/ui";',
-    code: `import { GradientBorder } from "@arsenal/ui";
-
-export function Example() {
-  return (
-    <GradientBorder className="max-w-sm">
-      <div className="p-6">
-        <p className="text-sm text-arsenal-secondary">Framed content</p>
-      </div>
-    </GradientBorder>
-  );
-}`,
-  },
-  {
-    id: "stat-card",
-    name: "StatCard",
-    description: "Simple metric tile with label, value, and optional hint.",
-    category: "cards",
-    importLine: 'import { StatCard } from "@arsenal/ui";',
-    code: `import { StatCard } from "@arsenal/ui";
-
-export function Example() {
-  return <StatCard label="Tokens saved" value="42%" hint="vs last week" />;
-}`,
-  },
-  {
-    id: "scroll-reveal",
-    name: "ScrollReveal",
-    description: "Intersection-observer entrance animation with direction and delay.",
-    category: "utilities",
+    id: 'scroll-reveal',
+    name: 'ScrollReveal',
+    description: 'Intersection-observer entrance animation with direction and delay.',
+    category: 'motion',
     importLine: 'import { ScrollReveal } from "@arsenal/ui";',
+    props: ['direction?: up | down | left | right', 'delay?: number', 'children: ReactNode'],
+    usage: 'Use sparingly for narrative page sections.',
+    accessibility: 'Global reduced-motion policy disables animation.',
+    performance: 'IntersectionObserver avoids scroll listeners.',
     code: `import { ScrollReveal } from "@arsenal/ui";
 
 export function Example() {
-  return (
-    <ScrollReveal direction="up" delay={0.1}>
-      <p>Fades in when scrolled into view.</p>
-    </ScrollReveal>
-  );
+  return <ScrollReveal direction="up">Revealed content</ScrollReveal>;
 }`,
   },
   {
-    id: "tooltip",
-    name: "Tooltip",
-    description: "Portal tooltip with hover/focus and reposition on scroll.",
-    category: "utilities",
-    importLine: 'import { Tooltip } from "@arsenal/ui";',
-    code: `import { Tooltip } from "@arsenal/ui";
-
-export function Example() {
-  return <Tooltip content="Helpful context on hover." label="Info" />;
-}`,
-  },
-  {
-    id: "badge",
-    name: "Badge",
-    description: "Status and priority pill with variant coloring.",
-    category: "utilities",
+    id: 'badge',
+    name: 'Badge',
+    description: 'Status and priority pill with variant coloring.',
+    category: 'utilities',
     importLine: 'import { Badge } from "@arsenal/ui";',
+    props: ['variant?: default | progress | p0 | p1 | p2', 'children: ReactNode'],
+    usage: 'Use for component states, package status, and risk labels.',
+    accessibility: 'Text label remains visible for screen readers and color-blind users.',
+    performance: 'Class-only styling.',
     code: `import { Badge } from "@arsenal/ui";
 
 export function Example() {
-  return (
-    <div className="flex gap-2">
-      <Badge variant="progress">in progress</Badge>
-      <Badge variant="p0">P0</Badge>
-    </div>
-  );
+  return <Badge variant="progress">in progress</Badge>;
 }`,
   },
   {
-    id: "page-header",
-    name: "PageHeader",
-    description: "Page title block with subtitle and actions slot.",
-    category: "typography",
-    importLine: 'import { PageHeader } from "@arsenal/ui";',
-    code: `import { PageHeader, PrimaryButton } from "@arsenal/ui";
-
-export function Example() {
-  return (
-    <PageHeader
-      title="Dashboard"
-      subtitle="Live metrics from your repo."
-      actions={<PrimaryButton>Refresh</PrimaryButton>}
-    />
-  );
-}`,
-  },
-  {
-    id: "guide-step",
-    name: "GuideStep",
-    description: "Numbered playbook step with optional info tooltip.",
-    category: "typography",
-    importLine: 'import { GuideStep } from "@arsenal/ui";',
-    code: `import { GuideStep } from "@arsenal/ui";
-
-export function Example() {
-  return (
-    <GuideStep
-      id="step-1"
-      step={1}
-      title="Optimize resume"
-      summary="Tailor keywords to the job description."
-      tooltip="ATS scanners look for exact skill matches."
-    >
-      <p>Checklist content goes here.</p>
-    </GuideStep>
-  );
-}`,
-  },
-  {
-    id: "primary-link",
-    name: "PrimaryLink",
-    description: "Anchor-styled CTA — use with Next.js Link via primaryLinkClassName.",
-    category: "buttons",
-    importLine: 'import { PrimaryLink, primaryLinkClassName } from "@arsenal/ui";',
-    code: `import Link from "next/link";
-import { primaryLinkClassName } from "@arsenal/ui";
-
-// With Next.js Link
-<Link href="/dashboard" className={primaryLinkClassName}>Open</Link>
-
-// Or plain anchor
-import { PrimaryLink } from "@arsenal/ui";
-<PrimaryLink href="/dashboard">Open</PrimaryLink>`,
-  },
-  {
-    id: "light-dark-theme-toggle",
-    name: "LightDarkThemeToggle",
-    description: "Sun/moon toggle — wire to next-themes in your app.",
-    category: "utilities",
-    importLine: 'import { LightDarkThemeToggle } from "@arsenal/ui";',
-    code: `"use client";
-import { useTheme } from "next-themes";
-import { LightDarkThemeToggle } from "@arsenal/ui";
-
-export function ThemeToggle() {
-  const { theme, setTheme, resolvedTheme } = useTheme();
-  const current = (resolvedTheme ?? theme) === "light" ? "light" : "dark";
-  return (
-    <LightDarkThemeToggle
-      theme={current}
-      onToggle={(next) => setTheme(next)}
-    />
-  );
-}`,
-  },
-  {
-    id: "cn",
-    name: "cn",
-    description: "clsx + tailwind-merge utility for className composition.",
-    category: "utilities",
+    id: 'cn',
+    name: 'cn',
+    description: 'clsx + tailwind-merge utility for className composition.',
+    category: 'utilities',
     importLine: 'import { cn } from "@arsenal/ui";',
+    props: ['...classes: ClassValue[]'],
+    usage: 'Use in every reusable component to compose variants safely.',
+    accessibility: 'Not visual; supports stable styling contracts.',
+    performance: 'Tiny runtime helper.',
     code: `import { cn } from "@arsenal/ui";
 
-const classes = cn(
-  "rounded-arsenal border border-arsenal-border p-4",
-  isActive && "border-arsenal-accent shadow-arsenal-glow",
-);`,
+const classes = cn("rounded-arsenal p-4", active && "border-arsenal-accent");`,
   },
 ];
 
 export const COMPONENT_CATEGORIES: { id: ComponentCategory; label: string }[] = [
-  { id: "cards", label: "Cards" },
-  { id: "typography", label: "Typography" },
-  { id: "buttons", label: "Buttons" },
-  { id: "navigation", label: "Navigation" },
-  { id: "backgrounds", label: "Backgrounds" },
-  { id: "utilities", label: "Utilities" },
+  { id: 'hero', label: 'Hero' },
+  { id: 'cards', label: 'Cards' },
+  { id: 'dashboards', label: 'Dashboards' },
+  { id: 'typography', label: 'Typography' },
+  { id: 'buttons', label: 'Buttons' },
+  { id: 'navigation', label: 'Navigation' },
+  { id: 'backgrounds', label: 'Backgrounds' },
+  { id: 'motion', label: 'Motion' },
+  { id: 'utilities', label: 'Utilities' },
 ];

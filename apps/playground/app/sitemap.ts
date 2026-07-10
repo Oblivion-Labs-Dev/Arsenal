@@ -1,5 +1,17 @@
-import type { MetadataRoute } from "next";
+import { FEATURE_AREAS } from '@/lib/feature-catalog';
+import type { MetadataRoute } from 'next';
+
+const baseUrl = 'https://arsenal.oblivionlabs.dev';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [{ url: "https://arsenal.oblivionlabs.dev", lastModified: new Date(), changeFrequency: "weekly", priority: 1 }];
+  const staticRoutes = ['/', '/components', '/context', '/coming-soon'];
+  const featureRoutes = FEATURE_AREAS.map((feature) => `/features/${feature.slug}`);
+  const lastModified = new Date();
+
+  return [...staticRoutes, ...featureRoutes].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified,
+    changeFrequency: 'weekly',
+    priority: route === '/' ? 1 : 0.75,
+  }));
 }
