@@ -1,0 +1,48 @@
+{
+  "changedFiles": [
+    "src/components/Card.tsx",
+    "src/styles/card.css"
+  ],
+  "affectedComponents": [
+    {
+      "path": "src/components/Card.tsx",
+      "reason": "Directly changed by current task"
+    },
+    {
+      "path": "src/pages/components.tsx",
+      "reason": "Directly imports changed component src/components/Card.tsx"
+    }
+  ],
+  "affectedRoutes": [
+    {
+      "path": "/components",
+      "reason": "Changed file is pages route src/pages/components.tsx"
+    }
+  ],
+  "affectedTests": [],
+  "affectedInteractions": [
+    {
+      "path": "src/components/Card.tsx",
+      "reason": "Potential interaction surface from changed UI file"
+    }
+  ],
+  "supportingFiles": [
+    {
+      "path": "src/styles/card.css",
+      "reason": "Styles, tokens, assets, or hooks changed by task"
+    }
+  ],
+  "excludedFiles": [],
+  "expandedItems": [],
+  "scopeReasoning": {
+    "changeSource": "Explicit files supplied via --files",
+    "task": "Update Card click handler and styles",
+    "truncated": "Within budget",
+    "component:src/components/Card.tsx": "Directly changed by current task",
+    "component:src/pages/components.tsx": "Directly imports changed component src/components/Card.tsx",
+    "route:/components": "Changed file is pages route src/pages/components.tsx"
+  },
+  "generatedAt": "2026-07-14T00:27:14.595Z",
+  "mode": "fast",
+  "source": "explicit-files"
+}

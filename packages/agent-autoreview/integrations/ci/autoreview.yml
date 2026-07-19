@@ -1,0 +1,83 @@
+name: agent-autoreview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  autoreview:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build autoreview
+        run: pnpm --filter @arsenal/agent-autoreview build
+
+      - name: Determine PR file scope
+        id: scope
+        shell: bash
+        run: |
+          FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | tr '\n' ' ')
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          # Backend-only heuristic
+          if echo "$FILES" | grep -Eq '\.(tsx|jsx|vue|svelte|css|scss)$'; then
+            echo "needs_browser=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "needs_browser=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run scoped autoreview
+        run: |
+          pnpm exec arsenal-autoreview \
+            --task "PR #${{ github.event.pull_request.number }}" \
+            --base origin/${{ github.base_ref }} \
+            --mode fast \
+            --dry-run
+
+      - name: Upload reports and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: autoreview-artifacts
+          path: |
+            .autoreview/reports/**
+            .autoreview/screenshots/**
+            .autoreview/current-scope.json
+          if-no-files-found: warn
+
+      - name: Comment summary on PR
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let body = '## Autoreview\nVerification completed for the current PR task scope.\n';
+            try {
+              const md = fs.readFileSync('.autoreview/reports/latest.md', 'utf8');
+              body += '\n<details><summary>Report</summary>\n\n' + md.slice(0, 60000) + '\n</details>';
+            } catch {
+              body += '\n_No report generated._';
+            }
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body
+            });

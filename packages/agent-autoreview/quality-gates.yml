@@ -1,0 +1,12 @@
+qualityGates:
+  relatedTestsPass: true
+  typeErrorsInScope: 0
+  lintErrorsInScope: 0
+  runtimeErrorsInScope: 0
+  relevantFailedRequests: 0
+  detectedCriticalOverlaps: 0
+  horizontalOverflowInChangedSurface: 0
+  accessibilityCriticalIssues: 0
+  unresolvedCriticalFindings: 0
+  unresolvedHighConfidenceHighSeverityFindings: 0
+  primaryInteractionsPass: true

@@ -118,6 +118,17 @@ export interface DashboardData {
   suggestions: ImprovementSuggestion[];
   recentTasks: ContextBuildRecord[];
   savings: SavingsReport;
+  /** Optional scoped autoreview panel (from .autoreview / .agent-memory). */
+  autoreview?: {
+    hasActiveSession: boolean;
+    taskDescription: string | null;
+    qualityGatesPassed: boolean | null;
+    memoryRuleCount: number;
+    changedFileCount: number;
+    affectedRouteCount: number;
+    budgetUsage: unknown | null;
+    installMode: string | null;
+  };
 }
 
 export interface DashboardDetails {

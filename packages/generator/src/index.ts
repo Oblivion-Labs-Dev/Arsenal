@@ -51,4 +51,12 @@ export const CLI_COMMANDS = [
   "audit",
   "analyze",
   "context",
+  "autoreview",
+  "review",
+  "task",
+  "agent",
+  "baseline",
+  "install",
+  "upgrade",
+  "generate",
 ] as const;

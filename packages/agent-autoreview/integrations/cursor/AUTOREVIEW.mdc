@@ -1,0 +1,20 @@
+---
+description: Run scoped autoreview after implementing a task
+globs:
+alwaysApply: false
+---
+
+# Autoreview (scoped)
+
+After implementing a task:
+
+1. Run `arsenal autoreview --task "<task description>"` (or `pnpm exec arsenal-autoreview`).
+2. Review **only** the current task scope (Git changes / session / explicit files).
+3. Do **not** inspect unrelated pages or the entire repository.
+4. Do **not** declare completion until scoped quality gates pass.
+5. Do **not** hide unresolved findings.
+6. Do **not** expand scope without evidence of broader impact.
+7. Prefer deterministic checks before model-based review.
+8. Reuse cached `.autoreview/cache` results whenever possible.
+
+Read `.autoreview/reports/latest.md` before claiming the task is done.

@@ -1,12 +1,15 @@
 export type ComponentCategory =
   | 'hero'
   | 'cards'
+  | 'dashboards'
+  | 'data-display'
+  | 'controls'
+  | 'feedback'
   | 'buttons'
   | 'typography'
   | 'navigation'
   | 'backgrounds'
   | 'motion'
-  | 'dashboards'
   | 'utilities';
 
 export interface ComponentCatalogEntry {
@@ -352,12 +355,183 @@ export function Example() {
 
 const classes = cn("rounded-arsenal p-4", active && "border-arsenal-accent");`,
   },
+  {
+    id: 'metric-card',
+    name: 'MetricCard',
+    description: 'Semantic metric summary with trend, description, icon, and action slots.',
+    category: 'data-display',
+    importLine: 'import { MetricCard } from "@arsenal/ui";',
+    props: [
+      'label: string',
+      'value: ReactNode',
+      'description?: ReactNode',
+      'trend?: MetricTrend',
+      'tone?: MetricTone',
+      'icon?: ReactNode',
+      'action?: ReactNode',
+      'className?: string',
+    ],
+    usage: 'Use for KPI and health summaries across dashboards and review panels.',
+    accessibility: 'Trend and tone mapping should stay readable without color alone.',
+    performance: 'Pure presentational card with no animation loops.',
+    code: `import { MetricCard } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <MetricCard
+      label="Requests processed"
+      value="24.8k"
+      description="Across the last seven days"
+      trend={{ label: "+8.4%", direction: "up", tone: "success" }}
+      tone="accent"
+    />
+  );
+}`,
+  },
+  {
+    id: 'score-gauge',
+    name: 'ScoreGauge',
+    description: 'Accessible CSS conic-gradient meter with clamped values and semantic tones.',
+    category: 'data-display',
+    importLine: 'import { ScoreGauge } from "@arsenal/ui";',
+    props: [
+      'value: number',
+      'min?: number',
+      'max?: number',
+      'label?: string',
+      'description?: ReactNode',
+      'tone?: ScoreGaugeTone',
+      'size?: ScoreGaugeSize',
+      'className?: string',
+    ],
+    usage: 'Use for coverage, readiness, and quality scores with bounded ranges.',
+    accessibility: 'Exposes numeric value textually; meter is decorative surround.',
+    performance: 'CSS-only meter with no canvas or frame loops.',
+    code: `import { ScoreGauge } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <ScoreGauge
+      value={82}
+      label="Coverage score"
+      description="82 of 100 checks currently pass."
+      tone="success"
+    />
+  );
+}`,
+  },
+  {
+    id: 'segmented-control',
+    name: 'SegmentedControl',
+    description: 'Typed single-select control backed by native radios for keyboard and form support.',
+    category: 'controls',
+    importLine: 'import { SegmentedControl } from "@arsenal/ui";',
+    props: [
+      'label: string',
+      'options: SegmentedControlOption[]',
+      'value: string',
+      'onValueChange: (value: string) => void',
+      'className?: string',
+    ],
+    usage: 'Use when a compact exclusive choice needs strong keyboard support.',
+    accessibility: 'Native radios preserve focus, labeling, and form semantics.',
+    performance: 'No animation dependencies.',
+    code: `"use client";
+
+import { useState } from "react";
+import { SegmentedControl } from "@arsenal/ui";
+
+const options = [
+  { value: "cards", label: "Cards" },
+  { value: "table", label: "Table" },
+  { value: "timeline", label: "Timeline" },
+] as const;
+
+export function Example() {
+  const [view, setView] = useState<(typeof options)[number]["value"]>("cards");
+  return (
+    <SegmentedControl
+      label="Choose a view"
+      options={options}
+      value={view}
+      onValueChange={setView}
+    />
+  );
+}`,
+  },
+  {
+    id: 'disclosure-section',
+    name: 'DisclosureSection',
+    description: 'Controlled or uncontrolled accessible section with summary, metadata, and action slots.',
+    category: 'controls',
+    importLine: 'import { DisclosureSection } from "@arsenal/ui";',
+    props: [
+      'title: string',
+      'summary?: ReactNode',
+      'meta?: ReactNode',
+      'defaultOpen?: boolean',
+      'open?: boolean',
+      'onOpenChange?: (open: boolean) => void',
+      'children: ReactNode',
+      'className?: string',
+    ],
+    usage: 'Use to keep dense secondary content available without crowding the page.',
+    accessibility: 'Button trigger with expanded state announcements.',
+    performance: 'No heavy motion; layout remains CSS-driven.',
+    code: `import { DisclosureSection } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <DisclosureSection
+      title="Implementation details"
+      summary="Configuration, limits, and operational notes"
+      meta="3 items"
+      defaultOpen
+    >
+      <p>Dense content stays available without overwhelming the surrounding page.</p>
+    </DisclosureSection>
+  );
+}`,
+  },
+  {
+    id: 'state-panel',
+    name: 'StatePanel',
+    description: 'Consistent empty, loading, and error feedback with live-region semantics.',
+    category: 'feedback',
+    importLine: 'import { StatePanel } from "@arsenal/ui";',
+    props: [
+      'kind: empty | loading | error',
+      'title: string',
+      'description?: ReactNode',
+      'action?: ReactNode',
+      'size?: compact | default',
+      'className?: string',
+    ],
+    usage: 'Use for empty, loading, and error states across product surfaces.',
+    accessibility: 'Live-region semantics communicate status changes to assistive tech.',
+    performance: 'Lightweight presentational panel.',
+    code: `import { StatePanel } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <StatePanel
+      kind="empty"
+      title="Nothing here yet"
+      description="Create the first item to populate this view."
+      action={<button type="button">Create item</button>}
+    />
+  );
+}`,
+  },
 ];
 
 export const COMPONENT_CATEGORIES: { id: ComponentCategory; label: string }[] = [
   { id: 'hero', label: 'Hero' },
   { id: 'cards', label: 'Cards' },
   { id: 'dashboards', label: 'Dashboards' },
+  { id: 'data-display', label: 'Data display' },
+  { id: 'controls', label: 'Controls' },
+  { id: 'feedback', label: 'Feedback' },
   { id: 'typography', label: 'Typography' },
   { id: 'buttons', label: 'Buttons' },
   { id: 'navigation', label: 'Navigation' },

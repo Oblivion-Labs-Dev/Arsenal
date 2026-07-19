@@ -30,3 +30,35 @@ export {
   secondaryLinkClassName,
 } from './link-button';
 export { LightDarkThemeToggle } from './light-dark-theme-toggle';
+export {
+  MetricCard,
+  type MetricCardProps,
+  type MetricTone,
+  type MetricTrend,
+  type MetricTrendDirection,
+  type MetricTrendTone,
+} from './metric-card';
+export {
+  ScoreGauge,
+  normalizeScoreRange,
+  type NormalizedScoreRange,
+  type ScoreGaugeProps,
+  type ScoreGaugeSize,
+  type ScoreGaugeTone,
+} from './score-gauge';
+export {
+  SegmentedControl,
+  type SegmentedControlOption,
+  type SegmentedControlProps,
+} from './segmented-control';
+export {
+  DisclosureSection,
+  type DisclosureHeadingLevel,
+  type DisclosureSectionProps,
+} from './disclosure-section';
+export { StatePanel, type StatePanelKind, type StatePanelProps } from './state-panel';
+export {
+  StatusMarker,
+  type StatusMarkerProps,
+  type StatusMarkerTone,
+} from './status-marker';

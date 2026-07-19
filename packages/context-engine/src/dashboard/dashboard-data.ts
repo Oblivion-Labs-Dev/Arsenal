@@ -1,4 +1,5 @@
-import { existsSync, statSync } from "fs";
+import { existsSync, readFileSync, statSync } from "fs";
+import { join } from "path";
 import { arsenalPath } from "../core/paths.js";
 import { loadConfig } from "../core/init-workspace.js";
 import { loadFileSummaries } from "../cli/commands/summarize.js";
@@ -9,6 +10,38 @@ import { calculateQualityScore } from "../analytics/quality-score.js";
 import { generateImprovements } from "../analytics/improvement-engine.js";
 import type { DashboardData } from "../analytics/analytics-types.js";
 import { saveDashboardSnapshot } from "./dashboard-snapshot.js";
+
+function loadAutoreviewPanel(repoRoot: string): DashboardData["autoreview"] {
+  const read = (p: string) => {
+    const abs = join(repoRoot, p);
+    if (!existsSync(abs)) return null;
+    try {
+      return JSON.parse(readFileSync(abs, "utf8")) as Record<string, unknown>;
+    } catch {
+      return null;
+    }
+  };
+  const session =
+    read(".autoreview/sessions/current.json") ?? read(".autoreview/current-task.json");
+  const report = read(".autoreview/reports/latest.json");
+  const scope = read(".autoreview/current-scope.json");
+  const installation = read(".autoreview/installation.json");
+  const memory = read(".agent-memory/index.json");
+  return {
+    hasActiveSession: Boolean(session && !(session as { finishedAt?: string }).finishedAt),
+    taskDescription: (session?.taskDescription as string) ?? null,
+    qualityGatesPassed: (report?.qualityGatesPassed as boolean) ?? null,
+    memoryRuleCount: Array.isArray(memory?.rules) ? (memory.rules as unknown[]).length : 0,
+    changedFileCount: Array.isArray(scope?.changedFiles)
+      ? (scope.changedFiles as unknown[]).length
+      : 0,
+    affectedRouteCount: Array.isArray(scope?.affectedRoutes)
+      ? (scope.affectedRoutes as unknown[]).length
+      : 0,
+    budgetUsage: report?.budgetUsage ?? null,
+    installMode: (installation?.installMode as string) ?? null,
+  };
+}
 
 export function aggregateDashboardData(repoRoot: string): DashboardData {
   const store = new AnalyticsStore(repoRoot);
@@ -73,6 +106,7 @@ export function aggregateDashboardData(repoRoot: string): DashboardData {
     suggestions,
     recentTasks: [...builds].slice(-10).reverse(),
     savings,
+    autoreview: loadAutoreviewPanel(repoRoot),
   };
 
   saveDashboardSnapshot(repoRoot, data);

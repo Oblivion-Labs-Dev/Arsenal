@@ -1,4 +1,6 @@
 import { runContextCli } from "@arsenal/context-engine";
+import { runAutoreviewCli } from "@arsenal/agent-autoreview";
+import { runExporterCli } from "@arsenal/repository-exporter";
 import { writeFileSync, mkdirSync, existsSync } from "fs";
 import { join } from "path";
 import { defineSite, defineProject, resolveProjectToSite } from "@arsenal/config";
@@ -84,6 +86,12 @@ function cmdPreview() {
 }
 
 function cmdDoctor() {
+  if (args[0] === "autoreview") {
+    void runExporterCli(["doctor", "autoreview", ...args.slice(1)]).then((code) => {
+      process.exitCode = code;
+    });
+    return;
+  }
   const checks = [
     { label: "site.config.ts", ok: existsSync(join(process.cwd(), "site.config.ts")) },
     { label: "project.config.ts", ok: existsSync(join(process.cwd(), "project.config.ts")) },
@@ -141,18 +149,41 @@ switch (command) {
   case "context":
     runContextCli(args);
     break;
+  case "autoreview":
+  case "review":
+  case "task":
+  case "agent":
+  case "baseline":
+  case "report":
+    void runAutoreviewCli([command === "autoreview" ? "autoreview" : command, ...args]).then(
+      (code) => {
+        if (code !== 0) process.exitCode = code;
+      },
+    );
+    break;
+  case "install":
+  case "upgrade":
+  case "remove":
+  case "generate":
+    void runExporterCli([command, ...args]).then((code) => {
+      process.exitCode = code;
+    });
+    break;
   default:
     console.log(`
 Arsenal CLI
 
-  pnpm arsenal create <name>       Create a new site
-  pnpm arsenal blueprint <name>    Create from project blueprint
-  pnpm arsenal add <module>        Add blog, dashboard, waitlist…
-  pnpm arsenal theme <id>          Set theme palette
-  pnpm arsenal preview             Start preview server
-  pnpm arsenal doctor              Validate project structure
-  pnpm arsenal audit               Show quality gate checklist
-  pnpm arsenal analyze             Bundle / performance analysis hints
-  pnpm arsenal context <cmd>       AI context engine (init, index, summarize…)
+  pnpm arsenal create <name>
+  pnpm arsenal blueprint <name>
+  pnpm arsenal context <cmd>
+  pnpm arsenal review [opts]              Scoped validation (alias: autoreview)
+  pnpm arsenal task start --task "..."
+  pnpm arsenal agent task|context|finish
+  pnpm arsenal baseline approve|list|diff|remove
+  pnpm arsenal install autoreview [--mode package|embedded] [--preset github-pages|react|nextjs|vite]
+  pnpm arsenal upgrade autoreview
+  pnpm arsenal doctor autoreview
+  pnpm arsenal remove autoreview
+  pnpm arsenal generate agent-rules|memory|ci|autoreview-config
 `);
 }

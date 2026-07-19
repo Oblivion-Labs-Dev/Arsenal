@@ -97,6 +97,7 @@ function writeDashboardViewer(repoRoot: string, snapshot: DashboardSnapshot): st
       <h2>Improvement Suggestions</h2>
       <ul id="suggestionsList" class="suggestions"></ul>
     </section>
+    <section class="card wide" id="autoreviewPanel"></section>
     <section class="card wide" id="recent">
       <h2>Recent Tasks</h2>
       <div id="recentTasks"></div>

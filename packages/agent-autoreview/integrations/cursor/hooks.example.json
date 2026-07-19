@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "hooks": {
+    "afterAgentResponse": [
+      {
+        "description": "Remind agent to run scoped autoreview before declaring completion",
+        "prompt": "If you finished implementing code changes, run `arsenal autoreview --task \"<summary>\"` and only declare completion after scoped quality gates pass. Do not crawl unrelated routes."
+      }
+    ]
+  }
+}

@@ -6,6 +6,7 @@ import {
   BentoCard,
   CommandPalette,
   DashboardCard,
+  DisclosureSection,
   FeatureCard,
   FloatingNav,
   GlassCard,
@@ -14,9 +15,13 @@ import {
   NetworkBackground,
   OrbBackground,
   PrimaryButton,
+  MetricCard,
+  ScoreGauge,
   ScrollReveal,
+  SegmentedControl,
   SecondaryButton,
   SectionHeader,
+  StatePanel,
   ThemeToggle,
   TimelineCard,
   UI_COMPONENT_CATALOG,
@@ -320,6 +325,7 @@ function ComponentPreview({
   const [toastCount, setToastCount] = useState(2);
   const [query, setQuery] = useState('');
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [previewView, setPreviewView] = useState<'cards' | 'table' | 'timeline'>('cards');
   const roundedClass =
     settings.rounded === 'tight'
       ? 'rounded-arsenal-sm'
@@ -700,6 +706,61 @@ function ComponentPreview({
         <div className="flex items-center gap-4">
           <ThemeToggle />
           <span className="text-sm text-arsenal-secondary">Toggle the live theme state.</span>
+        </div>
+      );
+    case 'metric-card':
+      return (
+        <MetricCard
+          className="w-full max-w-sm"
+          label="Requests processed"
+          value="24.8k"
+          description="Across the last seven days"
+          trend={{ label: '+8.4%', direction: 'up', tone: 'success' }}
+          tone="accent"
+        />
+      );
+    case 'score-gauge':
+      return (
+        <ScoreGauge
+          value={82}
+          label="Coverage score"
+          description="82 of 100 checks currently pass."
+          tone="success"
+        />
+      );
+    case 'segmented-control':
+      return (
+        <SegmentedControl
+          label="Choose a view"
+          options={[
+            { value: 'cards', label: 'Cards' },
+            { value: 'table', label: 'Table' },
+            { value: 'timeline', label: 'Timeline' },
+          ]}
+          value={previewView}
+          onValueChange={setPreviewView}
+        />
+      );
+    case 'disclosure-section':
+      return (
+        <DisclosureSection
+          className="w-full max-w-2xl"
+          title="Implementation details"
+          summary="Configuration, limits, and operational notes"
+          meta="3 items"
+          defaultOpen
+        >
+          <p className="text-sm leading-relaxed">
+            Dense content stays available without overwhelming the surrounding page.
+          </p>
+        </DisclosureSection>
+      );
+    case 'state-panel':
+      return (
+        <div className="grid w-full gap-3 lg:grid-cols-3">
+          <StatePanel kind="empty" size="compact" title="Nothing here yet" description="Create the first item." />
+          <StatePanel kind="loading" size="compact" title="Loading data" description="This should only take a moment." />
+          <StatePanel kind="error" size="compact" title="Unable to load" description="Try the request again." />
         </div>
       );
     default:

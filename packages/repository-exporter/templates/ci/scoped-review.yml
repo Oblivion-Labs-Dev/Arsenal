@@ -1,0 +1,43 @@
+name: scoped-review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install
+        run: |
+          if [ -f pnpm-lock.yaml ]; then corepack enable && pnpm install; 
+          elif [ -f yarn.lock ]; then yarn install --frozen-lockfile;
+          elif [ -f bun.lockb ]; then bun install;
+          else npm ci || npm install; fi
+      - name: Scoped review
+        run: |
+          if [ -f tools/autoreview/cli.mjs ]; then
+            node tools/autoreview/cli.mjs review --mode fast
+          elif command -v arsenal >/dev/null 2>&1; then
+            arsenal review --mode fast --dry-run
+          else
+            npm run review:run --if-present
+          fi
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: autoreview
+          path: |
+            .autoreview/reports/**
+            .autoreview/current-scope.json
+          if-no-files-found: warn

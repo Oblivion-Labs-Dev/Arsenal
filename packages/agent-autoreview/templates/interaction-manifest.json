@@ -1,0 +1,7 @@
+{
+  "interaction": "Open component details",
+  "route": "/components",
+  "trigger": "[data-testid='component-card']",
+  "expectedResult": "Details panel becomes visible",
+  "sourceFile": "src/components/ComponentCard.tsx"
+}

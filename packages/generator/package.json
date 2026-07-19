@@ -8,15 +8,17 @@
   "types": "./dist/index.d.ts",
   "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
   "scripts": {
-    "build": "tsup src/cli.ts src/index.ts --format esm --dts --clean --external @arsenal/context-engine",
+    "build": "tsup src/cli.ts src/index.ts --format esm --dts --clean --external @arsenal/context-engine --external @arsenal/agent-autoreview --external @arsenal/repository-exporter",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
     "lint": "tsc --noEmit",
     "clean": "rimraf dist"
   },
   "dependencies": {
+    "@arsenal/agent-autoreview": "workspace:*",
     "@arsenal/config": "workspace:*",
     "@arsenal/context-engine": "workspace:*",
+    "@arsenal/repository-exporter": "workspace:*",
     "@arsenal/testing": "workspace:*"
   },
   "devDependencies": {

@@ -1,0 +1,4 @@
+.autoreview/
+dist/
+node_modules/
+*.log
