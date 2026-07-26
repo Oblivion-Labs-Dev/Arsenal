@@ -1,0 +1,377 @@
+.card {
+  --clay-base: #6c655f;
+  --clay-deep: #292522;
+  --clay-highlight: #d8d0c8;
+  --clay-ink: #fff8ed;
+  --clay-muted: rgba(255, 248, 237, 0.76);
+  --clay-status: #d56f2b;
+  --clay-status-ink: #fff0d6;
+  position: relative;
+  isolation: isolate;
+  width: min(350px, calc(100vw - 64px));
+  min-width: 280px;
+  max-width: 350px;
+  aspect-ratio: 7 / 10;
+  border-radius: 29px 31px 28px 32px;
+  color: var(--clay-ink);
+  container-type: inline-size;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.card[data-fill-container='true'] {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.card[data-rarity='rare'] {
+  --clay-base: #315fae;
+  --clay-deep: #0c234c;
+  --clay-highlight: #8fc2ff;
+  --clay-ink: #e1f1ff;
+  --clay-muted: rgba(225, 241, 255, 0.78);
+}
+
+.card[data-rarity='epic'] {
+  --clay-base: #75459a;
+  --clay-deep: #271236;
+  --clay-highlight: #d699f0;
+  --clay-ink: #f7ddff;
+  --clay-muted: rgba(247, 221, 255, 0.78);
+}
+
+.card[data-rarity='legendary'] {
+  --clay-base: #b3711d;
+  --clay-deep: #4d2505;
+  --clay-highlight: #ffc65c;
+  --clay-ink: #fff0bb;
+  --clay-muted: rgba(255, 240, 187, 0.8);
+}
+
+.card[data-task-status='done'] {
+  --clay-status: #3f8f57;
+  --clay-status-ink: #e1ffdd;
+}
+
+.card[data-task-status='inactive'] {
+  filter: saturate(0.62);
+}
+
+.aura {
+  position: absolute;
+  z-index: -1;
+  inset: -14px;
+  border-radius: 46px;
+  background: var(--clay-accent);
+  filter: blur(28px);
+  opacity: 0.2;
+}
+
+.motionLayer {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  filter: drop-shadow(0 24px 18px rgba(15, 9, 6, 0.38));
+  transform: rotateX(var(--clay-tilt-x)) rotateY(var(--clay-tilt-y));
+  transform-style: preserve-3d;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.surface {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border: 2px solid color-mix(in srgb, var(--clay-highlight) 62%, var(--clay-deep));
+  border-radius: inherit;
+  background: linear-gradient(
+    155deg,
+    var(--clay-highlight),
+    var(--clay-base) 22%,
+    var(--clay-deep)
+  );
+  box-shadow:
+    inset 0 2px 1px color-mix(in srgb, var(--clay-highlight) 82%, white),
+    inset 0 -28px 38px rgba(15, 7, 3, 0.28),
+    inset 0 0 0 1px color-mix(in srgb, var(--clay-highlight) 30%, transparent),
+    0 2px 0 var(--clay-deep);
+}
+
+.artwork,
+.rarityWash,
+.completionWash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.artwork {
+  z-index: 1;
+  border-radius: inherit;
+  background: url('/task-card-prototype/clay-card-face-premium.png') center / 100% 100% no-repeat;
+  filter: grayscale(1) contrast(1.16) brightness(1.08);
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+
+.rarityWash {
+  z-index: 2;
+  background:
+    radial-gradient(
+      circle at var(--clay-light-x) var(--clay-light-y),
+      color-mix(in srgb, var(--clay-highlight) 72%, white) 0%,
+      transparent 28%
+    ),
+    linear-gradient(
+        112deg,
+        transparent 26%,
+        rgba(255, 255, 255, 0.04) 34%,
+        rgba(255, 255, 255, 0.28) 43%,
+        rgba(255, 255, 255, 0.05) 51%,
+        transparent 59%
+      ) -180%
+      0 / 56% 100% no-repeat,
+    linear-gradient(145deg, rgba(255, 255, 255, 0.16), transparent 38%, rgba(12, 5, 2, 0.2));
+  animation: clay-card-foil-pass 8s ease-in-out infinite;
+  mix-blend-mode: soft-light;
+}
+
+.completionWash {
+  z-index: 3;
+  background:
+    radial-gradient(circle at 50% 86%, rgba(181, 255, 191, 0.34), transparent 42%),
+    linear-gradient(180deg, transparent 52%, rgba(53, 157, 86, 0.3));
+  opacity: 0;
+  transition: opacity 360ms ease;
+}
+
+.card[data-completed='true'] .completionWash {
+  opacity: 1;
+}
+
+.header,
+.body,
+.footer {
+  position: absolute;
+  z-index: 4;
+  right: 8.5%;
+  left: 8.5%;
+}
+
+.header {
+  top: 6.8%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.signals {
+  display: grid;
+  justify-items: start;
+  gap: 7px;
+}
+
+.rarityLabel,
+.statusLabel {
+  display: inline-flex;
+  min-height: clamp(23px, 7cqw, 30px);
+  align-items: center;
+  padding: 0 clamp(9px, 3cqw, 14px);
+  border: 1px solid color-mix(in srgb, var(--clay-highlight) 74%, var(--clay-deep));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--clay-base) 88%, transparent);
+  box-shadow:
+    inset 0 1px 1px color-mix(in srgb, var(--clay-highlight) 78%, white),
+    0 3px 4px color-mix(in srgb, var(--clay-deep) 76%, transparent);
+  color: var(--clay-ink);
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: clamp(9px, 3cqw, 12px);
+  font-weight: 850;
+  letter-spacing: 0.11em;
+  line-height: 1;
+  text-shadow: 0 1px 1px var(--clay-deep);
+  text-transform: uppercase;
+}
+
+.statusLabel {
+  border-color: color-mix(in srgb, var(--clay-status) 58%, var(--clay-deep));
+  background: var(--clay-status);
+  color: var(--clay-status-ink);
+}
+
+.checkbox {
+  position: relative;
+  display: grid;
+  width: clamp(42px, 13cqw, 56px);
+  height: clamp(42px, 13cqw, 56px);
+  cursor: pointer;
+  place-items: center;
+}
+
+.checkbox input {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.checkbox span {
+  position: relative;
+  width: 62%;
+  height: 62%;
+  border: clamp(2px, 0.7cqw, 3px) solid color-mix(in srgb, var(--clay-deep) 76%, black);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--clay-base) 86%, var(--clay-deep));
+  box-shadow:
+    inset 2px 3px 4px color-mix(in srgb, var(--clay-deep) 76%, transparent),
+    1px 2px 1px color-mix(in srgb, var(--clay-highlight) 64%, transparent);
+}
+
+.checkbox span::after {
+  position: absolute;
+  top: 18%;
+  left: 34%;
+  width: 23%;
+  height: 42%;
+  border-right: 3px solid #17301d;
+  border-bottom: 3px solid #17301d;
+  content: '';
+  opacity: 0;
+  transform: rotate(43deg) scale(0.6);
+  transition:
+    opacity 160ms ease,
+    transform 200ms ease;
+}
+
+.checkbox input:checked + span {
+  border-color: #2a6d3c;
+  background: #66bd71;
+  box-shadow:
+    inset 2px 3px 4px rgba(22, 72, 34, 0.42),
+    0 0 12px rgba(102, 189, 113, 0.44);
+}
+
+.checkbox input:checked + span::after {
+  opacity: 1;
+  transform: rotate(43deg) scale(1);
+}
+
+.checkbox input:focus-visible + span {
+  outline: 2px solid var(--clay-ink);
+  outline-offset: 4px;
+}
+
+.body {
+  top: 31.8%;
+  bottom: 36.7%;
+  display: grid;
+  padding: 0 6%;
+  place-items: center;
+}
+
+.body h2 {
+  display: -webkit-box;
+  max-width: 13ch;
+  margin: 0;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  color: var(--clay-ink);
+  font-family: var(--precision-card-serif, Georgia, Cambria, 'Times New Roman', serif);
+  font-size: clamp(28px, 9.6cqw, 58px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+  text-align: center;
+  text-shadow:
+    -1px -1px 1px color-mix(in srgb, var(--clay-highlight) 72%, white),
+    2px 3px 2px color-mix(in srgb, var(--clay-deep) 80%, transparent);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.footer {
+  bottom: 6.4%;
+}
+
+.energyIndicator {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: clamp(7px, 2.5cqw, 12px);
+  color: var(--clay-muted);
+  font-family: var(--font-sans, system-ui, sans-serif);
+  text-transform: uppercase;
+}
+
+.energyLabel,
+.energyIndicator strong {
+  font-size: clamp(9px, 3cqw, 12px);
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-shadow: 0 2px 1px var(--clay-deep);
+}
+
+.energyIndicator strong {
+  color: var(--clay-ink);
+}
+
+.energyMarks {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(5px, 1.8cqw, 9px);
+}
+
+.energyMarks i {
+  width: clamp(15px, 5cqw, 25px);
+  height: clamp(15px, 5cqw, 25px);
+  border: clamp(1px, 0.55cqw, 2px) solid var(--clay-deep);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--clay-base) 78%, var(--clay-deep));
+  box-shadow:
+    inset 2px 2px 4px color-mix(in srgb, var(--clay-deep) 64%, transparent),
+    1px 1px 1px color-mix(in srgb, var(--clay-highlight) 58%, transparent);
+}
+
+.energyMarks i[data-filled='true'] {
+  background: var(--clay-highlight);
+  box-shadow:
+    inset 1px 1px 2px color-mix(in srgb, var(--clay-ink) 52%, transparent),
+    0 0 10px color-mix(in srgb, var(--clay-highlight) 44%, transparent);
+}
+
+.card[data-color-scheme='light'] .motionLayer {
+  filter: drop-shadow(0 23px 18px rgba(55, 37, 25, 0.25));
+}
+
+@keyframes clay-card-foil-pass {
+  0%,
+  42% {
+    background-position:
+      0 0,
+      -180% 0,
+      0 0;
+  }
+
+  64%,
+  100% {
+    background-position:
+      0 0,
+      310% 0,
+      0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motionLayer,
+  .completionWash,
+  .checkbox span::after {
+    transition: none;
+  }
+}

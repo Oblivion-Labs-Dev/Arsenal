@@ -57,8 +57,15 @@ export {
   type DisclosureSectionProps,
 } from './disclosure-section';
 export { StatePanel, type StatePanelKind, type StatePanelProps } from './state-panel';
+export { StatusMarker, type StatusMarkerProps, type StatusMarkerTone } from './status-marker';
 export {
-  StatusMarker,
-  type StatusMarkerProps,
-  type StatusMarkerTone,
-} from './status-marker';
+  PrecisionTaskCard,
+  resolveTaskCardStatus,
+  type TaskCardBorderTheme,
+  type TaskCardColorScheme,
+  type TaskCardStatus,
+  rarityColors,
+  type PrecisionTaskCardProps,
+  type TaskEnergy,
+  type TaskRarity,
+} from './precision-task-card';

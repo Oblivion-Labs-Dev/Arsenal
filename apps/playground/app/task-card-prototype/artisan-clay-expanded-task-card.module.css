@@ -1,0 +1,257 @@
+.artisanClayBack.artisanClayBack.artisanClayBack[data-card-style='artisan-clay'] {
+  --artisan-expanded-base: #29272a;
+  --artisan-expanded-mid: #222126;
+  --artisan-expanded-deep: #0d0d12;
+  --artisan-expanded-rim: #625960;
+  --artisan-expanded-stone: #d8c7b4;
+  --artisan-expanded-muted: rgba(216, 199, 180, 0.68);
+  --artisan-expanded-mineral: #a95e20;
+  --artisan-expanded-mineral-light: #ecaa54;
+  --back-text: var(--artisan-expanded-stone);
+  --back-muted: var(--artisan-expanded-muted);
+  --back-line: rgba(200, 176, 157, 0.16);
+  --back-panel: rgba(10, 10, 13, 0.3);
+  border: 9px solid #302c30;
+  background:
+    radial-gradient(circle at 18% 3%, rgba(255, 231, 209, 0.17), transparent 29%),
+    radial-gradient(
+      circle at 80% 88%,
+      color-mix(in srgb, var(--expanded-accent) 8%, transparent),
+      transparent 35%
+    ),
+    radial-gradient(ellipse at 15% 18%, rgba(255, 255, 255, 0.025) 0 0.65px, transparent 1px) 0 0 /
+      15px 19px,
+    linear-gradient(
+      146deg,
+      #4a4347 0%,
+      var(--artisan-expanded-base) 19%,
+      var(--artisan-expanded-mid) 59%,
+      var(--artisan-expanded-deep) 100%
+    );
+  box-shadow:
+    inset 2px 3px 2px rgba(255, 233, 212, 0.21),
+    inset -5px -12px 18px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 2px rgba(184, 159, 145, 0.13),
+    0 0 38px color-mix(in srgb, var(--expanded-accent) 16%, transparent);
+  color: var(--back-text);
+  text-shadow:
+    -1px -1px rgba(235, 212, 191, 0.08),
+    1px 2px 1px rgba(0, 0, 0, 0.62);
+}
+
+:global([data-rarity='common']) .artisanClayBack[data-card-style='artisan-clay'] {
+  --artisan-expanded-mineral: #625f5d;
+  --artisan-expanded-mineral-light: #c7c1b9;
+}
+
+:global([data-rarity='rare']) .artisanClayBack[data-card-style='artisan-clay'] {
+  --artisan-expanded-mineral: #164d9f;
+  --artisan-expanded-mineral-light: #78b5ff;
+}
+
+:global([data-rarity='epic']) .artisanClayBack[data-card-style='artisan-clay'] {
+  --artisan-expanded-mineral: #5c286f;
+  --artisan-expanded-mineral-light: #d58bed;
+}
+
+:global([data-rarity='legendary']) .artisanClayBack[data-card-style='artisan-clay'] {
+  --artisan-expanded-mineral: #9b4f0e;
+  --artisan-expanded-mineral-light: #ffc562;
+}
+
+.artisanClayBack.artisanClayBack[data-card-style='artisan-clay'] > span:first-child {
+  inset: 10px;
+  border: 2px solid #635a5c;
+  border-radius: 20px;
+  box-shadow:
+    inset 3px 5px 8px rgba(0, 0, 0, 0.63),
+    1px 1px rgba(229, 204, 183, 0.16);
+}
+
+.artisanClayBack.artisanClayBack[data-card-style='artisan-clay'] > span:nth-child(2) {
+  inset: 0;
+  border: 0;
+  box-shadow: none;
+}
+
+.artisanClayBack.artisanClayBack[data-card-style='artisan-clay']
+  > span:nth-child(2)
+  > i:first-child {
+  inset: 1px;
+  padding: 6px;
+  border-radius: inherit;
+  background: linear-gradient(143deg, #7a6d6d, #3a3437 24%, #1f1e22 66%, #0c0c10);
+  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.62));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.artisanClayBack.artisanClayBack[data-card-style='artisan-clay']
+  > span:nth-child(2)
+  > i:nth-child(2) {
+  inset: 14px;
+  border: 1px solid rgba(213, 187, 165, 0.18);
+  border-radius: 17px;
+  box-shadow:
+    inset 2px 3px 5px rgba(0, 0, 0, 0.58),
+    0 1px rgba(255, 236, 218, 0.08);
+}
+
+.artisanClayBack[data-card-style='artisan-clay'] > header {
+  margin: 12px 14px 0;
+  border: 1px solid #17161a;
+  border-radius: 18px 18px 14px 14px;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255, 232, 210, 0.06), transparent 34%),
+    linear-gradient(145deg, #302c30, #19191d);
+  box-shadow:
+    inset 2px 3px 4px rgba(0, 0, 0, 0.58),
+    0 1px rgba(230, 205, 184, 0.1);
+}
+
+.artisanClayBack[data-card-style='artisan-clay'] > header > div > span {
+  border-color: #5d5150;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #3a3438, #1a191d);
+  box-shadow:
+    inset 1px 2px rgba(238, 213, 190, 0.09),
+    0 3px 4px rgba(0, 0, 0, 0.42);
+}
+
+.artisanClayBack[data-card-style='artisan-clay'] > header > div > span:first-child > i {
+  border-radius: 24% 76% 36% 64%;
+  background:
+    linear-gradient(126deg, rgba(255, 255, 255, 0.65), transparent 31%),
+    linear-gradient(
+      42deg,
+      var(--artisan-expanded-mineral),
+      var(--artisan-expanded-mineral-light) 54%,
+      #28141a
+    );
+  box-shadow: none;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.66));
+  transform: rotate(45deg);
+}
+
+.artisanClayBack[data-card-style='artisan-clay'] > header label span,
+.artisanClayBack[data-card-style='artisan-clay'] > header button {
+  border-color: #5f5552;
+  background: linear-gradient(145deg, #403a3c, #1b1a1e);
+  box-shadow:
+    inset 1px 2px rgba(238, 211, 188, 0.11),
+    inset -2px -3px 4px rgba(0, 0, 0, 0.42),
+    0 3px 4px rgba(0, 0, 0, 0.43);
+}
+
+.artisanClayBack[data-card-style='artisan-clay'] > header label input:checked + span {
+  border-color: #a36b35;
+  background: linear-gradient(145deg, #e8b363, #8f4d1d 62%, #47260f);
+  box-shadow:
+    inset 1px 2px 3px rgba(78, 34, 8, 0.58),
+    0 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+.artisanClayBack[data-card-style='artisan-clay'] > div {
+  margin: 0 14px;
+  padding: 24px 18px;
+}
+
+.artisanClayBack[data-card-style='artisan-clay'] > div > section:first-child {
+  padding: 24px 22px;
+  border: 2px solid #151419;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 27% 8%, rgba(255, 235, 214, 0.045), transparent 34%),
+    linear-gradient(146deg, #2b282c, #17171b 68%, #101014);
+  box-shadow:
+    inset 3px 5px 7px rgba(0, 0, 0, 0.62),
+    0 1px rgba(229, 204, 182, 0.1);
+}
+
+.artisanClayBack[data-card-style='artisan-clay'] > div > section:first-child h2 {
+  color: var(--artisan-expanded-stone);
+  font-weight: 560;
+  text-shadow:
+    -1px -1px rgba(236, 214, 194, 0.13),
+    2px 3px 2px rgba(0, 0, 0, 0.72);
+}
+
+.artisanClayBack[data-card-style='artisan-clay'] > div > section:not(:first-child) {
+  border-color: #17161a;
+  border-radius: 15px;
+  background: linear-gradient(145deg, rgba(53, 48, 51, 0.72), rgba(21, 20, 24, 0.78));
+  box-shadow:
+    inset 2px 3px 4px rgba(0, 0, 0, 0.52),
+    0 1px rgba(232, 205, 181, 0.08);
+}
+
+.artisanClayBack[data-card-style='artisan-clay'] :is(input, textarea) {
+  border: 2px solid #141318;
+  background: #17161a;
+  box-shadow:
+    inset 3px 5px 6px rgba(0, 0, 0, 0.64),
+    0 1px rgba(232, 207, 186, 0.1);
+  color: var(--artisan-expanded-stone);
+}
+
+.artisanClayBack[data-card-style='artisan-clay'] :is(input, textarea):focus {
+  border-color: color-mix(in srgb, var(--artisan-expanded-mineral-light) 52%, #151419);
+  box-shadow:
+    inset 3px 5px 6px rgba(0, 0, 0, 0.64),
+    0 0 0 3px color-mix(in srgb, var(--artisan-expanded-mineral-light) 12%, transparent);
+}
+
+.artisanClayBack[data-card-style='artisan-clay'] > footer {
+  margin: 0 14px 12px;
+  border: 1px solid #17161a;
+  border-radius: 14px 14px 18px 18px;
+  background: linear-gradient(145deg, #2f2b2f, #17161a);
+  box-shadow:
+    inset 2px 3px 4px rgba(0, 0, 0, 0.5),
+    0 1px rgba(236, 211, 188, 0.1);
+}
+
+.artisanClayBack[data-card-style='artisan-clay'] button {
+  border-color: #51484a;
+  background: linear-gradient(145deg, #3a3538, #1c1b1f);
+  box-shadow:
+    inset 1px 2px rgba(238, 212, 190, 0.09),
+    0 3px 5px rgba(0, 0, 0, 0.38);
+  color: var(--artisan-expanded-stone);
+  text-shadow: 0 1px 1px #09090b;
+}
+
+.artisanClayBack[data-card-style='artisan-clay'] > footer button:first-child {
+  border-color: #9c6c3c;
+  background:
+    radial-gradient(circle at 25% 10%, rgba(255, 226, 201, 0.11), transparent 42%),
+    linear-gradient(145deg, #704664, #472841 58%, #25151f);
+  box-shadow:
+    inset 1px 2px rgba(247, 207, 174, 0.16),
+    inset -2px -4px 5px rgba(22, 8, 16, 0.5),
+    0 4px 6px rgba(0, 0, 0, 0.45);
+  color: #efd3ac;
+}
+
+.artisanClayBack[data-card-style='artisan-clay'][data-completed='true'] {
+  box-shadow:
+    inset 2px 3px 2px rgba(255, 233, 212, 0.21),
+    inset -5px -12px 18px rgba(0, 0, 0, 0.55),
+    inset 0 0 36px rgba(78, 139, 95, 0.12),
+    0 0 38px rgba(78, 139, 95, 0.14);
+}
+
+@media (max-width: 520px) {
+  .artisanClayBack[data-card-style='artisan-clay'] > header,
+  .artisanClayBack[data-card-style='artisan-clay'] > footer {
+    margin-inline: 8px;
+  }
+
+  .artisanClayBack[data-card-style='artisan-clay'] > div {
+    margin-inline: 8px;
+    padding-inline: 12px;
+  }
+}

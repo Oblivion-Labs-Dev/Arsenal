@@ -1,0 +1,90 @@
+.clayBack.clayBack[data-card-style='clay'] {
+  --clay-back-base: #6c655f;
+  --clay-back-deep: #292522;
+  --clay-back-highlight: #d8d0c8;
+  --back-text: #fff8ed;
+  --back-muted: rgba(255, 248, 237, 0.72);
+  --back-line: color-mix(in srgb, var(--clay-back-highlight) 34%, var(--clay-back-deep));
+  --back-panel: color-mix(in srgb, var(--clay-back-base) 82%, transparent);
+  border: 8px solid color-mix(in srgb, var(--clay-back-base) 72%, var(--clay-back-deep));
+  background:
+    radial-gradient(
+      circle at 20% 4%,
+      color-mix(in srgb, var(--clay-back-highlight) 44%, transparent),
+      transparent 32%
+    ),
+    linear-gradient(
+      155deg,
+      color-mix(in srgb, var(--clay-back-base) 78%, var(--clay-back-highlight)),
+      var(--clay-back-base) 48%,
+      var(--clay-back-deep)
+    ),
+    url('/task-card-prototype/clay-card-face-premium.png') center / 100% 100% no-repeat;
+  background-blend-mode: soft-light, color, multiply;
+  box-shadow:
+    inset 0 2px 1px color-mix(in srgb, var(--clay-back-highlight) 72%, white),
+    inset 0 -38px 58px color-mix(in srgb, var(--clay-back-deep) 48%, transparent),
+    0 0 34px color-mix(in srgb, var(--expanded-accent) 28%, transparent);
+  text-shadow: 0 1px 1px var(--clay-back-deep);
+}
+
+:global([data-rarity='rare']) .clayBack.clayBack[data-card-style='clay'] {
+  --clay-back-base: #315fae;
+  --clay-back-deep: #0c234c;
+  --clay-back-highlight: #8fc2ff;
+  --back-text: #e1f1ff;
+  --back-muted: rgba(225, 241, 255, 0.72);
+}
+
+:global([data-rarity='epic']) .clayBack.clayBack[data-card-style='clay'] {
+  --clay-back-base: #75459a;
+  --clay-back-deep: #271236;
+  --clay-back-highlight: #d699f0;
+  --back-text: #f7ddff;
+  --back-muted: rgba(247, 221, 255, 0.72);
+}
+
+:global([data-rarity='legendary']) .clayBack.clayBack[data-card-style='clay'] {
+  --clay-back-base: #b3711d;
+  --clay-back-deep: #4d2505;
+  --clay-back-highlight: #ffc65c;
+  --back-text: #fff0bb;
+  --back-muted: rgba(255, 240, 187, 0.74);
+}
+
+.clayBack[data-card-style='clay'] > span:first-child {
+  inset: 11px;
+  border: 2px solid color-mix(in srgb, var(--clay-back-highlight) 42%, var(--clay-back-deep));
+  border-radius: 19px;
+  box-shadow:
+    inset 2px 3px 7px color-mix(in srgb, var(--clay-back-deep) 58%, transparent),
+    0 1px 1px color-mix(in srgb, var(--clay-back-highlight) 58%, transparent);
+}
+
+.clayBack[data-card-style='clay'] > span:nth-child(2) > i:first-child {
+  inset: 0;
+  padding: 5px;
+  border-radius: inherit;
+  background: linear-gradient(
+    145deg,
+    var(--clay-back-highlight),
+    var(--clay-back-base) 42%,
+    var(--clay-back-deep)
+  );
+  filter: drop-shadow(0 3px 3px color-mix(in srgb, var(--clay-back-deep) 62%, transparent));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.clayBack[data-card-style='clay'] :is(section, input, textarea, button) {
+  text-shadow: inherit;
+}
+
+.clayBack[data-card-style='clay'] :is(input, textarea, button) {
+  box-shadow:
+    inset 1px 2px 3px color-mix(in srgb, var(--clay-back-deep) 34%, transparent),
+    0 1px 1px color-mix(in srgb, var(--clay-back-highlight) 28%, transparent);
+}

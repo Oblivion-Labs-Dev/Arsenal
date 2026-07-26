@@ -2,9 +2,10 @@
 
 :root,
 [data-theme='deep-forge'] {
-  --font-sans: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans:
+    'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  
+
   --arsenal-background: #05070a;
   --arsenal-surface: #0c0f16;
   --arsenal-elevated: #131822;
@@ -31,7 +32,8 @@
 }
 
 [data-theme='obsidian-cyber'] {
-  --font-sans: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans:
+    'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   --arsenal-background: #04060a;
@@ -52,7 +54,8 @@
 }
 
 [data-theme='ivory-graphite'] {
-  --font-sans: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans:
+    'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   --arsenal-background: #fbfaf7;
@@ -90,14 +93,20 @@ body {
       color-mix(in srgb, var(--arsenal-accent) 6%, transparent),
       transparent 35rem
     ),
-    radial-gradient(circle at 10% 25%, color-mix(in srgb, var(--arsenal-accent) 1.5%, transparent), transparent 25rem),
+    radial-gradient(
+      circle at 10% 25%,
+      color-mix(in srgb, var(--arsenal-accent) 1.5%, transparent),
+      transparent 25rem
+    ),
     radial-gradient(circle at 90% 75%, rgba(100, 181, 246, 0.02), transparent 30rem),
     var(--arsenal-background);
   color: var(--arsenal-text-primary);
   min-height: 100vh;
 }
 
-code, pre, kbd {
+code,
+pre,
+kbd {
   font-family: var(--font-mono) !important;
 }
 
@@ -154,8 +163,9 @@ code, pre, kbd {
   box-shadow:
     inset 0 1px 1px rgba(255, 255, 255, 0.03),
     0 12px 40px rgba(0, 0, 0, 0.25);
-  transition: border-color var(--arsenal-duration-normal) var(--arsenal-ease-out),
-              box-shadow var(--arsenal-duration-normal) var(--arsenal-ease-out);
+  transition:
+    border-color var(--arsenal-duration-normal) var(--arsenal-ease-out),
+    box-shadow var(--arsenal-duration-normal) var(--arsenal-ease-out);
 }
 .arsenal-panel:hover {
   border-color: var(--arsenal-border-hover);
@@ -166,12 +176,7 @@ code, pre, kbd {
 }
 
 .arsenal-rail {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--arsenal-accent),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, var(--arsenal-accent), transparent);
   height: 1px;
   box-shadow: 0 0 12px var(--arsenal-accent);
 }
@@ -187,3 +192,3407 @@ code, pre, kbd {
   }
 }
 
+/* Precision task card */
+.precision-task-card {
+  --card-accent: #4b8dff;
+  --energy-color: #d79a3b;
+  --card-accent-wash: rgba(75, 141, 255, 0.09);
+  --card-pointer-x: 50%;
+  --card-pointer-y: 30%;
+  --card-tilt-x: 0deg;
+  --card-tilt-y: 0deg;
+  --card-float-delay: 0s;
+  --card-float-duration: 15s;
+  --card-surface-start: #11131a;
+  --card-surface-middle: #090a0e;
+  --card-surface-end: #07080b;
+  --card-text: #f4f1ea;
+  --card-muted: rgba(244, 241, 234, 0.5);
+  --card-muted-soft: rgba(244, 241, 234, 0.42);
+  --card-surface-border: rgba(255, 255, 255, 0.055);
+  --card-surface-highlight: rgba(255, 255, 255, 0.075);
+  --card-surface-vignette: rgba(0, 0, 0, 0.24);
+  --card-surface-shadow: 0 18px 50px rgba(0, 0, 0, 0.42);
+  --card-paper-mark: rgba(255, 255, 255, 0.016);
+  --card-hover-light: rgba(255, 255, 255, 0.12);
+  --card-checkbox-border: rgba(255, 255, 255, 0.38);
+  --card-checkbox-hover: rgba(255, 255, 255, 0.72);
+  --card-checkbox-fill: rgba(255, 255, 255, 0.018);
+  position: relative;
+  isolation: isolate;
+  width: min(350px, calc(100vw - 64px));
+  min-width: 280px;
+  max-width: 350px;
+  aspect-ratio: 7 / 10;
+  border-radius: 24px;
+  color: var(--card-text);
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.precision-task-card__ambient-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transform-style: preserve-3d;
+  animation: precision-task-card-water-float var(--card-float-duration) ease-in-out
+    var(--card-float-delay) infinite alternate both;
+  will-change: transform;
+}
+
+.precision-task-card__motion-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transform-style: preserve-3d;
+  transition:
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 300ms ease;
+  will-change: transform;
+}
+
+.precision-task-card[data-color-scheme='light'] {
+  --card-accent-wash: rgba(75, 141, 255, 0.075);
+  --card-surface-start: #fcf9f3;
+  --card-surface-middle: #f5f0e9;
+  --card-surface-end: #ece7df;
+  --card-text: #202326;
+  --card-muted: rgba(32, 35, 38, 0.58);
+  --card-muted-soft: rgba(32, 35, 38, 0.48);
+  --card-surface-border: rgba(51, 45, 37, 0.1);
+  --card-surface-highlight: rgba(255, 255, 255, 0.88);
+  --card-surface-vignette: rgba(100, 83, 62, 0.055);
+  --card-surface-shadow: 0 24px 56px rgba(61, 78, 86, 0.2), 0 6px 16px rgba(61, 78, 86, 0.1);
+  --card-paper-mark: rgba(55, 48, 39, 0.022);
+  --card-hover-light: rgba(255, 255, 255, 0.52);
+  --card-checkbox-border: rgba(32, 35, 38, 0.34);
+  --card-checkbox-hover: rgba(32, 35, 38, 0.68);
+  --card-checkbox-fill: rgba(32, 35, 38, 0.025);
+  color-scheme: light;
+}
+
+.precision-task-card__filter-definitions {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.precision-task-card__aura,
+.precision-task-card__electric-outline {
+  position: absolute;
+  pointer-events: none;
+}
+
+.precision-task-card__aura {
+  z-index: 0;
+  inset: -18px;
+  border-radius: 40px;
+  background: var(--card-accent);
+  filter: blur(32px);
+  opacity: 0.24;
+  transition: opacity 300ms ease;
+}
+
+.precision-task-card__electric-outline {
+  inset: 0;
+  border-color: var(--card-accent);
+  border-style: solid;
+  border-radius: 24px;
+  transition:
+    opacity 300ms ease,
+    filter 300ms ease;
+}
+
+.precision-task-card__electric-outline--glow-wide {
+  z-index: 1;
+  border-width: 2px;
+  filter: blur(5px);
+  opacity: 0.58;
+  box-shadow: 0 0 17px var(--card-accent);
+}
+
+.precision-task-card__electric-outline--glow-tight {
+  z-index: 1;
+  border-width: 1.5px;
+  filter: blur(1.5px);
+  opacity: 0.86;
+  box-shadow: 0 0 6px var(--card-accent);
+}
+
+.precision-task-card__electric-outline--displaced {
+  z-index: 2;
+  border-width: 2px;
+  opacity: 0.88;
+}
+
+.precision-task-card__electric-outline--sharp {
+  z-index: 3;
+  border-width: 1.5px;
+  opacity: 0.96;
+  box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+.precision-task-card[data-color-scheme='light'] .precision-task-card__aura {
+  opacity: 0.16;
+}
+
+.precision-task-card[data-color-scheme='light'] .precision-task-card__electric-outline--glow-wide {
+  opacity: 0.42;
+}
+
+.precision-task-card[data-color-scheme='light'] .precision-task-card__electric-outline--glow-tight {
+  opacity: 0.68;
+}
+
+.precision-task-card[data-color-scheme='light']
+  .precision-task-card__energy-mark[data-filled='true'] {
+  box-shadow: none;
+}
+
+.precision-task-card[data-border-theme='minimal'] .precision-task-card__surface {
+  inset: 0;
+  border-radius: 24px;
+}
+
+.precision-task-card__surface {
+  position: absolute;
+  z-index: 4;
+  inset: 2px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+  padding: 28px;
+  border: 1px solid var(--card-surface-border);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 50% 16%, var(--card-accent-wash), transparent 42%),
+    linear-gradient(
+      158deg,
+      var(--card-surface-start) 0%,
+      var(--card-surface-middle) 58%,
+      var(--card-surface-end) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 var(--card-surface-highlight),
+    inset 0 -34px 60px var(--card-surface-vignette),
+    var(--card-surface-shadow);
+  transition:
+    background 360ms ease,
+    border-color 360ms ease,
+    box-shadow 360ms ease;
+}
+
+@supports (background: color-mix(in srgb, white 10%, transparent)) {
+  .precision-task-card {
+    --card-accent-wash: color-mix(in srgb, var(--card-accent) 9%, transparent);
+  }
+
+  .precision-task-card[data-color-scheme='light'] {
+    --card-accent-wash: color-mix(in srgb, var(--card-accent) 7%, transparent);
+  }
+}
+
+.precision-task-card__surface::before,
+.precision-task-card__surface::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+}
+
+.precision-task-card__surface::before {
+  z-index: 1;
+  background:
+    radial-gradient(circle, var(--card-paper-mark) 0 0.65px, transparent 0.8px) 0 0 / 9px 9px,
+    repeating-linear-gradient(
+      118deg,
+      transparent 0,
+      transparent 8px,
+      var(--card-paper-mark) 9px,
+      transparent 10px
+    );
+  opacity: 0.36;
+}
+
+.precision-task-card__surface::after {
+  z-index: 4;
+  background: radial-gradient(
+    circle at var(--card-pointer-x) var(--card-pointer-y),
+    var(--card-hover-light),
+    transparent 34%
+  );
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.precision-task-card__header,
+.precision-task-card__body,
+.precision-task-card__footer {
+  position: relative;
+  z-index: 3;
+}
+
+.precision-task-card__header {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.precision-task-card__eyebrow,
+.precision-task-card__energy-label,
+.precision-task-card__energy-value {
+  font-family: var(--font-sans, system-ui, sans-serif);
+  text-transform: uppercase;
+}
+
+.precision-task-card__eyebrow {
+  color: var(--card-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.precision-task-card__body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-12px);
+}
+
+.precision-task-card__title {
+  display: -webkit-box;
+  width: 100%;
+  max-width: 184px;
+  margin: 0;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  color: var(--card-text);
+  font-family: var(--precision-card-serif, Georgia, Cambria, 'Times New Roman', serif);
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  text-align: center;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.precision-task-card__footer {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.precision-task-card__energy-label {
+  color: var(--card-muted-soft);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.precision-task-card__energy-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--energy-color);
+}
+
+.precision-task-card__energy-value {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.precision-task-card__energy-marks {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.precision-task-card__energy-mark {
+  width: 5px;
+  height: 11px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  opacity: 0.36;
+}
+
+.precision-task-card__energy-mark[data-filled='true'] {
+  background: currentColor;
+  box-shadow: 0 0 7px currentColor;
+  opacity: 1;
+}
+
+.precision-task-card__checkbox-target {
+  position: relative;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  place-items: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.precision-task-card__checkbox-input {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.precision-task-card__checkbox-box {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 1.5px solid var(--card-checkbox-border);
+  border-radius: 7px;
+  background: var(--card-checkbox-fill);
+  box-shadow: inset 0 1px 0 var(--card-surface-highlight);
+  transition:
+    transform 140ms ease,
+    border-color 160ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.precision-task-card__checkbox-box::after {
+  position: absolute;
+  top: 5px;
+  left: 8px;
+  width: 6px;
+  height: 10px;
+  border-right: 2px solid #04150b;
+  border-bottom: 2px solid #04150b;
+  content: '';
+  opacity: 0;
+  transform: rotate(42deg) scale(0.6);
+  transition:
+    opacity 160ms ease,
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.precision-task-card__checkbox-input:hover + .precision-task-card__checkbox-box {
+  border-color: var(--card-checkbox-hover);
+}
+
+.precision-task-card__checkbox-input:active + .precision-task-card__checkbox-box {
+  transform: scale(0.94);
+}
+
+.precision-task-card__checkbox-input:focus-visible + .precision-task-card__checkbox-box {
+  outline: 2px solid #a7ffce;
+  outline-offset: 4px;
+}
+
+.precision-task-card__checkbox-input:checked + .precision-task-card__checkbox-box {
+  border-color: #a7ffce;
+  background: #43f58a;
+  box-shadow:
+    inset 0 1px 0 #a7ffce,
+    0 0 0 1px rgba(67, 245, 138, 0.15),
+    0 0 16px rgba(67, 245, 138, 0.24);
+  animation: precision-task-card-check-pulse 560ms ease-out 1;
+}
+
+.precision-task-card__checkbox-input:checked + .precision-task-card__checkbox-box::after {
+  opacity: 1;
+  transform: rotate(42deg) scale(1);
+}
+
+.precision-task-card__completion-liquid {
+  position: absolute;
+  z-index: 0;
+  right: -3%;
+  bottom: -1%;
+  left: -3%;
+  height: 53%;
+  clip-path: polygon(
+    0 8%,
+    10% 5%,
+    21% 7%,
+    34% 3%,
+    47% 6%,
+    61% 2%,
+    73% 6%,
+    86% 3%,
+    100% 7%,
+    100% 100%,
+    0 100%
+  );
+  background:
+    linear-gradient(180deg, rgba(167, 255, 206, 0.4), transparent 9%),
+    linear-gradient(150deg, rgba(67, 245, 138, 0.28), rgba(24, 111, 62, 0.2));
+  box-shadow: 0 -10px 38px rgba(67, 245, 138, 0.1);
+  opacity: 0;
+  transform: translateY(105%);
+  transition:
+    transform 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 500ms ease;
+}
+
+.precision-task-card[data-completed='true'] .precision-task-card__completion-liquid {
+  opacity: 0.88;
+  transform: translateY(0);
+  animation: precision-task-card-liquid-drift 10s ease-in-out 900ms infinite alternate;
+}
+
+.precision-task-card[data-completed='true'] .precision-task-card__electric-outline--glow-wide,
+.precision-task-card[data-completed='true'] .precision-task-card__electric-outline--glow-tight {
+  opacity: 0.44;
+}
+
+.precision-task-card[data-completed='true'] .precision-task-card__electric-outline--displaced {
+  opacity: 0.66;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .precision-task-card:hover .precision-task-card__ambient-layer {
+    animation-play-state: paused;
+  }
+
+  .precision-task-card:hover .precision-task-card__motion-layer {
+    filter: brightness(1.13);
+    transform: translateZ(8px) scale(1.008) rotateX(var(--card-tilt-x)) rotateY(var(--card-tilt-y));
+  }
+
+  .precision-task-card:hover .precision-task-card__aura {
+    opacity: 0.28;
+  }
+
+  .precision-task-card:hover .precision-task-card__surface::after {
+    opacity: 0.72;
+  }
+}
+
+@media (hover: none) {
+  .precision-task-card:active .precision-task-card__motion-layer {
+    transform: translateZ(-2px);
+  }
+}
+
+@media (max-width: 340px) {
+  .precision-task-card__surface {
+    padding: 22px;
+  }
+
+  .precision-task-card__title {
+    max-width: 158px;
+    font-size: 31px;
+  }
+}
+
+@keyframes precision-task-card-water-float {
+  0% {
+    transform: translateZ(1px) rotateX(-1.1deg) rotateY(0.7deg);
+  }
+
+  24% {
+    transform: translateZ(4px) rotateX(0.45deg) rotateY(-0.9deg);
+  }
+
+  51% {
+    transform: translateZ(6px) rotateX(1.25deg) rotateY(0.35deg);
+  }
+
+  76% {
+    transform: translateZ(3px) rotateX(-0.35deg) rotateY(1.05deg);
+  }
+
+  100% {
+    transform: translateZ(1px) rotateX(-0.85deg) rotateY(-0.55deg);
+  }
+}
+
+@keyframes precision-task-card-check-pulse {
+  0% {
+    box-shadow:
+      inset 0 1px 0 #a7ffce,
+      0 0 0 0 rgba(67, 245, 138, 0.36);
+  }
+  100% {
+    box-shadow:
+      inset 0 1px 0 #a7ffce,
+      0 0 0 8px rgba(67, 245, 138, 0),
+      0 0 16px rgba(67, 245, 138, 0.24);
+  }
+}
+
+@keyframes precision-task-card-liquid-drift {
+  from {
+    clip-path: polygon(
+      0 8%,
+      10% 5%,
+      21% 7%,
+      34% 3%,
+      47% 6%,
+      61% 2%,
+      73% 6%,
+      86% 3%,
+      100% 7%,
+      100% 100%,
+      0 100%
+    );
+  }
+  to {
+    clip-path: polygon(
+      0 5%,
+      11% 8%,
+      23% 4%,
+      36% 7%,
+      49% 3%,
+      62% 6%,
+      75% 2%,
+      88% 6%,
+      100% 4%,
+      100% 100%,
+      0 100%
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .precision-task-card,
+  .precision-task-card *,
+  .precision-task-card *::before,
+  .precision-task-card *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .precision-task-card__noise-animation {
+    display: none;
+  }
+
+  .precision-task-card,
+  .precision-task-card:hover,
+  .precision-task-card:active {
+    filter: none;
+    transform: none;
+  }
+
+  .precision-task-card__motion-layer,
+  .precision-task-card__ambient-layer,
+  .precision-task-card:hover .precision-task-card__motion-layer,
+  .precision-task-card:active .precision-task-card__motion-layer {
+    filter: none;
+    transform: none;
+  }
+
+  .precision-task-card__electric-outline--displaced {
+    filter: none !important;
+  }
+
+  .precision-task-card__surface::after {
+    display: none;
+  }
+
+  .precision-task-card[data-completed='true'] .precision-task-card__completion-liquid {
+    opacity: 0.88;
+    transform: translateY(0);
+  }
+}
+/* Arcane task card theme */
+.precision-task-card[data-border-theme='arcane'] {
+  --card-accent-wash: color-mix(in srgb, var(--card-accent) 9%, transparent);
+  --card-surface-start: #f2eadc;
+  --card-surface-middle: #e9dfcf;
+  --card-surface-end: #ded1bd;
+  --card-text: #28241f;
+  --card-muted: rgba(40, 36, 31, 0.68);
+  --card-muted-soft: rgba(40, 36, 31, 0.56);
+  --card-surface-border: rgba(61, 51, 41, 0.26);
+  --card-surface-highlight: rgba(255, 255, 255, 0.72);
+  --card-surface-vignette: rgba(79, 58, 35, 0.1);
+  --card-paper-mark: rgba(70, 54, 38, 0.045);
+  --card-hover-light: rgba(255, 255, 255, 0.48);
+  --card-checkbox-border: rgba(44, 34, 29, 0.76);
+  --card-checkbox-hover: var(--card-accent);
+  --card-checkbox-fill: rgba(255, 255, 255, 0.22);
+  color: var(--card-text);
+  color-scheme: light;
+}
+
+.precision-task-card__arcane-aura,
+.precision-task-card__arcane-frame,
+.precision-task-card__arcane-rail,
+.precision-task-card__arcane-corner,
+.precision-task-card__arcane-emblem,
+.precision-task-card__arcane-seal {
+  position: absolute;
+  pointer-events: none;
+}
+
+.precision-task-card__arcane-aura {
+  z-index: 0;
+  inset: -17px -14px;
+  border-radius: 34px;
+  background:
+    radial-gradient(
+      ellipse at 0 50%,
+      color-mix(in srgb, var(--card-accent) 52%, transparent),
+      transparent 34%
+    ),
+    radial-gradient(
+      ellipse at 100% 50%,
+      color-mix(in srgb, var(--card-accent) 52%, transparent),
+      transparent 34%
+    ),
+    radial-gradient(
+      ellipse at 50% 0,
+      color-mix(in srgb, var(--card-accent) 30%, transparent),
+      transparent 34%
+    ),
+    radial-gradient(
+      ellipse at 50% 100%,
+      color-mix(in srgb, var(--card-accent) 30%, transparent),
+      transparent 34%
+    );
+  filter: blur(13px);
+  opacity: 0.74;
+  animation: precision-task-card-arcane-pulse 4.8s ease-in-out infinite alternate;
+}
+
+.precision-task-card__arcane-frame {
+  box-sizing: border-box;
+}
+
+.precision-task-card__arcane-frame--outer {
+  z-index: 2;
+  inset: -2px;
+  padding: 18px;
+  border-radius: 27px;
+  background:
+    repeating-linear-gradient(112deg, rgba(255, 255, 255, 0.32) 0 1px, transparent 1px 7px),
+    linear-gradient(
+      135deg,
+      #d2d2d0 0%,
+      #4c4b4b 14%,
+      #151619 30%,
+      #777674 46%,
+      #222326 64%,
+      #aaa8a3 82%,
+      #2c2d31 100%
+    );
+  clip-path: polygon(11% 0, 89% 0, 100% 8%, 100% 92%, 89% 100%, 11% 100%, 0 92%, 0 8%);
+  filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 7px var(--card-accent))
+    drop-shadow(0 13px 18px rgba(0, 0, 0, 0.5));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.precision-task-card__arcane-frame--inner {
+  z-index: 3;
+  inset: 13px 11px;
+  padding: 6px;
+  border-radius: 19px;
+  background:
+    linear-gradient(
+      90deg,
+      #202126,
+      var(--card-accent) 16%,
+      color-mix(in srgb, var(--card-accent) 48%, #08090c) 50%,
+      color-mix(in srgb, var(--card-accent) 72%, white) 84%,
+      #202126
+    ),
+    repeating-linear-gradient(0deg, transparent 0 9px, rgba(255, 255, 255, 0.55) 10px);
+  clip-path: polygon(8% 0, 92% 0, 100% 6%, 100% 94%, 92% 100%, 8% 100%, 0 94%, 0 6%);
+  box-shadow:
+    0 0 8px color-mix(in srgb, var(--card-accent) 88%, transparent),
+    inset 0 0 5px rgba(255, 255, 255, 0.72);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.precision-task-card__arcane-rail {
+  z-index: 5;
+  right: 62px;
+  left: 62px;
+  height: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background:
+    linear-gradient(180deg, #a9a9a7, #2a2b2e 24%, #101115 57%, #58585b 78%, #17181b),
+    linear-gradient(90deg, transparent, var(--card-accent), transparent);
+  clip-path: polygon(9% 0, 91% 0, 100% 45%, 91% 100%, 9% 100%, 0 45%);
+  box-shadow:
+    inset 0 -3px 0 color-mix(in srgb, var(--card-accent) 58%, #090a0d),
+    inset 0 -5px 5px color-mix(in srgb, var(--card-accent) 72%, transparent),
+    0 0 7px color-mix(in srgb, var(--card-accent) 62%, transparent);
+}
+
+.precision-task-card__arcane-rail--top {
+  top: 7px;
+}
+
+.precision-task-card__arcane-rail--bottom {
+  bottom: 7px;
+  transform: rotate(180deg);
+}
+
+.precision-task-card__arcane-corner {
+  z-index: 6;
+  width: 76px;
+  height: 88px;
+  border: 1px solid rgba(230, 230, 226, 0.5);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.42), transparent 22%),
+    repeating-linear-gradient(135deg, #5e5d5c 0 5px, #222326 5px 11px, #969490 11px 13px);
+  clip-path: polygon(0 0, 100% 0, 76% 20%, 49% 20%, 25% 43%, 25% 77%, 0 100%);
+  box-shadow:
+    inset 0 0 0 4px #16171a,
+    inset 0 0 0 7px #777673,
+    0 0 5px color-mix(in srgb, var(--card-accent) 70%, transparent);
+}
+
+.precision-task-card__arcane-corner--top-left {
+  top: -3px;
+  left: -3px;
+}
+
+.precision-task-card__arcane-corner--top-right {
+  top: -3px;
+  right: -3px;
+  transform: scaleX(-1);
+}
+
+.precision-task-card__arcane-corner--bottom-left {
+  bottom: -3px;
+  left: -3px;
+  transform: scaleY(-1);
+}
+
+.precision-task-card__arcane-corner--bottom-right {
+  right: -3px;
+  bottom: -3px;
+  transform: scale(-1);
+}
+
+.precision-task-card__arcane-emblem {
+  z-index: 8;
+  top: -26px;
+  left: 50%;
+  width: 84px;
+  height: 94px;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 5px 3px rgba(0, 0, 0, 0.62)) drop-shadow(0 0 9px var(--card-accent));
+}
+
+.precision-task-card__arcane-emblem svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.arcane-emblem__plate {
+  fill: #25262a;
+  stroke: #b8b7b3;
+  stroke-width: 3;
+}
+
+.arcane-emblem__rim {
+  fill: #141519;
+  stroke: #707073;
+  stroke-width: 5;
+}
+
+.arcane-emblem__gem {
+  fill: color-mix(in srgb, var(--card-accent) 58%, #090a0d);
+  stroke: color-mix(in srgb, var(--card-accent) 65%, white);
+  stroke-width: 2;
+}
+
+.arcane-emblem__facet {
+  fill: none;
+  stroke: rgba(248, 222, 255, 0.85);
+  stroke-width: 1.5;
+}
+
+.arcane-emblem__core {
+  fill: #fff;
+  stroke: color-mix(in srgb, var(--card-accent) 68%, white);
+  stroke-width: 4;
+  filter: drop-shadow(0 0 7px var(--card-accent));
+}
+
+.precision-task-card__arcane-seal {
+  z-index: 8;
+  bottom: -5px;
+  left: 50%;
+  display: flex;
+  width: 96px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 2px solid #9d9b96;
+  background: linear-gradient(180deg, #4e4e50, #141519 45%, #2c2d30);
+  clip-path: polygon(15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%, 0 50%);
+  box-shadow:
+    inset 0 0 0 4px #18191c,
+    0 0 8px color-mix(in srgb, var(--card-accent) 72%, transparent);
+  transform: translateX(-50%);
+}
+
+.precision-task-card__arcane-seal i {
+  width: 7px;
+  height: 16px;
+  border: 1px solid color-mix(in srgb, var(--card-accent) 62%, white);
+  background: linear-gradient(
+    180deg,
+    var(--card-accent),
+    color-mix(in srgb, var(--card-accent) 52%, #090a0d)
+  );
+  box-shadow: 0 0 6px var(--card-accent);
+  transform: skewX(-25deg);
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__surface {
+  inset: 21px 17px 24px;
+  padding: 38px 29px 24px;
+  border: 1px solid rgba(76, 57, 39, 0.34);
+  border-radius: 13px;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.44), transparent 45%),
+    radial-gradient(circle at 15% 20%, rgba(103, 74, 41, 0.05) 0 0.7px, transparent 0.8px) 0 0 / 6px
+      6px,
+    repeating-linear-gradient(28deg, rgba(92, 67, 39, 0.025) 0 1px, transparent 1px 7px),
+    linear-gradient(155deg, #f4ecdf 0%, #e8ddcc 56%, #dccdb7 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.36),
+    inset 0 0 36px rgba(86, 58, 31, 0.13),
+    0 15px 30px rgba(0, 0, 0, 0.28);
+  clip-path: polygon(5% 0, 95% 0, 100% 4%, 100% 96%, 95% 100%, 5% 100%, 0 96%, 0 4%);
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__surface::before {
+  background:
+    radial-gradient(circle, rgba(67, 50, 34, 0.055) 0 0.55px, transparent 0.8px) 0 0 / 7px 7px,
+    repeating-linear-gradient(
+      108deg,
+      transparent 0,
+      transparent 12px,
+      rgba(70, 52, 34, 0.025) 13px,
+      transparent 14px
+    );
+  opacity: 0.62;
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__header {
+  min-height: 52px;
+  align-items: flex-start;
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #35302a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.19em;
+  white-space: nowrap;
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__eyebrow::after {
+  width: 72px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--card-accent) 0 42%,
+    transparent 42% 48%,
+    var(--card-accent) 48% 100%
+  );
+  box-shadow: 0 0 4px color-mix(in srgb, var(--card-accent) 52%, transparent);
+  content: '';
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__body {
+  position: relative;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-top: 27px;
+  transform: none;
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__title {
+  position: relative;
+  z-index: 2;
+  max-width: 230px;
+  color: #28241f;
+  font-size: 36px;
+  line-height: 1.08;
+  text-align: left;
+  -webkit-line-clamp: 3;
+}
+
+.precision-task-card__arcane-circuit {
+  position: absolute;
+  z-index: 1;
+  top: 52%;
+  left: 50%;
+  width: 78%;
+  height: auto;
+  color: #715f4d;
+  opacity: 0.2;
+  transform: translate(-50%, -22%);
+}
+
+.arcane-circuit__lines {
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 1.2;
+}
+
+.arcane-circuit__nodes {
+  fill: rgba(255, 255, 255, 0.08);
+  stroke: currentColor;
+  stroke-width: 1.2;
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__footer {
+  min-height: 75px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(54, 46, 38, 0.58);
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__footer::before {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgba(54, 46, 38, 0.58);
+  background: #e5d8c5;
+  content: '';
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__energy-label {
+  color: #2f2b26;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__energy-indicator {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 4px;
+  color: #332e29;
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__energy-value {
+  order: 2;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__energy-marks {
+  order: 1;
+  gap: 7px;
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__energy-mark {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #6a635b;
+  border-radius: 50%;
+  background: rgba(74, 65, 56, 0.2);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.28),
+    inset 0 0 5px rgba(36, 29, 24, 0.3);
+  opacity: 0.72;
+}
+
+.precision-task-card[data-border-theme='arcane']
+  .precision-task-card__energy-mark[data-filled='true'] {
+  border-color: #2b1735;
+  background: radial-gradient(circle at 38% 32%, #e9b3ff 0 8%, #a527ec 29%, #4e086f 72%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.48),
+    0 0 8px rgba(149, 37, 226, 0.78);
+  opacity: 1;
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__checkbox-box {
+  width: 38px;
+  height: 38px;
+  border: 3px solid #2d1a33;
+  border-radius: 10px;
+  background: rgba(246, 234, 221, 0.76);
+  box-shadow:
+    inset 0 0 0 2px color-mix(in srgb, var(--card-accent) 72%, white),
+    inset 0 0 0 4px #3d2944,
+    0 0 10px color-mix(in srgb, var(--card-accent) 65%, transparent);
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__checkbox-box::after {
+  top: 8px;
+  left: 13px;
+  width: 8px;
+  height: 15px;
+}
+
+.precision-task-card[data-border-theme='arcane']
+  .precision-task-card__checkbox-input:checked
+  + .precision-task-card__checkbox-box {
+  border-color: #221a25;
+  background: var(--card-accent);
+  box-shadow:
+    inset 0 0 0 2px #ecc7ff,
+    inset 0 0 0 4px #54216f,
+    0 0 12px color-mix(in srgb, var(--card-accent) 72%, transparent);
+}
+
+.precision-task-card[data-border-theme='arcane']
+  .precision-task-card__checkbox-input:focus-visible
+  + .precision-task-card__checkbox-box {
+  outline-color: var(--card-accent);
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__completion-liquid {
+  background:
+    linear-gradient(180deg, rgba(214, 147, 255, 0.34), transparent 9%),
+    linear-gradient(150deg, rgba(125, 39, 195, 0.25), rgba(61, 16, 88, 0.18));
+  box-shadow: 0 -10px 38px rgba(128, 36, 199, 0.15);
+}
+
+@media (max-width: 340px) {
+  .precision-task-card[data-border-theme='arcane'] .precision-task-card__surface {
+    inset: 18px 14px 20px;
+    padding: 32px 22px 20px;
+  }
+
+  .precision-task-card[data-border-theme='arcane'] .precision-task-card__title {
+    max-width: 205px;
+    font-size: 28px;
+  }
+
+  .precision-task-card[data-border-theme='arcane'] .precision-task-card__eyebrow::after {
+    width: 48px;
+  }
+
+  .precision-task-card__arcane-emblem {
+    top: -21px;
+    width: 72px;
+    height: 82px;
+  }
+
+  .precision-task-card__arcane-corner {
+    width: 62px;
+    height: 72px;
+  }
+
+  .precision-task-card__arcane-rail {
+    right: 52px;
+    left: 52px;
+  }
+
+  .precision-task-card[data-border-theme='arcane'] .precision-task-card__energy-mark {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .precision-task-card__arcane-aura {
+    animation: none;
+  }
+}
+
+@keyframes precision-task-card-arcane-pulse {
+  from {
+    opacity: 0.56;
+    transform: scale(0.995);
+  }
+
+  to {
+    opacity: 0.82;
+    transform: scale(1.01);
+  }
+}
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__aura {
+  display: none;
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__electric-outline {
+  inset: -5px;
+  border-color: var(--card-accent);
+  border-radius: 29px;
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__electric-outline--glow-wide {
+  border-width: 2px;
+  filter: blur(6px);
+  opacity: 0.72;
+  box-shadow:
+    0 0 16px var(--card-accent),
+    0 0 28px color-mix(in srgb, var(--card-accent) 54%, transparent);
+}
+
+.precision-task-card[data-border-theme='arcane']
+  .precision-task-card__electric-outline--glow-tight {
+  border-width: 1.5px;
+  filter: blur(1.5px);
+  opacity: 0.9;
+  box-shadow: 0 0 8px var(--card-accent);
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__electric-outline--displaced {
+  border-width: 2px;
+  opacity: 0.92;
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__electric-outline--sharp {
+  border-width: 1px;
+  opacity: 0.42;
+  box-shadow: none;
+}
+
+/* Experimental task card themes */
+.precision-task-card__creative-frame,
+.precision-task-card__creative-frame > i {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+}
+
+.precision-task-card__creative-frame {
+  z-index: 7;
+  inset: -4px;
+  overflow: hidden;
+  border-radius: 29px;
+}
+
+/* Holographic foil */
+.precision-task-card[data-border-theme='holographic'] {
+  --card-surface-start: #11162a;
+  --card-surface-middle: #0a0d19;
+  --card-surface-end: #090910;
+  --card-text: #f7fbff;
+  --card-muted: rgba(225, 246, 255, 0.62);
+  --card-muted-soft: rgba(225, 246, 255, 0.48);
+  --card-surface-border: rgba(190, 246, 255, 0.18);
+  --card-surface-highlight: rgba(255, 255, 255, 0.2);
+  --card-hover-light: rgba(190, 255, 255, 0.24);
+  --card-checkbox-hover: #b7fbff;
+}
+
+.precision-task-card[data-border-theme='holographic'] .precision-task-card__surface {
+  background:
+    linear-gradient(128deg, rgba(255, 89, 210, 0.11), transparent 32%),
+    linear-gradient(232deg, rgba(70, 231, 255, 0.13), transparent 36%),
+    radial-gradient(circle at 50% 16%, var(--card-accent-wash), transparent 40%),
+    linear-gradient(
+      158deg,
+      var(--card-surface-start) 0%,
+      var(--card-surface-middle) 58%,
+      var(--card-surface-end) 100%
+    );
+}
+
+.precision-task-card[data-border-theme='holographic'] .precision-task-card__surface::before {
+  background:
+    repeating-linear-gradient(
+      118deg,
+      transparent 0 18px,
+      rgba(121, 243, 255, 0.035) 19px,
+      rgba(255, 118, 218, 0.045) 20px,
+      transparent 22px
+    ),
+    repeating-linear-gradient(
+      32deg,
+      transparent 0 32px,
+      rgba(255, 255, 255, 0.025) 33px,
+      transparent 35px
+    );
+  opacity: 0.82;
+}
+
+.precision-task-card[data-border-theme='holographic'] .precision-task-card__aura {
+  background: conic-gradient(from 35deg, #62f5ff, var(--card-accent), #ff59c9, #ffd36b, #62f5ff);
+  filter: blur(34px);
+  opacity: 0.3;
+  animation: precision-task-card-holographic-aura 9s linear infinite;
+}
+
+.precision-task-card[data-border-theme='holographic'] .precision-task-card__electric-outline {
+  border-color: color-mix(in srgb, var(--card-accent) 58%, #8ff8ff);
+}
+
+.precision-task-card[data-border-theme='holographic']
+  .precision-task-card__electric-outline--glow-wide {
+  box-shadow:
+    -8px 0 18px rgba(79, 232, 255, 0.78),
+    8px 0 18px rgba(255, 81, 200, 0.68),
+    0 9px 18px rgba(255, 207, 95, 0.52);
+  opacity: 0.78;
+}
+
+.precision-task-card[data-border-theme='holographic']
+  .precision-task-card__creative-frame
+  > i:first-child {
+  inset: 0;
+  padding: 3px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 210deg,
+    #6bf5ff,
+    var(--card-accent),
+    #ff61d2,
+    #ffe07c,
+    #7bffda,
+    #6bf5ff
+  );
+  filter: saturate(1.18);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.precision-task-card[data-border-theme='holographic']
+  .precision-task-card__creative-frame
+  > i:nth-child(2) {
+  top: -42%;
+  left: -64%;
+  width: 48%;
+  height: 184%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.42),
+    rgba(105, 238, 255, 0.18),
+    transparent
+  );
+  filter: blur(8px);
+  opacity: 0.36;
+  transform: rotate(21deg);
+  animation: precision-task-card-prism-sweep 7.8s ease-in-out infinite;
+}
+
+.precision-task-card[data-border-theme='holographic']
+  .precision-task-card__creative-frame
+  > i:nth-child(3),
+.precision-task-card[data-border-theme='holographic']
+  .precision-task-card__creative-frame
+  > i:nth-child(4) {
+  width: 74px;
+  height: 7px;
+  border: 1px solid rgba(221, 253, 255, 0.56);
+  background: linear-gradient(90deg, #63f5ff, #ff65cf, #ffe18b);
+  box-shadow: 0 0 10px rgba(105, 238, 255, 0.52);
+  clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
+}
+
+.precision-task-card[data-border-theme='holographic']
+  .precision-task-card__creative-frame
+  > i:nth-child(3) {
+  top: 15px;
+  right: 24px;
+}
+
+.precision-task-card[data-border-theme='holographic']
+  .precision-task-card__creative-frame
+  > i:nth-child(4) {
+  bottom: 15px;
+  left: 24px;
+  transform: rotate(180deg);
+}
+
+.precision-task-card[data-border-theme='holographic'][data-color-scheme='light'] {
+  --card-surface-start: #fbfdff;
+  --card-surface-middle: #eff7fb;
+  --card-surface-end: #eee9f4;
+  --card-text: #202631;
+  --card-muted: rgba(32, 38, 49, 0.6);
+  --card-muted-soft: rgba(32, 38, 49, 0.48);
+  --card-surface-border: rgba(55, 103, 128, 0.14);
+  --card-hover-light: rgba(255, 255, 255, 0.72);
+}
+
+/* Ember forge */
+.precision-task-card[data-border-theme='ember'] {
+  --card-surface-start: #25150e;
+  --card-surface-middle: #100a08;
+  --card-surface-end: #080605;
+  --card-text: #fff1d8;
+  --card-muted: rgba(255, 221, 174, 0.6);
+  --card-muted-soft: rgba(255, 221, 174, 0.46);
+  --card-surface-border: rgba(255, 151, 69, 0.2);
+  --card-surface-highlight: rgba(255, 220, 154, 0.16);
+  --card-hover-light: rgba(255, 153, 75, 0.2);
+  --card-checkbox-hover: #ffbd68;
+}
+
+.precision-task-card[data-border-theme='ember'] .precision-task-card__surface {
+  background:
+    radial-gradient(ellipse at 50% 108%, rgba(255, 87, 25, 0.22), transparent 46%),
+    repeating-linear-gradient(
+      132deg,
+      transparent 0 21px,
+      rgba(255, 116, 45, 0.025) 22px,
+      transparent 24px
+    ),
+    linear-gradient(
+      158deg,
+      var(--card-surface-start) 0%,
+      var(--card-surface-middle) 58%,
+      var(--card-surface-end) 100%
+    );
+}
+
+.precision-task-card[data-border-theme='ember'] .precision-task-card__surface::before {
+  background:
+    linear-gradient(107deg, transparent 0 47%, rgba(255, 126, 52, 0.08) 48%, transparent 49%),
+    linear-gradient(73deg, transparent 0 62%, rgba(255, 190, 92, 0.055) 63%, transparent 64%),
+    repeating-linear-gradient(
+      14deg,
+      transparent 0 25px,
+      rgba(255, 255, 255, 0.018) 26px,
+      transparent 28px
+    );
+  opacity: 0.72;
+}
+
+.precision-task-card[data-border-theme='ember'] .precision-task-card__aura {
+  background: linear-gradient(180deg, var(--card-accent), #ff5a20 48%, #ffb33c);
+  filter: blur(30px);
+  opacity: 0.3;
+  animation: precision-task-card-ember-breathe 3.8s ease-in-out infinite alternate;
+}
+
+.precision-task-card[data-border-theme='ember'] .precision-task-card__electric-outline {
+  border-color: color-mix(in srgb, var(--card-accent) 36%, #ff692f);
+}
+
+.precision-task-card[data-border-theme='ember'] .precision-task-card__electric-outline--glow-wide {
+  box-shadow:
+    0 0 15px #ff5d24,
+    0 0 28px color-mix(in srgb, var(--card-accent) 42%, transparent);
+  opacity: 0.72;
+}
+
+.precision-task-card[data-border-theme='ember']
+  .precision-task-card__creative-frame
+  > i:first-child {
+  inset: 0;
+  padding: 5px;
+  border-radius: inherit;
+  background: repeating-conic-gradient(
+    from 45deg,
+    #f0b46c 0 4deg,
+    #3a2116 4deg 11deg,
+    #16110e 11deg 18deg
+  );
+  filter: drop-shadow(0 0 7px rgba(255, 97, 34, 0.64));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.precision-task-card[data-border-theme='ember']
+  .precision-task-card__creative-frame
+  > i:nth-child(2) {
+  inset: 11px;
+  border: 1px solid rgba(255, 183, 99, 0.52);
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 12px rgba(255, 72, 22, 0.26),
+    0 0 8px rgba(255, 91, 25, 0.34);
+}
+
+.precision-task-card[data-border-theme='ember']
+  .precision-task-card__creative-frame
+  > i:nth-child(3) {
+  top: 9px;
+  left: 50%;
+  width: 112px;
+  height: 15px;
+  background: linear-gradient(180deg, #d18b4e, #21140f 48%, #ff6b2b);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.48);
+  clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
+  transform: translateX(-50%);
+}
+
+.precision-task-card[data-border-theme='ember']
+  .precision-task-card__creative-frame
+  > i:nth-child(4) {
+  bottom: 9px;
+  left: 50%;
+  width: 72px;
+  height: 16px;
+  border: 1px solid rgba(255, 197, 121, 0.52);
+  background: repeating-linear-gradient(110deg, #ff8b42 0 6px, #2a1710 6px 12px);
+  box-shadow: 0 0 9px rgba(255, 84, 26, 0.54);
+  clip-path: polygon(12% 0, 88% 0, 100% 50%, 88% 100%, 12% 100%, 0 50%);
+  transform: translateX(-50%);
+}
+
+.precision-task-card[data-border-theme='ember'][data-color-scheme='light'] {
+  --card-surface-start: #fff7e9;
+  --card-surface-middle: #f3dfc5;
+  --card-surface-end: #d9b894;
+  --card-text: #352319;
+  --card-muted: rgba(53, 35, 25, 0.62);
+  --card-muted-soft: rgba(53, 35, 25, 0.5);
+  --card-surface-border: rgba(105, 54, 25, 0.2);
+  --card-surface-highlight: rgba(255, 255, 255, 0.72);
+  --card-hover-light: rgba(255, 255, 255, 0.54);
+}
+
+/* Blueprint technical grid */
+.precision-task-card[data-border-theme='blueprint'] {
+  --card-surface-start: #071c31;
+  --card-surface-middle: #041322;
+  --card-surface-end: #020b13;
+  --card-text: #dcf8ff;
+  --card-muted: rgba(171, 232, 247, 0.64);
+  --card-muted-soft: rgba(171, 232, 247, 0.5);
+  --card-surface-border: rgba(69, 219, 255, 0.22);
+  --card-surface-highlight: rgba(175, 243, 255, 0.16);
+  --card-hover-light: rgba(70, 226, 255, 0.2);
+  --card-checkbox-hover: #6be9ff;
+}
+
+.precision-task-card[data-border-theme='blueprint'] .precision-task-card__surface {
+  background:
+    linear-gradient(rgba(48, 196, 232, 0.07) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, rgba(48, 196, 232, 0.07) 1px, transparent 1px) 0 0 / 24px 24px,
+    radial-gradient(circle at 50% 48%, rgba(23, 187, 231, 0.13), transparent 44%),
+    linear-gradient(
+      158deg,
+      var(--card-surface-start) 0%,
+      var(--card-surface-middle) 58%,
+      var(--card-surface-end) 100%
+    );
+}
+
+.precision-task-card[data-border-theme='blueprint'] .precision-task-card__surface::before {
+  background:
+    linear-gradient(90deg, transparent 49.8%, rgba(73, 221, 255, 0.08) 50%, transparent 50.2%),
+    linear-gradient(transparent 49.8%, rgba(73, 221, 255, 0.08) 50%, transparent 50.2%);
+  opacity: 0.8;
+}
+
+.precision-task-card[data-border-theme='blueprint'] .precision-task-card__aura {
+  background: color-mix(in srgb, var(--card-accent) 48%, #28d8ff);
+  filter: blur(32px);
+  opacity: 0.25;
+}
+
+.precision-task-card[data-border-theme='blueprint'] .precision-task-card__electric-outline {
+  border-color: color-mix(in srgb, var(--card-accent) 46%, #35dbff);
+}
+
+.precision-task-card[data-border-theme='blueprint']
+  .precision-task-card__electric-outline--glow-wide {
+  box-shadow:
+    0 0 15px #28d7ff,
+    0 0 26px color-mix(in srgb, var(--card-accent) 32%, transparent);
+  opacity: 0.7;
+}
+
+.precision-task-card[data-border-theme='blueprint']
+  .precision-task-card__creative-frame
+  > i:first-child {
+  inset: 0;
+  background:
+    linear-gradient(#57e6ff 0 0) top left / 52px 3px no-repeat,
+    linear-gradient(#57e6ff 0 0) top left / 3px 52px no-repeat,
+    linear-gradient(#57e6ff 0 0) top right / 52px 3px no-repeat,
+    linear-gradient(#57e6ff 0 0) top right / 3px 52px no-repeat,
+    linear-gradient(#57e6ff 0 0) bottom left / 52px 3px no-repeat,
+    linear-gradient(#57e6ff 0 0) bottom left / 3px 52px no-repeat,
+    linear-gradient(#57e6ff 0 0) bottom right / 52px 3px no-repeat,
+    linear-gradient(#57e6ff 0 0) bottom right / 3px 52px no-repeat;
+  filter: drop-shadow(0 0 5px rgba(57, 218, 255, 0.62));
+}
+
+.precision-task-card[data-border-theme='blueprint']
+  .precision-task-card__creative-frame
+  > i:nth-child(2) {
+  inset: 10px;
+  border: 1px dashed rgba(104, 226, 255, 0.5);
+  border-radius: 17px;
+}
+
+.precision-task-card[data-border-theme='blueprint']
+  .precision-task-card__creative-frame
+  > i:nth-child(3) {
+  top: 14px;
+  right: 22px;
+  width: 66px;
+  height: 8px;
+  background: repeating-linear-gradient(90deg, #55e4ff 0 8px, transparent 8px 12px);
+  opacity: 0.72;
+}
+
+.precision-task-card[data-border-theme='blueprint']
+  .precision-task-card__creative-frame
+  > i:nth-child(4) {
+  bottom: 13px;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  border: 1px solid #55e4ff;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 5px rgba(85, 228, 255, 0.08),
+    0 0 9px rgba(85, 228, 255, 0.42);
+  transform: translateX(-50%);
+}
+
+.precision-task-card[data-border-theme='blueprint'] .precision-task-card__arcane-circuit {
+  color: #55e4ff;
+  opacity: 0.34;
+  transform: translate(-50%, -22%) scale(1.06);
+}
+
+.precision-task-card[data-border-theme='blueprint'] .precision-task-card__title {
+  text-shadow: 0 0 18px rgba(82, 225, 255, 0.14);
+}
+
+.precision-task-card[data-border-theme='blueprint'][data-color-scheme='light'] {
+  --card-surface-start: #f2fcff;
+  --card-surface-middle: #dceff5;
+  --card-surface-end: #c8e0e9;
+  --card-text: #163243;
+  --card-muted: rgba(22, 50, 67, 0.62);
+  --card-muted-soft: rgba(22, 50, 67, 0.5);
+  --card-surface-border: rgba(27, 121, 149, 0.2);
+  --card-surface-highlight: rgba(255, 255, 255, 0.78);
+  --card-hover-light: rgba(255, 255, 255, 0.62);
+}
+
+@keyframes precision-task-card-holographic-aura {
+  to {
+    filter: blur(34px) hue-rotate(360deg);
+  }
+}
+
+@keyframes precision-task-card-prism-sweep {
+  0%,
+  20% {
+    left: -64%;
+  }
+
+  72%,
+  100% {
+    left: 118%;
+  }
+}
+
+@keyframes precision-task-card-ember-breathe {
+  from {
+    opacity: 0.2;
+    filter: blur(30px) brightness(0.9);
+  }
+
+  to {
+    opacity: 0.36;
+    filter: blur(34px) brightness(1.14);
+  }
+}
+.precision-task-card[data-task-status='past-due'] .precision-task-card__eyebrow {
+  color: #ff6675;
+  text-shadow: 0 0 10px rgba(255, 68, 93, 0.48);
+}
+
+.precision-task-card[data-color-scheme='light'][data-task-status='past-due']
+  .precision-task-card__eyebrow {
+  color: #a91f32;
+  text-shadow: 0 0 9px rgba(255, 68, 93, 0.24);
+}
+
+/* Neon completion solution */
+.precision-task-card .precision-task-card__completion-liquid {
+  right: -8%;
+  bottom: -4%;
+  left: -8%;
+  height: 63%;
+  overflow: visible;
+  border-radius: 45% 55% 0 0 / 5% 6% 0 0;
+  background:
+    radial-gradient(circle at 22% 18%, rgba(201, 255, 220, 0.44), transparent 23%),
+    radial-gradient(circle at 76% 56%, rgba(102, 255, 157, 0.24), transparent 28%),
+    linear-gradient(
+      180deg,
+      rgba(146, 255, 188, 0.88) 0%,
+      rgba(42, 247, 122, 0.78) 13%,
+      rgba(5, 180, 77, 0.78) 52%,
+      rgba(0, 74, 35, 0.9) 100%
+    );
+  box-shadow:
+    inset 0 20px 26px rgba(214, 255, 226, 0.32),
+    inset 0 -52px 70px rgba(0, 43, 21, 0.48),
+    0 -8px 12px rgba(177, 255, 202, 0.44),
+    0 -18px 48px rgba(35, 255, 118, 0.52);
+  clip-path: none;
+  filter: saturate(1.18) brightness(1.02);
+  isolation: isolate;
+  opacity: 0;
+  transform: translateY(112%);
+  transition:
+    transform 920ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 520ms ease;
+}
+
+.precision-task-card .precision-task-card__completion-liquid::before {
+  position: absolute;
+  z-index: 3;
+  top: -14px;
+  left: -5%;
+  width: 110%;
+  height: 34px;
+  border: 1px solid rgba(213, 255, 226, 0.72);
+  border-radius: 50%;
+  background: linear-gradient(
+    180deg,
+    rgba(223, 255, 232, 0.94),
+    rgba(70, 255, 139, 0.9) 30%,
+    rgba(0, 151, 63, 0.78) 78%
+  );
+  box-shadow:
+    inset 0 5px 9px rgba(255, 255, 255, 0.48),
+    0 -3px 14px rgba(88, 255, 151, 0.72),
+    0 6px 16px rgba(0, 112, 49, 0.48);
+  content: '';
+  opacity: 0.96;
+  transform: translateX(-2%) rotate(-1deg);
+  transform-origin: center;
+}
+
+.precision-task-card .precision-task-card__completion-liquid::after {
+  position: absolute;
+  z-index: 1;
+  inset: 8px 0 0;
+  background:
+    linear-gradient(
+      112deg,
+      transparent 12%,
+      rgba(225, 255, 233, 0.28) 28%,
+      transparent 43%,
+      rgba(84, 255, 146, 0.22) 61%,
+      transparent 76%
+    ),
+    repeating-linear-gradient(
+      165deg,
+      transparent 0 30px,
+      rgba(200, 255, 219, 0.08) 31px 33px,
+      transparent 34px 58px
+    );
+  background-size:
+    190% 100%,
+    100% 100%;
+  content: '';
+  opacity: 0.74;
+}
+
+.precision-task-card[data-completed='true'] .precision-task-card__completion-liquid {
+  opacity: 0.94;
+  transform: translateY(0);
+  animation: precision-task-card-neon-liquid-body 7s ease-in-out 900ms infinite alternate;
+}
+
+.precision-task-card[data-completed='true'] .precision-task-card__completion-liquid::before {
+  animation: precision-task-card-neon-liquid-wave 4.8s ease-in-out 900ms infinite alternate;
+}
+
+.precision-task-card[data-completed='true'] .precision-task-card__completion-liquid::after {
+  animation: precision-task-card-neon-liquid-caustics 6.4s linear 900ms infinite;
+}
+
+.precision-task-card__liquid-bubble {
+  --bubble-delay: 0s;
+  --bubble-drift: 10px;
+  --bubble-duration: 5s;
+  --bubble-left: 50%;
+  --bubble-size: 9px;
+  position: absolute;
+  z-index: 4;
+  bottom: -12%;
+  left: var(--bubble-left);
+  width: var(--bubble-size);
+  height: var(--bubble-size);
+  border: 1px solid rgba(218, 255, 229, 0.76);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 34% 30%,
+    rgba(255, 255, 255, 0.9) 0 8%,
+    rgba(154, 255, 191, 0.3) 26%,
+    rgba(0, 103, 47, 0.26) 72%
+  );
+  box-shadow:
+    inset 0 0 4px rgba(218, 255, 229, 0.72),
+    0 0 9px rgba(72, 255, 139, 0.54);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.precision-task-card__liquid-bubble:nth-child(1) {
+  --bubble-delay: -0.8s;
+  --bubble-drift: 13px;
+  --bubble-duration: 4.6s;
+  --bubble-left: 12%;
+  --bubble-size: 8px;
+}
+
+.precision-task-card__liquid-bubble:nth-child(2) {
+  --bubble-delay: -2.2s;
+  --bubble-drift: -17px;
+  --bubble-duration: 5.8s;
+  --bubble-left: 27%;
+  --bubble-size: 13px;
+}
+
+.precision-task-card__liquid-bubble:nth-child(3) {
+  --bubble-delay: -3.5s;
+  --bubble-drift: 19px;
+  --bubble-duration: 6.2s;
+  --bubble-left: 43%;
+  --bubble-size: 7px;
+}
+
+.precision-task-card__liquid-bubble:nth-child(4) {
+  --bubble-delay: -1.4s;
+  --bubble-drift: -12px;
+  --bubble-duration: 5.2s;
+  --bubble-left: 58%;
+  --bubble-size: 11px;
+}
+
+.precision-task-card__liquid-bubble:nth-child(5) {
+  --bubble-delay: -4.1s;
+  --bubble-drift: 16px;
+  --bubble-duration: 6.5s;
+  --bubble-left: 72%;
+  --bubble-size: 6px;
+}
+
+.precision-task-card__liquid-bubble:nth-child(6) {
+  --bubble-delay: -2.8s;
+  --bubble-drift: -15px;
+  --bubble-duration: 5.5s;
+  --bubble-left: 84%;
+  --bubble-size: 14px;
+}
+
+.precision-task-card__liquid-bubble:nth-child(7) {
+  --bubble-delay: -0.2s;
+  --bubble-drift: 11px;
+  --bubble-duration: 4.9s;
+  --bubble-left: 94%;
+  --bubble-size: 8px;
+}
+
+.precision-task-card[data-completed='true'] .precision-task-card__liquid-bubble {
+  animation: precision-task-card-neon-liquid-bubble var(--bubble-duration) ease-in
+    var(--bubble-delay) infinite;
+}
+
+@keyframes precision-task-card-neon-liquid-body {
+  from {
+    background-position:
+      0 0,
+      0 0,
+      0 0;
+    filter: saturate(1.12) brightness(0.98);
+  }
+
+  to {
+    background-position:
+      18px -8px,
+      -20px 12px,
+      0 0;
+    filter: saturate(1.32) brightness(1.08);
+  }
+}
+
+@keyframes precision-task-card-neon-liquid-wave {
+  0% {
+    border-radius: 48% 52% 50% 50%;
+    transform: translateX(-2%) rotate(-1deg) scaleX(1.01);
+  }
+
+  50% {
+    border-radius: 55% 45% 48% 52%;
+    transform: translateX(1.5%) rotate(0.8deg) scaleX(0.98);
+  }
+
+  100% {
+    border-radius: 46% 54% 53% 47%;
+    transform: translateX(3%) rotate(-0.4deg) scaleX(1.02);
+  }
+}
+
+@keyframes precision-task-card-neon-liquid-caustics {
+  from {
+    background-position:
+      -85% 0,
+      0 0;
+  }
+
+  to {
+    background-position:
+      125% 0,
+      24px -12px;
+  }
+}
+
+@keyframes precision-task-card-neon-liquid-bubble {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0) scale(0.55);
+  }
+
+  14% {
+    opacity: 0.7;
+  }
+
+  72% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--bubble-drift), -265px, 0) scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .precision-task-card[data-completed='true'] .precision-task-card__completion-liquid {
+    filter: saturate(1.18) brightness(1.02);
+  }
+
+  .precision-task-card[data-completed='true'] .precision-task-card__liquid-bubble {
+    opacity: 0.36;
+    transform: translate3d(0, -92px, 0) scale(0.88);
+  }
+}
+
+.precision-task-card[data-border-theme='arcane'] .precision-task-card__completion-liquid {
+  background:
+    radial-gradient(circle at 22% 18%, rgba(201, 255, 220, 0.44), transparent 23%),
+    radial-gradient(circle at 76% 56%, rgba(102, 255, 157, 0.24), transparent 28%),
+    linear-gradient(
+      180deg,
+      rgba(146, 255, 188, 0.88) 0%,
+      rgba(42, 247, 122, 0.78) 13%,
+      rgba(5, 180, 77, 0.78) 52%,
+      rgba(0, 74, 35, 0.9) 100%
+    );
+  box-shadow:
+    inset 0 20px 26px rgba(214, 255, 226, 0.32),
+    inset 0 -52px 70px rgba(0, 43, 21, 0.48),
+    0 -8px 12px rgba(177, 255, 202, 0.44),
+    0 -18px 48px rgba(35, 255, 118, 0.52);
+}
+
+/* Collectible reward themes */
+.precision-task-card:is(
+  [data-border-theme='standard'],
+  [data-border-theme='celestial'],
+  [data-border-theme='void'],
+  [data-border-theme='aurora'],
+  [data-border-theme='alchemist'],
+  [data-border-theme='runic'],
+  [data-border-theme='samurai'],
+  [data-border-theme='cyberpunk'],
+  [data-border-theme='solarpunk'],
+  [data-border-theme='frost'],
+  [data-border-theme='oceanic'],
+  [data-border-theme='storm'],
+  [data-border-theme='mechanical'],
+  [data-border-theme='dragon-scale'],
+  [data-border-theme='stained-glass'],
+  [data-border-theme='origami'],
+  [data-border-theme='retro-arcade'],
+  [data-border-theme='synthwave'],
+  [data-border-theme='bioluminescent'],
+  [data-border-theme='minimal-luxury'],
+  [data-border-theme='living-ink']
+) {
+  --card-surface-start: color-mix(in srgb, var(--reward-primary) 18%, #0d111b);
+  --card-surface-middle: color-mix(in srgb, var(--reward-secondary) 10%, #080a10);
+  --card-surface-end: #030407;
+  --card-text: #f5f7f7;
+  --card-muted: rgba(232, 238, 240, 0.62);
+  --card-muted-soft: rgba(232, 238, 240, 0.48);
+  --card-surface-border: color-mix(in srgb, var(--reward-primary) 28%, transparent);
+  --card-surface-highlight: rgba(255, 255, 255, 0.17);
+  --card-hover-light: color-mix(in srgb, var(--reward-primary) 24%, transparent);
+  --card-checkbox-hover: var(--reward-primary);
+}
+
+.precision-task-card:is(
+    [data-border-theme='standard'],
+    [data-border-theme='celestial'],
+    [data-border-theme='void'],
+    [data-border-theme='aurora'],
+    [data-border-theme='alchemist'],
+    [data-border-theme='runic'],
+    [data-border-theme='samurai'],
+    [data-border-theme='cyberpunk'],
+    [data-border-theme='solarpunk'],
+    [data-border-theme='frost'],
+    [data-border-theme='oceanic'],
+    [data-border-theme='storm'],
+    [data-border-theme='mechanical'],
+    [data-border-theme='dragon-scale'],
+    [data-border-theme='stained-glass'],
+    [data-border-theme='origami'],
+    [data-border-theme='retro-arcade'],
+    [data-border-theme='synthwave'],
+    [data-border-theme='bioluminescent'],
+    [data-border-theme='minimal-luxury'],
+    [data-border-theme='living-ink']
+  )
+  .precision-task-card__surface {
+  background:
+    var(--reward-pattern),
+    radial-gradient(
+      circle at 50% 16%,
+      color-mix(in srgb, var(--reward-primary) 18%, transparent),
+      transparent 42%
+    ),
+    linear-gradient(
+      158deg,
+      var(--card-surface-start),
+      var(--card-surface-middle) 58%,
+      var(--card-surface-end)
+    );
+}
+
+.precision-task-card:is(
+    [data-border-theme='standard'],
+    [data-border-theme='celestial'],
+    [data-border-theme='void'],
+    [data-border-theme='aurora'],
+    [data-border-theme='alchemist'],
+    [data-border-theme='runic'],
+    [data-border-theme='samurai'],
+    [data-border-theme='cyberpunk'],
+    [data-border-theme='solarpunk'],
+    [data-border-theme='frost'],
+    [data-border-theme='oceanic'],
+    [data-border-theme='storm'],
+    [data-border-theme='mechanical'],
+    [data-border-theme='dragon-scale'],
+    [data-border-theme='stained-glass'],
+    [data-border-theme='origami'],
+    [data-border-theme='retro-arcade'],
+    [data-border-theme='synthwave'],
+    [data-border-theme='bioluminescent'],
+    [data-border-theme='minimal-luxury'],
+    [data-border-theme='living-ink']
+  )[data-color-scheme='light'] {
+  --card-surface-start: #fffefb;
+  --card-surface-middle: color-mix(in srgb, var(--reward-primary) 7%, #f2f0eb);
+  --card-surface-end: color-mix(in srgb, var(--reward-secondary) 9%, #dedbd4);
+  --card-text: #20262b;
+  --card-muted: rgba(32, 38, 43, 0.62);
+  --card-muted-soft: rgba(32, 38, 43, 0.48);
+  --card-surface-border: color-mix(in srgb, var(--reward-primary) 24%, rgba(35, 42, 48, 0.14));
+  --card-surface-highlight: rgba(255, 255, 255, 0.78);
+}
+
+.precision-task-card:is(
+    [data-border-theme='standard'],
+    [data-border-theme='celestial'],
+    [data-border-theme='void'],
+    [data-border-theme='aurora'],
+    [data-border-theme='alchemist'],
+    [data-border-theme='runic'],
+    [data-border-theme='samurai'],
+    [data-border-theme='cyberpunk'],
+    [data-border-theme='solarpunk'],
+    [data-border-theme='frost'],
+    [data-border-theme='oceanic'],
+    [data-border-theme='storm'],
+    [data-border-theme='mechanical'],
+    [data-border-theme='dragon-scale'],
+    [data-border-theme='stained-glass'],
+    [data-border-theme='origami'],
+    [data-border-theme='retro-arcade'],
+    [data-border-theme='synthwave'],
+    [data-border-theme='bioluminescent'],
+    [data-border-theme='minimal-luxury'],
+    [data-border-theme='living-ink']
+  )
+  .precision-task-card__creative-frame
+  > i:first-child {
+  inset: 0;
+  padding: var(--reward-frame-width, 4px);
+  border-radius: inherit;
+  background: var(
+    --reward-frame,
+    conic-gradient(
+      from 35deg,
+      var(--reward-primary),
+      var(--reward-secondary),
+      var(--reward-primary)
+    )
+  );
+  filter: drop-shadow(
+    0 0 var(--reward-frame-glow, 7px) color-mix(in srgb, var(--reward-primary) 62%, transparent)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.precision-task-card:is(
+    [data-border-theme='standard'],
+    [data-border-theme='celestial'],
+    [data-border-theme='void'],
+    [data-border-theme='aurora'],
+    [data-border-theme='alchemist'],
+    [data-border-theme='runic'],
+    [data-border-theme='samurai'],
+    [data-border-theme='cyberpunk'],
+    [data-border-theme='solarpunk'],
+    [data-border-theme='frost'],
+    [data-border-theme='oceanic'],
+    [data-border-theme='storm'],
+    [data-border-theme='mechanical'],
+    [data-border-theme='dragon-scale'],
+    [data-border-theme='stained-glass'],
+    [data-border-theme='origami'],
+    [data-border-theme='retro-arcade'],
+    [data-border-theme='synthwave'],
+    [data-border-theme='bioluminescent'],
+    [data-border-theme='minimal-luxury'],
+    [data-border-theme='living-ink']
+  )
+  .precision-task-card__creative-frame
+  > i:nth-child(2) {
+  inset: 10px;
+  border: 1px solid color-mix(in srgb, var(--reward-primary) 54%, transparent);
+  border-radius: 17px;
+  box-shadow:
+    inset 0 0 13px color-mix(in srgb, var(--reward-primary) 12%, transparent),
+    0 0 9px color-mix(in srgb, var(--reward-primary) 22%, transparent);
+  animation: precision-reward-theme-breathe 5.8s ease-in-out infinite alternate;
+}
+
+.precision-task-card:is(
+    [data-border-theme='standard'],
+    [data-border-theme='celestial'],
+    [data-border-theme='void'],
+    [data-border-theme='aurora'],
+    [data-border-theme='alchemist'],
+    [data-border-theme='runic'],
+    [data-border-theme='samurai'],
+    [data-border-theme='cyberpunk'],
+    [data-border-theme='solarpunk'],
+    [data-border-theme='frost'],
+    [data-border-theme='oceanic'],
+    [data-border-theme='storm'],
+    [data-border-theme='mechanical'],
+    [data-border-theme='dragon-scale'],
+    [data-border-theme='stained-glass'],
+    [data-border-theme='origami'],
+    [data-border-theme='retro-arcade'],
+    [data-border-theme='synthwave'],
+    [data-border-theme='bioluminescent'],
+    [data-border-theme='minimal-luxury'],
+    [data-border-theme='living-ink']
+  )
+  .precision-task-card__creative-frame
+  > i:nth-child(3) {
+  top: 12px;
+  right: 24px;
+  width: 62px;
+  height: 6px;
+  background: linear-gradient(90deg, transparent, var(--reward-primary));
+  box-shadow: 0 0 8px color-mix(in srgb, var(--reward-primary) 58%, transparent);
+}
+
+.precision-task-card:is(
+    [data-border-theme='standard'],
+    [data-border-theme='celestial'],
+    [data-border-theme='void'],
+    [data-border-theme='aurora'],
+    [data-border-theme='alchemist'],
+    [data-border-theme='runic'],
+    [data-border-theme='samurai'],
+    [data-border-theme='cyberpunk'],
+    [data-border-theme='solarpunk'],
+    [data-border-theme='frost'],
+    [data-border-theme='oceanic'],
+    [data-border-theme='storm'],
+    [data-border-theme='mechanical'],
+    [data-border-theme='dragon-scale'],
+    [data-border-theme='stained-glass'],
+    [data-border-theme='origami'],
+    [data-border-theme='retro-arcade'],
+    [data-border-theme='synthwave'],
+    [data-border-theme='bioluminescent'],
+    [data-border-theme='minimal-luxury'],
+    [data-border-theme='living-ink']
+  )
+  .precision-task-card__creative-frame
+  > i:nth-child(4) {
+  bottom: 12px;
+  left: 50%;
+  width: 26px;
+  height: 12px;
+  border: 1px solid var(--reward-secondary);
+  border-radius: 50%;
+  box-shadow: 0 0 9px color-mix(in srgb, var(--reward-secondary) 52%, transparent);
+  transform: translateX(-50%);
+}
+
+.precision-task-card:is(
+    [data-border-theme='standard'],
+    [data-border-theme='celestial'],
+    [data-border-theme='void'],
+    [data-border-theme='aurora'],
+    [data-border-theme='alchemist'],
+    [data-border-theme='runic'],
+    [data-border-theme='samurai'],
+    [data-border-theme='cyberpunk'],
+    [data-border-theme='solarpunk'],
+    [data-border-theme='frost'],
+    [data-border-theme='oceanic'],
+    [data-border-theme='storm'],
+    [data-border-theme='mechanical'],
+    [data-border-theme='dragon-scale'],
+    [data-border-theme='stained-glass'],
+    [data-border-theme='origami'],
+    [data-border-theme='retro-arcade'],
+    [data-border-theme='synthwave'],
+    [data-border-theme='bioluminescent'],
+    [data-border-theme='minimal-luxury'],
+    [data-border-theme='living-ink']
+  )
+  .precision-task-card__electric-outline {
+  border-color: color-mix(in srgb, var(--reward-primary) 58%, transparent);
+}
+
+.precision-task-card:is(
+    [data-border-theme='standard'],
+    [data-border-theme='celestial'],
+    [data-border-theme='void'],
+    [data-border-theme='aurora'],
+    [data-border-theme='alchemist'],
+    [data-border-theme='runic'],
+    [data-border-theme='samurai'],
+    [data-border-theme='cyberpunk'],
+    [data-border-theme='solarpunk'],
+    [data-border-theme='frost'],
+    [data-border-theme='oceanic'],
+    [data-border-theme='storm'],
+    [data-border-theme='mechanical'],
+    [data-border-theme='dragon-scale'],
+    [data-border-theme='stained-glass'],
+    [data-border-theme='origami'],
+    [data-border-theme='retro-arcade'],
+    [data-border-theme='synthwave'],
+    [data-border-theme='bioluminescent'],
+    [data-border-theme='minimal-luxury'],
+    [data-border-theme='living-ink']
+  )[data-completed='true']
+  .precision-task-card__completion-liquid {
+  background:
+    radial-gradient(circle at 24% 20%, rgba(255, 255, 255, 0.34), transparent 24%),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--reward-primary) 78%, white),
+      var(--reward-primary) 44%,
+      color-mix(in srgb, var(--reward-secondary) 62%, #00120a)
+    );
+  box-shadow:
+    inset 0 18px 24px rgba(255, 255, 255, 0.18),
+    0 -12px 42px color-mix(in srgb, var(--reward-primary) 34%, transparent);
+}
+
+/* Theme tokens and material patterns */
+.precision-task-card[data-border-theme='standard'] {
+  --reward-primary: #a7b0ba;
+  --reward-secondary: #66717d;
+  --reward-frame-width: 2px;
+  --reward-frame-glow: 2px;
+  --reward-pattern: linear-gradient(
+    120deg,
+    transparent 48%,
+    rgba(255, 255, 255, 0.035) 50%,
+    transparent 52%
+  );
+}
+
+.precision-task-card[data-border-theme='celestial'] {
+  --reward-primary: #9aa8ff;
+  --reward-secondary: #f8d98a;
+  --reward-pattern:
+    radial-gradient(circle at 21% 28%, #fff 0 1px, transparent 1.5px),
+    radial-gradient(circle at 72% 18%, #dce4ff 0 1px, transparent 1.6px),
+    radial-gradient(circle at 66% 64%, #f8d98a 0 0.8px, transparent 1.4px),
+    radial-gradient(
+      ellipse at 50% 42%,
+      transparent 0 30%,
+      rgba(154, 168, 255, 0.12) 31% 31.5%,
+      transparent 32%
+    );
+}
+
+.precision-task-card[data-border-theme='void'] {
+  --reward-primary: #8a78ff;
+  --reward-secondary: #1de4d1;
+  --reward-pattern:
+    radial-gradient(
+      circle at 50% 45%,
+      #020207 0 14%,
+      rgba(138, 120, 255, 0.2) 15%,
+      transparent 29%
+    ),
+    radial-gradient(
+      ellipse at 50% 45%,
+      transparent 0 38%,
+      rgba(29, 228, 209, 0.08) 39%,
+      transparent 42%
+    );
+  --reward-frame: conic-gradient(from 90deg, #11111b, #8a78ff, #050509, #1de4d1, #11111b);
+}
+
+.precision-task-card[data-border-theme='aurora'] {
+  --reward-primary: #61ffd0;
+  --reward-secondary: #a86bff;
+  --reward-pattern:
+    radial-gradient(ellipse at 20% 22%, rgba(97, 255, 208, 0.24), transparent 34%),
+    radial-gradient(ellipse at 78% 36%, rgba(168, 107, 255, 0.2), transparent 38%),
+    linear-gradient(120deg, transparent 30%, rgba(105, 244, 225, 0.08), transparent 66%);
+}
+
+.precision-task-card[data-border-theme='alchemist'] {
+  --reward-primary: #7cff89;
+  --reward-secondary: #d8a4ff;
+  --reward-pattern:
+    radial-gradient(
+      circle at 72% 42%,
+      transparent 0 8%,
+      rgba(216, 164, 255, 0.16) 8.5% 9%,
+      transparent 9.5%
+    ),
+    radial-gradient(
+      circle at 31% 65%,
+      transparent 0 5%,
+      rgba(124, 255, 137, 0.14) 5.5% 6%,
+      transparent 6.5%
+    ),
+    repeating-linear-gradient(45deg, transparent 0 28px, rgba(124, 255, 137, 0.03) 29px 30px);
+}
+
+.precision-task-card[data-border-theme='runic'] {
+  --reward-primary: #64e6ff;
+  --reward-secondary: #a79073;
+  --reward-frame-width: 6px;
+  --reward-frame: repeating-conic-gradient(
+    from 45deg,
+    #4e4c48 0 5deg,
+    #64e6ff 5deg 7deg,
+    #17191a 7deg 14deg
+  );
+  --reward-pattern: repeating-linear-gradient(
+    90deg,
+    transparent 0 36px,
+    rgba(100, 230, 255, 0.045) 37px 38px
+  );
+}
+
+.precision-task-card[data-border-theme='samurai'] {
+  --reward-primary: #e44545;
+  --reward-secondary: #d8b35b;
+  --reward-frame: linear-gradient(90deg, #120c0c, #d8b35b 18%, #5d1111 50%, #d8b35b 82%, #120c0c);
+  --reward-pattern:
+    linear-gradient(125deg, transparent 46%, rgba(228, 69, 69, 0.12) 47% 49%, transparent 50%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.018) 0 2px, transparent 2px 6px);
+}
+
+.precision-task-card[data-border-theme='cyberpunk'] {
+  --reward-primary: #ff3dcc;
+  --reward-secondary: #35e7ff;
+  --reward-frame: repeating-linear-gradient(
+    90deg,
+    #ff3dcc 0 8px,
+    #15101d 8px 14px,
+    #35e7ff 14px 22px
+  );
+  --reward-pattern:
+    repeating-linear-gradient(0deg, transparent 0 5px, rgba(53, 231, 255, 0.055) 6px),
+    linear-gradient(90deg, transparent 0 14%, rgba(255, 61, 204, 0.08) 14.5%, transparent 15%);
+}
+
+.precision-task-card[data-border-theme='solarpunk'] {
+  --reward-primary: #72dc63;
+  --reward-secondary: #ffd36a;
+  --reward-pattern:
+    radial-gradient(ellipse at 14% 48%, rgba(114, 220, 99, 0.18) 0 8%, transparent 8.5%),
+    radial-gradient(ellipse at 88% 34%, rgba(255, 211, 106, 0.13) 0 10%, transparent 10.5%),
+    linear-gradient(115deg, transparent 40%, rgba(255, 244, 176, 0.08), transparent 63%);
+}
+
+.precision-task-card[data-border-theme='frost'] {
+  --reward-primary: #8be7ff;
+  --reward-secondary: #c8f7ff;
+  --reward-frame: conic-gradient(from 20deg, #effcff, #77d9f6, #b7ecff, #609db8, #effcff);
+  --reward-pattern:
+    linear-gradient(135deg, transparent 43%, rgba(200, 247, 255, 0.12) 44% 45%, transparent 46%),
+    linear-gradient(45deg, transparent 62%, rgba(139, 231, 255, 0.08) 63% 64%, transparent 65%);
+}
+
+.precision-task-card[data-border-theme='oceanic'] {
+  --reward-primary: #39d5ff;
+  --reward-secondary: #147aa8;
+  --reward-pattern:
+    radial-gradient(
+      ellipse at 20% 36%,
+      transparent 0 12%,
+      rgba(99, 226, 255, 0.12) 13%,
+      transparent 16%
+    ),
+    radial-gradient(
+      ellipse at 76% 58%,
+      transparent 0 15%,
+      rgba(57, 213, 255, 0.1) 16%,
+      transparent 19%
+    ),
+    linear-gradient(170deg, transparent 40%, rgba(20, 122, 168, 0.12), transparent 70%);
+}
+
+.precision-task-card[data-border-theme='storm'] {
+  --reward-primary: #aab8ff;
+  --reward-secondary: #f4d35e;
+  --reward-pattern:
+    radial-gradient(ellipse at 28% 28%, rgba(180, 190, 220, 0.15), transparent 36%),
+    radial-gradient(ellipse at 74% 42%, rgba(78, 89, 120, 0.2), transparent 40%),
+    linear-gradient(112deg, transparent 55%, rgba(244, 211, 94, 0.09) 55.5% 56%, transparent 56.5%);
+}
+
+.precision-task-card[data-border-theme='mechanical'] {
+  --reward-primary: #d39b61;
+  --reward-secondary: #71808d;
+  --reward-frame-width: 6px;
+  --reward-frame: repeating-conic-gradient(#d39b61 0 6deg, #252a2d 6deg 14deg, #71808d 14deg 20deg);
+  --reward-pattern:
+    repeating-radial-gradient(
+      circle at 72% 54%,
+      transparent 0 9px,
+      rgba(211, 155, 97, 0.1) 10px 11px,
+      transparent 12px 19px
+    ),
+    linear-gradient(90deg, transparent 47%, rgba(113, 128, 141, 0.08) 48% 52%, transparent 53%);
+}
+
+.precision-task-card[data-border-theme='dragon-scale'] {
+  --reward-primary: #ff7a45;
+  --reward-secondary: #8d4bff;
+  --reward-frame-width: 7px;
+  --reward-frame: repeating-conic-gradient(
+    from 20deg,
+    #351b18 0 8deg,
+    #ff7a45 8deg 12deg,
+    #251236 12deg 20deg
+  );
+  --reward-pattern: radial-gradient(
+      ellipse at 50% 0,
+      rgba(255, 122, 69, 0.14) 0 22%,
+      transparent 23%
+    )
+    0 0 / 42px 30px;
+}
+
+.precision-task-card[data-border-theme='stained-glass'] {
+  --reward-primary: #ff5d8f;
+  --reward-secondary: #4ed8ff;
+  --reward-frame-width: 6px;
+  --reward-frame: conic-gradient(from 15deg, #121217, #ff5d8f, #ffd45f, #4ed8ff, #9e69ff, #121217);
+  --reward-pattern:
+    linear-gradient(35deg, transparent 0 38%, rgba(255, 93, 143, 0.14) 39% 54%, transparent 55%),
+    linear-gradient(145deg, transparent 0 48%, rgba(78, 216, 255, 0.12) 49% 66%, transparent 67%);
+}
+
+.precision-task-card[data-border-theme='origami'] {
+  --reward-primary: #ff8f70;
+  --reward-secondary: #f5e6c8;
+  --reward-frame-glow: 2px;
+  --reward-frame: linear-gradient(135deg, #fff6e8, #ff8f70 35%, #b85c50 36%, #f5e6c8 72%, #8c6f61);
+  --reward-pattern:
+    linear-gradient(145deg, transparent 0 49%, rgba(255, 255, 255, 0.13) 50%, transparent 51%),
+    linear-gradient(35deg, transparent 0 64%, rgba(255, 143, 112, 0.1) 65%, transparent 66%);
+}
+
+.precision-task-card[data-border-theme='retro-arcade'] {
+  --reward-primary: #7dff57;
+  --reward-secondary: #ff4fd8;
+  --reward-frame-width: 5px;
+  --reward-frame: repeating-linear-gradient(
+    90deg,
+    #7dff57 0 8px,
+    #17171b 8px 12px,
+    #ff4fd8 12px 20px
+  );
+  --reward-pattern:
+    repeating-linear-gradient(0deg, transparent 0 4px, rgba(125, 255, 87, 0.045) 5px),
+    linear-gradient(90deg, rgba(255, 79, 216, 0.06) 1px, transparent 1px) 0 0 / 24px 24px;
+}
+
+.precision-task-card[data-border-theme='synthwave'] {
+  --reward-primary: #ff4eb8;
+  --reward-secondary: #735cff;
+  --reward-frame: linear-gradient(90deg, #9efcff, #ff4eb8 30%, #ffb457 52%, #735cff 78%, #9efcff);
+  --reward-pattern:
+    linear-gradient(180deg, transparent 0 48%, rgba(255, 78, 184, 0.14) 49%, transparent 52%),
+    linear-gradient(90deg, rgba(115, 92, 255, 0.08) 1px, transparent 1px) 0 58% / 28px 28px,
+    linear-gradient(rgba(115, 92, 255, 0.08) 1px, transparent 1px) 0 58% / 28px 28px;
+}
+
+.precision-task-card[data-border-theme='bioluminescent'] {
+  --reward-primary: #38ffc7;
+  --reward-secondary: #366cff;
+  --reward-pattern:
+    radial-gradient(ellipse at 18% 44%, rgba(56, 255, 199, 0.2) 0 2%, transparent 3%),
+    radial-gradient(ellipse at 72% 58%, rgba(54, 108, 255, 0.18) 0 3%, transparent 4%),
+    repeating-linear-gradient(118deg, transparent 0 34px, rgba(56, 255, 199, 0.055) 35px 36px);
+}
+
+.precision-task-card[data-border-theme='minimal-luxury'] {
+  --reward-primary: #d7bc86;
+  --reward-secondary: #83735c;
+  --reward-frame-width: 2px;
+  --reward-frame-glow: 1px;
+  --reward-frame: linear-gradient(135deg, #f1ddae, #6d5b40 28%, #d7bc86 58%, #494033);
+  --reward-pattern: linear-gradient(
+    120deg,
+    transparent 0 49%,
+    rgba(215, 188, 134, 0.04) 50%,
+    transparent 51%
+  );
+}
+
+.precision-task-card[data-border-theme='living-ink'] {
+  --reward-primary: #ecf0e8;
+  --reward-secondary: #596b64;
+  --reward-frame-width: 5px;
+  --reward-frame: conic-gradient(
+    from 40deg,
+    transparent,
+    #dce3dc 8%,
+    #242b29 18%,
+    transparent 31%,
+    #ecf0e8 52%,
+    #18201e 69%,
+    transparent 82%
+  );
+  --reward-pattern:
+    radial-gradient(ellipse at 16% 28%, rgba(236, 240, 232, 0.1), transparent 14%),
+    linear-gradient(112deg, transparent 0 38%, rgba(236, 240, 232, 0.08) 39% 42%, transparent 43%),
+    linear-gradient(68deg, transparent 0 61%, rgba(89, 107, 100, 0.1) 62% 65%, transparent 66%);
+}
+
+.precision-task-card[data-border-theme='retro-arcade'] .precision-task-card__creative-frame,
+.precision-task-card[data-border-theme='retro-arcade'] .precision-task-card__surface {
+  border-radius: 8px;
+}
+
+.precision-task-card[data-border-theme='runic']
+  .precision-task-card__creative-frame
+  > i:nth-child(2),
+.precision-task-card[data-border-theme='blueprint']
+  .precision-task-card__creative-frame
+  > i:nth-child(2) {
+  border-style: dashed;
+}
+
+.precision-task-card[data-border-theme='aurora'] .precision-task-card__surface,
+.precision-task-card[data-border-theme='oceanic'] .precision-task-card__surface {
+  background-size:
+    140% 140%,
+    130% 130%,
+    auto;
+  animation: precision-reward-surface-drift 11s ease-in-out infinite alternate;
+}
+
+.precision-task-card[data-border-theme='living-ink'][data-task-status='in-progress']
+  .precision-task-card__creative-frame
+  > i:first-child {
+  animation: precision-reward-ink-shift 6.4s ease-in-out infinite alternate;
+}
+
+.precision-task-card[data-task-status='past-due'] .precision-task-card__eyebrow {
+  color: #ff9a3d;
+  text-shadow: 0 0 10px rgba(255, 154, 61, 0.42);
+}
+
+.precision-task-card[data-color-scheme='light'][data-task-status='past-due']
+  .precision-task-card__eyebrow {
+  color: #9a4812;
+  text-shadow: 0 0 8px rgba(255, 154, 61, 0.2);
+}
+
+@keyframes precision-reward-theme-breathe {
+  from {
+    opacity: 0.52;
+  }
+
+  to {
+    opacity: 0.92;
+  }
+}
+
+@keyframes precision-reward-surface-drift {
+  from {
+    background-position:
+      0 0,
+      100% 0,
+      0 0;
+  }
+
+  to {
+    background-position:
+      24% 14%,
+      76% 18%,
+      0 0;
+  }
+}
+
+@keyframes precision-reward-ink-shift {
+  from {
+    transform: scaleX(0.98) rotate(-0.3deg);
+  }
+
+  to {
+    transform: scaleX(1.01) rotate(0.35deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .precision-task-card__creative-frame > i,
+  .precision-task-card[data-border-theme='aurora'] .precision-task-card__surface,
+  .precision-task-card[data-border-theme='oceanic'] .precision-task-card__surface {
+    animation: none !important;
+  }
+}
+
+/* Independently composable cosmetic parts */
+.precision-task-card[data-surface-theme='standard'],
+.precision-task-card[data-completion-theme='standard'],
+.precision-task-card[data-checkbox-theme='standard'] {
+  --mix-primary: #a7b0ba;
+  --mix-secondary: #66717d;
+}
+.precision-task-card[data-surface-theme='electric'],
+.precision-task-card[data-completion-theme='electric'],
+.precision-task-card[data-checkbox-theme='electric'] {
+  --mix-primary: #4b8dff;
+  --mix-secondary: #73f5ff;
+}
+.precision-task-card[data-surface-theme='arcane'],
+.precision-task-card[data-completion-theme='arcane'],
+.precision-task-card[data-checkbox-theme='arcane'] {
+  --mix-primary: #a855f7;
+  --mix-secondary: #f0c7ff;
+}
+.precision-task-card[data-surface-theme='holographic'],
+.precision-task-card[data-completion-theme='holographic'],
+.precision-task-card[data-checkbox-theme='holographic'] {
+  --mix-primary: #63f5ff;
+  --mix-secondary: #ff65cf;
+}
+.precision-task-card[data-surface-theme='ember'],
+.precision-task-card[data-completion-theme='ember'],
+.precision-task-card[data-checkbox-theme='ember'] {
+  --mix-primary: #ff6b35;
+  --mix-secondary: #ffc257;
+}
+.precision-task-card[data-surface-theme='blueprint'],
+.precision-task-card[data-completion-theme='blueprint'],
+.precision-task-card[data-checkbox-theme='blueprint'] {
+  --mix-primary: #25c6f7;
+  --mix-secondary: #4b8dff;
+}
+.precision-task-card[data-surface-theme='celestial'],
+.precision-task-card[data-completion-theme='celestial'],
+.precision-task-card[data-checkbox-theme='celestial'] {
+  --mix-primary: #9aa8ff;
+  --mix-secondary: #f8d98a;
+}
+.precision-task-card[data-surface-theme='void'],
+.precision-task-card[data-completion-theme='void'],
+.precision-task-card[data-checkbox-theme='void'] {
+  --mix-primary: #8a78ff;
+  --mix-secondary: #1de4d1;
+}
+.precision-task-card[data-surface-theme='aurora'],
+.precision-task-card[data-completion-theme='aurora'],
+.precision-task-card[data-checkbox-theme='aurora'] {
+  --mix-primary: #61ffd0;
+  --mix-secondary: #a86bff;
+}
+.precision-task-card[data-surface-theme='alchemist'],
+.precision-task-card[data-completion-theme='alchemist'],
+.precision-task-card[data-checkbox-theme='alchemist'] {
+  --mix-primary: #7cff89;
+  --mix-secondary: #d8a4ff;
+}
+.precision-task-card[data-surface-theme='runic'],
+.precision-task-card[data-completion-theme='runic'],
+.precision-task-card[data-checkbox-theme='runic'] {
+  --mix-primary: #64e6ff;
+  --mix-secondary: #a79073;
+}
+.precision-task-card[data-surface-theme='samurai'],
+.precision-task-card[data-completion-theme='samurai'],
+.precision-task-card[data-checkbox-theme='samurai'] {
+  --mix-primary: #e44545;
+  --mix-secondary: #d8b35b;
+}
+.precision-task-card[data-surface-theme='cyberpunk'],
+.precision-task-card[data-completion-theme='cyberpunk'],
+.precision-task-card[data-checkbox-theme='cyberpunk'] {
+  --mix-primary: #ff3dcc;
+  --mix-secondary: #35e7ff;
+}
+.precision-task-card[data-surface-theme='solarpunk'],
+.precision-task-card[data-completion-theme='solarpunk'],
+.precision-task-card[data-checkbox-theme='solarpunk'] {
+  --mix-primary: #72dc63;
+  --mix-secondary: #ffd36a;
+}
+.precision-task-card[data-surface-theme='frost'],
+.precision-task-card[data-completion-theme='frost'],
+.precision-task-card[data-checkbox-theme='frost'] {
+  --mix-primary: #8be7ff;
+  --mix-secondary: #c8f7ff;
+}
+.precision-task-card[data-surface-theme='oceanic'],
+.precision-task-card[data-completion-theme='oceanic'],
+.precision-task-card[data-checkbox-theme='oceanic'] {
+  --mix-primary: #39d5ff;
+  --mix-secondary: #147aa8;
+}
+.precision-task-card[data-surface-theme='storm'],
+.precision-task-card[data-completion-theme='storm'],
+.precision-task-card[data-checkbox-theme='storm'] {
+  --mix-primary: #aab8ff;
+  --mix-secondary: #f4d35e;
+}
+.precision-task-card[data-surface-theme='mechanical'],
+.precision-task-card[data-completion-theme='mechanical'],
+.precision-task-card[data-checkbox-theme='mechanical'] {
+  --mix-primary: #d39b61;
+  --mix-secondary: #71808d;
+}
+.precision-task-card[data-surface-theme='dragon-scale'],
+.precision-task-card[data-completion-theme='dragon-scale'],
+.precision-task-card[data-checkbox-theme='dragon-scale'] {
+  --mix-primary: #ff7a45;
+  --mix-secondary: #8d4bff;
+}
+.precision-task-card[data-surface-theme='stained-glass'],
+.precision-task-card[data-completion-theme='stained-glass'],
+.precision-task-card[data-checkbox-theme='stained-glass'] {
+  --mix-primary: #ff5d8f;
+  --mix-secondary: #4ed8ff;
+}
+.precision-task-card[data-surface-theme='origami'],
+.precision-task-card[data-completion-theme='origami'],
+.precision-task-card[data-checkbox-theme='origami'] {
+  --mix-primary: #ff8f70;
+  --mix-secondary: #f5e6c8;
+}
+.precision-task-card[data-surface-theme='retro-arcade'],
+.precision-task-card[data-completion-theme='retro-arcade'],
+.precision-task-card[data-checkbox-theme='retro-arcade'] {
+  --mix-primary: #7dff57;
+  --mix-secondary: #ff4fd8;
+}
+.precision-task-card[data-surface-theme='synthwave'],
+.precision-task-card[data-completion-theme='synthwave'],
+.precision-task-card[data-checkbox-theme='synthwave'] {
+  --mix-primary: #ff4eb8;
+  --mix-secondary: #735cff;
+}
+.precision-task-card[data-surface-theme='bioluminescent'],
+.precision-task-card[data-completion-theme='bioluminescent'],
+.precision-task-card[data-checkbox-theme='bioluminescent'] {
+  --mix-primary: #38ffc7;
+  --mix-secondary: #366cff;
+}
+.precision-task-card[data-surface-theme='minimal-luxury'],
+.precision-task-card[data-completion-theme='minimal-luxury'],
+.precision-task-card[data-checkbox-theme='minimal-luxury'] {
+  --mix-primary: #d7bc86;
+  --mix-secondary: #83735c;
+}
+.precision-task-card[data-surface-theme='living-ink'],
+.precision-task-card[data-completion-theme='living-ink'],
+.precision-task-card[data-checkbox-theme='living-ink'] {
+  --mix-primary: #ecf0e8;
+  --mix-secondary: #596b64;
+}
+
+.precision-task-card[data-mixed-surface='true'] .precision-task-card__surface {
+  background:
+    repeating-linear-gradient(
+      118deg,
+      transparent 0 24px,
+      color-mix(in srgb, var(--mix-primary) 4%, transparent) 25px 26px
+    ),
+    radial-gradient(
+      circle at 50% 18%,
+      color-mix(in srgb, var(--mix-primary) 19%, transparent),
+      transparent 43%
+    ),
+    linear-gradient(
+      158deg,
+      color-mix(in srgb, var(--mix-primary) 18%, #11151d),
+      color-mix(in srgb, var(--mix-secondary) 10%, #080a10) 58%,
+      #030407
+    );
+}
+
+.precision-task-card[data-color-scheme='light'][data-mixed-surface='true']
+  .precision-task-card__surface {
+  background:
+    repeating-linear-gradient(
+      118deg,
+      transparent 0 24px,
+      color-mix(in srgb, var(--mix-primary) 5%, transparent) 25px 26px
+    ),
+    radial-gradient(
+      circle at 50% 18%,
+      color-mix(in srgb, var(--mix-primary) 12%, transparent),
+      transparent 43%
+    ),
+    linear-gradient(
+      158deg,
+      #fffefb,
+      color-mix(in srgb, var(--mix-primary) 8%, #f2f0eb) 58%,
+      color-mix(in srgb, var(--mix-secondary) 10%, #dedbd4)
+    );
+}
+
+.precision-task-card[data-mixed-completion='true'][data-completed='true']
+  .precision-task-card__completion-liquid {
+  background:
+    radial-gradient(circle at 24% 20%, rgba(255, 255, 255, 0.34), transparent 24%),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--mix-primary) 76%, white),
+      var(--mix-primary) 44%,
+      color-mix(in srgb, var(--mix-secondary) 64%, #00120a)
+    );
+  box-shadow:
+    inset 0 18px 24px rgba(255, 255, 255, 0.18),
+    0 -12px 42px color-mix(in srgb, var(--mix-primary) 34%, transparent);
+}
+
+.precision-task-card[data-mixed-checkbox='true']
+  .precision-task-card__checkbox-input:checked
+  + .precision-task-card__checkbox-box {
+  border-color: color-mix(in srgb, var(--mix-primary) 72%, white);
+  background: var(--mix-primary);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--mix-primary) 42%, white),
+    0 0 16px color-mix(in srgb, var(--mix-primary) 34%, transparent);
+}
+
+/* Universal collectible rarity progression */
+.precision-task-card[data-border-theme='electric'] {
+  --theme-primary: #4b8dff;
+  --theme-secondary: #73f5ff;
+}
+
+.precision-task-card[data-border-theme='arcane'] {
+  --theme-primary: #a855f7;
+  --theme-secondary: #f0c7ff;
+}
+
+.precision-task-card[data-border-theme='holographic'] {
+  --theme-primary: #63f5ff;
+  --theme-secondary: #ff65cf;
+}
+
+.precision-task-card[data-border-theme='ember'] {
+  --theme-primary: #ff6b35;
+  --theme-secondary: #ffc257;
+}
+
+.precision-task-card[data-border-theme='blueprint'] {
+  --theme-primary: #25c6f7;
+  --theme-secondary: #4b8dff;
+}
+
+.precision-task-card {
+  --theme-primary: var(--reward-primary, var(--card-accent));
+  --theme-secondary: var(--reward-secondary, var(--card-accent));
+  --rarity-primary: #8b949e;
+  --rarity-secondary: #d8dee5;
+  --rarity-deep: #30363d;
+  --rarity-frame-strength: 48%;
+  --rarity-foil-opacity: 0.03;
+  --rarity-gem-size: 5px;
+  --rarity-label-spacing: 0.16em;
+}
+
+.precision-task-card[data-rarity='common'] {
+  --rarity-primary: #8b949e;
+  --rarity-secondary: #d8dee5;
+  --rarity-deep: #30363d;
+  --rarity-frame-strength: 44%;
+  --rarity-foil-opacity: 0.035;
+  --rarity-gem-size: 5px;
+}
+
+.precision-task-card[data-rarity='rare'] {
+  --rarity-primary: #4b8dff;
+  --rarity-secondary: #87e9ff;
+  --rarity-deep: #102a63;
+  --rarity-frame-strength: 72%;
+  --rarity-foil-opacity: 0.13;
+  --rarity-gem-size: 7px;
+}
+
+.precision-task-card[data-rarity='epic'] {
+  --rarity-primary: #d946ef;
+  --rarity-secondary: #866bff;
+  --rarity-deep: #4a0e62;
+  --rarity-frame-strength: 90%;
+  --rarity-foil-opacity: 0.23;
+  --rarity-gem-size: 8px;
+}
+
+.precision-task-card[data-rarity='legendary'] {
+  --rarity-primary: #ff8a2b;
+  --rarity-secondary: #ffd76a;
+  --rarity-deep: #7a240d;
+  --rarity-frame-strength: 100%;
+  --rarity-foil-opacity: 0.3;
+  --rarity-gem-size: 9px;
+  --rarity-label-spacing: 0.19em;
+}
+
+.precision-task-card__rarity-adornment,
+.precision-task-card__rarity-adornment > span,
+.precision-task-card__rarity-gems > i {
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.precision-task-card__rarity-adornment {
+  z-index: 9;
+  inset: 4px;
+  overflow: hidden;
+  border-radius: 21px;
+  transform: translateZ(3px);
+}
+
+.precision-task-card__rarity-adornment::before,
+.precision-task-card__rarity-adornment::after {
+  position: absolute;
+  content: '';
+  pointer-events: none;
+}
+
+.precision-task-card__rarity-adornment::before {
+  z-index: 3;
+  inset: 0;
+  border: 1px solid
+    color-mix(in srgb, var(--rarity-primary) var(--rarity-frame-strength), var(--theme-primary));
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--rarity-secondary) 12%, transparent),
+    inset 0 0 18px color-mix(in srgb, var(--rarity-primary) 7%, transparent),
+    0 0 10px color-mix(in srgb, var(--rarity-primary) 14%, transparent);
+}
+
+.precision-task-card__rarity-adornment::after {
+  z-index: 4;
+  inset: 9px;
+  border: 1px solid color-mix(in srgb, var(--rarity-primary) 18%, transparent);
+  border-radius: 14px;
+}
+
+.precision-task-card__rarity-foil {
+  z-index: 1;
+  inset: 1px;
+  overflow: hidden;
+  border-radius: 19px;
+  background:
+    linear-gradient(112deg, transparent 10%, rgba(255, 255, 255, 0.54) 22%, transparent 34%) -180%
+      0 / 46% 100% no-repeat,
+    conic-gradient(
+      from 210deg at var(--card-pointer-x) var(--card-pointer-y),
+      transparent,
+      color-mix(in srgb, var(--rarity-primary) 64%, transparent),
+      transparent 32%,
+      color-mix(in srgb, var(--theme-primary) 52%, transparent),
+      transparent 66%,
+      color-mix(in srgb, var(--rarity-secondary) 48%, transparent),
+      transparent
+    );
+  mix-blend-mode: screen;
+  opacity: var(--rarity-foil-opacity);
+}
+
+.precision-task-card__rarity-inner-frame {
+  z-index: 4;
+  inset: 5px;
+  border: 1px solid color-mix(in srgb, var(--rarity-secondary) 22%, transparent);
+  border-radius: 17px;
+  opacity: 0;
+}
+
+.precision-task-card__rarity-crest {
+  z-index: 6;
+  top: 2px;
+  left: 50%;
+  width: 38px;
+  height: 25px;
+  border: 1px solid color-mix(in srgb, var(--rarity-secondary) 58%, transparent);
+  border-radius: 0 0 12px 12px;
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, var(--rarity-secondary) 22%, #11141a),
+    color-mix(in srgb, var(--rarity-deep) 88%, #050608)
+  );
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--rarity-secondary) 36%, transparent),
+    0 4px 12px color-mix(in srgb, var(--rarity-primary) 20%, transparent);
+  opacity: 0;
+  transform: translateX(-50%) translateY(-5px) scale(0.78);
+}
+
+.precision-task-card__rarity-crest svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.rarity-crest__crown {
+  fill: color-mix(in srgb, var(--rarity-primary) 28%, transparent);
+  stroke: var(--rarity-secondary);
+  stroke-width: 1.4;
+}
+
+.rarity-crest__facet {
+  fill: color-mix(in srgb, var(--theme-primary) 54%, var(--rarity-deep));
+  stroke: color-mix(in srgb, var(--rarity-secondary) 68%, white);
+  stroke-width: 1;
+}
+
+.rarity-crest__core {
+  fill: color-mix(in srgb, var(--rarity-secondary) 76%, white);
+  stroke: var(--rarity-primary);
+  stroke-width: 1;
+  filter: drop-shadow(0 0 4px var(--rarity-primary));
+}
+
+.precision-task-card__rarity-gems {
+  z-index: 7;
+  inset: 0;
+}
+
+.precision-task-card__rarity-gems > i {
+  width: var(--rarity-gem-size);
+  height: var(--rarity-gem-size);
+  border: 1px solid color-mix(in srgb, var(--rarity-secondary) 72%, white);
+  background: linear-gradient(
+    135deg,
+    var(--rarity-secondary),
+    var(--rarity-primary) 58%,
+    var(--rarity-deep)
+  );
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.5),
+    0 0 8px color-mix(in srgb, var(--rarity-primary) 48%, transparent);
+  opacity: 0.85;
+  transform: rotate(45deg);
+}
+
+.precision-task-card__rarity-gems > i:nth-child(1) {
+  top: 12px;
+  left: 12px;
+}
+
+.precision-task-card__rarity-gems > i:nth-child(2) {
+  top: 12px;
+  right: 12px;
+}
+
+.precision-task-card__rarity-gems > i:nth-child(3) {
+  right: 12px;
+  bottom: 12px;
+}
+
+.precision-task-card__rarity-gems > i:nth-child(4) {
+  bottom: 12px;
+  left: 12px;
+}
+
+.precision-task-card__rarity-label {
+  z-index: 7;
+  bottom: 4px;
+  left: 50%;
+  min-width: 74px;
+  padding: 2px 9px 3px;
+  border: 1px solid color-mix(in srgb, var(--rarity-primary) 42%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--card-surface-middle) 90%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--rarity-primary) 13%, transparent);
+  color: color-mix(in srgb, var(--rarity-secondary) 74%, var(--card-text));
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: 6.5px;
+  font-weight: 800;
+  letter-spacing: var(--rarity-label-spacing);
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+}
+
+/* Common: restrained matte hardware. */
+.precision-task-card[data-rarity='common'] .precision-task-card__surface {
+  filter: saturate(0.72) contrast(0.98);
+}
+
+.precision-task-card[data-rarity='common'] .precision-task-card__aura {
+  opacity: 0.08;
+}
+
+.precision-task-card[data-rarity='common'] .precision-task-card__electric-outline--glow-wide,
+.precision-task-card[data-rarity='common'] .precision-task-card__electric-outline--glow-tight {
+  opacity: 0.16;
+  filter: blur(2px) grayscale(0.38);
+}
+
+.precision-task-card[data-rarity='common'] .precision-task-card__rarity-gems > i {
+  width: 4px;
+  height: 4px;
+  border: 0;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--theme-primary) 24%, #8b949e);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.32);
+  transform: none;
+}
+
+.precision-task-card[data-rarity='common'] .precision-task-card__rarity-gems > i:nth-child(n + 3) {
+  display: none;
+}
+
+/* Rare: a precise illuminated double edge and paired cut stones. */
+.precision-task-card[data-rarity='rare'] .precision-task-card__rarity-adornment::before {
+  border-width: 1.5px;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--theme-primary) 34%, transparent),
+    inset 0 0 20px color-mix(in srgb, var(--rarity-primary) 9%, transparent),
+    0 0 12px color-mix(in srgb, var(--rarity-primary) 24%, transparent);
+}
+
+.precision-task-card[data-rarity='rare'] .precision-task-card__rarity-inner-frame {
+  opacity: 0.58;
+}
+
+.precision-task-card[data-rarity='rare'] .precision-task-card__rarity-crest {
+  width: 30px;
+  opacity: 0.82;
+  transform: translateX(-50%) translateY(-7px) scale(0.7);
+}
+
+.precision-task-card[data-rarity='rare'] .rarity-crest__crown {
+  opacity: 0;
+}
+
+.precision-task-card[data-rarity='rare'] .precision-task-card__rarity-gems > i:nth-child(n + 3) {
+  display: none;
+}
+
+/* Epic: four jewels, prismatic foil, and a dimensional crest. */
+.precision-task-card[data-rarity='epic'] .precision-task-card__rarity-adornment::before {
+  border-width: 2px;
+  background:
+    linear-gradient(#0000, #0000) padding-box,
+    conic-gradient(
+        from 25deg,
+        var(--rarity-primary),
+        var(--theme-primary),
+        var(--rarity-secondary),
+        var(--theme-secondary),
+        var(--rarity-primary)
+      )
+      border-box;
+  border-color: transparent;
+  padding: 2px;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--rarity-secondary) 34%, transparent),
+    inset 0 0 28px color-mix(in srgb, var(--rarity-primary) 13%, transparent),
+    0 0 18px color-mix(in srgb, var(--rarity-primary) 36%, transparent);
+}
+
+.precision-task-card[data-rarity='epic'] .precision-task-card__rarity-adornment::after {
+  border-color: color-mix(in srgb, var(--rarity-secondary) 46%, transparent);
+  box-shadow: inset 0 0 12px color-mix(in srgb, var(--rarity-primary) 14%, transparent);
+}
+
+.precision-task-card[data-rarity='epic'] .precision-task-card__rarity-inner-frame {
+  inset: 5px;
+  border-color: color-mix(in srgb, var(--theme-secondary) 45%, transparent);
+  opacity: 0.88;
+}
+
+.precision-task-card[data-rarity='epic'] .precision-task-card__rarity-crest {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-3px) scale(0.88);
+}
+
+.precision-task-card[data-rarity='epic'] .rarity-crest__crown {
+  opacity: 0.38;
+}
+
+.precision-task-card[data-rarity='epic'] .precision-task-card__rarity-foil {
+  animation: precision-rarity-foil-pass 8.6s ease-in-out infinite;
+}
+
+.precision-task-card[data-rarity='epic'] .precision-task-card__surface {
+  filter: saturate(1.08) contrast(1.025);
+}
+
+/* Legendary: forged crown metal, fire lustre, and the richest dimensional frame. */
+.precision-task-card[data-rarity='legendary'] .precision-task-card__rarity-adornment {
+  inset: 2px;
+  border-radius: 23px;
+}
+
+.precision-task-card[data-rarity='legendary'] .precision-task-card__rarity-adornment::before {
+  border-width: 3px;
+  background:
+    linear-gradient(#0000, #0000) padding-box,
+    conic-gradient(
+        from 8deg,
+        #4f1609,
+        #ff8a2b 10%,
+        #ffe7a0 19%,
+        var(--theme-primary) 30%,
+        #ff6a1a 42%,
+        #fff1b7 51%,
+        var(--theme-secondary) 66%,
+        #ff8a2b 82%,
+        #4f1609
+      )
+      border-box;
+  border-color: transparent;
+  padding: 3px;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 240, 184, 0.54),
+    inset 0 0 34px rgba(255, 121, 26, 0.18),
+    0 0 10px rgba(255, 224, 139, 0.56),
+    0 0 24px rgba(255, 100, 18, 0.34);
+}
+
+.precision-task-card[data-rarity='legendary'] .precision-task-card__rarity-adornment::after {
+  inset: 10px;
+  border-color: rgba(255, 220, 125, 0.62);
+  box-shadow:
+    inset 0 0 14px rgba(255, 117, 20, 0.22),
+    0 0 10px rgba(255, 182, 70, 0.16);
+}
+
+.precision-task-card[data-rarity='legendary'] .precision-task-card__rarity-inner-frame {
+  inset: 6px;
+  border-width: 2px;
+  border-color: color-mix(in srgb, var(--theme-primary) 46%, #ffd36a);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--theme-primary) 28%, transparent);
+  opacity: 1;
+}
+
+.precision-task-card[data-rarity='legendary'] .precision-task-card__rarity-crest {
+  top: 0;
+  width: 48px;
+  height: 31px;
+  border-color: rgba(255, 228, 150, 0.82);
+  background: linear-gradient(150deg, #5d1e0d, #150907 70%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 245, 202, 0.7),
+    0 3px 8px rgba(0, 0, 0, 0.64),
+    0 0 17px rgba(255, 126, 25, 0.64);
+  opacity: 1;
+  transform: translateX(-50%) translateY(-1px) scale(1);
+}
+
+.precision-task-card[data-rarity='legendary'] .precision-task-card__rarity-gems > i {
+  border-width: 1.5px;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.78),
+    0 0 5px #fff0b0,
+    0 0 13px rgba(255, 107, 24, 0.76);
+}
+
+.precision-task-card[data-rarity='legendary'] .precision-task-card__rarity-label {
+  bottom: 3px;
+  border-color: rgba(255, 220, 123, 0.74);
+  background: linear-gradient(
+    90deg,
+    rgba(61, 15, 7, 0.9),
+    rgba(116, 43, 10, 0.94),
+    rgba(61, 15, 7, 0.9)
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 242, 188, 0.25),
+    0 0 12px rgba(255, 111, 24, 0.38);
+  color: #ffe7a2;
+}
+
+.precision-task-card[data-rarity='legendary'] .precision-task-card__rarity-foil {
+  background:
+    radial-gradient(ellipse at 50% 104%, rgba(255, 83, 10, 0.32), transparent 42%),
+    linear-gradient(112deg, transparent 9%, rgba(255, 245, 198, 0.72) 22%, transparent 35%) -180%
+      0 / 45% 100% no-repeat,
+    conic-gradient(
+      from 210deg at var(--card-pointer-x) var(--card-pointer-y),
+      transparent,
+      rgba(255, 107, 22, 0.58),
+      transparent 33%,
+      color-mix(in srgb, var(--theme-primary) 54%, transparent),
+      transparent 64%,
+      rgba(255, 221, 120, 0.55),
+      transparent
+    );
+  animation:
+    precision-rarity-foil-pass 6.8s ease-in-out infinite,
+    precision-rarity-legendary-lustre 4.6s ease-in-out infinite alternate;
+}
+
+.precision-task-card[data-rarity='legendary'] .precision-task-card__surface {
+  filter: saturate(1.14) contrast(1.04);
+  box-shadow:
+    inset 0 1px 0 var(--card-surface-highlight),
+    inset 0 -34px 60px var(--card-surface-vignette),
+    inset 0 0 30px rgba(255, 119, 22, 0.055),
+    0 24px 62px rgba(0, 0, 0, 0.52);
+}
+
+.precision-task-card[data-rarity='legendary'] .precision-task-card__aura {
+  opacity: 0.32;
+  filter: blur(36px) saturate(1.25);
+}
+
+.precision-task-card[data-rarity='legendary'] .precision-task-card__electric-outline {
+  border-color: color-mix(in srgb, var(--theme-primary) 46%, #ffb43f);
+}
+
+.precision-task-card[data-rarity='legendary'] .precision-task-card__electric-outline--glow-wide {
+  opacity: 0.72;
+  box-shadow:
+    0 0 12px #ffb33d,
+    0 0 25px color-mix(in srgb, var(--theme-primary) 48%, transparent);
+}
+
+.precision-task-card[data-color-scheme='light'] .precision-task-card__rarity-foil {
+  mix-blend-mode: soft-light;
+  opacity: calc(var(--rarity-foil-opacity) * 0.68);
+}
+
+.precision-task-card[data-color-scheme='light'] .precision-task-card__rarity-label {
+  background: color-mix(in srgb, var(--card-surface-middle) 92%, white);
+  color: color-mix(in srgb, var(--rarity-deep) 62%, #252525);
+}
+
+.precision-task-card[data-color-scheme='light'][data-rarity='legendary']
+  .precision-task-card__rarity-label {
+  background: linear-gradient(90deg, #6f250e, #a64d16, #6f250e);
+  color: #fff0b8;
+}
+
+@keyframes precision-rarity-foil-pass {
+  0%,
+  22% {
+    background-position:
+      -180% 0,
+      0 0;
+  }
+
+  64%,
+  100% {
+    background-position:
+      240% 0,
+      0 0;
+  }
+}
+
+@keyframes precision-rarity-legendary-lustre {
+  from {
+    filter: saturate(0.94) brightness(0.94);
+  }
+
+  to {
+    filter: saturate(1.18) brightness(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .precision-task-card__rarity-foil,
+  .precision-task-card__rarity-crest,
+  .precision-task-card__rarity-gems > i {
+    animation: none !important;
+  }
+}
+
+/* Preserve readable typography when border and surface themes are mixed. */
+.precision-task-card[data-mixed-surface='true'] .precision-task-card__title {
+  color: var(--card-text);
+}
+
+.precision-task-card[data-mixed-surface='true'] .precision-task-card__eyebrow,
+.precision-task-card[data-mixed-surface='true'] .precision-task-card__energy-label {
+  color: var(--card-muted);
+}
+
+.precision-task-card[data-mixed-surface='true'] .precision-task-card__energy-value {
+  color: var(--energy-color);
+}
+.precision-task-card[data-mixed-surface='true'][data-color-scheme='dark'] {
+  --card-text: #f4f1ea;
+  --card-muted: rgba(244, 241, 234, 0.5);
+}
+
+.precision-task-card[data-mixed-surface='true'][data-color-scheme='light'] {
+  --card-text: #202326;
+  --card-muted: rgba(32, 35, 38, 0.58);
+}
