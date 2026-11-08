@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import '@arsenal/stock-kit';
+import '@arsenal/stock-kit/styles.css';
 import '@arsenal/clayflow/react.css';
 import { StockIntelligenceDashboard } from './dashboard';
 
