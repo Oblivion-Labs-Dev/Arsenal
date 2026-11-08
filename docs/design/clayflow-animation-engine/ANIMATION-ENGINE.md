@@ -46,3 +46,7 @@ Packets follow the real wire with `getPointAtLength`, so curved, orthogonal and 
 | `src/style/motion-reduced.ts` | The one reduced-motion sheet, emitted for both `prefers-reduced-motion: reduce` and `html.force-reduced`; appended last so it wins |
 | `src/style/inspect.ts` | Inspect panel and illustrative badge |
 | `src/style.ts` | Aggregates the token CSS and owned style modules into `CLAYFLOW_STYLE` |
+
+## Layout inside cards
+
+A diagram embedded in a card must let its stage shrink, with `.cf-stage { min-width: 0 }` scoped to the card (the showcase and reports both do this). Without it, a wide diagram keeps its intrinsic width and the card's `overflow-x: hidden` clips it at phone widths.
