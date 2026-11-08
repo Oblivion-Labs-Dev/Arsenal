@@ -49,16 +49,25 @@ function renderStage(
     const isDashed = edge.dashed ? ' data-dashed="true"' : "";
     const isAnim = edge.animated ? ' data-animated="true"' : "";
     const markerStart = edge.bidirectional ? ` marker-start="url(#${markerStartId})"` : "";
-
-    const edgeSpec = diagram.edges.find((item) => item.id === edge.id);
-    svgContent += `<g class="cf-edge" data-edge="${escapeHtml(edge.id)}" data-kind="${escapeHtml(edgeSpec?.kind ?? "flow")}"${isDashed}${isAnim}>`;
+    const kind = edge.kind;
+    const dimmed = finalFrame?.dimmed?.includes(edge.id) ? " is-dimmed" : "";
+    const condition = edge.condition ? ` data-condition="${escapeHtml(edge.condition)}"` : "";
+    const labelY = edge.condition && edge.label ? edge.labelY - 18 : edge.labelY;
+    svgContent += `<g class="cf-edge${dimmed}" data-edge="${escapeHtml(edge.id)}" data-kind="${escapeHtml(kind)}"${condition}${isDashed}${isAnim}>`;
     svgContent += `<path class="cf-edge-track" d="${edge.path}" />`;
-    svgContent += `<path class="cf-edge-wire" d="${edge.path}" marker-end="url(#${markerId})"${markerStart} />`;
+    svgContent += `<path class="cf-edge-wire" d="${edge.path}" style="--cf-edge-length:${edge.length}px" marker-end="url(#${markerId})"${markerStart} />`;
     if (edge.label) {
-      svgContent += `<text class="cf-edge-label" x="${edge.labelX}" y="${edge.labelY}" text-anchor="middle" dominant-baseline="central">${escapeHtml(edge.label)}</text>`;
+      svgContent += `<text class="cf-edge-label" x="${edge.labelX}" y="${labelY}" text-anchor="middle" dominant-baseline="central">${escapeHtml(edge.label)}</text>`;
     }
-    if (edgeSpec?.condition) svgContent += `<text class="cf-edge-condition" x="${edge.labelX}" y="${edge.labelY + 14}" text-anchor="middle" dominant-baseline="central">${escapeHtml(edgeSpec.condition)}</text>`;
+    if (edge.condition) {
+      const pillWidth = Math.max(42, edge.condition.length * 7 + 26);
+      const pillX = edge.labelX - pillWidth / 2;
+      const pillY = edge.labelY - 11;
+      svgContent += `<g class="cf-edge-condition" transform="translate(${pillX} ${pillY})"><rect class="cf-edge-condition-pill" width="${pillWidth}" height="22" rx="11"/><text class="cf-edge-condition-check" x="10" y="11" dominant-baseline="central">✓</text><text class="cf-edge-condition-text" x="${pillWidth / 2 + 5}" y="11" text-anchor="middle" dominant-baseline="central">${escapeHtml(edge.condition)}</text></g>`;
+    }
+    if (kind === "branch") svgContent += `<text class="cf-edge-not-taken" x="${edge.labelX}" y="${edge.labelY + 16}" text-anchor="middle" dominant-baseline="central">Not taken</text>`;
     svgContent += `<circle class="cf-packet" data-edge="${escapeHtml(edge.id)}" r="4.5" cx="0" cy="0" opacity="0" />`;
+    if (edge.bidirectional) svgContent += `<circle class="cf-packet" data-edge="${escapeHtml(edge.id)}" data-reverse="true" r="4.5" cx="0" cy="0" opacity="0" />`;
     svgContent += `</g>`;
   }
   svgContent += `</svg>`;

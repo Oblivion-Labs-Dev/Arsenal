@@ -106,4 +106,59 @@ describe("ClayFlow connector routing", () => {
     const [routed] = routeEdges(bidiDiagram, layout);
     expect(routed?.bidirectional).toBe(true);
   });
+
+  it("offsets parallel-kind wires symmetrically by six pixels", () => {
+    const diagram = diagramSchema.parse({
+      schemaVersion: "1.0", id: "parallel-offset", title: "Parallel",
+      layout: "horizontal",
+      nodes: [{ id: "a", kind: "process", label: "A" }, { id: "b", kind: "process", label: "B" }],
+      edges: [
+        { id: "p1", from: "a", to: "b", kind: "parallel", style: "straight" },
+        { id: "p2", from: "a", to: "b", kind: "parallel", style: "straight" },
+        { id: "p3", from: "a", to: "b", kind: "parallel", style: "straight" },
+      ],
+    } satisfies DiagramSpec);
+    const routes = routeEdges(diagram, computeLayout(diagram));
+    const start = (path: string) => path.match(/^M ([\d-]+) ([\d-]+)/)?.slice(1).map(Number);
+    const offsets = routes.map((edge) => start(edge.path)![1]!).sort((a, b) => a - b);
+    expect(new Set(routes.map((edge) => edge.path)).size).toBe(3);
+    expect(offsets[2]! - offsets[0]!).toBe(12);
+    expect(offsets[1]! - offsets[0]!).toBe(6);
+  });
+
+  it("routes feedback arcs outside the node boxes", () => {
+    const diagram = diagramSchema.parse({
+      schemaVersion: "1.0", id: "feedback-arc", title: "Feedback",
+      layout: "horizontal",
+      nodes: [{ id: "a", kind: "process", label: "A" }, { id: "b", kind: "process", label: "B" }],
+      edges: [{ id: "back", from: "b", to: "a", kind: "feedback" }],
+    } satisfies DiagramSpec);
+    const layout = computeLayout(diagram);
+    const [edge] = routeEdges(diagram, layout);
+    const controls = edge?.path.match(/C [-\d.]+ ([-\d.]+), [-\d.]+ ([-\d.]+)/);
+    const lowerBound = Math.max(...layout.nodes.map((node) => node.y + node.h));
+    expect(edge?.path).toContain("C");
+    expect(Number(controls?.[1])).toBeGreaterThan(lowerBound);
+    expect(Number(controls?.[2])).toBeGreaterThan(lowerBound);
+  });
+
+  it("fans branch edges out from the same source port", () => {
+    const diagram = diagramSchema.parse({
+      schemaVersion: "1.0", id: "branch-fan", title: "Branch",
+      layout: "horizontal",
+      nodes: [
+        { id: "decision", kind: "decision", label: "Decision" },
+        { id: "yes", kind: "process", label: "Yes" },
+        { id: "no", kind: "process", label: "No" },
+      ],
+      edges: [
+        { id: "yes-edge", from: "decision", to: "yes", kind: "branch", style: "curved" },
+        { id: "no-edge", from: "decision", to: "no", kind: "branch", style: "curved" },
+      ],
+    } satisfies DiagramSpec);
+    const routes = routeEdges(diagram, computeLayout(diagram));
+    const starts = routes.map((edge) => edge.path.match(/^M ([\d-]+ [\d-]+)/)?.[1]);
+    expect(new Set(starts).size).toBe(1);
+    expect(routes[0]?.path).not.toBe(routes[1]?.path);
+  });
 });

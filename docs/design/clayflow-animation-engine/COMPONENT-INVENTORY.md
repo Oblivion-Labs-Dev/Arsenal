@@ -1,4 +1,4 @@
-# ClayFlow component motion inventory
+# ClayFlow component inventory
 
 Each node kind receives its motion family from `src/motion/kind-motion.ts`, using its catalog family as the default and refining kinds with specific semantics. Motion uses the scoped duration and easing tokens in `src/motion/tokens.ts`; all state-driven loops stop when their state stops applying.
 
@@ -56,3 +56,12 @@ Each node kind receives its motion family from `src/motion/kind-motion.ts`, usin
 `setMetricProgress(element, value, unit)` sets `--cf-progress` only when `unit` is `%`, normalizing the supplied percentage to `0–1`. The runtime should call it when applying counter values to percent metrics. It deliberately does not infer progress for other units.
 
 Status cues apply to nodes in any motion family: success draws a check, warning nudges once, error shakes no more than two cycles, pending pulses only while pending, and disabled nodes show a dash and remain desaturated. Existing node labels and any annotation text remain visible. Reduced motion disables movement and animation while retaining final state cues.
+
+## Connectors
+
+- Straight, curved, and orthogonal wires draw in with the connector duration token. Active wires use the accent token and show a clay packet.
+- Dashed wires march only while active. Bidirectional edges render a reverse packet marker and arrowheads at both ends.
+- Parallel-kind edges route with symmetric 6 px offsets. Branch edges share the source port; untaken branches remain dashed and dim with a “Not taken” label.
+- Conditional edges carry an SVG pill on the wire. The active state lights the pill and reveals its check mark.
+- Feedback edges use an outward return arc beyond the connected node pair. Reduced motion shows the complete wire and active state without packets or animation.
+- Motion and presentation styles live in `src/style/motion-edges.ts`; route geometry lives in `src/route.ts`; SVG output lives in the edge block in `src/render.ts`.

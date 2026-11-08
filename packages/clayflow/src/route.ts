@@ -15,6 +15,8 @@ export interface RoutedEdge {
   dashed: boolean;
   bidirectional: boolean;
   animated: boolean;
+  kind: Edge["kind"];
+  condition?: string;
   label?: string;
   fromPort: PortName;
   toPort: PortName;
@@ -127,7 +129,9 @@ export function routeEdges(
     const count = siblings.length;
     let offset = 0;
     if (count > 1) {
-      const step = 20;
+      const step = edge.kind === "parallel" && siblings.every((item) => item.kind === "parallel")
+        ? 12 / (count - 1)
+        : 20;
       offset = Math.round((siblingIndex - (count - 1) / 2) * step);
       if (edge.from > edge.to) {
         offset = -offset;
@@ -145,7 +149,29 @@ export function routeEdges(
     const x2 = p2.x;
     const y2 = p2.y;
 
-    if (style === "straight") {
+    if (edge.kind === "feedback") {
+      // Feedback paths leave from the outward-facing port and arc around the node pair.
+      // Controls are placed beyond the pair's bounds so the return never cuts through either node.
+      if (isHorizontal) {
+        const side = fromPort === "n" || fromPort === "s" ? (fromPort === "n" ? -1 : 1) : (y2 <= y1 ? -1 : 1);
+        const outsideY = Math.round((side < 0 ? Math.min(y1, y2) : Math.max(y1, y2)) + side * (64 + Math.abs(offset)));
+        const cx1 = Math.round(x1 + (x2 - x1) / 3);
+        const cx2 = Math.round(x1 + (x2 - x1) * 2 / 3);
+        path = `M ${x1} ${y1} C ${cx1} ${outsideY}, ${cx2} ${outsideY}, ${x2} ${y2}`;
+        labelX = Math.round((cx1 + cx2) / 2);
+        labelY = outsideY + side * 10;
+        length = Math.round(Math.hypot(x2 - x1, outsideY - y1) + Math.hypot(x2 - x1, y2 - outsideY));
+      } else {
+        const side = fromPort === "w" || fromPort === "e" ? (fromPort === "w" ? -1 : 1) : (x2 <= x1 ? -1 : 1);
+        const outsideX = Math.round((side < 0 ? Math.min(x1, x2) : Math.max(x1, x2)) + side * (64 + Math.abs(offset)));
+        const cy1 = Math.round(y1 + (y2 - y1) / 3);
+        const cy2 = Math.round(y1 + (y2 - y1) * 2 / 3);
+        path = `M ${x1} ${y1} C ${outsideX} ${cy1}, ${outsideX} ${cy2}, ${x2} ${y2}`;
+        labelX = outsideX + side * 10;
+        labelY = Math.round((cy1 + cy2) / 2);
+        length = Math.round(Math.hypot(outsideX - x1, y2 - y1) + Math.hypot(x2 - outsideX, y2 - y1));
+      }
+    } else if (style === "straight") {
       if (offset === 0) {
         path = `M ${x1} ${y1} L ${x2} ${y2}`;
         labelX = Math.round((x1 + x2) / 2);
@@ -282,6 +308,8 @@ export function routeEdges(
       dashed: Boolean(edge.dashed),
       bidirectional: Boolean(edge.bidirectional),
       animated: Boolean(edge.animated),
+      kind: edge.kind ?? "flow",
+      ...(edge.condition ? { condition: edge.condition } : {}),
       ...(edge.label ? { label: edge.label } : {}),
       fromPort,
       toPort,

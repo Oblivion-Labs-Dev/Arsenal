@@ -65,6 +65,42 @@ describe("ClayFlow renderer", () => {
     expect(html).toContain("Illustrative");
   });
 
+  it("renders connector kinds, conditional pills, and a reverse bidirectional packet", () => {
+    const diagram = diagramSchema.parse({
+      schemaVersion: "1.0", id: "connector-visuals", title: "Connector visuals",
+      nodes: [{ id: "source", kind: "decision", label: "Review" }, { id: "target", kind: "process", label: "Continue" }],
+      edges: [{ id: "approved", from: "source", to: "target", kind: "conditional", condition: "Approved", bidirectional: true }],
+    } satisfies DiagramSpec);
+    const html = renderClayFlow(diagram);
+    expect(html).toContain('data-kind="conditional"');
+    expect(html).toContain('data-condition="Approved"');
+    expect(html).toContain('class="cf-edge-condition"');
+    expect(html).toContain("✓");
+    expect(html).toContain('class="cf-packet" data-edge="approved" data-reverse="true"');
+  });
+
+  it("keeps untaken branch paths visible with a text affordance", () => {
+    const diagram = diagramSchema.parse({
+      schemaVersion: "1.0", id: "branch-render", title: "Branch",
+      nodes: [{ id: "gate", kind: "decision", label: "Choose" }, { id: "yes", kind: "process", label: "Yes" }, { id: "no", kind: "process", label: "No" }],
+      edges: [
+        { id: "yes-edge", from: "gate", to: "yes", kind: "branch" },
+        { id: "no-edge", from: "gate", to: "no", kind: "branch" },
+      ],
+      animation: { preset: "decision-branch", steps: [{ caption: "Take yes", branch: { from: "gate", take: "yes-edge" } }] },
+    } satisfies DiagramSpec);
+    const html = renderClayFlow(diagram);
+    expect(html).toMatch(/class="cf-edge is-dimmed" data-edge="no-edge" data-kind="branch"/);
+    expect(html).toContain('class="cf-edge-not-taken"');
+    expect(CLAYFLOW_STYLE).toContain(".cf-edge.is-dimmed[data-kind=\"branch\"] .cf-edge-not-taken");
+  });
+
+  it("uses motion and theme tokens for connector animation styling", () => {
+    expect(CLAYFLOW_STYLE).toContain("animation: cf-edge-draw var(--cf-dur-connector) var(--cf-ease-standard)");
+    expect(CLAYFLOW_STYLE).toContain("animation: cf-edge-march var(--cf-dur-packet) linear infinite");
+    expect(CLAYFLOW_STYLE).toContain("stroke: var(--cf-accent)");
+  });
+
   it("keeps step captions from closing the frames script or opening a comment", () => {
     const hostile = diagramSchema.parse({
       ...aiAgentRequestExample,
