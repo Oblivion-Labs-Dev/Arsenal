@@ -36,7 +36,11 @@ export function revealOrigin(origin: RevealPoint | RevealRect): RevealPoint {
 }
 
 type ViewTransitionDocument = Document & {
-  startViewTransition?: (callback: () => void) => { finished: Promise<void> };
+  startViewTransition?: (callback: () => void) => {
+    finished: Promise<void>;
+    ready?: Promise<void>;
+    updateCallbackDone?: Promise<void>;
+  };
 };
 
 /**
@@ -66,9 +70,12 @@ export function revealTheme(
   const doc = document as ViewTransitionDocument;
   if (typeof doc.startViewTransition === 'function') {
     root.classList.add(revealClass);
-    return doc
-      .startViewTransition(apply)
-      .finished.catch(() => undefined)
+    const transition = doc.startViewTransition(apply);
+    // A skipped transition rejects every promise; only `finished` is awaited, so silence the rest.
+    transition.ready?.catch(() => undefined);
+    transition.updateCallbackDone?.catch(() => undefined);
+    return transition.finished
+      .catch(() => undefined)
       .finally(() => root.classList.remove(revealClass));
   }
   root.classList.add(fadeClass);

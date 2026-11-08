@@ -19,7 +19,11 @@ export function viewTransitionName(id: string, prefix = "surface"): string {
 }
 
 type ViewTransitionDocument = Document & {
-  startViewTransition?: (callback: () => void) => { finished: Promise<void> };
+  startViewTransition?: (callback: () => void) => {
+    finished: Promise<void>;
+    ready?: Promise<void>;
+    updateCallbackDone?: Promise<void>;
+  };
 };
 
 export interface TransitionSurfaceOptions {
@@ -43,5 +47,8 @@ export function transitionSurface(
     return Promise.resolve();
   }
   const transition = doc.startViewTransition(() => (flush ? flushSync(update) : update()));
+  // A skipped transition rejects every promise; only `finished` is awaited, so silence the rest.
+  transition.ready?.catch(() => undefined);
+  transition.updateCallbackDone?.catch(() => undefined);
   return transition.finished.catch(() => undefined);
 }
