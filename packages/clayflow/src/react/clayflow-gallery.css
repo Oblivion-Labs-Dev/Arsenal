@@ -1,0 +1,539 @@
+/* ClayFlow Gallery Page Chrome (page chrome only; diagram visuals come from CLAYFLOW_STYLE) */
+
+:root {
+  --cfg-canvas: #f6f1ea;
+  --cfg-fg: #2a2540;
+  --cfg-muted: #5b5573;
+  --cfg-border: #e0d7cd;
+  --cfg-border-subtle: #ede5dc;
+  --cfg-surface: #fffdf9;
+  --cfg-surface-subtle: #f1ebf7;
+  --cfg-accent: #6d4fe6;
+  --cfg-accent-hover: #5d40d6;
+  --cfg-editor-bg: #fffdf9;
+  --cfg-header-bg: rgba(246, 241, 234, 0.82);
+  --cfg-shadow-sm: 0 1px 2px rgba(42, 37, 64, 0.05);
+  --cfg-shadow-md: 0 8px 24px -10px rgba(42, 37, 64, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --cfg-canvas: #141225;
+    --cfg-fg: #f2effa;
+    --cfg-muted: #bfb8d9;
+    --cfg-border: #352e5a;
+    --cfg-border-subtle: #272145;
+    --cfg-surface: #1e1a38;
+    --cfg-surface-subtle: #29244c;
+    --cfg-accent: #a48bff;
+    --cfg-accent-hover: #b7a3ff;
+    --cfg-on-accent: #16112b;
+    --cfg-editor-bg: #17142b;
+    --cfg-header-bg: rgba(20, 18, 37, 0.85);
+    --cfg-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --cfg-shadow-md: 0 10px 30px -12px rgba(0, 0, 0, 0.6);
+  }
+}
+
+:root[data-theme="dark"] {
+  --cfg-canvas: #141225;
+  --cfg-fg: #f2effa;
+  --cfg-muted: #bfb8d9;
+  --cfg-border: #352e5a;
+  --cfg-border-subtle: #272145;
+  --cfg-surface: #1e1a38;
+  --cfg-surface-subtle: #29244c;
+  --cfg-accent: #a48bff;
+  --cfg-accent-hover: #b7a3ff;
+  --cfg-on-accent: #16112b;
+  --cfg-editor-bg: #17142b;
+  --cfg-header-bg: rgba(20, 18, 37, 0.85);
+  --cfg-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --cfg-shadow-md: 0 10px 30px -12px rgba(0, 0, 0, 0.6);
+}
+
+:root[data-theme="light"] {
+  --cfg-canvas: #f6f1ea;
+  --cfg-fg: #2a2540;
+  --cfg-muted: #5b5573;
+  --cfg-border: #e0d7cd;
+  --cfg-border-subtle: #ede5dc;
+  --cfg-surface: #fffdf9;
+  --cfg-surface-subtle: #f1ebf7;
+  --cfg-accent: #6d4fe6;
+  --cfg-accent-hover: #5d40d6;
+  --cfg-editor-bg: #fffdf9;
+  --cfg-header-bg: rgba(246, 241, 234, 0.82);
+  --cfg-shadow-sm: 0 1px 2px rgba(42, 37, 64, 0.05);
+  --cfg-shadow-md: 0 8px 24px -10px rgba(42, 37, 64, 0.12);
+}
+
+.cfg-page {
+  min-height: 100vh;
+  background-color: var(--cfg-canvas);
+  background-image:
+    radial-gradient(circle at 10% 8%, rgba(123, 92, 240, 0.08) 0%, transparent 45%),
+    linear-gradient(180deg, var(--cfg-canvas) 0%, var(--cfg-canvas) 100%);
+  color: var(--cfg-fg);
+  font-family:
+    "Switzer",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+/* The lab page lives outside the app shell, so the shell's sidebar gutter does not apply. */
+body:has(.cfg-page) #root {
+  padding-left: 0;
+}
+
+:root[data-theme="dark"] .cfg-page {
+  background-image:
+    radial-gradient(circle at 12% 10%, rgba(164, 139, 255, 0.12) 0%, transparent 55%),
+    linear-gradient(180deg, #141225 0%, #1c1836 100%);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .cfg-page {
+    background-image:
+      radial-gradient(circle at 12% 10%, rgba(164, 139, 255, 0.12) 0%, transparent 55%),
+      linear-gradient(180deg, #141225 0%, #1c1836 100%);
+  }
+}
+
+/* Sticky top navigation bar */
+.cfg-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--cfg-header-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--cfg-border);
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.cfg-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.cfg-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.cfg-brand-title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--cfg-fg);
+  white-space: nowrap;
+}
+
+.cfg-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--cfg-surface-subtle);
+  color: var(--cfg-accent);
+  border: 1px solid color-mix(in srgb, var(--cfg-accent) 25%, transparent);
+  white-space: nowrap;
+}
+
+/* Nav jump links */
+.cfg-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 2px 0;
+  scrollbar-width: none;
+}
+
+.cfg-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.cfg-nav-link {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--cfg-muted);
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease;
+}
+
+.cfg-nav-link:hover {
+  color: var(--cfg-fg);
+  background: var(--cfg-surface-subtle);
+}
+
+.cfg-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Reduced motion button */
+.cfg-motion-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--cfg-border);
+  background: var(--cfg-surface);
+  color: var(--cfg-fg);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.cfg-motion-toggle:hover {
+  border-color: var(--cfg-accent);
+}
+
+.cfg-motion-toggle.is-active {
+  background: color-mix(in srgb, var(--cfg-accent) 15%, transparent);
+  border-color: var(--cfg-accent);
+  color: var(--cfg-accent);
+}
+
+.cfg-motion-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2f9e6b;
+  display: inline-block;
+  transition: background 0.2s ease;
+}
+
+.cfg-motion-toggle.is-active .cfg-motion-indicator {
+  background: #d9822b;
+}
+
+/* Main Container */
+.cfg-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px 96px;
+  box-sizing: border-box;
+}
+
+/* Hero introductory card */
+.cfg-hero {
+  margin-bottom: 48px;
+}
+
+.cfg-hero-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cfg-accent);
+  margin-bottom: 8px;
+}
+
+.cfg-hero-title {
+  font-family: var(--editorial, "Gambetta", Georgia, serif);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--cfg-fg);
+  margin: 0 0 12px 0;
+}
+
+.cfg-hero-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--cfg-muted);
+  max-width: 760px;
+  margin: 0;
+}
+
+/* Gallery Section */
+.cfg-section {
+  margin-bottom: 56px;
+  scroll-margin-top: 80px;
+}
+
+.cfg-section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--cfg-border-subtle);
+}
+
+.cfg-section-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cfg-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--cfg-fg);
+  margin: 0;
+}
+
+.cfg-section-desc {
+  font-size: 13px;
+  color: var(--cfg-muted);
+  margin: 0;
+}
+
+/* Grids */
+.cfg-grid-two {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
+  gap: 24px;
+}
+
+.cfg-grid-three {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+  gap: 20px;
+}
+
+/* Card wrappers for gallery items */
+.cfg-card {
+  background: var(--cfg-surface);
+  border: 1px solid var(--cfg-border-subtle);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: var(--cfg-shadow-sm);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cfg-card:hover {
+  border-color: var(--cfg-border);
+  box-shadow: var(--cfg-shadow-md);
+}
+
+.cfg-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.cfg-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cfg-fg);
+  margin: 0;
+}
+
+.cfg-card-meta {
+  font-size: 11.5px;
+  color: var(--cfg-muted);
+}
+
+/* Segmented mode switcher (ELI5 vs Advanced) */
+.cfg-segmented {
+  display: inline-flex;
+  flex-shrink: 0;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--cfg-surface-subtle);
+  border: 1px solid var(--cfg-border);
+}
+
+.cfg-segmented-btn {
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  border: none;
+  background: transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--cfg-muted);
+  transition: all 0.15s ease;
+}
+
+.cfg-segmented-btn:hover {
+  color: var(--cfg-fg);
+}
+
+.cfg-segmented-btn.is-active {
+  background: var(--cfg-accent);
+  color: var(--cfg-on-accent, #fff);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+}
+
+/* Playground section */
+.cfg-playground-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .cfg-playground-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.cfg-playground-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cfg-playground-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cfg-select {
+  font-family: inherit;
+  font-size: 12.5px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--cfg-border);
+  background: var(--cfg-surface);
+  color: var(--cfg-fg);
+  cursor: pointer;
+  outline: none;
+}
+
+.cfg-select:focus-visible {
+  border-color: var(--cfg-accent);
+}
+
+.cfg-status-chip {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cfg-status-chip.is-valid {
+  background: rgba(47, 158, 107, 0.12);
+  color: #2f9e6b;
+  border: 1px solid rgba(47, 158, 107, 0.25);
+}
+
+.cfg-status-chip.is-invalid {
+  background: rgba(208, 71, 94, 0.12);
+  color: #d0475e;
+  border: 1px solid rgba(208, 71, 94, 0.25);
+}
+
+.cfg-textarea {
+  width: 100%;
+  min-height: 440px;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--cfg-border);
+  background: var(--cfg-editor-bg);
+  color: var(--cfg-fg);
+  resize: vertical;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.cfg-textarea:focus {
+  border-color: var(--cfg-accent);
+}
+
+/* Error callout under textarea */
+.cfg-errors {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #fff4e5;
+  border: 1px solid #ffd8a8;
+  color: #8c4a00;
+  font-size: 12.5px;
+  box-sizing: border-box;
+}
+
+:root[data-theme="dark"] .cfg-errors {
+  background: #311c16;
+  border-color: #5c301e;
+  color: #ffcba4;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .cfg-errors {
+    background: #311c16;
+    border-color: #5c301e;
+    color: #ffcba4;
+  }
+}
+
+.cfg-errors-title {
+  margin: 0 0 6px 0;
+  font-weight: 600;
+}
+
+.cfg-errors ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.cfg-errors li {
+  margin-bottom: 3px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 680px) {
+  .cfg-header-inner {
+    padding: 10px 16px;
+  }
+  .cfg-nav {
+    display: none;
+  }
+  .cfg-container {
+    padding: 20px 16px 64px;
+  }
+}
+
+/* The brand badge would slide under the header controls on a phone. */
+@media (max-width: 440px) {
+  .cfg-badge {
+    display: none;
+  }
+}

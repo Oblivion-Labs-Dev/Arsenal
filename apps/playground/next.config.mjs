@@ -9,6 +9,8 @@ const nextConfig = {
     '@arsenal/themes',
     '@arsenal/config',
     '@arsenal/adapters',
+    '@arsenal/clayflow',
+    '@arsenal/stock-kit',
   ],
   serverExternalPackages: ['@arsenal/context-engine'],
   async redirects() {

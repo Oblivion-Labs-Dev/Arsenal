@@ -1,0 +1,25 @@
+/*
+ * Manthan clay tokens. The ported components read Sutra's app tokens (--fg, --card, --si-violet...);
+ * wrap them in `.manthan-clay` to supply them. Values come from Sutra home.css and stock-clay.css.
+ * light-dark() follows the host's color-scheme.
+ */
+.manthan-clay {
+  --fg: light-dark(#292b27, #eeeade);
+  --muted: light-dark(#656357, #b2b9b5);
+  --line: light-dark(#ddd3ee, #3a3160);
+  --card: light-dark(#fffdf8, #1d1838);
+  --accent: light-dark(#6d4fd8, #b8a9f7);
+  --accent-fg: light-dark(#fffaf0, #1a1530);
+  --ok: light-dark(#1f7a4d, #93c4a0);
+  --err: light-dark(#a62c28, #f5a29a);
+  --warn: light-dark(#95672a, #e3be80);
+  --editorial: "Gambetta", Georgia, "Times New Roman", serif;
+  --sb-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --si-violet: var(--accent);
+  --si-indigo: light-dark(#5948bd, #9687e6);
+  --si-cyan: light-dark(#3f5d80, #a8b9df);
+  --si-surface-2: light-dark(#faf7ff, #2a2350);
+  --si-glow: light-dark(transparent, rgba(184, 169, 247, 0.22));
+  --si-radius: 22px;
+  color: var(--fg);
+}

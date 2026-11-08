@@ -1,0 +1,457 @@
+/* Market Landscape hero: night (dark) or warm dusk (light) sky, layered ranges, real front ridge. */
+@property --sk-land-warmth {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgb(243 144 83 / 0.32);
+}
+.sk-land {
+  --sk-land-sky-top: light-dark(#ece5dd, #090b1c);
+  --sk-land-sky-mid: light-dark(#e4c8b6, #171438);
+  --sk-land-sky-low: light-dark(#d7a789, #302052);
+  --sk-land-sun-core: light-dark(#fff4dc, #fff0cc);
+  --sk-land-sun-halo: light-dark(rgb(255 168 88 / 0.6), rgb(255 150 84 / 0.62));
+  --sk-land-far-0: light-dark(rgb(149 124 184 / 0.5), rgb(91 103 186 / 0.46));
+  --sk-land-far-1: light-dark(rgb(104 96 166 / 0.66), rgb(53 67 148 / 0.7));
+  --sk-land-far-2: light-dark(rgb(74 77 146 / 0.78), rgb(33 43 112 / 0.88));
+  --sk-land-front-top: light-dark(rgb(54 104 184 / 0.92), rgb(40 112 204 / 0.96));
+  --sk-land-front-mid: light-dark(rgb(64 56 156 / 0.95), rgb(32 28 104 / 1));
+  --sk-land-front-low: light-dark(rgb(40 34 104 / 1), rgb(16 12 48 / 1));
+  --sk-land-star: light-dark(transparent, rgb(255 255 255 / 0.9));
+  --sk-land-up: var(--ok);
+  --sk-land-down: var(--err);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  grid-template-rows: 1fr auto;
+  min-height: 260px;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid var(--line);
+  border-radius: var(--si-radius);
+  background:
+    radial-gradient(
+      60% 90% at 72% 40%,
+      color-mix(in srgb, var(--si-violet) 14%, transparent),
+      transparent 70%
+    ),
+    var(--card);
+  box-shadow: 0 18px 44px light-dark(rgb(70 50 30 / 0.1), rgb(4 2 20 / 0.55));
+}
+.sk-land-copy {
+  position: relative;
+  z-index: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  min-width: 0;
+}
+.sk-land-art {
+  position: absolute;
+  inset: 0 0 0 25%;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    var(--sk-land-sky-top) 0%,
+    var(--sk-land-sky-mid) 52%,
+    var(--sk-land-sky-low) 100%
+  );
+  cursor: crosshair;
+  touch-action: pan-y;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgb(0 0 0 / 0.55) 12%, #000 24%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgb(0 0 0 / 0.55) 12%, #000 24%);
+  --sk-land-warmth: light-dark(rgb(218 153 101 / 0.28), rgb(243 144 83 / 0.32));
+}
+.sk-land-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse 40% 58% at 59% 57%, var(--sk-land-warmth), transparent 78%);
+  mix-blend-mode: screen;
+  transition: --sk-land-warmth 520ms ease;
+}
+.sk-land-art[data-tone="down"] {
+  --sk-land-warmth: light-dark(rgb(116 145 195 / 0.22), rgb(104 153 222 / 0.28));
+}
+.sk-land-art[data-tone="flat"] {
+  --sk-land-warmth: light-dark(rgb(205 168 138 / 0.24), rgb(190 166 228 / 0.25));
+}
+.sk-land-art::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 35% 0 22%;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    light-dark(rgb(255 244 226 / 0.25), rgb(198 205 255 / 0.1)) 46%,
+    transparent
+  );
+  filter: blur(16px);
+}
+.sk-land-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.sk-land-stars {
+  position: absolute;
+  inset: 0 0 45% 0;
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, var(--sk-land-star), transparent),
+    radial-gradient(1px 1px at 28% 8%, var(--sk-land-star), transparent),
+    radial-gradient(1.5px 1.5px at 41% 30%, var(--sk-land-star), transparent),
+    radial-gradient(1px 1px at 57% 14%, var(--sk-land-star), transparent),
+    radial-gradient(1px 1px at 69% 34%, var(--sk-land-star), transparent),
+    radial-gradient(1.5px 1.5px at 83% 10%, var(--sk-land-star), transparent),
+    radial-gradient(1px 1px at 93% 26%, var(--sk-land-star), transparent);
+  opacity: 0.7;
+  animation: sk-land-twinkle 5s ease-in-out infinite alternate;
+}
+.sk-land-stars-b {
+  background-image:
+    radial-gradient(1px 1px at 20% 40%, var(--sk-land-star), transparent),
+    radial-gradient(1px 1px at 35% 18%, var(--sk-land-star), transparent),
+    radial-gradient(1px 1px at 50% 6%, var(--sk-land-star), transparent),
+    radial-gradient(1.5px 1.5px at 64% 24%, var(--sk-land-star), transparent),
+    radial-gradient(1px 1px at 77% 44%, var(--sk-land-star), transparent),
+    radial-gradient(1px 1px at 88% 36%, var(--sk-land-star), transparent);
+  animation-duration: 7s;
+  animation-delay: -3s;
+}
+.sk-land-sun {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 70%;
+  aspect-ratio: 1.5;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    var(--sk-land-sun-core) 0%,
+    color-mix(in srgb, var(--sk-land-sun-halo) 85%, var(--sk-land-warmth)) 26%,
+    color-mix(in srgb, var(--si-violet) 32%, transparent) 55%,
+    transparent 100%
+  );
+  animation: sk-land-breathe 9s ease-in-out infinite alternate;
+}
+.sk-land-far-0 {
+  animation: sk-atmo-drift-a 26s ease-in-out infinite alternate;
+  transform: translate3d(
+    calc(var(--sk-parallax-x, 0px) * -0.6),
+    calc(var(--sk-parallax-y, 0px) * -0.4),
+    0
+  );
+}
+.sk-land-far-1 {
+  animation: sk-atmo-drift-b 32s ease-in-out infinite alternate;
+  transform: translate3d(
+    calc(var(--sk-parallax-x, 0px) * -0.35),
+    calc(var(--sk-parallax-y, 0px) * -0.2),
+    0
+  );
+}
+.sk-land-far-2 {
+  transform: translate3d(calc(var(--sk-parallax-x, 0px) * -0.14), 0, 0);
+}
+.sk-land-edge {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: sk-land-draw 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+.sk-land-edge-glow {
+  opacity: 0.6;
+}
+.sk-land-flow {
+  stroke: light-dark(#ffffff, #e8fbff);
+  stroke-linecap: round;
+  stroke-dasharray: 0.06 0.94;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  filter: drop-shadow(0 0 4px var(--si-cyan));
+  animation: sk-land-flow 7s linear 1.6s infinite;
+}
+.sk-land-mist {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 45%;
+  background: linear-gradient(
+    0deg,
+    color-mix(in srgb, var(--card) 40%, transparent),
+    transparent 82%
+  );
+  pointer-events: none;
+}
+.sk-land[data-active="false"] :is(.sk-land-stars, .sk-land-sun, .sk-land-far, .sk-land-flow),
+.sk-land[data-active="false"] .sk-land-dot::after {
+  animation-play-state: paused;
+}
+
+.sk-land-marker {
+  position: absolute;
+  z-index: 3;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  transition:
+    left 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    top 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sk-land-art[data-hovering="true"] .sk-land-marker {
+  transition-duration: 0.08s;
+}
+.sk-land-drop {
+  position: absolute;
+  left: -0.5px;
+  top: 0;
+  width: 1px;
+  height: var(--sk-land-drop-height, 0%);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--si-cyan) 85%, transparent),
+    transparent 60%
+  );
+}
+.sk-land-dot {
+  position: absolute;
+  left: -6px;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: light-dark(#ffffff, #dffaff);
+  border: 2px solid var(--si-cyan);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--si-cyan) 25%, transparent),
+    0 0 18px var(--si-cyan);
+}
+.sk-land-dot::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid var(--si-cyan);
+  animation: sk-land-ping 2.4s ease-out infinite;
+}
+.sk-land-badge {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  translate: -50% 0;
+  display: grid;
+  justify-items: center;
+  gap: 1px;
+  padding: 0.35rem 0.7rem;
+  white-space: nowrap;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--si-cyan) 55%, transparent);
+  background: light-dark(rgb(255 255 255 / 0.97), rgb(9 28 42 / 0.95));
+  box-shadow: 0 6px 22px light-dark(rgb(40 30 80 / 0.18), rgb(0 0 0 / 0.45));
+  color: var(--fg);
+}
+.sk-land-badge[data-edge="end"] {
+  translate: calc(-100% + 18px) 0;
+}
+.sk-land-badge[data-edge="start"] {
+  translate: -18px 0;
+}
+.sk-land-badge b {
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+.sk-land-badge[data-tone="up"] b {
+  color: var(--sk-land-up);
+}
+.sk-land-badge[data-tone="down"] b {
+  color: var(--sk-land-down);
+}
+.sk-land-badge small {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.sk-land-controls {
+  position: relative;
+  z-index: 2;
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  padding: 0 1rem 0.85rem;
+}
+.sk-land-ranges {
+  display: inline-flex;
+  padding: 2px;
+  border-radius: 999px;
+  background: light-dark(rgb(255 255 255 / 0.9), rgb(8 6 28 / 0.8));
+  border: 1px solid var(--line);
+}
+.sk-land-ranges button {
+  min-width: 2.4rem;
+  min-height: 0;
+  height: auto;
+  margin: 0;
+  padding: 0.2rem 0.55rem;
+  line-height: 1.3;
+  box-shadow: none;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.sk-land-ranges button[aria-pressed="true"] {
+  background: var(--si-violet);
+  color: var(--accent-fg);
+}
+.sk-land-ranges button:focus-visible {
+  outline: 2px solid var(--si-cyan);
+  outline-offset: 1px;
+}
+.sk-land-scrub {
+  flex: 1 1 140px;
+  min-width: 120px;
+  height: 4px;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--si-cyan) 0 var(--sk-land-fill, 100%),
+    color-mix(in srgb, var(--fg) 22%, transparent) var(--sk-land-fill, 100%)
+  );
+  cursor: pointer;
+}
+.sk-land-scrub::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: light-dark(#fff, #dffaff);
+  border: 2px solid var(--si-cyan);
+  box-shadow: 0 0 10px var(--si-cyan);
+}
+.sk-land-scrub::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: light-dark(#fff, #dffaff);
+  border: 2px solid var(--si-cyan);
+}
+.sk-land-scrub:focus-visible {
+  outline: 2px solid var(--si-cyan);
+  outline-offset: 4px;
+}
+.sk-land-caption {
+  font-size: 0.72rem;
+  color: var(--muted);
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  background: light-dark(rgb(255 255 255 / 0.88), rgb(8 6 28 / 0.75));
+}
+
+@keyframes sk-land-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes sk-land-flow {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  8%,
+  60% {
+    opacity: 1;
+  }
+  70%,
+  100% {
+    stroke-dashoffset: 0.06;
+    opacity: 0;
+  }
+}
+@keyframes sk-land-breathe {
+  from {
+    opacity: 0.82;
+    scale: 0.96;
+  }
+  to {
+    opacity: 1;
+    scale: 1.04;
+  }
+}
+@keyframes sk-land-twinkle {
+  from {
+    opacity: 0.35;
+  }
+  to {
+    opacity: 0.85;
+  }
+}
+@keyframes sk-land-ping {
+  from {
+    opacity: 0.8;
+    scale: 0.6;
+  }
+  to {
+    opacity: 0;
+    scale: 1.6;
+  }
+}
+
+@media (max-width: 760px) {
+  .sk-land {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 190px auto;
+  }
+  .sk-land-copy {
+    grid-row: 1;
+  }
+  .sk-land-art {
+    inset: auto 0 0 0;
+    height: calc(190px + 3.2rem);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 22%);
+  }
+  .sk-land-controls {
+    grid-column: 1;
+    grid-row: 3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sk-land :is(.sk-land-stars, .sk-land-sun, .sk-land-far),
+  .sk-land .sk-land-dot::after {
+    animation: none !important;
+  }
+  .sk-land-edge {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .sk-land-flow {
+    display: none;
+  }
+  .sk-land-marker {
+    transition: none;
+  }
+  .sk-land-art::before {
+    transition: none;
+  }
+}

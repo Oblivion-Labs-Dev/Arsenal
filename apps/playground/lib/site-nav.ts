@@ -44,6 +44,12 @@ export const LAB_ITEMS: LabItem[] = [
     description: 'An interactive dimensional analytics dashboard with linked charts.',
     tag: 'Analytics',
   },
+  {
+    href: '/clayflow',
+    title: 'ClayFlow diagrams',
+    description: 'Claymorphic diagram components from Manthan: nodes, connectors, groups and motion presets.',
+    tag: 'Diagrams',
+  },
 ];
 
 /** Which header item is active for a pathname. Prototype routes belong to Labs. */
