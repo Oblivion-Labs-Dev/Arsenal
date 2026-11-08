@@ -157,8 +157,8 @@ const SOURCE = String.raw`(function () {
         edgeEl.classList.toggle('is-active', !!lit[eId] || !!moving[eId]);
         edgeEl.classList.toggle('cf-off', !shown[eId]);
         edgeEl.classList.toggle('is-dimmed', (frame.dimmed || []).indexOf(eId) !== -1);
-        var pkt = edgeEl.querySelector('.cf-packet');
-        if (pkt) pkt.style.opacity = moving[eId] && !reducedMotion() ? '1' : '0';
+        var pkts = edgeEl.querySelectorAll('.cf-packet');
+        for (var q = 0; q < pkts.length; q++) pkts[q].style.opacity = moving[eId] && !reducedMotion() ? '1' : '0';
       }
     }
 
@@ -178,17 +178,36 @@ const SOURCE = String.raw`(function () {
   function placePackets(inst, progress) {
     var stage = activeStage(inst);
     if (!stage) return;
-    for (var id in inst.packets) {
-      var group = stage.querySelector('.cf-edge[data-edge="' + id + '"]');
-      if (!group) continue;
+    // Parallel wires moving together start one after another so the lanes read as separate flows.
+    var lanes = [];
+    for (var pid in inst.packets) {
+      var pg = stage.querySelector('.cf-edge[data-edge="' + pid + '"]');
+      if (pg) lanes.push({ id: pid, group: pg, parallel: pg.getAttribute('data-kind') === 'parallel' });
+    }
+    var parallelCount = 0;
+    for (var c = 0; c < lanes.length; c++) if (lanes[c].parallel) parallelCount++;
+    var gap = parallelCount > 1 ? Math.min(0.18, 0.5 / (parallelCount - 1)) : 0;
+    var lane = 0;
+    for (var l = 0; l < lanes.length; l++) {
+      var group = lanes[l].group;
       var wire = group.querySelector('.cf-edge-wire');
-      var pkt = group.querySelector('.cf-packet');
-      if (!wire || !pkt || !wire.getTotalLength) continue;
+      var pkts = group.querySelectorAll('.cf-packet');
+      if (!wire || !pkts.length || !wire.getTotalLength) continue;
+      var local = progress;
+      if (lanes[l].parallel && gap) {
+        var delay = gap * lane++;
+        local = Math.max(0, Math.min(1, (progress - delay) / (1 - gap * (parallelCount - 1))));
+      }
       var len = wire.getTotalLength();
-      var t = ease(progress);
-      var pt = wire.getPointAtLength((inst.packets[id].reverse ? 1 - t : t) * len);
-      pkt.setAttribute('cx', pt.x.toFixed(1));
-      pkt.setAttribute('cy', pt.y.toFixed(1));
+      var t = ease(local);
+      var backwards = !!inst.packets[lanes[l].id].reverse;
+      for (var k = 0; k < pkts.length; k++) {
+        // A data-reverse packet (bidirectional edge) runs against the frame's direction.
+        var rev = backwards !== pkts[k].hasAttribute('data-reverse');
+        var pt = wire.getPointAtLength((rev ? 1 - t : t) * len);
+        pkts[k].setAttribute('cx', pt.x.toFixed(1));
+        pkts[k].setAttribute('cy', pt.y.toFixed(1));
+      }
     }
   }
 
@@ -471,13 +490,19 @@ const SOURCE = String.raw`(function () {
   window.ClayFlow = { mount: mount, unmount: unmount, get: function (fig) { var inst = getInst(fig); if (!inst) return null; return { play: function () { inst.play(); }, pause: function () { inst.pause(); }, toggle: function () { inst.toggle(); }, replay: function () { inst.replay(); }, reset: function () { inst.reset(); }, step: function (dir) { inst.step(dir); }, seek: function (index) { inst.seek(index); }, setSpeed: function (n) { inst.setSpeed(n); }, inspect: function (id) { inst.inspect(id); }, on: function (event, fn) { return inst.on(event, fn); } }; } };
 })();`;
 
-export const CLAYFLOW_RUNTIME = SOURCE.replace(/^[ \t]+/gm, "")
-  .replace(/^\/\/.*\n/gm, "")
+export const CLAYFLOW_RUNTIME = SOURCE.replace(/^[ \t]+/gm, '')
+  .replace(/^\/\/.*\n/gm, '')
   .trim();
 
 export interface ClayFlowInstanceAPI {
-  play(): void; pause(): void; toggle(): void; replay(): void; reset(): void;
-  step(dir: number): void; seek(index: number): void; setSpeed(n: number): void;
+  play(): void;
+  pause(): void;
+  toggle(): void;
+  replay(): void;
+  reset(): void;
+  step(dir: number): void;
+  seek(index: number): void;
+  setSpeed(n: number): void;
   inspect(nodeId: string | null): void;
-  on(event: "frame" | "complete", fn: (value?: number) => void): () => void;
+  on(event: 'frame' | 'complete', fn: (value?: number) => void): () => void;
 }
