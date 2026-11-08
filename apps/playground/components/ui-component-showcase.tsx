@@ -65,6 +65,22 @@ export interface ComponentCollection {
 }
 
 const showroomMeta: Record<string, ShowroomMeta> = {
+  'gravity-well': {
+    category: '3D',
+    tags: ['black hole', 'webgl', 'signature'],
+    difficulty: 'Advanced',
+    dependencies: ['@arsenal/three', 'three', '@react-three/fiber'],
+    popularity: 80,
+    recentlyAdded: true,
+  },
+  'anomaly-matrix': {
+    category: '3D',
+    tags: ['sphere', 'webgl', 'wireframe'],
+    difficulty: 'Advanced',
+    dependencies: ['@arsenal/three', 'three', '@react-three/fiber'],
+    popularity: 80,
+    recentlyAdded: true,
+  },
   'aurora-background': {
     category: 'Backgrounds',
     tags: ['aurora', 'ambient', 'hero'],

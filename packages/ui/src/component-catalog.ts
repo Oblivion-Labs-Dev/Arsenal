@@ -1888,6 +1888,59 @@ export function Example() {
   );
 }`,
   },
+  {
+    id: "gravity-well",
+    name: "GravityWell",
+    description: "A black hole with a two-armed Keplerian accretion disk, rendered in WebGL with React Three Fiber.",
+    category: 'effects',
+    importLine: 'import { GravityWell } from "@arsenal/three";',
+    props: [
+      "particleCount?: number",
+      "diskSpeed?: number",
+      "colorTheme?: \"theme\" | \"indigo\" | \"amber\" | \"emerald\"",
+      "autoColor?: boolean",
+      "palette?: \"dark\" | \"light\" | \"auto\"",
+    ],
+    usage: "Use as a signature hero visual or a section centrepiece. Needs the optional three and @react-three/fiber peers.",
+    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
+    performance: "Orbits run in the vertex shader (no per-frame CPU work); renders on demand when off screen, in a background tab or with reduced motion.",
+    code: `import { GravityWell } from "@arsenal/three";
+
+export function Example() {
+  return (
+    <section className="relative h-[420px]">
+      <GravityWell particleCount={2000} diskSpeed={1} />
+    </section>
+  );
+}`,
+  },
+  {
+    id: "anomaly-matrix",
+    name: "AnomalyMatrix",
+    description: "A noise-displaced wireframe sphere with a rim glow that breathes, in its own WebGL canvas (GodSphere mesh included).",
+    category: 'effects',
+    importLine: 'import { AnomalyMatrix, GodSphere } from "@arsenal/three";',
+    props: [
+      "speed?: number",
+      "scale?: number",
+      "charge?: number  // 0-1, eases between core and outer colour",
+      "detail?: number",
+      "colorTheme?: \"theme\" | \"indigo\" | \"amber\" | \"emerald\"",
+      "autoColor?: boolean",
+    ],
+    usage: "Use as a hero centrepiece or drop <GodSphere> into your own R3F scene. Drive charge from scroll or state.",
+    accessibility: "Decorative and aria-hidden; with reduced motion it renders one still frame.",
+    performance: "Displacement runs on the GPU; lower detail for small cards. Paused off screen and in background tabs.",
+    code: `import { AnomalyMatrix } from "@arsenal/three";
+
+export function Example() {
+  return (
+    <section className="relative h-[420px]">
+      <AnomalyMatrix speed={1} charge={0.3} />
+    </section>
+  );
+}`,
+  },
 ];
 
 export const COMPONENT_CATEGORIES: { id: ComponentCategory; label: string }[] = [

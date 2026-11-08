@@ -4,6 +4,7 @@ const nextConfig = {
     '@arsenal/ui',
     '@arsenal/motion',
     '@arsenal/fx',
+    '@arsenal/three',
     '@arsenal/sections',
     '@arsenal/layouts',
     '@arsenal/themes',

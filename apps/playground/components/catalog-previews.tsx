@@ -1,6 +1,7 @@
 'use client';
 
 import { type ReactNode, useMemo, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
 import {
   AuroraBackground,
   CosmicParticleBackground,
@@ -345,6 +346,17 @@ function FxScene({ children, hint }: { children: ReactNode; hint?: string }) {
   );
 }
 
+/** three.js is optional: the 3D scenes load only when their card renders, never on the server. */
+const SceneLoading = () => <div className="h-full w-full animate-pulse rounded-xl bg-arsenal-surface" />;
+const GravityWell = dynamic(() => import('@arsenal/three').then((m) => m.GravityWell), {
+  ssr: false,
+  loading: SceneLoading,
+});
+const AnomalyMatrix = dynamic(() => import('@arsenal/three').then((m) => m.AnomalyMatrix), {
+  ssr: false,
+  loading: SceneLoading,
+});
+
 function ParticleBurstDemo() {
   const ref = useRef<ParticleBurstHandle>(null);
   return (
@@ -680,6 +692,16 @@ const DEMOS: Record<string, () => ReactNode> = {
     </FxScene>
   ),
   'particle-burst': () => <ParticleBurstDemo />,
+  'gravity-well': () => (
+    <FxScene>
+      <GravityWell particleCount={1800} />
+    </FxScene>
+  ),
+  'anomaly-matrix': () => (
+    <FxScene>
+      <AnomalyMatrix detail={40} scale={0.95} charge={0.35} />
+    </FxScene>
+  ),
   'weather-canvas': () => (
     <FxScene>
       <WeatherCanvas precip="rain" intensity={0.7} wind={0.3} ripples />
