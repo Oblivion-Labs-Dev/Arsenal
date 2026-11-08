@@ -56,6 +56,12 @@ export const LAB_ITEMS: LabItem[] = [
     description: 'A beginner-friendly market dashboard assembled from Manthan clay components with illustrative sample data.',
     tag: 'Finance',
   },
+  {
+    href: '/reports',
+    title: 'Manthan Reports',
+    description: 'An editorial report reader with fictional stories and ClayFlow diagrams.',
+    tag: 'Reports',
+  },
 ];
 
 /** Which header item is active for a pathname. Prototype routes belong to Labs. */
