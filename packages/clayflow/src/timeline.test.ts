@@ -119,4 +119,12 @@ describe("ClayFlow animation timeline", () => {
     expect(frame!.dimmed).toEqual(expect.arrayContaining(["skip", "no"]));
     expect(frame!.dimmed).not.toContain("end");
   });
+  it("does not dim nodes already walked when the skipped branch loops back upstream", () => {
+    const spec = diagramSchema.parse({ schemaVersion: "1.0", id: "loopback", title: "Loop back", nodes: [{ id: "start", kind: "process", label: "Start" }, { id: "work", kind: "process", label: "Work" }, { id: "gate", kind: "decision", label: "Gate" }, { id: "done", kind: "goal", label: "Done" }], edges: [{ id: "s-w", from: "start", to: "work" }, { id: "w-g", from: "work", to: "gate" }, { id: "go", from: "gate", to: "done", kind: "conditional", condition: "Ok" }, { id: "again", from: "gate", to: "work", kind: "feedback" }], animation: { preset: "data-flow", steps: [{ caption: "Pass", branch: { from: "gate", take: "go" } }] } });
+    const [frame] = compile(spec);
+    expect(frame!.dimmed).toContain("again");
+    expect(frame!.dimmed).not.toContain("work");
+    expect(frame!.dimmed).not.toContain("gate");
+    expect(frame!.dimmed).not.toContain("start");
+  });
 });

@@ -164,4 +164,12 @@ describe("ClayFlow layout engine", () => {
     for (const id of ["n1", "n2", "n3"]) expect(y("n0")).toBeGreaterThanOrEqual(y(id));
     expect(y("out")).toBeGreaterThan(y("n0"));
   });
+  it("widens a horizontal gap so a condition pill fits between the two nodes", () => {
+    const spec = diagramSchema.parse({ schemaVersion: "1.0", id: "pill", title: "Pill", layout: "horizontal", nodes: [{ id: "gate", kind: "decision", label: "Gate" }, { id: "done", kind: "goal", label: "Done" }], edges: [{ id: "go", from: "gate", to: "done", kind: "conditional", condition: "All risks reviewed today" }] });
+    const l = computeLayout(spec);
+    const gate = l.nodes.find((n) => n.id === "gate")!;
+    const done = l.nodes.find((n) => n.id === "done")!;
+    const pillWidth = "All risks reviewed today".length * 7 + 26;
+    expect(done.x - (gate.x + gate.w)).toBeGreaterThanOrEqual(pillWidth + 24);
+  });
 });

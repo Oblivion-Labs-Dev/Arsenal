@@ -76,6 +76,11 @@ function getNodeDimensions(node: NodeSpec): { w: number; h: number } {
  * Computes longest-path ranks, performs 2-sweep barycenter ordering,
  * places nodes, builds port anchors, and calculates group bounding boxes.
  */
+/** Width of the rounded condition pill drawn on an edge (check glyph plus text), shared with render. */
+export function conditionPillWidth(condition: string): number {
+  return Math.max(42, condition.length * 7 + 26);
+}
+
 export function computeLayout(
   diagram: Diagram,
   forcedLayout?: "horizontal" | "vertical",
@@ -296,6 +301,17 @@ export function computeLayout(
 
     const maxColHeight = Math.max(...colHeights, 160);
 
+    // A condition pill or label sits on the wire between two adjacent columns; widen that gap so it fits.
+    const gapAfter: number[] = [];
+    for (const e of edges) {
+      const from = ranks.get(e.from) ?? 0;
+      const to = ranks.get(e.to) ?? 0;
+      if (Math.abs(to - from) !== 1) continue;
+      const need = Math.max(e.condition ? conditionPillWidth(e.condition) : 0, e.label ? e.label.length * 7 + 16 : 0) + 24;
+      const r = Math.min(from, to);
+      gapAfter[r] = Math.max(gapAfter[r] ?? rankGap, need);
+    }
+
     let curX = padding;
     for (let r = 0; r <= maxRank; r++) {
       const layer = layers[r]!;
@@ -319,7 +335,7 @@ export function computeLayout(
         curY += dims.h + nodeGap;
       }
 
-      curX += colW + rankGap;
+      curX += colW + (gapAfter[r] ?? rankGap);
     }
   } else {
     // Vertical (narrow screens): ranks run down the page. A rank wider than three nodes wraps

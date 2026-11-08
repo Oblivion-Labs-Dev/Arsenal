@@ -1,7 +1,7 @@
 import { resolveAsset } from "./assets.js";
 import { CATALOG } from "./catalog.js";
 import { getKindMotionFamily } from "./motion/kind-motion.js";
-import { computeLayout, type LayoutResult } from "./layout.js";
+import { computeLayout, conditionPillWidth, type LayoutResult } from "./layout.js";
 import { routeEdges, type RoutedEdge } from "./route.js";
 import { TOPIC_THEMES, type Diagram, type FallbackModel, type Tone } from "./schema.js";
 import { compile, type Frame } from "./timeline.js";
@@ -60,7 +60,7 @@ function renderStage(
       svgContent += `<text class="cf-edge-label" x="${edge.labelX}" y="${labelY}" text-anchor="middle" dominant-baseline="central">${escapeHtml(edge.label)}</text>`;
     }
     if (edge.condition) {
-      const pillWidth = Math.max(42, edge.condition.length * 7 + 26);
+      const pillWidth = conditionPillWidth(edge.condition);
       const pillX = edge.labelX - pillWidth / 2;
       const pillY = edge.labelY - 11;
       svgContent += `<g class="cf-edge-condition" transform="translate(${pillX} ${pillY})"><rect class="cf-edge-condition-pill" width="${pillWidth}" height="22" rx="11"/><text class="cf-edge-condition-check" x="10" y="11" dominant-baseline="central">✓</text><text class="cf-edge-condition-text" x="${pillWidth / 2 + 5}" y="11" text-anchor="middle" dominant-baseline="central">${escapeHtml(edge.condition)}</text></g>`;

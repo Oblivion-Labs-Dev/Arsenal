@@ -105,6 +105,15 @@ export function compile(diagram: Diagram): Frame[] {
       }
       return found;
     };
+    const upstream = (start: string, excludedEdges: Set<string>): Set<string> => {
+      const found = new Set<string>();
+      const queue = [start];
+      while (queue.length) {
+        const current = queue.shift()!;
+        for (const edge of diagram.edges) if (edge.to === current && !excludedEdges.has(edge.id) && !found.has(edge.from)) { found.add(edge.from); queue.push(edge.from); }
+      }
+      return found;
+    };
 
     for (const [idx, step] of rawSteps.entries()) {
       const dur = step.loop ? MOTION.packet.default : step.duration ?? DEFAULT_FRAME_DURATION;
@@ -121,7 +130,9 @@ export function compile(diagram: Diagram): Frame[] {
       const skipped = branch ? outgoing(branch.from).filter((edge) => edge.id !== branch.take) : [];
       const takenEdge = branch ? diagram.edges.find((edge) => edge.id === branch.take) : undefined;
       const taken = takenEdge ? new Set([takenEdge.to, ...reachable(takenEdge.to, new Set())]) : new Set<string>();
-      const dimmed = branch ? [...skipped.map((edge) => edge.id), ...[...new Set(skipped.flatMap((edge) => [edge.to, ...reachable(edge.to, new Set([edge.id]))]))].filter((id) => !taken.has(id))] : [];
+      // The decision node and everything leading to it were already walked; a skipped loop-back edge must not dim them.
+      const walked = branch ? new Set([branch.from, ...upstream(branch.from, new Set(skipped.map((edge) => edge.id)))]) : new Set<string>();
+      const dimmed = branch ? [...skipped.map((edge) => edge.id), ...[...new Set(skipped.flatMap((edge) => [edge.to, ...reachable(edge.to, new Set([edge.id]))]))].filter((id) => !taken.has(id) && !walked.has(id))] : [];
       for (const item of step.transform ?? []) transforms[item.node] = { ...transforms[item.node], ...(item.kind ? { kind: item.kind, motion: getKindMotionFamily(item.kind) } : {}), ...(item.label ? { label: item.label } : {}) };
       expanded = [...new Set([...expanded.filter((id) => !(step.collapse ?? []).includes(id)), ...(step.expand ?? [])])];
       collapsed = [...new Set([...collapsed.filter((id) => !(step.expand ?? []).includes(id)), ...(step.collapse ?? [])])];
