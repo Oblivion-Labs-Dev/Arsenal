@@ -83,14 +83,18 @@ export function ClayFlowDiagram({ spec, mode, assetBase, className, onReady, aut
   const mountOptions = useRef({ onReady, autoPlay, initialStep });
   mountOptions.current = { onReady, autoPlay, initialStep };
 
+  // Runs after every render, but only touches the runtime when the live figure element changed.
+  // React 19 re-applies dangerouslySetInnerHTML whenever the prop object changes identity, which
+  // swaps in a fresh, unmounted figure; keying this on [html] alone would miss that.
   useLayoutEffect(() => {
     ensureClayFlowAssets();
 
     const container = containerRef.current;
     const newFigure = container?.querySelector<HTMLElement>('.cf') ?? null;
     const oldFigure = mountedFigureRef.current;
+    if (newFigure === oldFigure) return;
 
-    if (oldFigure && oldFigure !== newFigure) {
+    if (oldFigure) {
       window.ClayFlow?.unmount(oldFigure);
       mountedFigureRef.current = null;
     }
@@ -106,20 +110,26 @@ export function ClayFlowDiagram({ spec, mode, assetBase, className, onReady, aut
         if (opts.autoPlay) api.play();
       }
     }
+  });
 
-    return () => {
+  useLayoutEffect(
+    () => () => {
       if (mountedFigureRef.current) {
         window.ClayFlow?.unmount(mountedFigureRef.current);
         mountedFigureRef.current = null;
       }
-    };
-  }, [html]);
+    },
+    [],
+  );
+
+  // A stable object keeps React 19 from rewriting the markup (and resetting playback) on re-render.
+  const innerHtml = useMemo(() => ({ __html: html }), [html]);
 
   return (
     <div
       ref={containerRef}
       className={className ? `cf-diagram-host ${className}` : 'cf-diagram-host'}
-      dangerouslySetInnerHTML={{ __html: html }}
+      dangerouslySetInnerHTML={innerHtml}
     />
   );
 }

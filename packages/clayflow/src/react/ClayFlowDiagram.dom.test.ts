@@ -34,4 +34,26 @@ describe("ClayFlowDiagram (DOM)", () => {
     act(() => root.unmount());
     mount.mockRestore();
   });
+  it("mounts the figure again when React re-applies the markup on a parent re-render (React 19)", () => {
+    const host = document.createElement("div");
+    document.body.appendChild(host);
+    const root = createRoot(host);
+    const render = (n: number) => createElement(ClayFlowDiagram, { spec: aiAgentRequestExample, className: `r${n}` });
+
+    act(() => root.render(render(1)));
+    const diagramHost = host.querySelector<HTMLElement>(".cf-diagram-host")!;
+    const first = diagramHost.querySelector<HTMLElement>(".cf")!;
+    expect(window.ClayFlow!.get(first)).not.toBeNull();
+
+    // React 19 re-sets innerHTML whenever the dangerouslySetInnerHTML object changes identity,
+    // replacing the mounted figure with a fresh, unmounted copy of the same markup.
+    diagramHost.innerHTML = diagramHost.innerHTML;
+    act(() => root.render(render(2)));
+
+    const current = diagramHost.querySelector<HTMLElement>(".cf")!;
+    expect(current).not.toBe(first);
+    expect(window.ClayFlow!.get(current)).not.toBeNull();
+    act(() => root.unmount());
+    expect(window.ClayFlow!.get(current)).toBeNull();
+  });
 });
