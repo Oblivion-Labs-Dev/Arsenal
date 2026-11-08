@@ -1250,12 +1250,8 @@ export function Example() {
       <table>
         <thead>
           <tr>
-            <th aria-sort={t.ariaSort("name")}>
-              <SortHeader label="Name" ariaSort={t.ariaSort("name")} arrow={t.arrow("name")} onSort={() => t.toggleSort("name")} />
-            </th>
-            <th aria-sort={t.ariaSort("stars")}>
-              <SortHeader label="Stars" align="right" ariaSort={t.ariaSort("stars")} arrow={t.arrow("stars")} onSort={() => t.toggleSort("stars")} />
-            </th>
+            <SortHeader label="Name" ariaSort={t.ariaSort("name")} arrow={t.arrow("name")} onSort={() => t.toggleSort("name")} />
+            <SortHeader label="Stars" align="right" ariaSort={t.ariaSort("stars")} arrow={t.arrow("stars")} onSort={() => t.toggleSort("stars")} />
           </tr>
         </thead>
         <tbody>

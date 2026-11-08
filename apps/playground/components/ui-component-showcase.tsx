@@ -29,6 +29,7 @@ import {
   cn,
   type ComponentCatalogEntry,
 } from '@arsenal/ui';
+import { CatalogPreview, hasCatalogPreview } from './catalog-previews';
 
 type ViewMode = 'gallery' | 'playground' | 'blueprint' | 'collections';
 type Difficulty = 'Foundational' | 'Intermediate' | 'Advanced' | 'Experimental';
@@ -764,6 +765,7 @@ function ComponentPreview({
         </div>
       );
     default:
+      if (hasCatalogPreview(entry.id)) return <CatalogPreview id={entry.id} />;
       return immersive ? <GlassCard>{entry.name}</GlassCard> : null;
   }
 }
