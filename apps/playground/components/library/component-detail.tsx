@@ -19,7 +19,7 @@ function Fact({ label, children }: { label: string; children: React.ReactNode })
   return (
     <div className="border-t border-arsenal-border py-5">
       <div className="site-label">{label}</div>
-      <div className="mt-2.5 text-[14.5px] leading-relaxed text-arsenal-secondary">{children}</div>
+      <div className="mt-2.5 text-sm leading-relaxed text-arsenal-secondary">{children}</div>
     </div>
   );
 }
@@ -51,14 +51,14 @@ export function ComponentDetail({ entry }: { entry: ComponentCatalogEntry }) {
             type="button"
             onClick={() => setTuning((v) => !v)}
             aria-expanded={tuning}
-            className="h-10 rounded-full border border-arsenal-border px-4 text-sm font-medium text-arsenal-primary transition-colors hover:border-arsenal-border-hover"
+            className="h-10 rounded-lg border border-arsenal-border px-4 text-sm font-medium text-arsenal-primary transition-colors hover:border-arsenal-border-hover"
           >
             {tuning ? 'Hide controls' : 'Tune'}
           </button>
           <button
             type="button"
             onClick={() => copy(copyBundleFor(entry))}
-            className="h-10 rounded-full bg-arsenal-accent px-5 text-sm font-semibold text-arsenal-background transition-opacity hover:opacity-90"
+            className="h-10 rounded-lg bg-arsenal-accent px-5 text-sm font-medium text-arsenal-background transition-opacity hover:opacity-90"
           >
             {state === 'copied' ? 'Copied' : state === 'failed' ? 'Copy failed' : 'Copy component'}
           </button>
@@ -86,7 +86,7 @@ export function ComponentDetail({ entry }: { entry: ComponentCatalogEntry }) {
 
       <div className="mt-14 grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_340px]">
         <section aria-label="Code">
-          <h2 className="text-xl font-semibold tracking-tight text-arsenal-primary">Use it</h2>
+          <h2 className="text-xl font-medium text-arsenal-primary">Use it</h2>
           <div className="mt-4 rounded-arsenal border border-arsenal-border bg-arsenal-background px-4 py-3 font-mono text-[12.5px] text-arsenal-primary">
             {entry.importLine}
           </div>
@@ -115,7 +115,7 @@ export function ComponentDetail({ entry }: { entry: ComponentCatalogEntry }) {
 
       {related.length ? (
         <section className="mt-20" aria-label="Related components">
-          <h2 className="text-xl font-semibold tracking-tight text-arsenal-primary">
+          <h2 className="text-xl font-medium text-arsenal-primary">
             More in {categoryLabel(entry.category)}
           </h2>
           <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

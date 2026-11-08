@@ -32,12 +32,10 @@ function Card({ entry }: { entry: ComponentCatalogEntry }) {
       <PreviewStage entry={entry} className="h-64" />
       <div className="flex items-center justify-between gap-4 border-t border-arsenal-border px-5 py-4">
         <div className="min-w-0">
-          <div className="truncate font-semibold text-arsenal-primary">{entry.name}</div>
+          <div className="truncate font-medium text-arsenal-primary">{entry.name}</div>
           <div className="mt-0.5 truncate text-sm text-arsenal-secondary">{entry.description}</div>
         </div>
-        <span className="text-arsenal-accent transition-transform duration-300 group-hover:translate-x-1">
-          →
-        </span>
+        <span className="font-mono text-xs text-arsenal-muted">View</span>
       </div>
       {/* Overlay link: live previews may contain their own <a>, which must not nest in this one. */}
       <Link
@@ -53,14 +51,14 @@ function Heading() {
   return (
     <div className="flex flex-wrap items-end justify-between gap-6">
       <div>
-        <div className="site-label">Best of the vault</div>
-        <h2 className="site-title mt-3">Live, not screenshots.</h2>
+        <div className="site-label">§ 01 · Components</div>
+        <h2 className="site-title mt-3">Components running in the browser</h2>
       </div>
       <Link
         href="/components"
         className="text-sm font-medium text-arsenal-accent transition-opacity hover:opacity-80"
       >
-        All {UI_COMPONENT_CATALOG.length} components →
+        Browse all {UI_COMPONENT_CATALOG.length} components
       </Link>
     </div>
   );
@@ -100,7 +98,7 @@ export function BestOfStrip() {
 
   if (!pinned) {
     return (
-      <section aria-label="Best of the vault" className="py-20">
+      <section aria-label="Featured components" className="py-20">
         <div className="site-container">
           <Heading />
         </div>
@@ -118,7 +116,7 @@ export function BestOfStrip() {
   return (
     <section
       ref={sectionRef}
-      aria-label="Best of the vault"
+      aria-label="Featured components"
       style={{ height: `calc(100vh + ${travel}px)` }}
     >
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">

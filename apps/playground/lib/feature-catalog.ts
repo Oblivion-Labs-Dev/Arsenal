@@ -23,7 +23,7 @@ export const FEATURE_AREAS: FeatureArea[] = [
     id: 'repository-bootstrap',
     slug: 'repository-bootstrap',
     title: 'Repository Bootstrap',
-    tagline: 'Turn a blank repo into a production workshop in minutes.',
+    tagline: 'Set up a new repository with shared tooling and templates.',
     description:
       'Project creation, folder templates, package setup, TypeScript, linting, formatting, hooks, release policy, and repeatable scaffolds.',
     packages: ['@arsenal/generator', '@arsenal/config', '@arsenal/site-config', '@arsenal/core'],
@@ -65,7 +65,7 @@ export const FEATURE_AREAS: FeatureArea[] = [
     id: 'developer-components',
     slug: 'developer-components',
     title: 'Developer Components',
-    tagline: 'A reusable UI vault for future repositories.',
+    tagline: 'Reusable UI components for current and future projects.',
     description:
       'Cards, buttons, backgrounds, command surfaces, dashboards, motion primitives, and component docs that can be imported independently.',
     packages: ['@arsenal/ui', '@arsenal/motion', '@arsenal/sections', '@arsenal/layouts'],
@@ -108,7 +108,7 @@ export const FEATURE_AREAS: FeatureArea[] = [
     id: 'testing',
     slug: 'testing',
     title: 'Testing',
-    tagline: 'A unified test command center for every repo.',
+    tagline: 'Run and track the checks used across a repository.',
     description:
       'Unit, integration, visual, accessibility, performance, e2e, mutation, regression, golden image, and coverage gates.',
     packages: ['@arsenal/testing', '@arsenal/site-testing', '@arsenal/evaluation'],
@@ -145,7 +145,7 @@ export const FEATURE_AREAS: FeatureArea[] = [
     id: 'ci-cd',
     slug: 'ci-cd',
     title: 'CI/CD',
-    tagline: 'Ship from verified artifacts, not hope.',
+    tagline: 'Build, verify, and release repository artifacts.',
     description:
       'GitHub Actions, Docker, Terraform, AWS, Azure, Kubernetes, deployment checks, rollback plans, and release notes.',
     packages: ['@arsenal/site-testing', '@arsenal/observability', '@arsenal/tools'],
@@ -183,7 +183,7 @@ export const FEATURE_AREAS: FeatureArea[] = [
     id: 'ai-development',
     slug: 'ai-development',
     title: 'AI Development',
-    tagline: 'Rules, memory, prompts, and guardrails for AI-assisted engineering.',
+    tagline: 'Manage rules, memory, prompts, and guardrails for AI-assisted engineering.',
     description:
       'Cursor, Claude, Codex, Copilot, and Gemini rules backed by context engineering, memory, prompt optimization, and knowledge graphs.',
     packages: [
@@ -225,7 +225,7 @@ export const FEATURE_AREAS: FeatureArea[] = [
     id: 'token-optimization',
     slug: 'token-optimization',
     title: 'Token Optimization',
-    tagline: 'Measure, reduce, and reuse context before it reaches a model.',
+    tagline: 'Measure and reduce context, then reuse it across model requests.',
     description:
       'Estimated savings, cache hits, prompt reductions, knowledge reuse, compressed context, retrieval usage, and historical metrics.',
     packages: [
@@ -273,7 +273,7 @@ export const FEATURE_AREAS: FeatureArea[] = [
     id: 'knowledge-graph',
     slug: 'knowledge-graph',
     title: 'Knowledge Graph',
-    tagline: 'A queryable map of components, rules, templates, agents, docs, and prompts.',
+    tagline: 'Query relationships between components, rules, templates, agents, docs, and prompts.',
     description:
       'Interactive relationships between modules, source files, summaries, rules, agents, projects, documentation, and generated prompts.',
     packages: ['@arsenal/context-engine', '@arsenal/knowledge', '@arsenal/retrieval'],
@@ -377,7 +377,7 @@ export const FEATURE_AREAS: FeatureArea[] = [
     id: 'labs',
     slug: 'labs',
     title: 'Labs',
-    tagline: 'Experimental prototypes, animations, AI workflows, and future capabilities.',
+    tagline: 'Explore prototypes, animation experiments, AI workflows, and planned capabilities.',
     description:
       'A contained space for proof-of-concepts, animation experiments, new agent workflows, and repository operating-system ideas.',
     packages: ['@arsenal/sections', '@arsenal/motion', '@arsenal/plugins'],

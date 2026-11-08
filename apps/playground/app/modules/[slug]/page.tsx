@@ -31,7 +31,7 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
           Modules
         </Link>
         <span className="mx-2 text-arsenal-muted">/</span>
-        <span>{String(index + 1).padStart(2, '0')}</span>
+        <span>{feature.title}</span>
       </nav>
 
       <header className="mt-5 max-w-3xl">
@@ -41,7 +41,7 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
           {feature.packages.map((pkg) => (
             <span
               key={pkg}
-              className="rounded-full border border-arsenal-border bg-arsenal-surface px-3 py-1 font-mono text-xs text-arsenal-primary"
+              className="rounded-md border border-arsenal-border bg-arsenal-surface px-3 py-1 font-mono text-xs text-arsenal-primary"
             >
               {pkg}
             </span>
@@ -53,7 +53,7 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
         {feature.metrics.map((metric) => (
           <div key={metric.label} className="p-6">
             <dt className="site-label">{metric.label}</dt>
-            <dd className="mt-3 text-2xl font-semibold tracking-tight text-arsenal-primary">
+            <dd className="mt-3 text-2xl font-medium text-arsenal-primary">
               {metric.value}
             </dd>
             <dd className="mt-1 text-sm text-arsenal-secondary">{metric.hint}</dd>
@@ -78,7 +78,7 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-arsenal-border bg-arsenal-surface font-mono text-xs text-arsenal-primary">
                   {i + 1}
                 </span>
-                <span className="pt-0.5 text-[14.5px] text-arsenal-secondary">{step}</span>
+                <span className="pt-0.5 text-sm text-arsenal-secondary">{step}</span>
               </li>
             ))}
           </ol>
@@ -107,7 +107,7 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
                 <Link
                   key={link.href}
                   href={link.href.replace(/^\/features\//, '/modules/')}
-                  className="rounded-full border border-arsenal-border px-4 py-2 text-sm font-medium text-arsenal-primary transition-colors hover:border-arsenal-border-hover"
+                  className="rounded-lg border border-arsenal-border px-4 py-2 text-sm font-medium text-arsenal-primary transition-colors hover:border-arsenal-border-hover"
                 >
                   {link.label}
                 </Link>
@@ -127,9 +127,7 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
             <div className="mt-2 text-lg font-semibold text-arsenal-primary">{next.title}</div>
             <div className="mt-1 text-sm text-arsenal-secondary">{next.tagline}</div>
           </div>
-          <span className="text-2xl text-arsenal-accent transition-transform duration-300 group-hover:translate-x-1">
-            →
-          </span>
+          <span className="font-mono text-xs text-arsenal-muted">Next module</span>
         </Link>
       ) : null}
     </div>

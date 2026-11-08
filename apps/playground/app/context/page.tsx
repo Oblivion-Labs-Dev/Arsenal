@@ -10,7 +10,7 @@ export default function ContextPage() {
   return (
     <div className="site-container">
       <header className="max-w-3xl pt-10">
-        <div className="site-label">Intelligence</div>
+        <div className="site-label">§ 07 · Context</div>
         <h1 className="site-title mt-3">Context</h1>
         <p className="site-lede mt-4">
           How much context Arsenal saves, how good it is, and where to optimise next.

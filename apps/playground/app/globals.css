@@ -4,45 +4,30 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
- * Site layer on top of the @arsenal/ui themes. Everything reads the theme tokens, so deep-forge,
- * obsidian-cyber and ivory-graphite all work without hard-coded colours.
- */
 :root {
   --site-max: 1240px;
   --site-gutter: clamp(1rem, 3vw, 2rem);
   --site-header-h: 3.5rem;
   --site-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --site-glow: color-mix(in srgb, var(--arsenal-accent) 16%, transparent);
-  --site-glow-2: color-mix(
-    in srgb,
-    var(--arsenal-steel-blue, var(--arsenal-accent)) 10%,
-    transparent
-  );
-  --site-card-shadow:
-    0 1px 0 color-mix(in srgb, var(--arsenal-text-primary) 4%, transparent) inset,
-    0 18px 40px -24px rgb(0 0 0 / 0.65);
-  --site-card-shadow-hover:
-    0 1px 0 color-mix(in srgb, var(--arsenal-text-primary) 6%, transparent) inset,
-    0 28px 60px -28px rgb(0 0 0 / 0.75),
-    0 0 0 1px color-mix(in srgb, var(--arsenal-accent) 18%, transparent);
-  --site-header-bg: color-mix(in srgb, var(--arsenal-background) 86%, transparent);
+  --site-card-shadow: 0 1px 2px rgb(29 25 18 / 0.05), 0 8px 24px -18px rgb(29 25 18 / 0.12);
+  --site-card-shadow-hover: 0 2px 4px rgb(29 25 18 / 0.07), 0 10px 28px -18px rgb(29 25 18 / 0.16);
+  --site-header-bg: var(--arsenal-surface);
+}
+
+[data-theme='deep-forge'],
+[data-theme='obsidian-cyber'] {
+  --site-card-shadow: none;
+  --site-card-shadow-hover: none;
+  --site-header-bg: var(--arsenal-surface);
 }
 
 [data-theme='ivory-graphite'] {
-  --site-glow: color-mix(in srgb, #d6a85b 14%, transparent);
-  --site-glow-2: color-mix(in srgb, var(--arsenal-accent-blue, #2563eb) 6%, transparent);
-  --site-card-shadow: 0 1px 2px rgb(60 48 20 / 0.06), 0 10px 28px -14px rgb(60 48 20 / 0.18);
-  --site-card-shadow-hover: 0 2px 4px rgb(60 48 20 / 0.08), 0 22px 44px -18px rgb(60 48 20 / 0.26);
-  --site-header-bg: color-mix(in srgb, var(--arsenal-surface) 90%, transparent);
+  color-scheme: light;
 }
 
 html {
   scroll-behavior: auto;
   color-scheme: dark;
-}
-[data-theme='ivory-graphite'] {
-  color-scheme: light;
 }
 
 body {
@@ -52,22 +37,19 @@ body {
   background: var(--arsenal-background);
 }
 
-/* Fixed atmosphere behind every page: pools of light, never flat black or flat white. */
 .site-atmosphere {
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
+  /* Depth comes from tone, not colour: a soft neutral lift at the top, settling darker below. */
   background:
-    radial-gradient(60rem 36rem at 50% -12rem, var(--site-glow), transparent 70%),
-    radial-gradient(40rem 30rem at -8% 70%, var(--site-glow-2), transparent 70%),
-    radial-gradient(36rem 28rem at 108% 40%, var(--site-glow-2), transparent 70%),
-    var(--arsenal-background);
+    radial-gradient(70rem 40rem at 50% -14rem, color-mix(in srgb, var(--arsenal-text-primary) 5%, transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--arsenal-surface) 55%, var(--arsenal-background)) 0%, var(--arsenal-background) 42rem);
 }
 [data-theme='ivory-graphite'] .site-atmosphere {
   background:
-    radial-gradient(60rem 36rem at 50% -14rem, var(--site-glow), transparent 70%),
-    radial-gradient(44rem 30rem at 0% 80%, var(--site-glow-2), transparent 70%),
+    radial-gradient(70rem 40rem at 50% -14rem, rgb(255 255 255 / 0.7), transparent 70%),
     linear-gradient(180deg, #fbfaf7 0%, #f6f2e9 100%);
 }
 
@@ -78,103 +60,92 @@ body {
   padding-inline: var(--site-gutter);
 }
 
-/* Floating header with a solid enough backing to stay readable over any content. */
 .site-header {
   background: var(--site-header-bg);
-  backdrop-filter: saturate(1.4) blur(14px);
-  -webkit-backdrop-filter: saturate(1.4) blur(14px);
   border: 1px solid var(--arsenal-border);
   box-shadow: var(--site-card-shadow);
 }
 
-/* Type scale: display / title / body / label. Labels stay readable: >= 0.72rem, <= 0.16em. */
+.site-header :focus-visible,
+.site-card :focus-visible {
+  outline: 2px solid var(--arsenal-accent);
+  outline-offset: 2px;
+}
+
 .site-display {
-  font-size: clamp(2.6rem, 6.4vw, 5.25rem);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
-  font-weight: 600;
-  color: var(--arsenal-text-primary);
-}
-.site-title {
-  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
-  line-height: 1.08;
+  font-size: clamp(2.5rem, 5.3vw, 4.5rem);
+  line-height: 1.04;
   letter-spacing: -0.025em;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--arsenal-text-primary);
 }
+
+.site-title {
+  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+  line-height: 1.14;
+  letter-spacing: -0.018em;
+  font-weight: 500;
+  color: var(--arsenal-text-primary);
+}
+
 .site-lede {
-  font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
   line-height: 1.65;
   color: var(--arsenal-text-secondary);
 }
+
 .site-label {
-  font-size: 0.74rem;
-  line-height: 1.2;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--arsenal-muted);
-}
-[data-theme='deep-forge'] .site-label,
-[data-theme='obsidian-cyber'] .site-label {
-  color: color-mix(in srgb, var(--arsenal-text-secondary) 72%, var(--arsenal-muted));
 }
 
 .site-card {
   position: relative;
-  border-radius: var(--arsenal-radius-lg);
+  border-radius: 14px;
   border: 1px solid var(--arsenal-border);
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--arsenal-text-primary) 2.5%, transparent),
-      transparent 40%
-    ),
-    var(--arsenal-surface);
+  background: var(--arsenal-surface);
   box-shadow: var(--site-card-shadow);
   transition:
-    border-color 0.35s var(--site-ease),
-    box-shadow 0.35s var(--site-ease),
-    transform 0.35s var(--site-ease);
+    border-color 160ms var(--site-ease),
+    background-color 160ms var(--site-ease),
+    box-shadow 160ms var(--site-ease);
 }
+
 a.site-card:hover,
 .site-card[data-interactive]:hover {
   border-color: var(--arsenal-border-hover);
   box-shadow: var(--site-card-shadow-hover);
-  transform: translateY(-2px);
 }
 
 .site-hairline {
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--arsenal-border) 15%,
-    var(--arsenal-border) 85%,
-    transparent
-  );
+  background: var(--arsenal-border);
 }
 
 .site-kbd {
   display: inline-flex;
   align-items: center;
   gap: 0.15rem;
-  border-radius: 0.4rem;
+  border-radius: 5px;
   border: 1px solid var(--arsenal-border);
   background: var(--arsenal-elevated);
-  padding: 0.1rem 0.4rem;
-  font-family: var(--font-mono);
+  padding: 0.15rem 0.4rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.72rem;
   color: var(--arsenal-text-secondary);
 }
 
 .site-overlay {
-  background: color-mix(in srgb, var(--arsenal-background) 72%, transparent);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: color-mix(in srgb, var(--arsenal-background) 92%, transparent);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
-/* Soft edge mask so a full-bleed visual melts into the page instead of sitting in a box. */
 .site-mask-fade {
   -webkit-mask-image: radial-gradient(ellipse 70% 62% at 50% 46%, #000 38%, transparent 78%);
   mask-image: radial-gradient(ellipse 70% 62% at 50% 46%, #000 38%, transparent 78%);
@@ -188,14 +159,13 @@ a.site-card:hover,
   display: none;
 }
 
-/* Theme reveal (from @arsenal/motion THEME_REVEAL_CSS). */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }
 :root.theme-reveal::view-transition-new(root) {
-  animation: arsenal-theme-reveal 0.78s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: arsenal-theme-reveal 0.42s var(--site-ease);
 }
 @keyframes arsenal-theme-reveal {
   from {
@@ -210,13 +180,24 @@ a.site-card:hover,
 .theme-fade *::before,
 .theme-fade *::after {
   transition:
-    background-color 0.65s cubic-bezier(0.4, 0, 0.2, 1),
-    color 0.65s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.65s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.65s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    background-color 220ms var(--site-ease),
+    color 220ms var(--site-ease),
+    border-color 220ms var(--site-ease),
+    box-shadow 220ms var(--site-ease) !important;
+}
+
+.site-stage {
+  background:
+    radial-gradient(color-mix(in srgb, var(--arsenal-text-primary) 7%, transparent) 1px, transparent 1px) 0 0 / 20px 20px,
+    var(--arsenal-background);
 }
 
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
   ::view-transition-new(root) {
     animation: none !important;
   }
@@ -229,12 +210,4 @@ a.site-card:hover,
     transition: none;
     transform: none;
   }
-}
-
-/* Preview stage: a quiet dotted field that frames a live component in both themes. */
-.site-stage {
-  background:
-    radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--arsenal-accent) 7%, transparent), transparent 65%),
-    radial-gradient(color-mix(in srgb, var(--arsenal-text-primary) 9%, transparent) 1px, transparent 1px) 0 0 / 18px 18px,
-    var(--arsenal-background);
 }

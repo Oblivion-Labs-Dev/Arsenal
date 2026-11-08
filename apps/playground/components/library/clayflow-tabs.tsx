@@ -141,14 +141,14 @@ export function ClayFlowTabs() {
               aria-controls={`cft-panel-${g.id}`}
               tabIndex={selected ? 0 : -1}
               onClick={() => setActive(g.id)}
-              className="relative shrink-0 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[13px] font-medium"
+              className="relative shrink-0 whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium"
             >
               {selected ? (
                 <motion.span
                   layoutId="clayflow-subtab"
-                  className="absolute inset-0 rounded-full border border-arsenal-border-hover bg-arsenal-elevated"
+                  className="absolute inset-0 rounded-md border border-arsenal-border bg-arsenal-elevated"
                   transition={
-                    reduced ? { duration: 0 } : { type: 'spring', stiffness: 420, damping: 36 }
+                    reduced ? { duration: 0 } : { duration: 0.16, ease: [0.22, 1, 0.36, 1] }
                   }
                 />
               ) : null}

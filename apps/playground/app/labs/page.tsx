@@ -12,7 +12,7 @@ export default function LabsPage() {
   return (
     <div className="site-container">
       <header className="max-w-3xl pt-10">
-        <div className="site-label">The forge</div>
+        <div className="site-label">&sect; 05 &middot; Labs</div>
         <h1 className="site-title mt-3">Labs</h1>
         <p className="site-lede mt-4">
           Full working prototypes that are still being shaped, and the modules planned next.
@@ -22,28 +22,25 @@ export default function LabsPage() {
       <section aria-label="Prototypes" className="mt-12 grid gap-5 md:grid-cols-3">
         {LAB_ITEMS.map((lab) => (
           <Link key={lab.href} href={lab.href} className="site-card group flex flex-col p-6">
-            <span className="w-fit rounded-full border border-arsenal-border px-2.5 py-0.5 text-xs text-arsenal-secondary">
+            <span className="w-fit rounded-md border border-arsenal-border px-2.5 py-1 text-xs text-arsenal-secondary">
               {lab.tag}
             </span>
-            <h2 className="mt-5 text-lg font-semibold tracking-tight text-arsenal-primary">
+            <h2 className="mt-4 text-lg font-medium text-arsenal-primary">
               {lab.title}
             </h2>
-            <p className="mt-2 text-[14.5px] leading-relaxed text-arsenal-secondary">
+            <p className="mt-2 text-sm leading-relaxed text-arsenal-secondary">
               {lab.description}
             </p>
             <span className="mt-auto pt-6 text-sm font-medium text-arsenal-accent">
-              Open prototype
-              <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">
-                →
-              </span>
+              View prototype
             </span>
           </Link>
         ))}
       </section>
 
       <section id="next" aria-label="Next" className="mt-24 scroll-mt-28">
-        <div className="site-label">Next</div>
-        <h2 className="mt-3 text-2xl font-semibold tracking-tight text-arsenal-primary">
+        <div className="site-label">&sect; 06 &middot; Planned work</div>
+        <h2 className="mt-3 text-2xl font-medium text-arsenal-primary">
           On the roadmap
         </h2>
         <p className="mt-3 max-w-2xl text-[15px] text-arsenal-secondary">

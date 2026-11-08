@@ -8,7 +8,7 @@ import { openPalette } from '@/components/site-command-palette';
 import { ThemeSwitch } from '@/components/theme-switch';
 import { LAB_ITEMS, NAV_ITEMS, activeNavHref } from '@/lib/site-nav';
 
-/** Arsenal mark: a forged hex core. Same shape as the hero visual, at icon size. */
+/** Arsenal mark: a compact hex symbol used beside the wordmark. */
 export function ArsenalMark({ className = 'h-6 w-6' }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" className={className} aria-hidden="true" fill="none">
@@ -20,10 +20,11 @@ export function ArsenalMark({ className = 'h-6 w-6' }: { className?: string }) {
       />
       <path
         d="M16 8.5 22.5 12.25v7.5L16 23.5l-6.5-3.75v-7.5L16 8.5Z"
-        stroke="var(--arsenal-accent)"
+        stroke="currentColor"
+        strokeOpacity="0.72"
         strokeWidth="1.6"
       />
-      <circle cx="16" cy="16" r="2.4" fill="var(--arsenal-accent)" />
+      <circle cx="16" cy="16" r="2.4" fill="currentColor" fillOpacity="0.72" />
     </svg>
   );
 }
@@ -36,7 +37,7 @@ function SearchButton({ compact = false }: { compact?: boolean }) {
       type="button"
       onClick={openPalette}
       aria-label="Search (Ctrl+K)"
-      className="flex h-9 items-center gap-2 rounded-full border border-arsenal-border px-3 text-[13px] text-arsenal-secondary transition-colors hover:border-arsenal-border-hover hover:text-arsenal-primary"
+      className="flex h-9 items-center gap-2 rounded-md border border-arsenal-border px-3 text-sm text-arsenal-secondary transition-colors hover:border-arsenal-border-hover hover:text-arsenal-primary"
     >
       <svg
         viewBox="0 0 20 20"
@@ -65,14 +66,14 @@ function Header() {
 
   return (
     <>
-      <div className="pointer-events-none fixed inset-x-0 top-0 z-50 pt-3">
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-50">
         <div className="site-container">
-          <header className="site-header pointer-events-auto flex h-[var(--site-header-h)] items-center gap-2 rounded-full pl-4 pr-2">
+          <header className="site-header pointer-events-auto flex h-[var(--site-header-h)] items-center gap-2 rounded-b-xl px-3 sm:px-4">
             <Link href="/" className="flex items-center gap-2.5 pr-3 text-arsenal-primary">
               <ArsenalMark />
-              <span className="text-[15px] font-semibold tracking-tight">Arsenal</span>
+              <span className="text-[15px] font-semibold">Arsenal</span>
             </Link>
-            <nav aria-label="Main" className="hidden flex-1 items-center justify-center md:flex">
+            <nav aria-label="Main" className="hidden flex-1 items-center md:flex">
               <ul className="flex items-center gap-1">
                 {NAV_ITEMS.map((item) => {
                   const isActive = active === item.href;
@@ -81,7 +82,7 @@ function Header() {
                       <Link
                         href={item.href}
                         aria-current={isActive ? 'page' : undefined}
-                        className={`relative z-10 block rounded-full px-3.5 py-1.5 text-[13.5px] font-medium transition-colors ${
+                        className={`relative z-10 block rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                           isActive
                             ? 'text-arsenal-primary'
                             : 'text-arsenal-secondary hover:text-arsenal-primary'
@@ -92,11 +93,11 @@ function Header() {
                       {isActive ? (
                         <motion.span
                           layoutId="site-nav-indicator"
-                          className="absolute inset-0 rounded-full border border-arsenal-border bg-arsenal-elevated"
+                          className="absolute inset-0 rounded-md border border-arsenal-border bg-arsenal-elevated"
                           transition={
                             reduced
                               ? { duration: 0 }
-                              : { type: 'spring', stiffness: 420, damping: 36 }
+                              : { duration: 0.16, ease: [0.22, 1, 0.36, 1] }
                           }
                         />
                       ) : null}
@@ -151,7 +152,7 @@ function Header() {
               initial={reduced ? { opacity: 0 } : { y: '110%' }}
               animate={reduced ? { opacity: 1 } : { y: 0 }}
               exit={reduced ? { opacity: 0 } : { y: '110%' }}
-              transition={{ type: 'spring', stiffness: 380, damping: 38 }}
+              transition={reduced ? { duration: 0 } : { duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             >
               <ul>
                 {NAV_ITEMS.map((item) => (
@@ -185,11 +186,11 @@ function Footer() {
         <div className="max-w-sm">
           <div className="flex items-center gap-2.5 text-arsenal-primary">
             <ArsenalMark />
-            <span className="font-semibold tracking-tight">Arsenal</span>
+            <span className="font-semibold">Arsenal</span>
           </div>
           <p className="mt-4 text-sm leading-relaxed text-arsenal-secondary">
-            The weapons vault for building software. Components, motion and context tooling, forged
-            once and reused everywhere. By Oblivion Labs.
+            A library of live UI components and repository tools for software projects. By Oblivion
+            Labs.
           </p>
         </div>
         <div>

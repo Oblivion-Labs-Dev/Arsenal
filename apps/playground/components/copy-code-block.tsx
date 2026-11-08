@@ -34,7 +34,7 @@ export function CopyCodeBlock({
         type="button"
         onClick={() => copy(code)}
         className={cn(
-          'absolute right-3 top-3 z-10 rounded-full border border-arsenal-border bg-arsenal-elevated px-3 py-1.5 text-xs font-medium transition hover:border-arsenal-border-hover hover:text-arsenal-primary',
+          'absolute right-3 top-3 z-10 rounded-md border border-arsenal-border bg-arsenal-elevated px-3 py-1.5 text-xs font-medium transition-colors hover:border-arsenal-border-hover hover:text-arsenal-primary',
           state === 'failed' ? 'text-arsenal-danger' : 'text-arsenal-secondary',
         )}
       >

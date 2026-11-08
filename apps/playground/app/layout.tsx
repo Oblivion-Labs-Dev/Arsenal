@@ -6,7 +6,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Arsenal - The developer weapons vault',
+    default: 'Arsenal · Live components and repository modules',
     template: '%s · Arsenal',
   },
   description:

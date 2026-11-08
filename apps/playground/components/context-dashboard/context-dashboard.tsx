@@ -52,7 +52,7 @@ export function ContextDashboard() {
         <button
           type="button"
           onClick={() => void load()}
-          className="mt-4 rounded-arsenal border border-arsenal-border px-4 py-2 text-sm hover:border-arsenal-accent"
+          className="mt-4 rounded-lg border border-arsenal-border px-4 py-2 text-sm transition-colors hover:border-arsenal-border-hover"
         >
           Retry
         </button>
@@ -72,7 +72,7 @@ export function ContextDashboard() {
         <button
           type="button"
           onClick={() => void load()}
-          className="rounded-arsenal border border-arsenal-border px-4 py-2 text-sm text-arsenal-secondary hover:border-arsenal-accent hover:text-arsenal-primary"
+          className="rounded-lg border border-arsenal-border px-4 py-2 text-sm text-arsenal-secondary transition-colors hover:border-arsenal-border-hover hover:text-arsenal-primary"
         >
           Refresh
         </button>
@@ -107,7 +107,7 @@ export function ContextDashboard() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <GlassCard>
-          <h2 className="text-xs font-medium uppercase tracking-wider text-arsenal-muted">
+          <h2 className="text-sm font-medium text-arsenal-secondary">
             Usage Trends
           </h2>
           <div className="mt-4 space-y-3">
@@ -117,7 +117,7 @@ export function ContextDashboard() {
                   <span className="text-arsenal-muted">{label.slice(5)}</span>
                   <div className="h-2 overflow-hidden rounded-full bg-arsenal-elevated">
                     <div
-                      className="h-full rounded-full bg-gradient-to-r from-orange-600 via-arsenal-accent to-amber-400"
+                      className="h-full rounded-full bg-arsenal-accent"
                       style={{ width: `${(data.usageTrends.tokensSaved[i]! / maxSaved) * 100}%` }}
                     />
                   </div>
@@ -131,11 +131,11 @@ export function ContextDashboard() {
         </GlassCard>
 
         <GlassCard>
-          <h2 className="text-xs font-medium uppercase tracking-wider text-arsenal-muted">
+          <h2 className="text-sm font-medium text-arsenal-secondary">
             Context Quality
           </h2>
           <div className="mt-4 flex items-center gap-6">
-            <div className="grid h-24 w-24 place-items-center rounded-full border-4 border-arsenal-accent/30 text-3xl font-bold text-arsenal-accent">
+          <div className="grid h-24 w-24 place-items-center rounded-full border border-arsenal-border bg-arsenal-elevated text-3xl font-medium tabular-nums text-arsenal-primary">
               {data.quality.score}
             </div>
             <div>
@@ -153,7 +153,7 @@ export function ContextDashboard() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <GlassCard>
-          <h2 className="text-xs font-medium uppercase tracking-wider text-arsenal-muted">Hotspots</h2>
+          <h2 className="text-sm font-medium text-arsenal-secondary">Hotspots</h2>
           <HotspotList title="Most Opened" items={data.hotspots.mostOpenedFiles} />
           <HotspotList title="Most Edited" items={data.hotspots.mostEditedFiles} />
           <div className="mt-4">
@@ -167,7 +167,7 @@ export function ContextDashboard() {
         </GlassCard>
 
         <GlassCard>
-          <h2 className="text-xs font-medium uppercase tracking-wider text-arsenal-muted">
+          <h2 className="text-sm font-medium text-arsenal-secondary">
             Improvement Suggestions
           </h2>
           <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm text-arsenal-secondary">
@@ -179,7 +179,7 @@ export function ContextDashboard() {
       </div>
 
       <GlassCard>
-        <h2 className="text-xs font-medium uppercase tracking-wider text-arsenal-muted">Recent Tasks</h2>
+        <h2 className="text-sm font-medium text-arsenal-secondary">Recent tasks</h2>
         <div className="mt-4 space-y-4">
           {data.recentTasks.length ? (
             data.recentTasks.map((t) => (
@@ -203,7 +203,7 @@ export function ContextDashboard() {
 
       {details && (
         <GlassCard>
-          <h2 className="text-xs font-medium uppercase tracking-wider text-arsenal-muted">Details & Patterns</h2>
+          <h2 className="text-sm font-medium text-arsenal-secondary">Details and patterns</h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <Stat label="Total Builds" value={details.patterns.totalBuilds} />
             <Stat label="Total Events" value={details.patterns.totalEvents} />
@@ -234,7 +234,7 @@ export function ContextDashboard() {
 function FeatureLinks() {
   return (
     <GlassCard>
-      <h2 className="text-xs font-medium uppercase tracking-wider text-arsenal-muted">
+      <h2 className="text-sm font-medium text-arsenal-secondary">
         Explore the library
       </h2>
       <div className="mt-4 grid gap-2 sm:grid-cols-2">
@@ -242,7 +242,7 @@ function FeatureLinks() {
           <a
             key={f.id}
             href={`/modules/${f.slug}`}
-            className="rounded-arsenal border border-arsenal-border px-4 py-3 text-sm hover:border-arsenal-accent/40"
+            className="rounded-lg border border-arsenal-border px-4 py-3 text-sm transition-colors hover:border-arsenal-border-hover"
           >
             <span className="font-medium text-arsenal-primary">{f.title}</span>
             <span className="mt-1 block text-xs text-arsenal-muted">{f.capabilities.length} capabilities</span>
@@ -279,7 +279,7 @@ function HotspotList({
 
 function Stat({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded-arsenal border border-arsenal-border bg-arsenal-elevated/30 p-4">
+    <div className="rounded-lg border border-arsenal-border bg-arsenal-elevated p-4">
       <p className="text-xs text-arsenal-muted">{label}</p>
       <p className="mt-1 text-2xl font-semibold">{fmt(value)}</p>
     </div>

@@ -29,7 +29,7 @@ function Chip({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`shrink-0 whitespace-nowrap rounded-full border px-3.5 py-1.5 text-[13px] font-medium transition-colors ${
+      className={`shrink-0 whitespace-nowrap rounded-md border px-3 py-1.5 text-sm font-medium transition-colors ${
         active
           ? 'border-arsenal-border-hover bg-arsenal-elevated text-arsenal-primary'
           : 'border-transparent text-arsenal-secondary hover:text-arsenal-primary'
@@ -54,31 +54,31 @@ export function ComponentLibrary() {
   return (
     <div className="site-container">
       <header className="max-w-3xl pt-10">
-        <div className="site-label">The vault</div>
+        <div className="site-label">§ 01 · Components</div>
         <h1 className="site-title mt-3">Components</h1>
         <p className="site-lede mt-4">
-          {UI_COMPONENT_CATALOG.length} production-grade pieces, live. Find one, see it move, copy
-          it into your project.
+          {UI_COMPONENT_CATALOG.length} components run here. Preview one, adjust its settings, and
+          copy it into your project.
         </p>
       </header>
 
       <div className="sticky top-[calc(var(--site-header-h)+1.25rem)] z-30 mt-10">
-        <div className="site-header flex flex-col gap-2 rounded-[var(--arsenal-radius-lg)] p-2 sm:flex-row sm:items-center">
-          <div className="flex shrink-0 rounded-full bg-arsenal-background p-1">
+        <div className="site-header flex flex-col gap-2 rounded-xl p-2 sm:flex-row sm:items-center">
+          <div className="flex shrink-0 rounded-lg bg-arsenal-background p-1">
             {(['components', 'clayflow', 'patterns'] as const).map((value) => (
               <button
                 key={value}
                 type="button"
                 onClick={() => setTab(value)}
                 aria-pressed={tab === value}
-                className="relative rounded-full px-4 py-1.5 text-[13px] font-medium"
+                className="relative rounded-md px-3 py-1.5 text-sm font-medium"
               >
                 {tab === value ? (
                   <motion.span
                     layoutId="library-tab"
-                    className="absolute inset-0 rounded-full bg-arsenal-elevated"
+                    className="absolute inset-0 rounded-md bg-arsenal-elevated"
                     transition={
-                      reduced ? { duration: 0 } : { type: 'spring', stiffness: 420, damping: 36 }
+                      reduced ? { duration: 0 } : { duration: 0.16, ease: [0.22, 1, 0.36, 1] }
                     }
                   />
                 ) : null}
@@ -97,7 +97,7 @@ export function ComponentLibrary() {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Filter by name or purpose"
-                className="h-10 w-full rounded-full border border-arsenal-border bg-arsenal-background px-4 text-sm text-arsenal-primary outline-none transition-colors placeholder:text-arsenal-muted focus:border-arsenal-border-hover"
+                className="h-10 w-full rounded-lg border border-arsenal-border bg-arsenal-background px-4 text-sm text-arsenal-primary outline-none transition-colors placeholder:text-arsenal-muted focus:border-arsenal-border-hover"
               />
             </label>
           ) : null}
@@ -144,15 +144,15 @@ export function ComponentLibrary() {
       ) : (
         <div className="mt-10 space-y-16">
           <section>
-            <div className="site-label">Collections</div>
-            <h2 className="mt-3 text-2xl font-semibold tracking-tight text-arsenal-primary">
+            <div className="site-label">§ 02 · Collections</div>
+            <h2 className="mt-3 text-2xl font-medium text-arsenal-primary">
               Sets that belong together
             </h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {collections.map((collection) => (
                 <article key={collection.title} className="site-card p-5">
                   <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="font-semibold text-arsenal-primary">{collection.title}</h3>
+                    <h3 className="font-medium text-arsenal-primary">{collection.title}</h3>
                     <span className="text-xs text-arsenal-secondary">{collection.tone}</span>
                   </div>
                   <p className="mt-2 text-sm leading-relaxed text-arsenal-secondary">
