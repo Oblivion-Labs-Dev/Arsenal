@@ -1,5 +1,6 @@
 import { resolveAsset } from "./assets.js";
 import { CATALOG } from "./catalog.js";
+import { getKindMotionFamily } from "./motion/kind-motion.js";
 import { computeLayout, type LayoutResult } from "./layout.js";
 import { routeEdges, type RoutedEdge } from "./route.js";
 import { TOPIC_THEMES, type Diagram, type FallbackModel, type Tone } from "./schema.js";
@@ -110,7 +111,7 @@ function renderStage(
 
     const inspectable = Boolean(nSpec.role || nSpec.inputs || nSpec.outputs || nSpec.evidence || nSpec.meta);
     if (inspectable) inspectData.push(`<template class="cf-inspect-data" data-node="${escapeHtml(n.id)}">${escapeHtml(JSON.stringify({ label: nSpec.label, kind: nSpec.kind, noun: meta.noun, role: nSpec.role ?? "", inputs: nSpec.inputs ?? [], outputs: nSpec.outputs ?? [], meta: nSpec.meta ?? "", evidence: nSpec.evidence ?? "" }))}</template>`);
-    nodesContent += `<figure class="cf-node cf-shape-${shape}${finalFrame?.dimmed?.includes(n.id) ? ' is-dimmed' : ''}${finalFrame?.focus === n.id ? ' is-focus' : ''}${finalFrame?.focus && finalFrame.focus !== n.id ? ' is-focus-dim' : ''}" data-node="${escapeHtml(n.id)}" data-kind="${escapeHtml(renderedKind)}"${transform ? ` data-original-kind="${escapeHtml(nSpec.kind)}" data-original-label="${escapeHtml(nSpec.label)}"` : ''} data-tone="${tone}" data-state="${finalState}"${inspectable ? ' data-inspectable="true"' : ''} style="left:${leftPct}%;top:${topPct}%;width:${widthPct}%;height:${heightPct}%;" tabindex="0" role="${inspectable ? 'button' : 'img'}" aria-label="${escapeHtml(renderedLabel)} (${escapeHtml(meta.noun)})">`;
+    nodesContent += `<figure class="cf-node cf-shape-${shape}${finalFrame?.dimmed?.includes(n.id) ? ' is-dimmed' : ''}${finalFrame?.focus === n.id ? ' is-focus' : ''}${finalFrame?.focus && finalFrame.focus !== n.id ? ' is-focus-dim' : ''}" data-node="${escapeHtml(n.id)}" data-kind="${escapeHtml(renderedKind)}" data-motion="${getKindMotionFamily(renderedKind)}"${transform ? ` data-original-kind="${escapeHtml(nSpec.kind)}" data-original-label="${escapeHtml(nSpec.label)}"` : ''} data-tone="${tone}" data-state="${finalState}"${inspectable ? ' data-inspectable="true"' : ''} style="left:${leftPct}%;top:${topPct}%;width:${widthPct}%;height:${heightPct}%;" tabindex="0" role="${inspectable ? 'button' : 'img'}" aria-label="${escapeHtml(renderedLabel)} (${escapeHtml(meta.noun)})">`;
     nodesContent += `<div class="cf-well">`;
     if (asset) {
       nodesContent += `<img class="cf-art" src="${escapeHtml(asset.src)}" alt="${escapeHtml(asset.alt)}" loading="lazy" />`;
