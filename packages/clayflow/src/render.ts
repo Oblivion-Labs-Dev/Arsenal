@@ -49,12 +49,14 @@ function renderStage(
     const isAnim = edge.animated ? ' data-animated="true"' : "";
     const markerStart = edge.bidirectional ? ` marker-start="url(#${markerStartId})"` : "";
 
-    svgContent += `<g class="cf-edge" data-edge="${escapeHtml(edge.id)}"${isDashed}${isAnim}>`;
+    const edgeSpec = diagram.edges.find((item) => item.id === edge.id);
+    svgContent += `<g class="cf-edge" data-edge="${escapeHtml(edge.id)}" data-kind="${escapeHtml(edgeSpec?.kind ?? "flow")}"${isDashed}${isAnim}>`;
     svgContent += `<path class="cf-edge-track" d="${edge.path}" />`;
     svgContent += `<path class="cf-edge-wire" d="${edge.path}" marker-end="url(#${markerId})"${markerStart} />`;
     if (edge.label) {
       svgContent += `<text class="cf-edge-label" x="${edge.labelX}" y="${edge.labelY}" text-anchor="middle" dominant-baseline="central">${escapeHtml(edge.label)}</text>`;
     }
+    if (edgeSpec?.condition) svgContent += `<text class="cf-edge-condition" x="${edge.labelX}" y="${edge.labelY + 14}" text-anchor="middle" dominant-baseline="central">${escapeHtml(edgeSpec.condition)}</text>`;
     svgContent += `<circle class="cf-packet" data-edge="${escapeHtml(edge.id)}" r="4.5" cx="0" cy="0" opacity="0" />`;
     svgContent += `</g>`;
   }
@@ -70,13 +72,16 @@ function renderStage(
     const heightPct = ((g.h / layout.height) * 100).toFixed(3);
     const kind = gSpec?.kind ?? "group";
 
-    groupsContent += `<div class="cf-group cf-group-${kind}" data-group="${escapeHtml(g.id)}" style="left:${leftPct}%;top:${topPct}%;width:${widthPct}%;height:${heightPct}%;z-index:${g.depth};">`;
+    const expanded = finalFrame?.expanded?.includes(g.id) ? " is-expanded" : "";
+    const collapsed = finalFrame?.collapsed?.includes(g.id) ? " is-collapsed" : "";
+    groupsContent += `<div class="cf-group cf-group-${kind}${expanded}${collapsed}" data-group="${escapeHtml(g.id)}" style="left:${leftPct}%;top:${topPct}%;width:${widthPct}%;height:${heightPct}%;z-index:${g.depth};">`;
     groupsContent += `<span class="cf-group-tab">${escapeHtml(gSpec?.label ?? g.id)}</span>`;
     groupsContent += `</div>`;
   }
 
   // Nodes
   let nodesContent = "";
+  const inspectData: string[] = [];
   for (const n of layout.nodes) {
     const nSpec = diagram.nodes.find((item) => item.id === n.id);
     if (!nSpec) continue;
@@ -91,6 +96,9 @@ function renderStage(
     const tone: Tone = nSpec.tone ?? meta.tone;
     const shape = meta.shape;
     const finalState = finalFrame?.states[n.id] ?? nSpec.state ?? "idle";
+    const transform = finalFrame?.transforms?.[n.id];
+    const renderedKind = transform?.kind ?? nSpec.kind;
+    const renderedLabel = transform?.label ?? nSpec.label;
     const counterVal = finalFrame?.counters[n.id] ?? nSpec.metric?.value;
 
     const leftPct = ((n.x / layout.width) * 100).toFixed(3);
@@ -100,7 +108,9 @@ function renderStage(
 
     const asset = meta.asset ? resolveAsset(meta.asset, opts?.assetBase) : undefined;
 
-    nodesContent += `<figure class="cf-node cf-shape-${shape}" data-node="${escapeHtml(n.id)}" data-kind="${escapeHtml(nSpec.kind)}" data-tone="${tone}" data-state="${finalState}" style="left:${leftPct}%;top:${topPct}%;width:${widthPct}%;height:${heightPct}%;" tabindex="0" role="img" aria-label="${escapeHtml(nSpec.label)} (${escapeHtml(meta.noun)})">`;
+    const inspectable = Boolean(nSpec.role || nSpec.inputs || nSpec.outputs || nSpec.evidence || nSpec.meta);
+    if (inspectable) inspectData.push(`<template class="cf-inspect-data" data-node="${escapeHtml(n.id)}">${escapeHtml(JSON.stringify({ label: nSpec.label, kind: nSpec.kind, noun: meta.noun, role: nSpec.role ?? "", inputs: nSpec.inputs ?? [], outputs: nSpec.outputs ?? [], meta: nSpec.meta ?? "", evidence: nSpec.evidence ?? "" }))}</template>`);
+    nodesContent += `<figure class="cf-node cf-shape-${shape}${finalFrame?.dimmed?.includes(n.id) ? ' is-dimmed' : ''}${finalFrame?.focus === n.id ? ' is-focus' : ''}${finalFrame?.focus && finalFrame.focus !== n.id ? ' is-focus-dim' : ''}" data-node="${escapeHtml(n.id)}" data-kind="${escapeHtml(renderedKind)}"${transform ? ` data-original-kind="${escapeHtml(nSpec.kind)}" data-original-label="${escapeHtml(nSpec.label)}"` : ''} data-tone="${tone}" data-state="${finalState}"${inspectable ? ' data-inspectable="true"' : ''} style="left:${leftPct}%;top:${topPct}%;width:${widthPct}%;height:${heightPct}%;" tabindex="0" role="${inspectable ? 'button' : 'img'}" aria-label="${escapeHtml(renderedLabel)} (${escapeHtml(meta.noun)})">`;
     nodesContent += `<div class="cf-well">`;
     if (asset) {
       nodesContent += `<img class="cf-art" src="${escapeHtml(asset.src)}" alt="${escapeHtml(asset.alt)}" loading="lazy" />`;
@@ -110,7 +120,7 @@ function renderStage(
     nodesContent += `</div>`;
 
     nodesContent += `<div class="cf-node-body">`;
-    nodesContent += `<strong class="cf-node-label">${escapeHtml(nSpec.label)}</strong>`;
+    nodesContent += `<strong class="cf-node-label">${escapeHtml(renderedLabel)}</strong>`;
     if (nSpec.meta) {
       nodesContent += `<span class="cf-node-meta">${escapeHtml(nSpec.meta)}</span>`;
     }
@@ -138,7 +148,9 @@ function renderStage(
     const leftPct = (((targetNode.x + targetNode.w / 2) / layout.width) * 100).toFixed(3);
     const topPct = (((targetNode.y - 14) / layout.height) * 100).toFixed(3);
 
-    annotationsContent += `<aside class="cf-chip cf-chip-${ann.kind}" data-target="${escapeHtml(ann.target)}" style="left:${leftPct}%;top:${topPct}%;">`;
+    const annotationSteps = diagram.animation?.steps?.some((step) => step.annotate !== undefined) ?? false;
+    const annotatedInitially = !annotationSteps || finalFrame?.annotations?.includes(ann.id) === true;
+    annotationsContent += `<aside class="cf-chip cf-chip-${ann.kind}" data-annotation="${escapeHtml(ann.id)}" data-target="${escapeHtml(ann.target)}"${annotationSteps && !annotatedInitially ? ' hidden' : ''} style="left:${leftPct}%;top:${topPct}%;">`;
     annotationsContent += `<span class="cf-chip-icon" aria-hidden="true"></span>`;
     annotationsContent += `<span class="cf-chip-text">${escapeHtml(ann.text)}</span>`;
     annotationsContent += `</aside>`;
@@ -151,6 +163,7 @@ function renderStage(
 ${groupsContent}
 ${svgContent}
 ${nodesContent}
+${inspectData.join("\n")}
 ${annotationsContent}
 </div>`;
 }
@@ -197,6 +210,7 @@ export function renderClayFlow(diagram: Diagram, opts?: RenderOptions): string {
   const framesJson = JSON.stringify(frames).replace(/</g, "\\u003c");
 
   // Explanations
+  const idPrefix = opts?.idPrefix ? `${escapeHtml(opts.idPrefix)}-` : "";
   const mode = opts?.mode ?? "eli5";
   let explanationHtml = "";
   if (diagram.explanations) {
@@ -224,7 +238,7 @@ ${frames
   const loop = diagram.animation?.loop !== false;
 
   const topicAttr = diagram.topic ? ` data-topic="${escapeHtml(diagram.topic)}" style="--cf-topic-accent:${TOPIC_THEMES[diagram.topic].accent}"` : "";
-  return `<figure class="cf"${topicAttr} data-cf-preset="${escapeHtml(preset)}" data-cf-id="${escapeHtml(diagram.id)}" data-cf-speed="${speed}" data-cf-loop="${loop}" data-cf-active-layout="${primaryLayout}" tabindex="0" aria-label="${escapeHtml(diagram.title)}">
+  return `<figure class="cf"${topicAttr} data-cf-preset="${escapeHtml(preset)}" data-cf-id="${escapeHtml(diagram.id)}" data-cf-speed="${speed}" data-cf-loop="${loop}" data-cf-active-layout="${primaryLayout}" data-cf-annotations="${diagram.animation?.steps?.some((step) => step.annotate !== undefined) ? 'true' : 'false'}" data-complete="${finalFrame?.complete ? 'true' : 'false'}" tabindex="0" aria-label="${escapeHtml(diagram.title)}">
 <script type="application/json" class="cf-frames">${framesJson}</script>
 <div class="cf-canvas">
 ${stageH}
@@ -238,6 +252,7 @@ ${stageV}
   <button type="button" class="cf-btn cf-btn-replay" data-action="replay" aria-label="Replay animation" title="Replay (Home)">
     <span class="cf-icon" aria-hidden="true">↺</span>
   </button>
+  <button type="button" class="cf-btn cf-btn-reset" data-action="reset" aria-label="Reset animation" title="Reset animation">↺</button>
   <button type="button" class="cf-btn cf-btn-prev" data-action="prev" aria-label="Previous step" title="Previous step (ArrowLeft)">
     <span class="cf-icon" aria-hidden="true">⏮</span>
   </button>
@@ -255,12 +270,14 @@ ${stageV}
 <figcaption class="cf-caption-bar">
   <div class="cf-title-row">
     <span class="cf-title">${escapeHtml(diagram.title)}</span>
+    ${diagram.illustrative ? '<span class="cf-illustrative">Illustrative</span>' : ''}
     ${diagram.summary ? `<span class="cf-summary">${escapeHtml(diagram.summary)}</span>` : ""}
   </div>
   <div class="cf-live-caption" aria-live="polite">${escapeHtml(finalFrame?.caption ?? "")}</div>
 </figcaption>
 ${explanationHtml}
 ${stepsList}
+<div class="cf-inspect" hidden role="dialog" aria-modal="false" aria-labelledby="${idPrefix}cf-inspect-title"><button type="button" class="cf-btn cf-inspect-close" data-action="inspect-close" aria-label="Close inspection">×</button><h2 id="${idPrefix}cf-inspect-title">Node details</h2><dl><dt>What</dt><dd data-inspect="what"></dd><dt>Role</dt><dd data-inspect="role"></dd><dt>Inputs</dt><dd data-inspect="inputs"></dd><dt>Outputs</dt><dd data-inspect="outputs"></dd><dt>Current state</dt><dd data-inspect="state"></dd><dt>Evidence</dt><dd data-inspect="evidence"></dd></dl></div>
 </figure>`;
 }
 

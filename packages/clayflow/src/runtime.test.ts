@@ -2,11 +2,11 @@
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { aiAgentRequestExample } from "./examples.js";
 import { renderClayFlow } from "./render.js";
-import { CLAYFLOW_RUNTIME } from "./runtime.js";
+import { CLAYFLOW_RUNTIME, type ClayFlowInstanceAPI } from "./runtime.js";
 
 declare global {
   interface Window {
-    ClayFlow?: { mount(fig: HTMLElement): void; unmount(fig: HTMLElement): void };
+    ClayFlow?: { mount(fig: HTMLElement): void; unmount(fig: HTMLElement): void; get(fig: HTMLElement): ClayFlowInstanceAPI | null };
   }
 }
 
@@ -66,13 +66,58 @@ describe("ClayFlow runtime", () => {
     expect(queued.length).toBe(0);
   });
 
-  it("steps forward one frame when Play is pressed under reduced motion", async () => {
+  it("jumps to the final state when Play is pressed under reduced motion", async () => {
     document.documentElement.classList.add("force-reduced");
     await flush();
     fig.querySelector<HTMLButtonElement>('[data-action="play"]')!.click();
-    expect(scrub().value).toBe("0");
+    expect(scrub().value).toBe(lastFrame());
     fig.querySelector<HTMLButtonElement>('[data-action="play"]')!.click();
-    expect(scrub().value).toBe("1");
+    expect(scrub().value).toBe(lastFrame());
     expect(queued.length).toBe(0);
+  });
+
+  it("exposes an instance API, events and reset", () => {
+    const api = window.ClayFlow!.get(fig);
+    expect(api).not.toBeNull();
+    const frames: number[] = [];
+    const off = api!.on("frame", (index) => { if (typeof index === "number") frames.push(index); });
+    api!.seek(1);
+    expect(frames).toContain(1);
+    let completed = 0;
+    const offComplete = api!.on("complete", () => { completed += 1; });
+    api!.seek(Number(lastFrame()));
+    expect(completed).toBeGreaterThan(0);
+    api!.reset();
+    expect(scrub().value).toBe("0");
+    off();
+    offComplete();
+    window.ClayFlow!.unmount(fig);
+    expect(window.ClayFlow!.get(fig)).toBeNull();
+  });
+
+  it("opens inspection with the keyboard and returns focus on Escape", () => {
+    // The previous test unmounts; inspection must work on a freshly mounted figure.
+    window.ClayFlow!.mount(fig);
+    const api = window.ClayFlow!.get(fig)!;
+    const node = fig.querySelector<HTMLElement>('.cf-node[data-inspectable="true"]')!;
+    node.focus();
+    node.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+    expect(fig.querySelector<HTMLElement>(".cf-inspect")?.hidden).toBe(false);
+    fig.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+    expect(fig.querySelector<HTMLElement>(".cf-inspect")?.hidden).toBe(true);
+    expect(document.activeElement).toBe(node);
+    api.reset();
+  });
+
+  it("fills the inspect panel from the node's authored details", () => {
+    if (!window.ClayFlow!.get(fig)) window.ClayFlow!.mount(fig);
+    const api = window.ClayFlow!.get(fig)!;
+    const node = fig.querySelector<HTMLElement>('.cf-node[data-inspectable="true"]')!;
+    const label = node.getAttribute("aria-label")!.replace(/ \(.*\)$/, "");
+    api.inspect(node.dataset.node!);
+    const what = fig.querySelector<HTMLElement>('.cf-inspect [data-inspect="what"]')!.textContent!;
+    expect(what).toContain(label);
+    expect(what).not.toContain("undefined");
+    api.inspect(null);
   });
 });

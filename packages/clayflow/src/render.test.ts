@@ -55,6 +55,16 @@ describe("ClayFlow renderer", () => {
     expect(renderClayFlow(diagramSchema.parse({ ...diagram, topic: undefined }))).not.toContain("data-topic=");
   });
 
+  it("renders inspect data, edge kinds, reset control and illustrative status", () => {
+    const spec = diagramSchema.parse({ schemaVersion: "1.0", id: "inspect-render", title: "Inspect", illustrative: true, nodes: [{ id: "n", kind: "agent", label: "Agent", role: "Reviewer", inputs: ["task"], evidence: "Source <one>" }], edges: [], animation: { preset: "data-flow" } });
+    const html = renderClayFlow(spec);
+    expect(html).toContain("data-inspectable=\"true\"");
+    expect(html).toContain("cf-inspect-data");
+    expect(html).toContain("Source &lt;one&gt;");
+    expect(html).toContain("data-action=\"reset\"");
+    expect(html).toContain("Illustrative");
+  });
+
   it("keeps step captions from closing the frames script or opening a comment", () => {
     const hostile = diagramSchema.parse({
       ...aiAgentRequestExample,
@@ -154,5 +164,18 @@ describe("ClayFlow renderer", () => {
 
     const htmlAdvanced = renderClayFlow(aiAgentRequestExample, { mode: "advanced" });
     expect(htmlAdvanced.includes("cf-explanation-advanced")).toBe(true);
+  });
+  it("treats the host's ivory-graphite theme as light, so diagrams do not stay dark on a dark OS", () => {
+    const darkScoped = [...CLAYFLOW_STYLE.matchAll(/:root:not\(\[data-theme="light"\]\)([^\s{]*)/g)];
+    expect(darkScoped.length).toBeGreaterThan(0);
+    for (const [, rest] of darkScoped) expect(rest).toContain(':not([data-theme="ivory-graphite"])');
+  });
+
+  it("gives each diagram's inspect panel a unique title id", () => {
+    const a = renderClayFlow(aiAgentRequestExample, { idPrefix: "one" });
+    const b = renderClayFlow(aiAgentRequestExample, { idPrefix: "two" });
+    const titleId = (html: string) => html.match(/<h2 id="([^"]+)">Node details/)![1];
+    expect(titleId(a)).not.toBe(titleId(b));
+    expect(a).toContain(`aria-labelledby="${titleId(a)}"`);
   });
 });

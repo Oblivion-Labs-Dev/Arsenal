@@ -1,5 +1,6 @@
 import { useId, useLayoutEffect, useMemo, useRef } from 'react';
 import {
+  type ClayFlowInstanceAPI,
   CLAYFLOW_RUNTIME,
   CLAYFLOW_STYLE,
   renderClayFlow,
@@ -9,11 +10,14 @@ import {
 
 declare global {
   interface Window {
-    ClayFlow?: {
-      mount: (fig: HTMLElement) => void;
-      unmount: (fig: HTMLElement) => void;
-    };
+    ClayFlow?: ClayFlowRuntime;
   }
+}
+
+interface ClayFlowRuntime {
+  mount(fig: HTMLElement): void;
+  unmount(fig: HTMLElement): void;
+  get(fig: HTMLElement): ClayFlowInstanceAPI | null;
 }
 
 /**
@@ -46,9 +50,12 @@ export interface ClayFlowDiagramProps {
   mode?: 'eli5' | 'advanced';
   assetBase?: string;
   className?: string;
+  onReady?: (api: ClayFlowInstanceAPI) => void;
+  autoPlay?: boolean;
+  initialStep?: number;
 }
 
-export function ClayFlowDiagram({ spec, mode, assetBase, className }: ClayFlowDiagramProps) {
+export function ClayFlowDiagram({ spec, mode, assetBase, className, onReady, autoPlay = false, initialStep }: ClayFlowDiagramProps) {
   const rawId = useId();
   // Safe ID prefix matching ^[a-z0-9-]{1,32}$
   const safeIdPrefix = useMemo(() => {
@@ -71,6 +78,10 @@ export function ClayFlowDiagram({ spec, mode, assetBase, className }: ClayFlowDi
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mountedFigureRef = useRef<HTMLElement | null>(null);
+  // Mount-time options live in a ref: a new inline onReady on every parent render must not
+  // remount the runtime (that would reset playback). Only a new spec/html remounts.
+  const mountOptions = useRef({ onReady, autoPlay, initialStep });
+  mountOptions.current = { onReady, autoPlay, initialStep };
 
   useLayoutEffect(() => {
     ensureClayFlowAssets();
@@ -87,6 +98,13 @@ export function ClayFlowDiagram({ spec, mode, assetBase, className }: ClayFlowDi
     if (newFigure && !newFigure.classList.contains('cf-fallback')) {
       window.ClayFlow?.mount(newFigure);
       mountedFigureRef.current = newFigure;
+      const api = window.ClayFlow?.get(newFigure);
+      if (api) {
+        const opts = mountOptions.current;
+        if (opts.initialStep !== undefined) api.seek(opts.initialStep);
+        opts.onReady?.(api);
+        if (opts.autoPlay) api.play();
+      }
     }
 
     return () => {

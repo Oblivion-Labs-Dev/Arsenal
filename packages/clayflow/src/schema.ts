@@ -155,6 +155,10 @@ export const nodeSchema = z.object({
   kind: nodeKindSchema,
   label: labelSchema,
   meta: z.string().trim().max(160).optional(),
+  role: z.string().trim().max(80).optional(),
+  inputs: z.array(z.string().trim().max(60)).max(6).optional(),
+  outputs: z.array(z.string().trim().max(60)).max(6).optional(),
+  evidence: z.string().trim().max(200).optional(),
   state: nodeStateSchema.optional().default("idle"),
   metric: metricSchema.optional(),
   group: idSchema.optional(),
@@ -172,6 +176,8 @@ export const edgeSchema = z.object({
   bidirectional: z.boolean().optional().default(false),
   label: z.string().trim().max(40).optional(),
   animated: z.boolean().optional().default(false),
+  kind: z.enum(["flow", "parallel", "branch", "conditional", "feedback"]).optional().default("flow"),
+  condition: z.string().trim().max(40).optional(),
 });
 
 export type Edge = z.infer<typeof edgeSchema>;
@@ -213,6 +219,14 @@ export const animationStepSchema = z.object({
   states: z.record(idSchema, nodeStateSchema).optional(),
   counters: z.record(idSchema, z.number().finite()).optional(),
   duration: z.number().finite().positive().max(10000).optional(),
+  branch: z.object({ from: idSchema, take: idSchema }).optional(),
+  transform: z.array(z.object({ node: idSchema, kind: nodeKindSchema.optional(), label: labelSchema.optional() })).optional(),
+  expand: z.array(idSchema).optional(),
+  collapse: z.array(idSchema).optional(),
+  annotate: z.array(idSchema).optional(),
+  focus: idSchema.optional(),
+  complete: z.boolean().optional(),
+  loop: z.object({ edge: idSchema, times: z.number().int().min(1).max(5) }).optional(),
 });
 
 export type AnimationStep = z.infer<typeof animationStepSchema>;
@@ -252,6 +266,7 @@ export const diagramSchema = z.object({
   layout: z.enum(["horizontal", "vertical"]).default("horizontal"),
   theme: z.enum(["auto", "light", "dark"]).optional().default("auto"),
   topic: z.enum(["ai-tech", "finance", "health", "education", "business", "general"]).optional(),
+  illustrative: z.boolean().optional(),
   nodes: z.array(nodeSchema).min(1).max(40),
   edges: z.array(edgeSchema).max(80).default([]),
   groups: z.array(groupSchema).max(8).optional().default([]),

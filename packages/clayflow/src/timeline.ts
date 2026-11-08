@@ -1,4 +1,5 @@
 import type { Diagram, NodeState } from "./schema.js";
+import { MOTION } from "./motion/tokens.js";
 
 export interface AnimationPacket {
   edge: string;
@@ -15,9 +16,16 @@ export interface Frame {
   states: Record<string, NodeState>;
   counters: Record<string, number>;
   caption: string;
+  dimmed?: string[];
+  transforms?: Record<string, { kind?: string; label?: string }>;
+  expanded?: string[];
+  collapsed?: string[];
+  annotations?: string[];
+  focus?: string;
+  complete?: boolean;
 }
 
-const DEFAULT_FRAME_DURATION = 800; // ms within 700-900ms
+const DEFAULT_FRAME_DURATION = MOTION.scene.default;
 
 /**
  * Pure function: retrieves the frame active at time tMs.
@@ -35,6 +43,7 @@ export function frameAt(frames: Frame[], tMs: number): Frame {
       states: {},
       counters: {},
       caption: "",
+      dimmed: [], transforms: {}, expanded: [], collapsed: [], annotations: [], complete: false,
     };
   }
 
@@ -77,37 +86,67 @@ export function compile(diagram: Diagram): Frame[] {
 
   // If explicit steps are provided in the spec, compile them directly
   if (diagram.animation?.steps && diagram.animation.steps.length > 0) {
-    const rawSteps = diagram.animation.steps.slice(0, 24);
+    const rawSteps = diagram.animation.steps;
     let accumAt = 0;
     const frames: Frame[] = [];
+    let transforms: Frame["transforms"] = {};
+    let expanded: string[] = [];
+    let collapsed: string[] = [];
+    let annotations: string[] = [];
+    let complete = false;
+    const outgoing = (from: string) => diagram.edges.filter((edge) => edge.from === from);
+    const reachable = (start: string, excludedEdges: Set<string>): Set<string> => {
+      const found = new Set<string>();
+      const queue = [start];
+      while (queue.length) {
+        const current = queue.shift()!;
+        for (const edge of diagram.edges) if (edge.from === current && !excludedEdges.has(edge.id) && !found.has(edge.to)) { found.add(edge.to); queue.push(edge.to); }
+      }
+      return found;
+    };
 
     for (const [idx, step] of rawSteps.entries()) {
-      const dur = step.duration ?? DEFAULT_FRAME_DURATION;
+      const dur = step.loop ? MOTION.packet.default : step.duration ?? DEFAULT_FRAME_DURATION;
       const visible =
         step.nodes || step.edges
           ? [...(step.nodes ?? allNodeIds), ...(step.edges ?? allEdgeIds)]
           : allIds;
       const highlight = step.highlight ?? [];
-      const packets: AnimationPacket[] = step.packets ?? [];
+      const stepPackets: AnimationPacket[] = step.packets ?? [];
       const states = { ...initialStates, ...(step.states ?? {}) };
       const counters = { ...initialCounters, ...(step.counters ?? {}) };
 
-      frames.push({
+      const branch = step.branch;
+      const skipped = branch ? outgoing(branch.from).filter((edge) => edge.id !== branch.take) : [];
+      const takenEdge = branch ? diagram.edges.find((edge) => edge.id === branch.take) : undefined;
+      const taken = takenEdge ? new Set([takenEdge.to, ...reachable(takenEdge.to, new Set())]) : new Set<string>();
+      const dimmed = branch ? [...skipped.map((edge) => edge.id), ...[...new Set(skipped.flatMap((edge) => [edge.to, ...reachable(edge.to, new Set([edge.id]))]))].filter((id) => !taken.has(id))] : [];
+      for (const item of step.transform ?? []) transforms[item.node] = { ...transforms[item.node], ...(item.kind ? { kind: item.kind } : {}), ...(item.label ? { label: item.label } : {}) };
+      expanded = [...new Set([...expanded.filter((id) => !(step.collapse ?? []).includes(id)), ...(step.expand ?? [])])];
+      collapsed = [...new Set([...collapsed.filter((id) => !(step.expand ?? []).includes(id)), ...(step.collapse ?? [])])];
+      annotations = [...new Set([...annotations, ...(step.annotate ?? [])])];
+      complete = step.complete ?? complete;
+      const packets: AnimationPacket[] = step.loop ? Array.from({ length: step.loop.times }, () => ({ edge: step.loop!.edge })) : stepPackets;
+      const repeat = step.loop ? step.loop.times : 1;
+      for (let iteration = 0; iteration < repeat && frames.length < 24; iteration++) frames.push({
         index: idx,
         at: accumAt,
         duration: dur,
         visible,
-        highlight,
-        packets,
+        highlight: branch ? [...new Set([...highlight, branch.take])] : highlight,
+        packets: step.loop ? [packets[iteration]!] : packets,
         states,
         counters,
-        caption: step.caption,
+        caption: step.loop ? `${step.caption} (iteration ${iteration + 1}/${repeat})` : step.caption,
+        dimmed,
+        transforms: { ...transforms }, expanded: [...expanded], collapsed: [...collapsed], annotations: [...annotations],
+        ...(step.focus ? { focus: step.focus } : {}),
+        complete,
       });
-
       accumAt += dur;
     }
 
-    return frames;
+    return frames.map((frame, index) => ({ ...frame, index, at: frames.slice(0, index).reduce((sum, previous) => sum + previous.duration, 0) }));
   }
 
   // Preset generators
@@ -306,7 +345,16 @@ export function compile(diagram: Diagram): Frame[] {
         ) ?? diagram.nodes[0];
       const incomingEdges = diagram.edges.filter((e) => decisionNode && e.to === decisionNode.id);
       const outgoingEdges = diagram.edges.filter((e) => decisionNode && e.from === decisionNode.id);
-      const primaryBranch = outgoingEdges[0] ?? diagram.edges[0];
+      const explicitBranch = diagram.animation?.steps?.find((step) => step.branch)?.branch;
+      const primaryBranch = (explicitBranch ? diagram.edges.find((edge) => edge.id === explicitBranch.take && edge.from === explicitBranch.from) : undefined) ?? outgoingEdges[0] ?? diagram.edges[0];
+      const dimmedEdges = outgoingEdges.filter((edge) => edge.id !== primaryBranch?.id);
+      const dimmedNodes = new Set<string>();
+      const walk = (id: string) => { for (const edge of diagram.edges) if (edge.from === id && edge.id !== primaryBranch?.id && !dimmedNodes.has(edge.to)) { dimmedNodes.add(edge.to); walk(edge.to); } };
+      for (const edge of dimmedEdges) { dimmedNodes.add(edge.to); walk(edge.to); }
+      const takenNodes = new Set<string>();
+      const walkTaken = (id: string) => { for (const edge of diagram.edges) if (edge.from === id && !takenNodes.has(edge.to)) { takenNodes.add(edge.to); walkTaken(edge.to); } };
+      if (primaryBranch) { takenNodes.add(primaryBranch.to); walkTaken(primaryBranch.to); }
+      for (const id of takenNodes) dimmedNodes.delete(id);
 
       frames.push({
         index: 0,
@@ -348,6 +396,7 @@ export function compile(diagram: Diagram): Frame[] {
         },
         counters: { ...initialCounters },
         caption: `Criteria satisfied: taking ${primaryBranch?.label ?? "approved branch"}.`,
+        dimmed: [...dimmedEdges.map((edge) => edge.id), ...dimmedNodes],
       });
 
       frames.push({
@@ -363,6 +412,7 @@ export function compile(diagram: Diagram): Frame[] {
         },
         counters: { ...initialCounters },
         caption: "Target branch executed outcome successfully.",
+        dimmed: [...dimmedEdges.map((edge) => edge.id), ...dimmedNodes],
       });
       break;
     }
@@ -674,5 +724,14 @@ export function compile(diagram: Diagram): Frame[] {
     cappedFrames[i]!.index = i;
   }
 
-  return cappedFrames;
+  return cappedFrames.map((frame, index) => ({
+    ...frame,
+    index,
+    dimmed: frame.dimmed ?? [],
+    transforms: frame.transforms ?? {},
+    expanded: frame.expanded ?? [],
+    collapsed: frame.collapsed ?? [],
+    annotations: frame.annotations ?? [],
+    complete: frame.complete ?? index === cappedFrames.length - 1,
+  }));
 }

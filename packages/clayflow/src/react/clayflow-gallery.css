@@ -17,7 +17,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root:not([data-theme="light"]):not([data-theme="ivory-graphite"]) {
     --cfg-canvas: #141225;
     --cfg-fg: #f2effa;
     --cfg-muted: #bfb8d9;
@@ -95,7 +95,7 @@ body:has(.cfg-page) #root {
     linear-gradient(180deg, #141225 0%, #1c1836 100%);
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .cfg-page {
+  :root:not([data-theme="light"]):not([data-theme="ivory-graphite"]) .cfg-page {
     background-image:
       radial-gradient(circle at 12% 10%, rgba(164, 139, 255, 0.12) 0%, transparent 55%),
       linear-gradient(180deg, #141225 0%, #1c1836 100%);
@@ -497,7 +497,7 @@ body:has(.cfg-page) #root {
   color: #ffcba4;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .cfg-errors {
+  :root:not([data-theme="light"]):not([data-theme="ivory-graphite"]) .cfg-errors {
     background: #311c16;
     border-color: #5c301e;
     color: #ffcba4;

@@ -36,6 +36,17 @@ describe("ClayFlow animation timeline", () => {
     expect(JSON.stringify(frames1)).toBe(JSON.stringify(frames2));
   });
 
+  it("dims non-selected branch edges, expands loop packets, and keeps state sticky", () => {
+    const spec = diagramSchema.parse({ schemaVersion: "1.0", id: "branch-loop", title: "Branch Loop", nodes: [{ id: "gate", kind: "decision", label: "Gate" }, { id: "yes", kind: "process", label: "Yes" }, { id: "no", kind: "process", label: "No" }], edges: [{ id: "take", from: "gate", to: "yes" }, { id: "skip", from: "gate", to: "no" }], groups: [{ id: "group", label: "Group" }], annotations: [{ id: "note", target: "yes", kind: "info", text: "Note" }], animation: { preset: "data-flow", steps: [{ caption: "Choose", branch: { from: "gate", take: "take" }, transform: [{ node: "yes", label: "Chosen" }], expand: ["group"], annotate: ["note"] }, { caption: "Repeat", loop: { edge: "take", times: 3 } }] } });
+    const frames = compile(spec);
+    expect(frames[0]?.dimmed).toContain("skip");
+    expect(frames.slice(1).filter((frame) => frame.packets.some((packet) => packet.edge === "take"))).toHaveLength(3);
+    expect(frames[1]?.transforms?.yes?.label).toBe("Chosen");
+    expect(frames[1]?.annotations).toContain("note");
+    expect(frames).toHaveLength(4);
+    expect(JSON.stringify(frames)).toBe(JSON.stringify(compile(spec)));
+  });
+
   it("allows custom animation.steps to override default preset generation", () => {
     const customDiagram: Diagram = diagramSchema.parse({
       ...aiAgentRequestExample,
@@ -101,5 +112,11 @@ describe("ClayFlow animation timeline", () => {
       ];
       expect(frameAt(singleFrame, 999).caption).toBe("Single");
     });
+  });
+  it("keeps a node lit when the taken branch also reaches it (converging paths)", () => {
+    const spec = diagramSchema.parse({ schemaVersion: "1.0", id: "converge", title: "Converge", nodes: [{ id: "gate", kind: "decision", label: "Gate" }, { id: "yes", kind: "process", label: "Yes" }, { id: "no", kind: "process", label: "No" }, { id: "end", kind: "goal", label: "End" }], edges: [{ id: "take", from: "gate", to: "yes" }, { id: "skip", from: "gate", to: "no" }, { id: "y2", from: "yes", to: "end" }, { id: "n2", from: "no", to: "end" }], animation: { preset: "data-flow", steps: [{ caption: "Choose", branch: { from: "gate", take: "take" } }] } });
+    const [frame] = compile(spec);
+    expect(frame!.dimmed).toEqual(expect.arrayContaining(["skip", "no"]));
+    expect(frame!.dimmed).not.toContain("end");
   });
 });

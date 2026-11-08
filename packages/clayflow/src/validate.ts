@@ -247,6 +247,17 @@ export function validate(input: unknown): ValidationResult {
           }
         }
       }
+      if (step.branch) {
+        if (!nodeIds.has(step.branch.from)) errors.push(`animation.steps.${stepIdx}.branch.from: Node "${step.branch.from}" does not exist`);
+        const take = diagram.edges.find((edge) => edge.id === step.branch?.take);
+        if (!take) errors.push(`animation.steps.${stepIdx}.branch.take: Edge "${step.branch.take}" does not exist`);
+        else if (take.from !== step.branch.from) errors.push(`animation.steps.${stepIdx}.branch.take: Edge "${take.id}" is not outgoing from "${step.branch.from}"`);
+      }
+      for (const transform of step.transform ?? []) if (!nodeIds.has(transform.node)) errors.push(`animation.steps.${stepIdx}.transform: Node "${transform.node}" does not exist`);
+      for (const groupId of [...(step.expand ?? []), ...(step.collapse ?? [])]) if (!groupIds.has(groupId)) errors.push(`animation.steps.${stepIdx}: Group "${groupId}" does not exist`);
+      for (const annotationId of step.annotate ?? []) if (!annotationIds.has(annotationId)) errors.push(`animation.steps.${stepIdx}.annotate: Annotation "${annotationId}" does not exist`);
+      if (step.focus && !nodeIds.has(step.focus)) errors.push(`animation.steps.${stepIdx}.focus: Node "${step.focus}" does not exist`);
+      if (step.loop && !edgeIds.has(step.loop.edge)) errors.push(`animation.steps.${stepIdx}.loop: Edge "${step.loop.edge}" does not exist`);
     }
   }
 

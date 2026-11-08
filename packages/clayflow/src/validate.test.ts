@@ -23,6 +23,15 @@ describe("ClayFlow validate", () => {
     }
   });
 
+  it("accepts optional motion and inspection fields and rejects invalid references", () => {
+    const valid = { schemaVersion: "1.0", id: "new-fields", title: "New Fields", illustrative: true, nodes: [{ id: "gate", kind: "decision", label: "Gate", role: "Approver", inputs: ["request"], outputs: ["decision"], evidence: "Policy" }, { id: "yes", kind: "success", label: "Yes" }], edges: [{ id: "take", from: "gate", to: "yes", kind: "conditional", condition: "eligible" }], groups: [{ id: "group", label: "Group" }], annotations: [{ id: "note", kind: "info", text: "Note", target: "yes" }], animation: { preset: "loop", steps: [{ caption: "Go", branch: { from: "gate", take: "take" }, transform: [{ node: "yes", label: "Done" }], expand: ["group"], annotate: ["note"], focus: "yes", loop: { edge: "take", times: 2 } }] } };
+    expect(validate(valid).ok).toBe(true);
+    const invalid = { ...valid, animation: { preset: "loop", steps: [{ caption: "Bad", branch: { from: "yes", take: "take" }, transform: [{ node: "missing" }], expand: ["missing-group"], annotate: ["missing-note"], focus: "missing", loop: { edge: "missing-edge", times: 2 } }] } };
+    const result = validate(invalid);
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.errors.join(" ")).toContain("does not exist");
+  });
+
   describe("enforces architectural safety limits", () => {
     it("rejects over 40 nodes", () => {
       const overNodes: DiagramSpec = {

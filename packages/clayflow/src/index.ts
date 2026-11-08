@@ -7,5 +7,6 @@ export * from "./route.js";
 export * from "./timeline.js";
 export * from "./render.js";
 export * from "./style.js";
+export * from "./motion/tokens.js";
 export * from "./runtime.js";
 export * from "./examples.js";
