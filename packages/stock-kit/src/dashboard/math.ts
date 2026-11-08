@@ -2,6 +2,11 @@ export function gaugeAngle(value: number): number {
   return -90 + Math.max(0, Math.min(100, value)) * 1.8;
 }
 
+export function easeOutCubic(progress: number): number {
+  const t = Math.max(0, Math.min(1, progress));
+  return 1 - Math.pow(1 - t, 3);
+}
+
 export function riskReward(entry: number, target: number, stop: number): number | null {
   const risk = entry - stop;
   if (![entry, target, stop].every(Number.isFinite) || risk <= 0 || target <= entry) return null;

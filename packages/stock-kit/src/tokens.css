@@ -35,3 +35,15 @@
   --si-rail-muted: light-dark(#d5cdef, #b8afd1);
   color: var(--fg);
 }
+
+/* Dashboard contrast and clay surfaces: both theme values remain tied to color-scheme. */
+.manthan-clay {
+  --muted: light-dark(#514d43, #d2cce6);
+  --line: light-dark(#e3d6c6, #484064);
+  --card: light-dark(#fffaf1, #211b3b);
+  --si-page: light-dark(#f3e9da, #17132a);
+  --si-surface: var(--card);
+  --si-surface-raised: light-dark(#fffaf2, #2a2347);
+  --si-shadow: light-dark(0 2px 4px rgb(84 57 30 / .07), 0 16px 36px -20px rgb(0 0 0 / .78));
+  --si-radius: 24px;
+}

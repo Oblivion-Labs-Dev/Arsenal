@@ -10,5 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default function StockIntelligencePage() {
-  return <StockIntelligenceDashboard />;
+  // The site header floats over the page; offset so it never covers the dashboard or its sample-data notice.
+  return (
+    <div className="pt-[calc(var(--site-header-h)+1.25rem)]">
+      <StockIntelligenceDashboard />
+    </div>
+  );
 }

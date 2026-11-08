@@ -1,11 +1,18 @@
 import { describe, expect, it } from 'vitest';
-import { gaugeAngle, portfolioProfitLoss, positionSizePerThousand, riskReward } from './math.js';
+import { easeOutCubic, gaugeAngle, portfolioProfitLoss, positionSizePerThousand, riskReward } from './math.js';
 
 describe('dashboard math', () => {
   it('clamps mood values to the semicircle', () => {
     expect(gaugeAngle(-1)).toBe(-90);
     expect(gaugeAngle(50)).toBe(0);
     expect(gaugeAngle(120)).toBe(90);
+  });
+  it('eases count-up progress and clamps its input', () => {
+    expect(easeOutCubic(0)).toBe(0);
+    expect(easeOutCubic(1)).toBe(1);
+    expect(easeOutCubic(0.5)).toBe(0.875);
+    expect(easeOutCubic(-1)).toBe(0);
+    expect(easeOutCubic(2)).toBe(1);
   });
   it('calculates risk reward and rejects invalid plans', () => {
     expect(riskReward(100, 120, 90)).toBe(2);
