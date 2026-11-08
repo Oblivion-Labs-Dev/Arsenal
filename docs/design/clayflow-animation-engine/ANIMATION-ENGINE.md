@@ -27,6 +27,10 @@ Each step has a required `caption` and may set `nodes`, `edges`, `highlight`, `p
 
 `transform.kind` uses a valid node kind. `branch.take` must identify an edge whose `from` matches the branch node. Group, annotation, focus and loop references must exist.
 
+## Packets
+
+Packets follow the real wire with `getPointAtLength`, so curved, orthogonal and feedback routes are traced exactly. A packet with `reverse: true` travels from target to source. Bidirectional edges render a second `.cf-packet[data-reverse]`, which always runs against the frame's direction, so both directions are visible at once. When several `parallel` edges move in the same frame, their packets start one after another (up to 18% of the packet time apart, never more than half of it in total), so the lanes read as separate flows. Under reduced motion packets stay hidden and the active state is shown by wire colour, thickness and labels.
+
 ## Runtime API
 
 `window.ClayFlow.get(fig)` returns the instance API for a mounted figure, or `null` if it is not mounted. The API provides `play()`, `pause()`, `toggle()`, `replay()`, `reset()`, `step(dir)`, `seek(index)`, `setSpeed(n)`, `inspect(nodeId | null)`, and `on("frame" | "complete", fn)`. `on` returns an unsubscribe function. React exposes this handle with `onReady(api)` and supports `autoPlay` and `initialStep`.
@@ -39,5 +43,6 @@ Each step has a required `caption` and may set `nodes`, `edges`, `highlight`, `p
 | `src/style/motion-nodes.ts` | Node motion and focus states |
 | `src/style/motion-edges.ts` | Connector motion and branch states |
 | `src/style/motion-groups.ts` | Group expansion and collapse states |
+| `src/style/motion-reduced.ts` | The one reduced-motion sheet, emitted for both `prefers-reduced-motion: reduce` and `html.force-reduced`; appended last so it wins |
 | `src/style/inspect.ts` | Inspect panel and illustrative badge |
 | `src/style.ts` | Aggregates the token CSS and owned style modules into `CLAYFLOW_STYLE` |

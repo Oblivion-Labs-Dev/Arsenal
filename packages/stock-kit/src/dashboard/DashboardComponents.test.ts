@@ -18,6 +18,21 @@ describe('PipelineFlow research example', () => {
     expect(result.diagram.animation?.steps).toHaveLength(5);
     expect(result.diagram.animation?.steps?.at(-1)?.states?.pick).toBe('success');
   });
+
+  it('is marked illustrative and shows the risk gate as a condition with a recheck loop not taken', () => {
+    const result = validate(pipelineSpec);
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.diagram.illustrative).toBe(true);
+    const edge = (id: string) => result.diagram.edges.find((e) => e.id === id);
+    expect(edge('risk-pick')?.kind).toBe('conditional');
+    expect(edge('risk-pick')?.condition).toBeTruthy();
+    expect(edge('recheck')).toMatchObject({ from: 'risk-check', to: 'analysis', kind: 'feedback' });
+    expect(result.diagram.animation?.steps?.at(-1)?.branch).toEqual({
+      from: 'risk-check',
+      take: 'risk-pick',
+    });
+  });
 });
 
 describe('PipelineFlow art paths', () => {
