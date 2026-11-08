@@ -1,19 +1,24 @@
-import type { Metadata } from "next";
-import { ArsenalAppShell } from "@/components/arsenal-app-shell";
-import { ContextDashboard } from "@/components/context-dashboard/context-dashboard";
+import type { Metadata } from 'next';
+import { ContextDashboard } from '@/components/context-dashboard/context-dashboard';
 
 export const metadata: Metadata = {
-  title: "Context Intelligence — Arsenal",
-  description: "Token savings, context quality, and AI preprocessing analytics for Arsenal.",
+  title: 'Context',
+  description: 'Token savings, context quality and preprocessing analytics for Arsenal.',
 };
 
 export default function ContextPage() {
   return (
-    <ArsenalAppShell
-      title="Context Intelligence"
-      subtitle="Token usage, savings, quality scores, and optimization insights"
-    >
-      <ContextDashboard />
-    </ArsenalAppShell>
+    <div className="site-container">
+      <header className="max-w-3xl pt-10">
+        <div className="site-label">Intelligence</div>
+        <h1 className="site-title mt-3">Context</h1>
+        <p className="site-lede mt-4">
+          How much context Arsenal saves, how good it is, and where to optimise next.
+        </p>
+      </header>
+      <div className="mt-10">
+        <ContextDashboard />
+      </div>
+    </div>
   );
 }

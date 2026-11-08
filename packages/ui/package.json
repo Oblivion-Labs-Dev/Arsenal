@@ -11,11 +11,15 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./catalog": {
+      "types": "./dist/catalog.d.ts",
+      "import": "./dist/catalog.js"
+    },
     "./styles.css": "./styles.css",
     "./tailwind": "./tailwind.preset.ts"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "rimraf dist && tsup",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
     "lint": "tsc --noEmit",

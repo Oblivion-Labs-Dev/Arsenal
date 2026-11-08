@@ -8,6 +8,7 @@ const preset = {
           surface: "var(--arsenal-surface)",
           elevated: "var(--arsenal-elevated)",
           border: "var(--arsenal-border)",
+          "border-hover": "var(--arsenal-border-hover)",
           primary: "var(--arsenal-text-primary)",
           secondary: "var(--arsenal-text-secondary)",
           muted: "var(--arsenal-muted)",

@@ -1,6 +1,7 @@
 // Canvas & SVG backgrounds: React renderers plus their pure, deterministic sims.
 export * from './AuroraBackground';
 export * from './CosmicParticleBackground';
+export * from './ForgeCore';
 export * from './GalaxyParticleCanvas';
 export * from './InfinityParticleCanvas';
 export * from './InteractiveParticles';
@@ -10,6 +11,7 @@ export * from './ParticleBurst';
 export * from './WeatherCanvas';
 
 export * from './cosmic-field';
+export * from './forge-core';
 export * from './galaxy-field';
 export * from './infinity-curve';
 export * from './infinity-field';

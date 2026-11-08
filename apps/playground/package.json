@@ -14,6 +14,7 @@
     "@arsenal/adapters": "workspace:*",
     "@arsenal/config": "workspace:*",
     "@arsenal/context-engine": "workspace:*",
+    "@arsenal/fx": "workspace:*",
     "@arsenal/layouts": "workspace:*",
     "@arsenal/motion": "workspace:*",
     "@arsenal/sections": "workspace:*",

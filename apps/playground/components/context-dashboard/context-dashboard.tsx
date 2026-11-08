@@ -241,7 +241,7 @@ function FeatureLinks() {
         {FEATURE_AREAS.map((f) => (
           <a
             key={f.id}
-            href={`/features/${f.slug}`}
+            href={`/modules/${f.slug}`}
             className="rounded-arsenal border border-arsenal-border px-4 py-3 text-sm hover:border-arsenal-accent/40"
           >
             <span className="font-medium text-arsenal-primary">{f.title}</span>

@@ -50,6 +50,9 @@ importers:
       '@arsenal/context-engine':
         specifier: workspace:*
         version: link:../../packages/context-engine
+      '@arsenal/fx':
+        specifier: workspace:*
+        version: link:../../packages/fx
       '@arsenal/layouts':
         specifier: workspace:*
         version: link:../../packages/layouts
