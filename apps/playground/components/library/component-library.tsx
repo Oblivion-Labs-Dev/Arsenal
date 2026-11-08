@@ -3,11 +3,17 @@
 import { UI_COMPONENT_CATALOG } from '@arsenal/ui';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useMemo, useState } from 'react';
+import { ClayFlowTabs } from '@/components/library/clayflow-tabs';
 import { ComponentCard } from '@/components/library/component-card';
 import { BlueprintGallery, collections } from '@/components/ui-component-showcase';
 import { categoriesWithCounts, filterEntries, type CategoryFilter } from '@/lib/catalog';
 
-type LibraryTab = 'components' | 'patterns';
+type LibraryTab = 'components' | 'clayflow' | 'patterns';
+const TAB_LABEL: Record<LibraryTab, string> = {
+  components: 'Components',
+  clayflow: 'ClayFlow',
+  patterns: 'Patterns',
+};
 
 function Chip({
   active,
@@ -59,13 +65,13 @@ export function ComponentLibrary() {
       <div className="sticky top-[calc(var(--site-header-h)+1.25rem)] z-30 mt-10">
         <div className="site-header flex flex-col gap-2 rounded-[var(--arsenal-radius-lg)] p-2 sm:flex-row sm:items-center">
           <div className="flex shrink-0 rounded-full bg-arsenal-background p-1">
-            {(['components', 'patterns'] as const).map((value) => (
+            {(['components', 'clayflow', 'patterns'] as const).map((value) => (
               <button
                 key={value}
                 type="button"
                 onClick={() => setTab(value)}
                 aria-pressed={tab === value}
-                className="relative rounded-full px-4 py-1.5 text-[13px] font-medium capitalize"
+                className="relative rounded-full px-4 py-1.5 text-[13px] font-medium"
               >
                 {tab === value ? (
                   <motion.span
@@ -79,7 +85,7 @@ export function ComponentLibrary() {
                 <span
                   className={`relative ${tab === value ? 'text-arsenal-primary' : 'text-arsenal-secondary'}`}
                 >
-                  {value}
+                  {TAB_LABEL[value]}
                 </span>
               </button>
             ))}
@@ -133,6 +139,8 @@ export function ComponentLibrary() {
             </motion.div>
           )}
         </>
+      ) : tab === 'clayflow' ? (
+        <ClayFlowTabs />
       ) : (
         <div className="mt-10 space-y-16">
           <section>

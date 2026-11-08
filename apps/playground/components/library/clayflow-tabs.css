@@ -1,0 +1,23 @@
+/* ClayFlow tab on /components. Diagrams sit inside cards, so the stage must be able to shrink
+   (otherwise a wide diagram keeps its intrinsic width and is clipped at phone widths). */
+.cft-card {
+  min-width: 0;
+}
+.cft-card .cf-stage {
+  min-width: 0;
+}
+.cft-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--arsenal-text-primary, currentColor);
+}
+.cft-stock {
+  background: transparent;
+}
+.cft-sample {
+  margin-bottom: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--arsenal-text-secondary, currentColor);
+}
