@@ -6,7 +6,12 @@
   "sideEffects": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --external react --external react-dom --external framer-motion --external @arsenal/ui --external @arsenal/motion --external @arsenal/config --external @arsenal/themes --clean",
     "typecheck": "tsc --noEmit",
@@ -27,9 +32,10 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
-    "@types/react": "^18.3.18",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "framer-motion": "^11.15.0",
-    "react": "^18.3.1",
+    "react": "^19.3.1",
     "rimraf": "^6.0.1",
     "tsup": "^8.5.0",
     "typescript": "^5.7.2"

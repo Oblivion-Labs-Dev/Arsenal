@@ -6,7 +6,12 @@
   "sideEffects": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "scripts": {
     "build": "tsup src/index.tsx --format esm --dts --external react --external @arsenal/ui --clean",
     "typecheck": "tsc --noEmit",
@@ -14,11 +19,15 @@
     "lint": "tsc --noEmit",
     "clean": "rimraf dist"
   },
-  "peerDependencies": { "react": "^18.0.0 || ^19.0.0" },
-  "dependencies": { "@arsenal/ui": "workspace:*" },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "@arsenal/ui": "workspace:*"
+  },
   "devDependencies": {
-    "@types/react": "^18.3.18",
-    "react": "^18.3.1",
+    "@types/react": "^19.3.0",
+    "react": "^19.3.1",
     "rimraf": "^6.0.1",
     "tsup": "^8.5.0",
     "typescript": "^5.7.2"
