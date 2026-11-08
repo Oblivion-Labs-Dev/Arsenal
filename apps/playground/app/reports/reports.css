@@ -58,6 +58,8 @@
 .report-diagram-card { min-width: 0; padding: .35rem; overflow: hidden; }
 .reports-page .report-diagram-card .cf { margin: 0; border-radius: calc(var(--si-radius-sm) - 4px); --cf-canvas: var(--card); --cf-surface: var(--si-surface-raised); --cf-surface-2: color-mix(in srgb, var(--accent) 8%, var(--card)); --cf-ink: var(--fg); --cf-ink-soft: var(--muted); --cf-accent: var(--accent); --cf-line: var(--line); --cf-shadow: var(--si-shadow); background-image: none; }
 .report-diagram-card .cf-canvas { overflow-x: hidden; }
+/* The canvas clips, so the stage must fit it: shrink on narrow screens rather than cut nodes off. */
+.report-diagram-card .cf-stage { min-width: 0; }
 .reports-footer { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding: 1rem 0; border-top: 1px solid var(--line); color: var(--reports-muted); font-size: .68rem; }
 
 @media (max-width: 760px) {

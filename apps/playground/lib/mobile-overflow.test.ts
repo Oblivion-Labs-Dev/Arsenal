@@ -25,4 +25,12 @@ describe('mobile horizontal overflow', () => {
       }
     },
   );
+
+  it('reports diagram cards shrink the ClayFlow stage instead of clipping it', () => {
+    // At 390px the entity map's vertical stage kept a 400px min-width inside a 341px
+    // canvas with overflow-x hidden, so the right-hand node was cut off.
+    const css = read('app/reports/reports.css');
+    expect(css).toMatch(/\.report-diagram-card \.cf-canvas\s*\{[^}]*overflow-x:\s*hidden/);
+    expect(css).toMatch(/\.report-diagram-card \.cf-stage\s*\{[^}]*min-width:\s*0/);
+  });
 });
