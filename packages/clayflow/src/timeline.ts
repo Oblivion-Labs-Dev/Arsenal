@@ -1,4 +1,5 @@
-import type { Diagram, NodeState } from "./schema.js";
+import type { Diagram, NodeKind, NodeState } from "./schema.js";
+import { getKindMotionFamily, type MotionFamily } from "./motion/kind-motion.js";
 import { MOTION } from "./motion/tokens.js";
 
 export interface AnimationPacket {
@@ -17,7 +18,7 @@ export interface Frame {
   counters: Record<string, number>;
   caption: string;
   dimmed?: string[];
-  transforms?: Record<string, { kind?: string; label?: string }>;
+  transforms?: Record<string, { kind?: NodeKind; motion?: MotionFamily; label?: string }>;
   expanded?: string[];
   collapsed?: string[];
   annotations?: string[];
@@ -121,7 +122,7 @@ export function compile(diagram: Diagram): Frame[] {
       const takenEdge = branch ? diagram.edges.find((edge) => edge.id === branch.take) : undefined;
       const taken = takenEdge ? new Set([takenEdge.to, ...reachable(takenEdge.to, new Set())]) : new Set<string>();
       const dimmed = branch ? [...skipped.map((edge) => edge.id), ...[...new Set(skipped.flatMap((edge) => [edge.to, ...reachable(edge.to, new Set([edge.id]))]))].filter((id) => !taken.has(id))] : [];
-      for (const item of step.transform ?? []) transforms[item.node] = { ...transforms[item.node], ...(item.kind ? { kind: item.kind } : {}), ...(item.label ? { label: item.label } : {}) };
+      for (const item of step.transform ?? []) transforms[item.node] = { ...transforms[item.node], ...(item.kind ? { kind: item.kind, motion: getKindMotionFamily(item.kind) } : {}), ...(item.label ? { label: item.label } : {}) };
       expanded = [...new Set([...expanded.filter((id) => !(step.collapse ?? []).includes(id)), ...(step.expand ?? [])])];
       collapsed = [...new Set([...collapsed.filter((id) => !(step.expand ?? []).includes(id)), ...(step.collapse ?? [])])];
       annotations = [...new Set([...annotations, ...(step.annotate ?? [])])];

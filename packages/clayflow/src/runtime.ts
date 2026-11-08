@@ -125,7 +125,9 @@ const SOURCE = String.raw`(function () {
         if (transform) {
           if (!nodeEl.hasAttribute('data-original-kind')) nodeEl.setAttribute('data-original-kind', nodeEl.getAttribute('data-kind') || '');
           if (!nodeEl.hasAttribute('data-original-label')) nodeEl.setAttribute('data-original-label', nodeEl.querySelector('.cf-node-label') ? nodeEl.querySelector('.cf-node-label').textContent : '');
+          if (!nodeEl.hasAttribute('data-original-motion')) nodeEl.setAttribute('data-original-motion', nodeEl.getAttribute('data-motion') || '');
           if (transform.kind) nodeEl.setAttribute('data-kind', transform.kind);
+          if (transform.motion) nodeEl.setAttribute('data-motion', transform.motion);
           if (transform.label) { var labelEl = nodeEl.querySelector('.cf-node-label'); if (labelEl) labelEl.textContent = transform.label; }
           nodeEl.classList.add('is-transforming');
           if (nodeEl._cfTransformTimer) clearTimeout(nodeEl._cfTransformTimer);
@@ -133,7 +135,8 @@ const SOURCE = String.raw`(function () {
         } else if (nodeEl.hasAttribute('data-original-kind')) {
           nodeEl.setAttribute('data-kind', nodeEl.getAttribute('data-original-kind'));
           var originalLabel = nodeEl.querySelector('.cf-node-label'); if (originalLabel) originalLabel.textContent = nodeEl.getAttribute('data-original-label') || '';
-          nodeEl.removeAttribute('data-original-kind'); nodeEl.removeAttribute('data-original-label');
+          if (nodeEl.hasAttribute('data-original-motion')) nodeEl.setAttribute('data-motion', nodeEl.getAttribute('data-original-motion'));
+          nodeEl.removeAttribute('data-original-kind'); nodeEl.removeAttribute('data-original-label'); nodeEl.removeAttribute('data-original-motion');
         }
         if (frame.counters[nId] !== undefined) {
           var valEl = nodeEl.querySelector('.cf-metric-val');

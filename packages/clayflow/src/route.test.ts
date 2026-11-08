@@ -126,20 +126,35 @@ describe("ClayFlow connector routing", () => {
     expect(offsets[1]! - offsets[0]!).toBe(6);
   });
 
-  it("routes feedback arcs outside the node boxes", () => {
+  it.each([
+    ["horizontal", 2], ["horizontal", 3], ["vertical", 2], ["vertical", 3],
+  ] as const)("routes %s feedback arcs (%i nodes) without crossing any node box", (layoutDir, count) => {
+    const ids = Array.from({ length: count }, (_, i) => `n${i}`);
     const diagram = diagramSchema.parse({
       schemaVersion: "1.0", id: "feedback-arc", title: "Feedback",
-      layout: "horizontal",
-      nodes: [{ id: "a", kind: "process", label: "A" }, { id: "b", kind: "process", label: "B" }],
-      edges: [{ id: "back", from: "b", to: "a", kind: "feedback" }],
+      layout: layoutDir,
+      nodes: ids.map((id) => ({ id, kind: "process", label: id.toUpperCase() })),
+      edges: [
+        ...ids.slice(1).map((id, i) => ({ id: `f${i}`, from: ids[i]!, to: id })),
+        { id: "back", from: ids[count - 1]!, to: ids[0]!, kind: "feedback" },
+      ],
     } satisfies DiagramSpec);
     const layout = computeLayout(diagram);
-    const [edge] = routeEdges(diagram, layout);
-    const controls = edge?.path.match(/C [-\d.]+ ([-\d.]+), [-\d.]+ ([-\d.]+)/);
-    const lowerBound = Math.max(...layout.nodes.map((node) => node.y + node.h));
-    expect(edge?.path).toContain("C");
-    expect(Number(controls?.[1])).toBeGreaterThan(lowerBound);
-    expect(Number(controls?.[2])).toBeGreaterThan(lowerBound);
+    const edge = routeEdges(diagram, layout).find((e) => e.id === "back")!;
+    const nums = edge.path.match(/^M ([-\d.]+) ([-\d.]+) C ([-\d.]+) ([-\d.]+), ([-\d.]+) ([-\d.]+), ([-\d.]+) ([-\d.]+)$/)?.slice(1).map(Number);
+    expect(nums).toHaveLength(8);
+    const [x0, y0, x1, y1, x2, y2, x3, y3] = nums!;
+    const inside: string[] = [];
+    // Skip the first/last few percent: the wire legitimately starts and ends on a port at a box edge.
+    for (let t = 0.06; t <= 0.94; t += 0.02) {
+      const u = 1 - t;
+      const x = u * u * u * x0! + 3 * u * u * t * x1! + 3 * u * t * t * x2! + t * t * t * x3!;
+      const y = u * u * u * y0! + 3 * u * u * t * y1! + 3 * u * t * t * y2! + t * t * t * y3!;
+      for (const n of layout.nodes) {
+        if (x > n.x && x < n.x + n.w && y > n.y && y < n.y + n.h) inside.push(`${n.id}@t=${t.toFixed(2)}`);
+      }
+    }
+    expect(inside).toEqual([]);
   });
 
   it("fans branch edges out from the same source port", () => {

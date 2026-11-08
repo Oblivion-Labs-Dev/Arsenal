@@ -6,7 +6,9 @@ import { CLAYFLOW_RUNTIME } from "./runtime.js";
 // brief added inspect, step/seek/speed, new step kinds and per-family motion CSS, so
 // they were raised once, deliberately (see docs/design/clayflow-animation-engine/
 // PERFORMANCE-RESULTS.md). Raise again only with a recorded reason.
-const STYLE_BUDGET = 28 * 1024;
+// Raised again to 36KB after workstreams B (node/group motion) and C (connector kinds) landed
+// at ~35KB; minification alone only reaches ~31KB. Recorded in PERFORMANCE-RESULTS.md.
+const STYLE_BUDGET = 36 * 1024;
 const RUNTIME_BUDGET = 20 * 1024;
 
 describe("ClayFlow size budgets", () => {

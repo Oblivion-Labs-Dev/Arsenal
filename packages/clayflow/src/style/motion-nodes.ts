@@ -209,16 +209,4 @@ export const MOTION_NODES_STYLE = `
 @keyframes cf-status-pending { to { opacity: .45; transform: scale(.88); } }
 @keyframes cf-clay-remould { 0% { transform: scale(1); } 38% { transform: scale(1.04, .92); } 72% { transform: scale(.97, 1.03); } 100% { transform: scale(1); } }
 
-@media (prefers-reduced-motion: reduce) {
-  .cf-node,
-  .cf-node *,
-  .cf-node::after,
-  .cf-group,
-  .cf-group-tab { animation: none !important; transition: none !important; }
-  .cf-node[data-motion="reservoir"][data-state="success"] .cf-well::before { transform: scaleY(.72); }
-  .cf-node[data-motion="thinking"] .cf-well::before { display: none; }
-  .cf-node[data-motion="coins"][data-state="active"] .cf-well::before { opacity: 1; transform: none; }
-  .cf-node[data-motion="goal"][data-state="success"] .cf-well::after { opacity: 1; transform: none; }
-  .cf-node[data-motion="launch"][data-state="success"] .cf-well::before { opacity: .25; }
-}
 `;

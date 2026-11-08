@@ -24,10 +24,4 @@ export const MOTION_GROUPS_STYLE = `
 @keyframes cf-section-arrive { from { transform: translateY(4px) scale(.99); opacity: .55; } to { transform: translateY(0) scale(1); opacity: 1; } }
 @keyframes cf-section-leave { from { transform: translateY(0) scale(1); opacity: 1; } to { transform: translateY(2px) scale(.99); opacity: .62; } }
 
-@media (prefers-reduced-motion: reduce) {
-  .cf-group,
-  .cf-group-tab { animation: none !important; transition: none !important; transform: none !important; }
-  .cf-group.is-expanded { opacity: 1; }
-  .cf-group.is-collapsed { opacity: .62; }
-}
 `;
