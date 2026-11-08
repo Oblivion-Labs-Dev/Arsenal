@@ -56,7 +56,9 @@ const buttonClass =
   'rounded-arsenal-sm border border-arsenal-border bg-arsenal-elevated px-4 py-2 text-sm font-medium text-arsenal-primary transition-colors hover:border-arsenal-accent';
 
 function Frame({ children, wide = false }: { children: ReactNode; wide?: boolean }) {
-  return <div className={wide ? 'w-full' : 'w-full max-w-md'}>{children}</div>;
+  return (
+    <div className={wide ? 'mx-auto w-full max-w-4xl' : 'mx-auto w-full max-w-lg'}>{children}</div>
+  );
 }
 
 const treemapRows = [
@@ -599,5 +601,7 @@ export function hasCatalogPreview(id: string): boolean {
 
 export function CatalogPreview({ id }: { id: string }) {
   const render = DEMOS[id];
-  return render ? <>{render()}</> : null;
+  return render ? (
+    <div className="flex w-full min-w-0 justify-center [&>*]:max-w-full">{render()}</div>
+  ) : null;
 }
