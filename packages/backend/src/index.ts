@@ -42,3 +42,6 @@ export {
 export { parseEnv, openRouterEnvSchema, readOpenRouterEnv, type OpenRouterEnv } from "./config/env.js";
 export { GmailGateway, SendEmailSchema, type SendEmailInput, type GmailGatewayConfig } from "./gateways/gmail.js";
 
+export * from "./net/index.js";
+export * from "./ai-kit/index.js";
+export * from "./documents/index.js";

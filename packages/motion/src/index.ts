@@ -17,3 +17,4 @@ export {
   shouldReduceMotion,
   onMotionPreferenceChange,
 } from "./motion-gate";
+export * from "./transitions";

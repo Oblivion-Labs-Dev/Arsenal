@@ -523,6 +523,1132 @@ export function Example() {
   );
 }`,
   },
+  {
+    id: 'animated-number',
+    name: 'AnimatedNumber',
+    description: 'Tabular figure that counts up to its value and re-animates when the value changes.',
+    category: 'data-display',
+    importLine: 'import { AnimatedNumber } from "@arsenal/ui";',
+    props: [
+      'value: number | null',
+      'format?: (value: number) => string',
+      'placeholder?: string',
+      'suffix?: string',
+      'durationMs?: number',
+      'delayMs?: number',
+      'decimals?: number',
+      'startFrom?: number | null',
+    ],
+    usage:
+      'Use for headline figures on dashboards. A null value renders the placeholder, never a fake zero. CountUp is an alias.',
+    accessibility:
+      'Renders a plain span with tabular numerals; null values are labelled "unknown". Reduced motion jumps to the final value.',
+    performance:
+      'Single requestAnimationFrame tween per figure; no layout shift thanks to tabular numerals.',
+    code: `import { AnimatedNumber } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <p className="text-4xl font-semibold">
+      <AnimatedNumber value={1284.5} decimals={1} delayMs={120} suffix=" pts" />
+    </p>
+  );
+}`,
+  },
+  {
+    id: 'delta-pill',
+    name: 'DeltaPill',
+    description: 'Signed change pill with success, danger, or muted tone and an arrow glyph.',
+    category: 'data-display',
+    importLine: 'import { DeltaPill } from "@arsenal/ui";',
+    props: [
+      'value: number | null',
+      'kind?: pct | money',
+      'label?: string',
+      'unknownText?: string',
+      'currency?: string',
+      'locale?: string',
+    ],
+    usage:
+      'Use next to a KPI to show change. pct values are fractions (0.012 is 1.2%); null shows the unknown text.',
+    accessibility:
+      'Direction is carried by sign and arrow text as well as colour. Pass label to name what changed.',
+    performance: 'Pure presentational span.',
+    code: `import { DeltaPill } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <div className="flex gap-2">
+      <DeltaPill value={0.034} label="vs last week" />
+      <DeltaPill value={-1250} kind="money" currency="USD" />
+      <DeltaPill value={null} />
+    </div>
+  );
+}`,
+  },
+  {
+    id: 'sparkline',
+    name: 'Sparkline',
+    description: 'Tiny dependency-free SVG trend line that tolerates missing values.',
+    category: 'data-display',
+    importLine: 'import { Sparkline } from "@arsenal/ui";',
+    props: [
+      'values: (number | null)[]',
+      'label: string',
+      'width?: number',
+      'height?: number',
+      'tone?: auto | accent | info',
+      'emptyText?: string',
+    ],
+    usage: 'Use inside table rows and KPI tiles. tone auto colours by overall direction.',
+    accessibility:
+      'Exposes label as the accessible name; empty data renders readable fallback text.',
+    performance: 'Static SVG path computed from the values; no chart runtime.',
+    code: `import { Sparkline } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <Sparkline values={[4, 6, 5, 9, null, 12, 11]} label="Stars, last 7 days" width={120} height={32} />
+  );
+}`,
+  },
+  {
+    id: 'score-ring',
+    name: 'ScoreRing',
+    description: 'Circular score meter with centred value and plain-language meaning.',
+    category: 'data-display',
+    importLine: 'import { ScoreRing } from "@arsenal/ui";',
+    props: [
+      'score: number | null',
+      'max?: number',
+      'label: string',
+      'meaning?: string',
+      'size?: number',
+      'animateOnEntry?: boolean',
+    ],
+    usage: 'Use for a single bounded score. A null score renders as unknown rather than zero.',
+    accessibility:
+      'Label and meaning are exposed to assistive tech; the value is never colour-only.',
+    performance: 'One SVG arc; the entry animation respects reduced motion.',
+    code: `import { ScoreRing } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <ScoreRing score={82} max={100} label="Health score" meaning="Above the portfolio median" size={120} />
+  );
+}`,
+  },
+  {
+    id: 'semi-gauge',
+    name: 'SemiGauge',
+    description: 'Half-circle gauge with coloured bands, needle, and optional legend.',
+    category: 'data-display',
+    importLine: 'import { SemiGauge } from "@arsenal/ui";',
+    props: [
+      'share: number | null',
+      'label: string',
+      'bands?: { from, to, color, label }[]',
+      'valueLabel?: string',
+      'showLegend?: boolean',
+      'width?: number',
+    ],
+    usage:
+      'Use to place a 0 to 1 share inside named zones. DEFAULT_SEMI_GAUGE_BANDS supplies a standard set.',
+    accessibility: 'Band names appear in the legend so meaning never depends on colour alone.',
+    performance: 'Static SVG geometry; no runtime dependency.',
+    code: `import { SemiGauge } from "@arsenal/ui";
+
+export function Example() {
+  return <SemiGauge share={0.64} label="Risk appetite" valueLabel="64%" showLegend width={260} />;
+}`,
+  },
+  {
+    id: 'treemap',
+    name: 'Treemap',
+    description: 'Squarified, keyboard-navigable treemap coloured by a signed value.',
+    category: 'data-display',
+    importLine: 'import { Treemap } from "@arsenal/ui";',
+    props: [
+      'items: readonly T[]',
+      'getKey: (item) => string',
+      'getLabel: (item) => string',
+      'getWeight?: (item) => number | undefined',
+      'getValue: (item) => number | null',
+      'formatValue?: (value) => string',
+      'domain?: number',
+      'colorFor?: (value, item) => string | null',
+      'onSelect?: (item) => void',
+      'label: string',
+      'hideLegend?: boolean',
+    ],
+    usage:
+      'Use for market maps and portfolio breakdowns where tile area is weight and colour is change.',
+    accessibility:
+      'Tiles are focusable with arrow-key movement; values are printed on tiles, not colour-only.',
+    performance: 'Layout is computed once per items change in plain DOM and SVG.',
+    code: `import { Treemap } from "@arsenal/ui";
+
+const rows = [
+  { symbol: "AAPL", cap: 3000, change: 0.012 },
+  { symbol: "MSFT", cap: 2800, change: -0.004 },
+  { symbol: "NVDA", cap: 2200, change: 0.031 },
+];
+
+export function Example() {
+  return (
+    <Treemap
+      items={rows}
+      label="Market map"
+      getKey={(r) => r.symbol}
+      getLabel={(r) => r.symbol}
+      getWeight={(r) => r.cap}
+      getValue={(r) => r.change}
+    />
+  );
+}`,
+  },
+  {
+    id: 'donut-chart',
+    name: 'DonutChart',
+    description: 'Segmented donut with centre readout and selectable segments.',
+    category: 'data-display',
+    importLine: 'import { DonutChart } from "@arsenal/ui";',
+    props: [
+      'segments: { key, label, value: number | null, color? }[]',
+      'label: string',
+      'centerValue?: ReactNode',
+      'centerLabel?: string',
+      'onSelectSegment?: (segment) => void',
+      'size?: number',
+    ],
+    usage:
+      'Use for part-of-whole splits with a handful of segments. DONUT_PALETTE provides default colours.',
+    accessibility: 'Segments are listed in an accessible data table alongside the SVG.',
+    performance: 'Static SVG arcs; no chart runtime.',
+    code: `import { DonutChart } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <DonutChart
+      label="Allocation by sector"
+      centerValue="$48k"
+      centerLabel="Total"
+      segments={[
+        { key: "tech", label: "Tech", value: 52 },
+        { key: "energy", label: "Energy", value: 18 },
+        { key: "cash", label: "Cash", value: 30 },
+      ]}
+    />
+  );
+}`,
+  },
+  {
+    id: 'stacked-bar-chart',
+    name: 'StackedBarChart',
+    description: 'Stacked columns across rows with a typed series key and hover totals.',
+    category: 'data-display',
+    importLine: 'import { StackedBarChart } from "@arsenal/ui";',
+    props: [
+      'series: { key, label, color }[]',
+      'rows: { label, values: Record<key, number | null> }[]',
+      'label: string',
+      'height?: number',
+      'emptyText?: string',
+    ],
+    usage: 'Use to compare composition over time or across groups.',
+    accessibility: 'A data table fallback exposes every value; series are named in the legend.',
+    performance: 'Plain SVG rects; re-renders only on data change.',
+    code: `import { StackedBarChart } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <StackedBarChart
+      label="Runs by outcome"
+      series={[
+        { key: "pass", label: "Passed", color: "var(--arsenal-success)" },
+        { key: "fail", label: "Failed", color: "var(--arsenal-danger)" },
+      ]}
+      rows={[
+        { label: "Mon", values: { pass: 12, fail: 2 } },
+        { label: "Tue", values: { pass: 9, fail: 4 } },
+      ]}
+    />
+  );
+}`,
+  },
+  {
+    id: 'line-chart',
+    name: 'LineChart',
+    description: 'Simple labelled SVG line chart that breaks the line at missing values.',
+    category: 'data-display',
+    importLine: 'import { LineChart } from "@arsenal/ui";',
+    props: [
+      'points: { label, value: number | null }[]',
+      'label: string',
+      'unit?: string',
+      'min?: number',
+      'max?: number',
+      'color?: string',
+      'emptyText?: string',
+    ],
+    usage:
+      'Use for short single-series trends. Reach for TimeSeriesChart when you need zoom or candles.',
+    accessibility: 'Provides a data table fallback and a descriptive label.',
+    performance: 'Static SVG; no chart runtime.',
+    code: `import { LineChart } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <LineChart
+      label="Win rate"
+      unit="%"
+      points={[
+        { label: "Jan", value: 48 },
+        { label: "Feb", value: 53 },
+        { label: "Mar", value: null },
+        { label: "Apr", value: 57 },
+      ]}
+    />
+  );
+}`,
+  },
+  {
+    id: 'distribution-bars',
+    name: 'DistributionBars',
+    description: 'Horizontal bars showing each bucket share of a total.',
+    category: 'data-display',
+    importLine: 'import { DistributionBars } from "@arsenal/ui";',
+    props: ['buckets: { key, label, count: number | null }[]', 'label: string', 'color?: string'],
+    usage: 'Use for histograms and category counts where exact shares matter.',
+    accessibility: 'Counts and percentages are printed as text beside each bar.',
+    performance: 'CSS-width bars; no chart runtime.',
+    code: `import { DistributionBars } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <DistributionBars
+      label="Holding period"
+      buckets={[
+        { key: "d1", label: "Under 1 day", count: 14 },
+        { key: "w1", label: "1 to 7 days", count: 31 },
+        { key: "m1", label: "Over a week", count: 9 },
+      ]}
+    />
+  );
+}`,
+  },
+  {
+    id: 'time-series-chart',
+    name: 'TimeSeriesChart',
+    description:
+      'Lazy-loaded Lightweight Charts wrapper for line, area, histogram, and candlestick series.',
+    category: 'data-display',
+    importLine: 'import { TimeSeriesChart } from "@arsenal/ui";',
+    props: [
+      'series: TimeSeriesSpec[]',
+      'label: string',
+      'priceLines?: { seriesId, price, title?, color?, dashed? }[]',
+      'markers?: { seriesId, time, position?, shape?, text?, color? }[]',
+      'fitContent?: boolean',
+      'mainPaneStretch?: number',
+    ],
+    usage:
+      'Use for price and equity charts with panes, price lines, and markers. Colours accept --arsenal-* token names.',
+    accessibility:
+      'Canvas chart: always supply a meaningful label and surface key figures as text nearby.',
+    performance: 'The charting library loads on demand, so it stays out of the initial bundle.',
+    code: `import { TimeSeriesChart } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <TimeSeriesChart
+      label="Equity curve"
+      fitContent
+      series={[
+        {
+          id: "equity",
+          type: "area",
+          color: "--arsenal-accent",
+          data: [
+            { time: "2026-01-02", value: 100 },
+            { time: "2026-01-03", value: 103 },
+            { time: "2026-01-04", value: 101 },
+          ],
+        },
+      ]}
+      priceLines={[{ seriesId: "equity", price: 100, title: "Start", dashed: true }]}
+    />
+  );
+}`,
+  },
+  {
+    id: 'drawdown-chart',
+    name: 'DrawdownChart',
+    description:
+      'Underwater chart derived from an equity curve, with worst drawdown and recovery summary.',
+    category: 'data-display',
+    importLine: 'import { DrawdownChart } from "@arsenal/ui";',
+    props: [
+      'points: { date: string; equity: number }[]',
+      'label?: string',
+      'formatDate?: (date: string) => string',
+    ],
+    usage: 'Pass the raw equity points; drawdown is calculated for you via calculateDrawdown.',
+    accessibility: 'Worst drawdown and recovery date are stated in text.',
+    performance: 'Static SVG derived from the points.',
+    code: `import { DrawdownChart } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <DrawdownChart
+      label="Strategy drawdown"
+      points={[
+        { date: "2026-01-02", equity: 100 },
+        { date: "2026-01-09", equity: 112 },
+        { date: "2026-01-16", equity: 98 },
+        { date: "2026-01-23", equity: 115 },
+      ]}
+    />
+  );
+}`,
+  },
+  {
+    id: 'data-ridge-background',
+    name: 'DataRidgeBackground',
+    description: 'Decorative ridge-line backdrop shaped by a real data series.',
+    category: 'backgrounds',
+    importLine: 'import { DataRidgeBackground } from "@arsenal/ui";',
+    props: [
+      'series?: { label, from, to, values: number[] }',
+      'children?: ReactNode',
+      'className?: string',
+    ],
+    usage: 'Use behind a hero so the page signature is the product data itself.',
+    accessibility: 'Decorative and aria-hidden; keep all copy in regular HTML children.',
+    performance: 'Single SVG path; no animation loop.',
+    code: `import { DataRidgeBackground } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <DataRidgeBackground
+      series={{ label: "Daily volume", from: "2026-01-01", to: "2026-01-07", values: [4, 7, 5, 9, 12, 8, 10] }}
+      className="min-h-[320px]"
+    >
+      <h1 className="p-8 text-4xl font-semibold">Markets at a glance</h1>
+    </DataRidgeBackground>
+  );
+}`,
+  },
+  {
+    id: 'form-fields',
+    name: 'Form fields',
+    description:
+      'Input, Textarea, Select, and SearchInput sharing one label, hint, and error shell.',
+    category: 'controls',
+    importLine: 'import { Input, Textarea, Select, SearchInput } from "@arsenal/ui";',
+    props: [
+      'label?: ReactNode',
+      'hint?: ReactNode',
+      'error?: ReactNode',
+      'wrapperClassName?: string',
+      'SearchInput value: string',
+      'SearchInput onValueChange: (value: string) => void',
+      'SearchInput clearLabel?: string',
+      'native input, textarea, and select attributes',
+    ],
+    usage: 'Use for every text entry. Hint and error text are wired automatically to the control.',
+    accessibility:
+      'Labels use htmlFor, hint and error are linked with aria-describedby, and error sets aria-invalid.',
+    performance: 'Thin wrappers over native elements.',
+    code: `import { useState } from "react";
+import { Input, Select, SearchInput } from "@arsenal/ui";
+
+export function Example() {
+  const [query, setQuery] = useState("");
+  return (
+    <form className="grid max-w-sm gap-4">
+      <Input label="Email" type="email" hint="We never share it." />
+      <Select label="Plan" defaultValue="pro">
+        <option value="free">Free</option>
+        <option value="pro">Pro</option>
+      </Select>
+      <SearchInput value={query} onValueChange={setQuery} placeholder="Search repos" clearLabel="Clear search" />
+    </form>
+  );
+}`,
+  },
+  {
+    id: 'card',
+    name: 'Card',
+    description:
+      'Base surface with standard, interactive, status, and insight variants plus header, body, and footer parts.',
+    category: 'cards',
+    importLine: 'import { Card, CardHeader, CardBody, CardFooter } from "@arsenal/ui";',
+    props: [
+      'variant?: standard | interactive | status | insight',
+      'status?: success | active | attention | danger | info | neutral',
+      'padding?: none | compact | default',
+      'selected?: boolean',
+      'onActivate?: () => void',
+      'CardHeader eyebrow?, title?, action?',
+    ],
+    usage:
+      'Use as the default container. Interactive cards become keyboard-activatable when onActivate is set.',
+    accessibility:
+      'Interactive cards get button semantics and a focus ring; status is paired with text, not colour only.',
+    performance: 'Plain element with CSS transitions only.',
+    code: `import { Card, CardHeader, CardBody, CardFooter } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <Card variant="status" status="success" onActivate={() => console.log("open")}>
+      <CardHeader eyebrow="Pipeline" title="Nightly build" />
+      <CardBody>All 42 checks passed.</CardBody>
+      <CardFooter>Finished 3 minutes ago</CardFooter>
+    </Card>
+  );
+}`,
+  },
+  {
+    id: 'skeleton',
+    name: 'Skeleton and LoadingPlaceholder',
+    description: 'Shimmer skeleton primitives and ready-made loading layouts.',
+    category: 'feedback',
+    importLine: 'import { Skeleton, SkeletonText, LoadingPlaceholder } from "@arsenal/ui";',
+    props: [
+      'Skeleton variant?: text | title | block',
+      'Skeleton width?, height?',
+      'LoadingPlaceholder label: string',
+      'LoadingPlaceholder shape?: panel | list | grid | page',
+      'LoadingPlaceholder rows?: number',
+    ],
+    usage: 'Use LoadingPlaceholder for whole regions and Skeleton to shape custom loading rows.',
+    accessibility:
+      'LoadingPlaceholder announces its label politely; skeleton pieces are decorative.',
+    performance: 'CSS shimmer only; reduced motion disables it.',
+    code: `import { LoadingPlaceholder, Skeleton } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <div className="grid gap-6">
+      <LoadingPlaceholder label="Loading repositories" shape="list" rows={4} />
+      <Skeleton variant="block" height={96} />
+    </div>
+  );
+}`,
+  },
+  {
+    id: 'error-state',
+    name: 'ErrorState',
+    description:
+      'Error boundary panel with retry, optional reporting, and a copyable error reference.',
+    category: 'feedback',
+    importLine: 'import { ErrorState } from "@arsenal/ui";',
+    props: [
+      'title: string',
+      'description?: ReactNode',
+      'error?: (Error & { digest?: string }) | null',
+      'onRetry?: () => void',
+      'retryLabel?: string',
+      'fallback?: ReactNode',
+      'onReport?: (error) => void',
+      'referenceLabel?: string',
+    ],
+    usage:
+      'Use in error.tsx files and failed data panels. Wire onReport so errors are logged, never swallowed.',
+    accessibility: 'Rendered as an alert so the failure is announced; retry is a real button.',
+    performance: 'Lightweight presentational panel.',
+    code: `import { ErrorState } from "@arsenal/ui";
+
+export default function RouteError({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
+  return (
+    <ErrorState
+      title="Could not load the dashboard"
+      error={error}
+      onRetry={reset}
+      onReport={(e) => console.error(e)}
+    />
+  );
+}`,
+  },
+  {
+    id: 'tabs',
+    name: 'Tabs',
+    description: 'Accessible tab list with counts, icons, and arrow-key navigation.',
+    category: 'navigation',
+    importLine: 'import { Tabs } from "@arsenal/ui";',
+    props: [
+      'items: { id, label, count?, icon?, disabled? }[]',
+      'value: Id',
+      'onChange: (id) => void',
+      'ariaLabel: string',
+      'idBase?: string',
+      'orientation?: horizontal | vertical',
+      'size?: sm | md',
+    ],
+    usage:
+      'Use for switching panels in place. Pair with tabId and tabPanelId so panels link to their tab.',
+    accessibility: 'Implements the tablist pattern with roving focus, arrow, Home, and End keys.',
+    performance: 'Controlled, stateless component.',
+    code: `import { useState } from "react";
+import { Tabs } from "@arsenal/ui";
+
+export function Example() {
+  const [tab, setTab] = useState("overview");
+  return (
+    <Tabs
+      ariaLabel="Repository sections"
+      value={tab}
+      onChange={setTab}
+      items={[
+        { id: "overview", label: "Overview" },
+        { id: "issues", label: "Issues", count: 12 },
+        { id: "archived", label: "Archived", disabled: true },
+      ]}
+    />
+  );
+}`,
+  },
+  {
+    id: 'animated-tabs',
+    name: 'AnimatedTabs',
+    description: 'Scrollable tab strip with a sliding indicator and edge fades.',
+    category: 'navigation',
+    importLine: 'import { AnimatedTabs } from "@arsenal/ui";',
+    props: [
+      'items: { id, label }[]',
+      'value: Id',
+      'onChange: (id) => void',
+      'ariaLabel: string',
+      'idBase?: string',
+    ],
+    usage:
+      'Use for many tabs that may overflow, where the indicator should glide to the active tab.',
+    accessibility:
+      'Same tablist keyboard model as Tabs; indicator motion respects reduced motion.',
+    performance:
+      'One transformed indicator element; scroll edges are measured on scroll and resize only.',
+    code: `import { useState } from "react";
+import { AnimatedTabs } from "@arsenal/ui";
+
+export function Example() {
+  const [tab, setTab] = useState("day");
+  return (
+    <AnimatedTabs
+      ariaLabel="Range"
+      value={tab}
+      onChange={setTab}
+      items={[
+        { id: "day", label: "1D" },
+        { id: "week", label: "1W" },
+        { id: "month", label: "1M" },
+      ]}
+    />
+  );
+}`,
+  },
+  {
+    id: 'filter-chip',
+    name: 'FilterChip',
+    description: 'Toggle chip for filters with an optional count.',
+    category: 'controls',
+    importLine: 'import { FilterChip } from "@arsenal/ui";',
+    props: ['label: string', 'active?: boolean', 'count?: number', 'native button attributes'],
+    usage: 'Use in filter rows where each chip toggles one facet.',
+    accessibility: 'Button with aria-pressed reflecting active state.',
+    performance: 'Lightweight presentational button.',
+    code: `import { useState } from "react";
+import { FilterChip } from "@arsenal/ui";
+
+export function Example() {
+  const [on, setOn] = useState(true);
+  return <FilterChip label="Open issues" count={12} active={on} onClick={() => setOn(!on)} />;
+}`,
+  },
+  {
+    id: 'facet-filter-dropdown',
+    name: 'FacetFilterDropdown',
+    description: 'Searchable single-select dropdown listing facet values with counts.',
+    category: 'controls',
+    importLine: 'import { FacetFilterDropdown } from "@arsenal/ui";',
+    props: [
+      'items: readonly [value, count][]',
+      'value: string',
+      'onChange: (value) => void',
+      'totalCount: number',
+      'ariaLabel: string',
+      'allLabel?: string',
+      'searchPlaceholder?: string',
+      'emptySearchLabel?: string',
+      'clearLabel?: string',
+      'icon?: ReactNode',
+      'debounceMs?: number',
+      'searchThreshold?: number',
+    ],
+    usage:
+      'Use for filtering a list by a facet with many values. Search appears once items pass searchThreshold.',
+    accessibility: 'Keyboard operable listbox with a labelled trigger and search field.',
+    performance: 'Search is debounced and filtered in memory.',
+    code: `import { useState } from "react";
+import { FacetFilterDropdown } from "@arsenal/ui";
+
+export function Example() {
+  const [lang, setLang] = useState("");
+  return (
+    <FacetFilterDropdown
+      ariaLabel="Filter by language"
+      value={lang}
+      onChange={setLang}
+      totalCount={120}
+      allLabel="All languages"
+      items={[["TypeScript", 64], ["Python", 38], ["Rust", 18]]}
+    />
+  );
+}`,
+  },
+  {
+    id: 'table-view',
+    name: 'Table view helpers',
+    description:
+      'useTableView hook with SortHeader and TableViewToggle for sortable, collapsible tables.',
+    category: 'data-display',
+    importLine: 'import { useTableView, SortHeader, TableViewToggle } from "@arsenal/ui";',
+    props: [
+      'useTableView(rows, value, options)',
+      'options.initialKey: K',
+      'options.initialDirection?: asc | desc',
+      'options.pageSize?: number',
+      'SortHeader label, ariaSort, arrow, onSort, align?',
+      'TableViewToggle total, expanded, onToggle, pageSize?',
+    ],
+    usage:
+      'Use for small tables that sort by column and collapse to the first rows. Define the value getter outside the component so it stays stable.',
+    accessibility:
+      'SortHeader renders a button for the column title; put aria-sort on the th using the hook ariaSort.',
+    performance: 'Sorting is memoised on rows, sort state, and the value getter.',
+    code: `import { useTableView, SortHeader, TableViewToggle } from "@arsenal/ui";
+
+type Row = { name: string; stars: number };
+type Key = "name" | "stars";
+
+const rows: Row[] = [
+  { name: "arsenal", stars: 120 },
+  { name: "vault", stars: 45 },
+];
+const value = (row: Row, key: Key) => row[key];
+
+export function Example() {
+  const t = useTableView(rows, value, { initialKey: "stars", pageSize: 5 });
+  return (
+    <>
+      <table>
+        <thead>
+          <tr>
+            <th aria-sort={t.ariaSort("name")}>
+              <SortHeader label="Name" ariaSort={t.ariaSort("name")} arrow={t.arrow("name")} onSort={() => t.toggleSort("name")} />
+            </th>
+            <th aria-sort={t.ariaSort("stars")}>
+              <SortHeader label="Stars" align="right" ariaSort={t.ariaSort("stars")} arrow={t.arrow("stars")} onSort={() => t.toggleSort("stars")} />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {t.visibleRows.map((r) => (
+            <tr key={r.name}><td>{r.name}</td><td>{r.stars}</td></tr>
+          ))}
+        </tbody>
+      </table>
+      <TableViewToggle total={t.total} pageSize={t.pageSize} expanded={t.expanded} onToggle={t.toggleExpanded} />
+    </>
+  );
+}`,
+  },
+  {
+    id: 'kpi-card',
+    name: 'KpiCard',
+    description:
+      'Headline metric tile with counting value, meter, hover insight, and optional action link.',
+    category: 'dashboards',
+    importLine: 'import { KpiCard } from "@arsenal/ui";',
+    props: [
+      'label: ReactNode',
+      'value: string | number | null',
+      'icon?: ReactNode',
+      'accent?: accent | amber | blue | cyan | gold | violet | success | danger',
+      'hint?: ReactNode',
+      'meter?: number',
+      'insight?: { eyebrow?, headline, detail?, rows? }',
+      'action?: { href, label }',
+      'linkComponent?: ComponentType',
+      'delay?: number',
+      'detailsLabel?: ReactNode',
+    ],
+    usage:
+      'Use for top-of-dashboard figures. Pass linkComponent (for example next/link) so actions stay client-side.',
+    accessibility:
+      'Insight is reachable by focus as well as hover; null values show an explicit unknown state.',
+    performance: 'Numeric values count up once; delay staggers a row of cards.',
+    code: `import { KpiCard } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <KpiCard
+      label="Open positions"
+      value={14}
+      accent="cyan"
+      meter={0.7}
+      hint="3 added today"
+      insight={{
+        headline: "Concentrated in tech",
+        rows: [
+          { label: "Tech", value: "9" },
+          { label: "Energy", value: "5" },
+        ],
+      }}
+      action={{ href: "/positions", label: "View all" }}
+    />
+  );
+}`,
+  },
+  {
+    id: 'confirm-dialog',
+    name: 'ConfirmDialog',
+    description: 'Trigger-driven confirmation dialog with busy and error states.',
+    category: 'feedback',
+    importLine: 'import { ConfirmDialog } from "@arsenal/ui";',
+    props: [
+      'trigger: ReactNode',
+      'title: ReactNode',
+      'description?: ReactNode',
+      'confirmLabel?: ReactNode',
+      'cancelLabel?: ReactNode',
+      'busyLabel?: ReactNode',
+      'onConfirm: () => void | Promise<void>',
+      'busy?: boolean',
+      'error?: ReactNode',
+      'tone?: danger | accent',
+    ],
+    usage:
+      'Use before destructive or irreversible actions. Surface failures from onConfirm through error.',
+    accessibility: 'Modal dialog with focus trap, Escape to cancel, and labelled title and description.',
+    performance: 'Renders its panel only while open.',
+    code: `import { ConfirmDialog } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <ConfirmDialog
+      trigger={<button type="button">Delete repo</button>}
+      title="Delete this repository?"
+      description="This cannot be undone."
+      confirmLabel="Delete"
+      tone="danger"
+      onConfirm={async () => {
+        await fetch("/api/repos/1", { method: "DELETE" });
+      }}
+    />
+  );
+}`,
+  },
+  {
+    id: 'side-panel',
+    name: 'SidePanel',
+    description: 'Modal side drawer or centred panel with focus trap and scroll lock.',
+    category: 'feedback',
+    importLine: 'import { SidePanel } from "@arsenal/ui";',
+    props: [
+      'open: boolean',
+      'onClose: () => void',
+      'children: ReactNode',
+      'variant?: side | center',
+      'backdropLabel?: string',
+      'ariaLabelledBy?: string',
+      'role?: dialog | status',
+      'ariaLive?: polite | assertive | off',
+      'animate?: PanelAnimator',
+      'exitMs?: number',
+    ],
+    usage:
+      'Use for detail views that should keep the list visible. Supply animate to plug in your own motion library.',
+    accessibility:
+      'Traps focus, restores it on close, closes on Escape and backdrop click, and compensates for the scrollbar.',
+    performance:
+      'Mounted only while open or exiting; animation is injected, so the base stays dependency-free.',
+    code: `import { useState } from "react";
+import { SidePanel } from "@arsenal/ui";
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button type="button" onClick={() => setOpen(true)}>Details</button>
+      <SidePanel open={open} onClose={() => setOpen(false)} ariaLabelledBy="panel-title">
+        <h2 id="panel-title" className="p-6 text-xl font-semibold">Repository details</h2>
+      </SidePanel>
+    </>
+  );
+}`,
+  },
+  {
+    id: 'side-by-side-diff',
+    name: 'SideBySideDiff',
+    description: 'Git diff viewer with side-by-side and unified modes.',
+    category: 'data-display',
+    importLine: 'import { SideBySideDiff } from "@arsenal/ui";',
+    props: [
+      'files: readonly FileDiff[]',
+      'stats?: { additions, deletions }',
+      'initialMode?: side-by-side | unified',
+      'beforeLabel?: string',
+      'afterLabel?: string',
+      'emptyMessage?: string',
+      'onOpenTarget?: (target) => void',
+    ],
+    usage:
+      'Use for change review. Parsed diffs map to FileDiff with hunks of context, addition, and deletion lines.',
+    accessibility:
+      'Additions and deletions carry +/- markers, not colour alone; the mode switch is a labelled control.',
+    performance: 'Plain DOM rows; deletions are paired with additions once per hunk.',
+    code: `import { SideBySideDiff } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <SideBySideDiff
+      beforeLabel="main"
+      afterLabel="feature"
+      files={[
+        {
+          file: "src/app.ts",
+          status: "modified",
+          additions: 1,
+          deletions: 1,
+          hunks: [
+            {
+              header: "@@ -1,2 +1,2 @@",
+              oldStart: 1,
+              oldLines: 2,
+              newStart: 1,
+              newLines: 2,
+              lines: [
+                { type: "context", content: "const a = 1;", oldLineNumber: 1, newLineNumber: 1 },
+                { type: "deletion", content: "const b = 2;", oldLineNumber: 2 },
+                { type: "addition", content: "const b = 3;", newLineNumber: 2 },
+              ],
+            },
+          ],
+        },
+      ]}
+    />
+  );
+}`,
+  },
+  {
+    id: 'asset-icon',
+    name: 'AssetIcon',
+    description: 'Decorative image icon resolved from a base path and a name.',
+    category: 'utilities',
+    importLine: 'import { AssetIcon } from "@arsenal/ui";',
+    props: ['name: string', 'basePath: string', 'ext?: string', 'size?: number'],
+    usage: 'Use for brand or asset glyphs served from an app public folder.',
+    accessibility: 'Decorative: rendered with empty alt, so put the meaning in adjacent text.',
+    performance: 'Fixed dimensions avoid layout shift.',
+    code: `import { AssetIcon } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <span className="inline-flex items-center gap-2">
+      <AssetIcon name="bitcoin" basePath="/icons" ext="svg" size={20} />
+      Bitcoin
+    </span>
+  );
+}`,
+  },
+  {
+    id: 'initials-avatar',
+    name: 'InitialsAvatar',
+    description: 'Deterministic coloured initials avatar.',
+    category: 'utilities',
+    importLine: 'import { InitialsAvatar } from "@arsenal/ui";',
+    props: [
+      'name: string',
+      'seed?: string',
+      'size?: number',
+      'letters?: number',
+      'palette?: readonly string[]',
+      'label?: boolean',
+    ],
+    usage:
+      'Use where no profile image exists. The same name or seed always yields the same colour.',
+    accessibility: 'Set label to expose the name to assistive tech; otherwise it is decorative.',
+    performance: 'Pure span; colour comes from a string hash.',
+    code: `import { InitialsAvatar } from "@arsenal/ui";
+
+export function Example() {
+  return <InitialsAvatar name="Ada Lovelace" size={40} letters={2} label />;
+}`,
+  },
+  {
+    id: 'upload-zone',
+    name: 'UploadZone',
+    description: 'Drag-and-drop or click file target with progress.',
+    category: 'controls',
+    importLine: 'import { UploadZone } from "@arsenal/ui";',
+    props: [
+      'title: string',
+      'hint?: string',
+      'accept?: string',
+      'onFile: (file, onProgress) => Promise<void> | void',
+      'progress?: number | null',
+      'compact?: boolean',
+      'disabled?: boolean',
+    ],
+    usage:
+      'Use for single-file uploads. Restrict types with accept and report progress (0 to 1) through onProgress.',
+    accessibility: 'Keyboard-activatable control backed by a real file input.',
+    performance: 'No upload logic bundled; you own the transport.',
+    code: `import { UploadZone } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <UploadZone
+      title="Drop a CSV here"
+      hint="Up to 5 MB"
+      accept=".csv"
+      onFile={async (file, onProgress) => {
+        onProgress(0.5);
+        await fetch("/api/upload", { method: "POST", body: file });
+        onProgress(1);
+      }}
+    />
+  );
+}`,
+  },
+  {
+    id: 'flip-clock',
+    name: 'FlipClock',
+    description: 'Live flip-style clock with optional seconds, 12-hour mode, and time zone.',
+    category: 'motion',
+    importLine: 'import { FlipClock } from "@arsenal/ui";',
+    props: ['hour12?: boolean', 'seconds?: boolean', 'locale?: string', 'timeZone?: string', 'scale?: number'],
+    usage: 'Use as a header or hero accent, for example showing market time in a given zone.',
+    accessibility: 'Flip motion respects prefers-reduced-motion.',
+    performance: 'Ticks once per second and updates only digits that change.',
+    code: `import { FlipClock } from "@arsenal/ui";
+
+export function Example() {
+  return <FlipClock timeZone="America/New_York" hour12={false} seconds scale={0.8} />;
+}`,
+  },
+  {
+    id: 'table-of-contents',
+    name: 'TableOfContents',
+    description: 'Heading list with an active-section highlight.',
+    category: 'navigation',
+    importLine: 'import { TableOfContents } from "@arsenal/ui";',
+    props: [
+      'items: { id, text, level: 2 | 3 }[]',
+      'variant?: minimal | default',
+      'title?: string',
+      'activeId?: string',
+    ],
+    usage:
+      'Use beside long reading pages. Pass activeId to control the highlight, otherwise it follows scroll.',
+    accessibility: 'Rendered as a labelled nav with in-page links.',
+    performance: 'Avoids per-scroll layout work.',
+    code: `import { TableOfContents } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <TableOfContents
+      title="On this page"
+      items={[
+        { id: "setup", text: "Setup", level: 2 },
+        { id: "tailwind", text: "Tailwind preset", level: 3 },
+        { id: "usage", text: "Usage", level: 2 },
+      ]}
+    />
+  );
+}`,
+  },
+  {
+    id: 'reading-progress',
+    name: 'ReadingProgress',
+    description: 'Thin progress bar that tracks scroll through an article.',
+    category: 'navigation',
+    importLine: 'import { ReadingProgress } from "@arsenal/ui";',
+    props: ['target?: string (CSS selector)', 'className?: string'],
+    usage:
+      'Place near the top of long reading pages. Pass a selector to measure a specific article element.',
+    accessibility: 'Decorative; reduced motion removes the smoothing.',
+    performance: 'Updates a single element on scroll.',
+    code: `import { ReadingProgress } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <>
+      <ReadingProgress target="#article" />
+      <article id="article">Long form content</article>
+    </>
+  );
+}`,
+  },
+  {
+    id: 'seo',
+    name: 'Seo',
+    description: 'Client-side document title and meta tags, including Open Graph and canonical URL.',
+    category: 'utilities',
+    importLine: 'import { Seo } from "@arsenal/ui";',
+    props: [
+      'title: string',
+      'description: string',
+      'siteUrl: string',
+      'siteName?: string',
+      'path?: string',
+      'noIndex?: boolean',
+      'image?: string',
+    ],
+    usage: 'Use in client-rendered pages that cannot use a framework metadata API.',
+    accessibility: 'Sets a descriptive document title for page announcements.',
+    performance: 'Updates existing meta tags in place instead of duplicating them.',
+    code: `import { Seo } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <Seo
+      title="Components"
+      description="Browse the shared UI library."
+      siteName="Arsenal"
+      siteUrl="https://arsenal.example.com"
+      path="/components"
+    />
+  );
+}`,
+  },
+  {
+    id: 'orbit-radar',
+    name: 'OrbitRadar',
+    description: 'Animated orbital radar that signals idle, running, or done.',
+    category: 'motion',
+    importLine: 'import { OrbitRadar } from "@arsenal/ui";',
+    props: ['status: idle | running | done', 'children?: ReactNode', 'size?: number', 'label?: string'],
+    usage: 'Use as a scan or analysis progress indicator with a centre slot for an icon or count.',
+    accessibility: 'Status is conveyed through the label; motion stops under prefers-reduced-motion.',
+    performance: 'Animation only runs while status is running.',
+    code: `import { OrbitRadar } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <OrbitRadar status="running" size={160} label="Scanning repositories">
+      <span className="text-sm">42</span>
+    </OrbitRadar>
+  );
+}`,
+  },
 ];
 
 export const COMPONENT_CATEGORIES: { id: ComponentCategory; label: string }[] = [

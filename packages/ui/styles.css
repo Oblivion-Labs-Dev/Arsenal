@@ -3596,3 +3596,21 @@ kbd {
   --card-text: #202326;
   --card-muted: rgba(32, 35, 38, 0.58);
 }
+
+/* Circular theme reveal used by ThemeRevealToggle / revealTheme (@arsenal/motion). */
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+:root.theme-reveal::view-transition-new(root) { animation: arsenal-theme-reveal 0.78s cubic-bezier(0.4, 0, 0.2, 1); }
+@keyframes arsenal-theme-reveal {
+  from { clip-path: circle(0 at var(--reveal-x, 100%) var(--reveal-y, 0)); }
+  to { clip-path: circle(var(--reveal-r, 150vmax) at var(--reveal-x, 100%) var(--reveal-y, 0)); }
+}
+.theme-fade, .theme-fade *, .theme-fade *::before, .theme-fade *::after {
+  transition: background-color .65s cubic-bezier(.4, 0, .2, 1), color .65s cubic-bezier(.4, 0, .2, 1),
+    border-color .65s cubic-bezier(.4, 0, .2, 1), fill .65s cubic-bezier(.4, 0, .2, 1),
+    stroke .65s cubic-bezier(.4, 0, .2, 1), box-shadow .65s cubic-bezier(.4, 0, .2, 1) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(root) { animation: none !important; }
+  .theme-fade, .theme-fade * { transition: none !important; }
+}
