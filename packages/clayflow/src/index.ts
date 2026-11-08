@@ -10,3 +10,4 @@ export * from "./style.js";
 export * from "./motion/tokens.js";
 export * from "./runtime.js";
 export * from "./examples.js";
+export * from "./examples/showcase-specs.js";

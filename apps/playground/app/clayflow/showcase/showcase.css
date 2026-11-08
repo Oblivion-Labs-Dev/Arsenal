@@ -31,7 +31,29 @@
   --show-accent: #7051ce;
 }
 
+.clay-showcase {
+  background:
+    radial-gradient(52rem 30rem at 82% -4rem, color-mix(in srgb, var(--show-accent) 20%, transparent), transparent 70%),
+    radial-gradient(44rem 36rem at -6% 38%, color-mix(in srgb, #5b7cf0 10%, transparent), transparent 70%),
+    radial-gradient(40rem 30rem at 100% 78%, color-mix(in srgb, #c46fd8 8%, transparent), transparent 70%),
+    linear-gradient(180deg, #100d1b, #0b0913 60%, #0e0b18);
+}
+[data-theme='ivory-graphite'] .clay-showcase {
+  background:
+    radial-gradient(52rem 30rem at 82% -4rem, #e9e0ff, transparent 70%),
+    radial-gradient(44rem 36rem at -6% 40%, #f4ead9, transparent 70%),
+    linear-gradient(180deg, #faf7f1, #f5f1ea);
+}
+[data-theme='ivory-graphite'] .showcase-card { box-shadow: 0 1px 2px #2a20400d, 0 14px 30px -22px #2a204040; }
 .showcase-shell { width: min(100%, 1240px); margin-inline: auto; }
+/* Cards carry their own titles; the diagram's title row would repeat them. */
+.clay-showcase .cf-title-row { display: none; }
+/* Small cards keep the step list for screen readers only. */
+.state-card .cf-steps, .connector-card .cf-steps, .stress-card .cf-steps, .recipe-card .cf-steps {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+/* Scale diagrams down to the card instead of scrolling inside it. */
+.showcase-card .cf-stage { min-width: 0; }
 .showcase-hero { position: relative; min-height: 23rem; padding: 0 0 5rem; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; }
 .showcase-back { margin-bottom: clamp(3.5rem, 8vw, 7rem); color: var(--show-muted); text-decoration: none; font-size: 0.84rem; }
 .showcase-back:hover, .showcase-footer a:hover { color: var(--show-accent); }

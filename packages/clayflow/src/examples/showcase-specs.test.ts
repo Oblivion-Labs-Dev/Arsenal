@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { computeLayout } from "../layout.js";
+import { routeEdges } from "../route.js";
 import { compile } from "../timeline.js";
 import { validate } from "../validate.js";
 import {
@@ -37,5 +39,32 @@ describe("ClayFlow animation showcase specs", () => {
 
   it("provides the eight requested connector forms", () => {
     expect(CONNECTOR_SPECS).toHaveLength(8);
+  });
+
+  it("draws connector demos so each shape is visible", () => {
+    const byId = (id: string) => {
+      const result = validate(CONNECTOR_SPECS.find((spec) => spec.id === `connector-${id}`)!);
+      if (!result.ok) throw new Error(result.errors.join(", "));
+      return result.diagram;
+    };
+    // A feedback wire returns to where the work came from.
+    const feedback = byId("feedback");
+    expect(feedback.edges[0]).toMatchObject({ from: "to", to: "from", kind: "feedback" });
+    // A curve between two aligned nodes renders as a straight line, so the curved and dashed
+    // demos must reach a node that is offset on the cross axis, in both layouts.
+    for (const id of ["curved", "dashed"]) {
+      const diagram = byId(id);
+      for (const forced of ["horizontal", "vertical"] as const) {
+        const layout = computeLayout({ ...diagram, layout: forced });
+        const pos = new Map(layout.nodes.map((n) => [n.id, n]));
+        const bends = diagram.edges.some((edge) => {
+          const a = pos.get(edge.from)!;
+          const b = pos.get(edge.to)!;
+          return forced === "vertical" ? a.x + a.w / 2 !== b.x + b.w / 2 : a.y + a.h / 2 !== b.y + b.h / 2;
+        });
+        expect(bends, `${id} ${forced}`).toBe(true);
+        expect(routeEdges({ ...diagram, layout: forced }, layout).length).toBe(diagram.edges.length);
+      }
+    }
   });
 });

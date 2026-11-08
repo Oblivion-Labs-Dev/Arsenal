@@ -10,7 +10,7 @@ import {
   EXAMPLE_DIAGRAMS,
   STRESS_SPECS,
   TRANSFORMATION_RECIPES,
-} from '../../../../../packages/clayflow/src/examples/showcase-specs.js';
+} from '@arsenal/clayflow';
 
 type DiagramAPI = Parameters<NonNullable<ComponentProps<typeof ClayFlowDiagram>['onReady']>>[0];
 const STATE_LABELS = ['Rest', 'Hover', 'Active', 'Complete', 'Error', 'Reduced'] as const;

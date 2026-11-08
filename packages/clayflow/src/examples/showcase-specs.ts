@@ -66,12 +66,18 @@ const connector = (
   label: string,
   edge: Omit<NonNullable<DiagramSpec["edges"]>[number], "id" | "from" | "to">,
 ): DiagramSpec => {
-  const branching = id === "branch";
+  // Curves only bend between offset nodes, so the curved and dashed demos fan out to a second target.
+  const fanOut = id === "curved" || id === "dashed";
+  const branching = id === "branch" || fanOut;
   const edgeOptions: Array<Omit<NonNullable<DiagramSpec["edges"]>[number], "id" | "from" | "to"> & { from?: string; to?: string }> = id === "parallel"
-    ? [edge, { style: "curved" as const, kind: "parallel" as const, label: "second lane" }]
-    : branching
-      ? [{ ...edge, label: "yes" }, { from: "from", to: "alternate", style: "curved" as const, kind: "branch" as const, label: "no" }]
-      : [edge];
+    ? [edge, { style: "curved" as const, kind: "parallel" as const }]
+    : id === "feedback"
+      ? [{ ...edge, from: "to", to: "from" }]
+      : fanOut
+        ? [edge, { ...edge, from: "from", to: "alternate" }]
+        : branching
+          ? [{ ...edge, label: "yes" }, { from: "from", to: "alternate", style: "curved" as const, kind: "branch" as const, label: "no" }]
+          : [edge];
   const edges = edgeOptions.map((item, index) => ({ ...item, id: `link-${index + 1}`, from: item.from ?? "from", to: item.to ?? "to" }));
   return {
     schemaVersion: "1.0",
@@ -85,7 +91,7 @@ const connector = (
       ...(branching ? [node("alternate", "service", "Alternative", "Other route", ["signal"], ["result"], "Static connector demonstration.")] : []),
     ],
     edges,
-    animation: { preset: "data-flow", loop: false, steps: [{ caption: `${label} carries a signal from source to target.`, packets: edges.map(({ id: edgeId }) => ({ edge: edgeId })) }] },
+    animation: { preset: "data-flow", loop: false, steps: [{ caption: id === "feedback" ? "Feedback sends the result back to the source for another pass." : `${label} carries a signal from source to target.`, packets: edges.map(({ id: edgeId }) => ({ edge: edgeId })) }] },
   };
 };
 
