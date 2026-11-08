@@ -5,7 +5,7 @@ export default defineConfig({
   format: ["esm"],
   dts: true,
   clean: true,
-  external: ["react", "react-dom", "framer-motion", "@arsenal/motion", "react-intersection-observer"],
+  external: ["lightweight-charts", "react", "react-dom", "framer-motion", "@arsenal/motion", "react-intersection-observer"],
   banner: {
     js: "'use client';",
   },

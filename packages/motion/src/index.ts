@@ -11,3 +11,9 @@ export {
   type AnimationPreset,
   type AnimationPresetId,
 } from "./presets";
+export {
+  prefersReducedMotion,
+  isMotionPaused,
+  shouldReduceMotion,
+  onMotionPreferenceChange,
+} from "./motion-gate";

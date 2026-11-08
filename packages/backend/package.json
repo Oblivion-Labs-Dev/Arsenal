@@ -12,7 +12,9 @@
       "default": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
@@ -21,8 +23,11 @@
   },
   "dependencies": {
     "@oblivion-labs-dev/arsenal-shared": "workspace:*",
+    "feedsmith": "^3.0.1",
     "nodemailer": "^6.9.13",
-    "zod": "^3.24.2"
+    "openai": "^7.53.0",
+    "undici": "^8.12.4",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/nodemailer": "^6.4.14",
