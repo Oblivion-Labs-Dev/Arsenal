@@ -1,4 +1,7 @@
 import "./tokens.css";
+export { StockHero, IndexTiles, MarketMoodGauge, StockPickCard, WhenToBuySell, TradePlanCard, PaperPortfolioCard, WhyThisStock, PipelineFlow, MarketGlance, ModeSwitch } from "./dashboard/DashboardComponents.js";
+export type { StockIndex, StockPick } from "./dashboard/DashboardComponents.js";
+export { gaugeAngle, riskReward, portfolioProfitLoss, positionSizePerThousand } from "./dashboard/math.js";
 export * from "./market/index.js";
 export { readChartColors, toRgba } from "./market/chart-colors.js";
 export { AllocationFlow } from "./portfolio/AllocationFlow.js";

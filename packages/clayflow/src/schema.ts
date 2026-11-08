@@ -47,6 +47,17 @@ export const NODE_KINDS = [
   "health",
   "learning",
   "business",
+  "money",
+  "technology",
+  "growth",
+  "goal",
+  "launch",
+  "person",
+  "team",
+  "organization",
+  "institution",
+  "education",
+  "general",
   // Progress
   "progress-ring",
   "progress-bar",
@@ -87,7 +98,7 @@ export type EdgeStyle = (typeof EDGE_STYLES)[number];
 
 export const edgeStyleSchema = z.enum(EDGE_STYLES);
 
-export const GROUP_KINDS = ["group", "module", "boundary"] as const;
+export const GROUP_KINDS = ["group", "module", "boundary", "section"] as const;
 
 export type GroupKind = (typeof GROUP_KINDS)[number];
 
@@ -102,6 +113,7 @@ export const ANNOTATION_KINDS = [
   "callout",
   "tooltip",
   "label",
+  "new",
 ] as const;
 
 export type AnnotationKind = (typeof ANNOTATION_KINDS)[number];
@@ -121,6 +133,9 @@ export const ANIMATION_PRESETS = [
   "timeline",
   "state-transition",
   "highlight",
+  "pulse",
+  "expand",
+  "cycle",
 ] as const;
 
 export type AnimationPreset = (typeof ANIMATION_PRESETS)[number];
@@ -218,6 +233,17 @@ export const explanationsSchema = z.object({
 
 export type Explanations = z.infer<typeof explanationsSchema>;
 
+export const TOPIC_THEMES = {
+  "ai-tech": { label: "AI & Tech", accent: "#7655d9", suggestedKinds: ["ai", "technology", "code", "agent"] },
+  finance: { label: "Finance", accent: "#55845e", suggestedKinds: ["money", "finance", "database", "metric"] },
+  health: { label: "Health", accent: "#b65b66", suggestedKinds: ["health", "person", "data", "success"] },
+  education: { label: "Education", accent: "#9a6a35", suggestedKinds: ["education", "learning", "person", "progress-ring"] },
+  business: { label: "Business", accent: "#727447", suggestedKinds: ["business", "team", "organization", "goal"] },
+  general: { label: "General", accent: "#7655d9", suggestedKinds: ["process", "data", "decision", "document"] },
+} as const satisfies Record<string, { label: string; accent: string; suggestedKinds: readonly NodeKind[] }>;
+
+export type TopicTheme = keyof typeof TOPIC_THEMES;
+
 export const diagramSchema = z.object({
   schemaVersion: z.literal("1.0"),
   id: idSchema,
@@ -225,6 +251,7 @@ export const diagramSchema = z.object({
   summary: descriptionSchema.optional(),
   layout: z.enum(["horizontal", "vertical"]).default("horizontal"),
   theme: z.enum(["auto", "light", "dark"]).optional().default("auto"),
+  topic: z.enum(["ai-tech", "finance", "health", "education", "business", "general"]).optional(),
   nodes: z.array(nodeSchema).min(1).max(40),
   edges: z.array(edgeSchema).max(80).default([]),
   groups: z.array(groupSchema).max(8).optional().default([]),

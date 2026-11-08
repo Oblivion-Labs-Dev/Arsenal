@@ -21,5 +21,17 @@
   --si-surface-2: light-dark(#faf7ff, #2a2350);
   --si-glow: light-dark(transparent, rgba(184, 169, 247, 0.22));
   --si-radius: 22px;
+  --si-page: light-dark(#f5eee3, #141126);
+  --si-surface: var(--card);
+  --si-surface-raised: light-dark(#fffaf1, #282044);
+  --si-up: light-dark(#24734c, #84d2a0);
+  --si-down: light-dark(#b43d3d, #f29a91);
+  --si-warm: light-dark(#b27626, #e7bc70);
+  --si-blue: light-dark(#3b76a8, #83b9e6);
+  --si-shadow: light-dark(0 14px 32px -24px rgb(65 45 24 / .48), 0 18px 42px -22px rgb(0 0 0 / .72));
+  --si-radius-sm: 16px;
+  --si-rail: light-dark(#292453, #100d21);
+  --si-rail-fg: light-dark(#fffdf8, #f2eefc);
+  --si-rail-muted: light-dark(#d5cdef, #b8afd1);
   color: var(--fg);
 }

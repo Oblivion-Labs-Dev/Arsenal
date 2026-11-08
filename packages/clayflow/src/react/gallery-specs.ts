@@ -443,6 +443,19 @@ export const progressMetricsOverviewSpec: DiagramSpec = {
   ],
 };
 
+export const nodesAdditionalSpec: DiagramSpec = {
+  schemaVersion: "1.0", id: "nodes-additional", title: "Domain & People Nodes", summary: "Money, technology, goals and organizations", nodes: [
+    { id: "add-money", kind: "money", label: "Money" }, { id: "add-tech", kind: "technology", label: "Technology" }, { id: "add-growth", kind: "growth", label: "Growth" }, { id: "add-goal", kind: "goal", label: "Goal" }, { id: "add-launch", kind: "launch", label: "Launch" }, { id: "add-person", kind: "person", label: "Person" }, { id: "add-team", kind: "team", label: "Team" }, { id: "add-org", kind: "organization", label: "Organization" }, { id: "add-inst", kind: "institution", label: "Institution" }, { id: "add-edu", kind: "education", label: "Education" }, { id: "add-general", kind: "general", label: "General" },
+  ], edges: [],
+};
+
+export const sectionGroupSpec: DiagramSpec = { schemaVersion: "1.0", id: "group-section", title: "Labeled Section", nodes: [{ id: "sec-node", kind: "process", label: "Section content", group: "sec-band" }], edges: [], groups: [{ id: "sec-band", label: "Research phase", kind: "section" }] };
+export const newAnnotationSpec: DiagramSpec = { schemaVersion: "1.0", id: "annotation-new", title: "New Badge", nodes: [{ id: "new-node", kind: "agent", label: "New capability" }], edges: [], annotations: [{ id: "new-badge", target: "new-node", kind: "new", text: "New" }] };
+export const topicThemesSpec: DiagramSpec = { schemaVersion: "1.0", id: "topic-themes", title: "Topic Themes", summary: "Accent suggestions for common diagram topics", topic: "ai-tech", nodes: [{ id: "topic-node", kind: "technology", label: "Technology topic" }], edges: [] };
+export const animPulseSpec: DiagramSpec = { schemaVersion: "1.0", id: "anim-pulse", title: "Preset: pulse", nodes: [{ id: "pulse-node", kind: "process", label: "Focus" }], edges: [], animation: { preset: "pulse" } };
+export const animExpandSpec: DiagramSpec = { schemaVersion: "1.0", id: "anim-expand", title: "Preset: expand", nodes: [{ id: "expand-node", kind: "process", label: "Emphasis" }], edges: [], animation: { preset: "expand" } };
+export const animCycleSpec: DiagramSpec = { schemaVersion: "1.0", id: "anim-cycle", title: "Preset: cycle", nodes: [{ id: "cycle-a", kind: "process", label: "Start" }, { id: "cycle-b", kind: "process", label: "Return" }], edges: [{ id: "cycle-edge", from: "cycle-a", to: "cycle-b" }], animation: { preset: "cycle" } };
+
 // ---------------------------------------------------------------------------
 // 7. Animation Presets: 12 compact diagrams (one per preset)
 // ---------------------------------------------------------------------------
@@ -694,6 +707,7 @@ export const ALL_GALLERY_SPECS: Record<string, DiagramSpec> = {
   "nodes-logic-outcomes": nodesLogicOutcomesSpec,
   "nodes-data": nodesDataSpec,
   "nodes-domain": nodesDomainSpec,
+  "nodes-additional": nodesAdditionalSpec,
   "nodes-progress": nodesProgressSpec,
   // States
   "states-overview": statesOverviewSpec,
@@ -701,8 +715,11 @@ export const ALL_GALLERY_SPECS: Record<string, DiagramSpec> = {
   "connectors-overview": connectorsOverviewSpec,
   // Groups
   "groups-overview": groupsOverviewSpec,
+  "group-section": sectionGroupSpec,
   // Annotations
   "annotations-overview": annotationsOverviewSpec,
+  "annotation-new": newAnnotationSpec,
+  "topic-themes": topicThemesSpec,
   // Progress & metrics
   "progress-metrics-overview": progressMetricsOverviewSpec,
   // Presets
@@ -718,4 +735,7 @@ export const ALL_GALLERY_SPECS: Record<string, DiagramSpec> = {
   "anim-timeline": animTimelineSpec,
   "anim-state-transition": animStateTransitionSpec,
   "anim-highlight": animHighlightSpec,
+  "anim-pulse": animPulseSpec,
+  "anim-expand": animExpandSpec,
+  "anim-cycle": animCycleSpec,
 };

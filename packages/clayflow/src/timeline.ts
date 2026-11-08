@@ -604,6 +604,15 @@ export function compile(diagram: Diagram): Frame[] {
       break;
     }
 
+    case "pulse":
+    case "expand":
+    case "cycle": {
+      const focused = diagram.nodes[0];
+      frames.push({ index: 0, at: 0, duration: 900, visible: allIds, highlight: focused ? [focused.id] : [], packets: [], states: initialStates, counters: initialCounters, caption: focused ? `${diagram.animation?.preset} emphasis on ${focused.label}.` : `${diagram.animation?.preset} emphasis.` });
+      frames.push({ index: 1, at: 900, duration: 900, visible: allIds, highlight: focused ? [focused.id] : allNodeIds, packets: diagram.animation?.preset === "cycle" && diagram.edges[0] ? [{ edge: diagram.edges[0].id }] : [], states: focused ? { ...initialStates, [focused.id]: "active" } : initialStates, counters: initialCounters, caption: `${diagram.animation?.preset} emphasis settles into the diagram.` });
+      break;
+    }
+
     case "data-flow":
     default: {
       if (diagram.edges.length === 0) {

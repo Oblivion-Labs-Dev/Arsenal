@@ -4,7 +4,7 @@ import { aiAgentRequestExample } from "./examples.js";
 import { ANIMATION_PRESETS, diagramSchema, type Diagram, type DiagramSpec } from "./schema.js";
 
 describe("ClayFlow animation timeline", () => {
-  it("compiles each of the 12 presets successfully within the 24 frame budget", () => {
+  it("compiles each of the 15 presets successfully within the 24 frame budget", () => {
     for (const preset of ANIMATION_PRESETS) {
       const diag: Diagram = diagramSchema.parse({
         ...aiAgentRequestExample,

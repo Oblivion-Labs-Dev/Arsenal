@@ -45,6 +45,16 @@ describe("ClayFlow renderer", () => {
     expect(frames.length).toBeGreaterThan(0);
   });
 
+  it("applies an opt-in topic accent and renders the new badge", () => {
+    const diagram = diagramSchema.parse({ schemaVersion: "1.0", id: "topic-render", title: "Topic Render", topic: "finance", nodes: [{ id: "node", kind: "money", label: "Money", group: "band" }], edges: [], groups: [{ id: "band", label: "Section band", kind: "section" }], annotations: [{ id: "badge", target: "node", kind: "new", text: "New" }] });
+    const html = renderClayFlow(diagram);
+    expect(html).toContain('data-topic="finance"');
+    expect(html).toContain("--cf-topic-accent:");
+    expect(html).toContain("cf-chip-new");
+    expect(html).toContain("cf-group-section");
+    expect(renderClayFlow(diagramSchema.parse({ ...diagram, topic: undefined }))).not.toContain("data-topic=");
+  });
+
   it("keeps step captions from closing the frames script or opening a comment", () => {
     const hostile = diagramSchema.parse({
       ...aiAgentRequestExample,
@@ -89,6 +99,11 @@ describe("ClayFlow renderer", () => {
       /\.cf-stage\s*\{[^}]*min-width:\s*calc\(var\(--cf-w\) \* 0\.72px\)/,
     );
     expect(CLAYFLOW_STYLE).toMatch(/\.cf-canvas\s*\{[^}]*overflow-x:\s*auto/);
+  });
+
+  it("disables new decorative preset motion for reduced-motion users", () => {
+    expect(CLAYFLOW_STYLE).toContain(".force-reduced .cf[data-cf-preset]");
+    expect(CLAYFLOW_STYLE).toMatch(/@media \(prefers-reduced-motion:\s*reduce\)[\s\S]*?animation:\s*none/);
   });
 
   it("keeps the figure's own role instead of an ARIA role a figure may not carry", () => {

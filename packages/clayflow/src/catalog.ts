@@ -1,6 +1,6 @@
 import type { NodeKind, Tone } from "./schema.js";
 
-export type ComponentFamily = "node" | "logic" | "data" | "domain" | "progress";
+export type ComponentFamily = "node" | "logic" | "data" | "domain" | "people" | "progress";
 export type ComponentShape = "card" | "diamond" | "pill" | "ring";
 
 export interface ComponentMetadata {
@@ -236,6 +236,17 @@ export const CATALOG: Record<NodeKind, ComponentMetadata> = {
     noun: "Business Operations",
     shape: "card",
   },
+  money: { family: "domain", tone: "mint", asset: "money", noun: "Money", shape: "card" },
+  technology: { family: "domain", tone: "violet", asset: "technology", noun: "Technology", shape: "card" },
+  growth: { family: "domain", tone: "mint", asset: "growth", noun: "Growth", shape: "card" },
+  goal: { family: "domain", tone: "peach", asset: "goal", noun: "Goal", shape: "card" },
+  launch: { family: "domain", tone: "violet", asset: "launch", noun: "Launch", shape: "card" },
+  general: { family: "domain", tone: "sand", asset: "general", noun: "General Concept", shape: "card" },
+  person: { family: "people", tone: "peach", asset: "person", noun: "Person", shape: "card" },
+  team: { family: "people", tone: "violet", asset: "team", noun: "Team", shape: "card" },
+  organization: { family: "people", tone: "sky", asset: "organization", noun: "Organization", shape: "card" },
+  institution: { family: "people", tone: "sand", asset: "institution", noun: "Institution", shape: "card" },
+  education: { family: "people", tone: "peach", asset: "education", noun: "Education", shape: "card" },
 
   // Progress
   "progress-ring": {

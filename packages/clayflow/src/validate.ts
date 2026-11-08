@@ -337,8 +337,9 @@ export function fromModelOutput(input: unknown): ValidationResult {
   const summary = summaryRaw ? truncateString(summaryRaw, 160) : undefined;
 
   const layout = raw.layout === "vertical" ? "vertical" : "horizontal";
-  const theme =
+    const theme =
     raw.theme === "light" || raw.theme === "dark" || raw.theme === "auto" ? raw.theme : "auto";
+    const topic = ["ai-tech", "finance", "health", "education", "business", "general"].includes(String(raw.topic)) ? raw.topic : undefined;
 
   // Nodes coercion
   const nodes: unknown[] = [];
@@ -534,7 +535,7 @@ export function fromModelOutput(input: unknown): ValidationResult {
             : typeof g.type === "string"
               ? g.type.toLowerCase()
               : "group";
-        const kind = ["group", "module", "boundary"].includes(kindCandidate)
+        const kind = ["group", "module", "boundary", "section"].includes(kindCandidate)
           ? kindCandidate
           : "group";
 
@@ -590,6 +591,7 @@ export function fromModelOutput(input: unknown): ValidationResult {
           "callout",
           "tooltip",
           "label",
+          "new",
         ];
         const kind = validKinds.includes(kindCandidate) ? kindCandidate : "info";
 
@@ -632,6 +634,9 @@ export function fromModelOutput(input: unknown): ValidationResult {
       "timeline",
       "state-transition",
       "highlight",
+      "pulse",
+      "expand",
+      "cycle",
     ];
     const preset = validPresets.includes(presetCandidate) ? presetCandidate : "data-flow";
 
@@ -696,6 +701,7 @@ export function fromModelOutput(input: unknown): ValidationResult {
     ...(summary ? { summary } : {}),
     layout,
     theme,
+    ...(topic ? { topic } : {}),
     nodes,
     edges,
     groups,

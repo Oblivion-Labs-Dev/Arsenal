@@ -56,6 +56,18 @@ export const CLAYFLOW_STYLE = `
   outline-offset: 3px;
 }
 
+.cf[data-topic] { --cf-accent: var(--cf-topic-accent); }
+.cf-group-section { border-style: solid; border-color: color-mix(in srgb, var(--cf-accent) 52%, var(--cf-line)); background: color-mix(in srgb, var(--cf-accent) 9%, transparent); }
+.cf-chip-new { color: var(--cf-accent); font-weight: 700; }
+.cf-chip-new .cf-chip-icon { background: var(--cf-accent); }
+.cf[data-cf-preset="pulse"] .cf-node.is-highlight { animation: cf-pulse 1.4s ease-in-out infinite alternate; }
+.cf[data-cf-preset="expand"] .cf-node.is-highlight { animation: cf-expand 1.4s cubic-bezier(.22,1,.36,1) infinite alternate; }
+.cf[data-cf-preset="cycle"] .cf-edge.is-active .cf-edge-wire { stroke-dasharray: 8 7; animation: cf-cycle 1.3s linear infinite; }
+.force-reduced .cf[data-cf-preset] .cf-node.is-highlight, .force-reduced .cf[data-cf-preset] .cf-edge.is-active .cf-edge-wire { animation: none !important; }
+@keyframes cf-pulse { to { box-shadow: var(--cf-shadow), 0 0 0 5px color-mix(in srgb, var(--cf-accent) 32%, transparent); } }
+@keyframes cf-expand { to { transform: scale(1.045); } }
+@keyframes cf-cycle { to { stroke-dashoffset: -30; } }
+
 .cf-canvas {
   position: relative;
   width: 100%;
@@ -580,6 +592,7 @@ export const CLAYFLOW_STYLE = `
     animation: none !important;
     transform: none !important;
   }
+  .cf[data-cf-preset] .cf-node.is-highlight, .cf[data-cf-preset] .cf-edge.is-active .cf-edge-wire { animation: none !important; }
 }
 
 /* Print Overrides */

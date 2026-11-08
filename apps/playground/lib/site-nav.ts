@@ -50,6 +50,12 @@ export const LAB_ITEMS: LabItem[] = [
     description: 'Claymorphic diagram components from Manthan: nodes, connectors, groups and motion presets.',
     tag: 'Diagrams',
   },
+  {
+    href: '/stock-intelligence',
+    title: 'Stock Intelligence',
+    description: 'A beginner-friendly market dashboard assembled from Manthan clay components with illustrative sample data.',
+    tag: 'Finance',
+  },
 ];
 
 /** Which header item is active for a pathname. Prototype routes belong to Labs. */

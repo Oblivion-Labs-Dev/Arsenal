@@ -2,7 +2,7 @@ import { resolveAsset } from "./assets.js";
 import { CATALOG } from "./catalog.js";
 import { computeLayout, type LayoutResult } from "./layout.js";
 import { routeEdges, type RoutedEdge } from "./route.js";
-import type { Diagram, FallbackModel, Tone } from "./schema.js";
+import { TOPIC_THEMES, type Diagram, type FallbackModel, type Tone } from "./schema.js";
 import { compile, type Frame } from "./timeline.js";
 
 export interface RenderOptions {
@@ -223,7 +223,8 @@ ${frames
   const speed = diagram.animation?.speed ?? 1;
   const loop = diagram.animation?.loop !== false;
 
-  return `<figure class="cf" data-cf-preset="${escapeHtml(preset)}" data-cf-id="${escapeHtml(diagram.id)}" data-cf-speed="${speed}" data-cf-loop="${loop}" data-cf-active-layout="${primaryLayout}" tabindex="0" aria-label="${escapeHtml(diagram.title)}">
+  const topicAttr = diagram.topic ? ` data-topic="${escapeHtml(diagram.topic)}" style="--cf-topic-accent:${TOPIC_THEMES[diagram.topic].accent}"` : "";
+  return `<figure class="cf"${topicAttr} data-cf-preset="${escapeHtml(preset)}" data-cf-id="${escapeHtml(diagram.id)}" data-cf-speed="${speed}" data-cf-loop="${loop}" data-cf-active-layout="${primaryLayout}" tabindex="0" aria-label="${escapeHtml(diagram.title)}">
 <script type="application/json" class="cf-frames">${framesJson}</script>
 <div class="cf-canvas">
 ${stageH}

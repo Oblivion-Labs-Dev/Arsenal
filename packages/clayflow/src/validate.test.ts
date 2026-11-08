@@ -13,6 +13,16 @@ describe("ClayFlow validate", () => {
     }
   });
 
+  it("accepts the added node, section, new badge, preset and topic kinds", () => {
+    const result = validate({ schemaVersion: "1.0", id: "new-kinds", title: "New Kinds", topic: "education", nodes: [{ id: "student", kind: "education", label: "Learning" }], edges: [], groups: [{ id: "band", label: "Section", kind: "section" }], annotations: [{ id: "badge", target: "student", kind: "new", text: "New" }], animation: { preset: "pulse" } });
+    expect(result.ok).toBe(true);
+    if (result.ok) {
+      expect(result.diagram.topic).toBe("education");
+      expect(result.diagram.groups[0]?.kind).toBe("section");
+      expect(result.diagram.annotations[0]?.kind).toBe("new");
+    }
+  });
+
   describe("enforces architectural safety limits", () => {
     it("rejects over 40 nodes", () => {
       const overNodes: DiagramSpec = {

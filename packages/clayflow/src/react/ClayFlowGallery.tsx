@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState, type ChangeEvent, type ReactNode } from "react";
-import { fromModelOutput, EXAMPLES } from "../index.js";
+import { fromModelOutput, EXAMPLES, TOPIC_THEMES, type TopicTheme } from "../index.js";
 import { ClayFlowDiagram } from "./ClayFlowDiagram.js";
 import {
   animDataFlowSpec,
+  animPulseSpec, animExpandSpec, animCycleSpec,
   animDecisionBranchSpec,
   animFanOutInSpec,
   animHighlightSpec,
@@ -18,11 +19,13 @@ import {
   connectorsOverviewSpec,
   groupsOverviewSpec,
   nodesArchitectureSpec,
+  nodesAdditionalSpec,
   nodesDataSpec,
   nodesDomainSpec,
   nodesLogicBranchingSpec,
   nodesLogicOutcomesSpec,
   nodesProgressSpec,
+  sectionGroupSpec, newAnnotationSpec, topicThemesSpec,
   progressMetricsOverviewSpec,
   statesOverviewSpec,
 } from "./gallery-specs.js";
@@ -41,6 +44,9 @@ const PRESET_SPECS = [
   { name: "timeline", spec: animTimelineSpec },
   { name: "state-transition", spec: animStateTransitionSpec },
   { name: "highlight", spec: animHighlightSpec },
+  { name: "pulse", spec: animPulseSpec },
+  { name: "expand", spec: animExpandSpec },
+  { name: "cycle", spec: animCycleSpec },
 ];
 
 /** `headerAction` fills the slot Sutra used for its theme toggle; the host app supplies its own. */
@@ -134,6 +140,7 @@ export function ClayFlowGallery({ headerAction }: { headerAction?: ReactNode } =
             <a href="#presets" className="cfg-nav-link">
               Presets
             </a>
+            <a href="#themes" className="cfg-nav-link">Themes</a>
             <a href="#examples" className="cfg-nav-link">
               Examples
             </a>
@@ -224,6 +231,8 @@ export function ClayFlowGallery({ headerAction }: { headerAction?: ReactNode } =
               <ClayFlowDiagram spec={nodesDomainSpec} />
             </div>
 
+            <div className="cfg-card"><div className="cfg-card-header"><h3 className="cfg-card-title">Domain & People (11)</h3><span className="cfg-card-meta">Families: domain · people</span></div><ClayFlowDiagram spec={nodesAdditionalSpec} /></div>
+
             <div className="cfg-card">
               <div className="cfg-card-header">
                 <h3 className="cfg-card-title">Progress & Metrics (6)</h3>
@@ -272,6 +281,7 @@ export function ClayFlowGallery({ headerAction }: { headerAction?: ReactNode } =
             </div>
           </div>
           <ClayFlowDiagram spec={groupsOverviewSpec} />
+          <div className="cfg-card"><div className="cfg-card-header"><h3 className="cfg-card-title">Labeled Section</h3><span className="cfg-card-meta">Group: section</span></div><ClayFlowDiagram spec={sectionGroupSpec} /></div>
         </section>
 
         {/* 5. Annotations */}
@@ -286,6 +296,7 @@ export function ClayFlowGallery({ headerAction }: { headerAction?: ReactNode } =
             </div>
           </div>
           <ClayFlowDiagram spec={annotationsOverviewSpec} />
+          <div className="cfg-card"><div className="cfg-card-header"><h3 className="cfg-card-title">New Badge</h3><span className="cfg-card-meta">Annotation: new</span></div><ClayFlowDiagram spec={newAnnotationSpec} /></div>
         </section>
 
         {/* 6. Progress and Metrics */}
@@ -308,7 +319,7 @@ export function ClayFlowGallery({ headerAction }: { headerAction?: ReactNode } =
             <div className="cfg-section-title-wrap">
               <h2 className="cfg-section-title">7. Animation Presets</h2>
               <p className="cfg-section-desc">
-                The twelve built-in ANIMATION_PRESETS compiled into deterministic step timelines.
+                The fifteen built-in ANIMATION_PRESETS compiled into deterministic step timelines.
               </p>
             </div>
           </div>
@@ -325,6 +336,8 @@ export function ClayFlowGallery({ headerAction }: { headerAction?: ReactNode } =
             ))}
           </div>
         </section>
+
+        <section id="themes" className="cfg-section"><div className="cfg-section-header"><div className="cfg-section-title-wrap"><h2 className="cfg-section-title">Topic Themes</h2><p className="cfg-section-desc">Six opt-in accent palettes with suggested node kinds.</p></div></div><div className="cfg-grid-three">{(Object.entries(TOPIC_THEMES) as [TopicTheme, (typeof TOPIC_THEMES)[TopicTheme]][]).map(([topic, theme]) => <div key={topic} className="cfg-card"><div className="cfg-card-header"><h3 className="cfg-card-title">{theme.label}</h3><span className="cfg-card-meta">Suggested: {theme.suggestedKinds.join(" · ")}</span></div><ClayFlowDiagram spec={{ ...topicThemesSpec, id: `theme-${topic}`, title: `${theme.label} Theme`, topic }} /></div>)}</div></section>
 
         {/* 8. Examples */}
         <section id="examples" className="cfg-section">
