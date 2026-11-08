@@ -65,6 +65,94 @@ export interface ComponentCollection {
 }
 
 const showroomMeta: Record<string, ShowroomMeta> = {
+  'gravity-well': {
+    category: '3D',
+    tags: ['black hole', 'webgl', 'signature'],
+    difficulty: 'Advanced',
+    dependencies: ['@arsenal/three', 'three', '@react-three/fiber'],
+    popularity: 80,
+    recentlyAdded: true,
+  },
+  'anomaly-matrix': {
+    category: '3D',
+    tags: ['sphere', 'webgl', 'wireframe'],
+    difficulty: 'Advanced',
+    dependencies: ['@arsenal/three', 'three', '@react-three/fiber'],
+    popularity: 80,
+    recentlyAdded: true,
+  },
+  'aurora-background': {
+    category: 'Backgrounds',
+    tags: ['aurora', 'ambient', 'hero'],
+    difficulty: 'Advanced',
+    dependencies: ['@arsenal/fx'],
+    popularity: 80,
+    recentlyAdded: true,
+  },
+  'cosmic-particle-background': {
+    category: 'Particles',
+    tags: ['stars', 'pointer', 'hero'],
+    difficulty: 'Advanced',
+    dependencies: ['@arsenal/fx'],
+    popularity: 80,
+    recentlyAdded: true,
+  },
+  'galaxy-particle-canvas': {
+    category: 'Particles',
+    tags: ['galaxy', 'pointer', 'signature'],
+    difficulty: 'Advanced',
+    dependencies: ['@arsenal/fx'],
+    popularity: 80,
+    recentlyAdded: true,
+  },
+  'infinity-particle-canvas': {
+    category: 'Particles',
+    tags: ['infinity', 'pointer', 'brand'],
+    difficulty: 'Advanced',
+    dependencies: ['@arsenal/fx'],
+    popularity: 80,
+    recentlyAdded: true,
+  },
+  'interactive-particles': {
+    category: 'Particles',
+    tags: ['mesh', 'hover', 'hold'],
+    difficulty: 'Advanced',
+    dependencies: ['@arsenal/fx'],
+    popularity: 80,
+    recentlyAdded: true,
+  },
+  'morphing-sphere': {
+    category: '3D',
+    tags: ['point cloud', 'morph', 'drag'],
+    difficulty: 'Advanced',
+    dependencies: ['@arsenal/fx'],
+    popularity: 80,
+    recentlyAdded: true,
+  },
+  'noise-texture': {
+    category: 'Backgrounds',
+    tags: ['grain', 'texture', 'overlay'],
+    difficulty: 'Advanced',
+    dependencies: ['@arsenal/fx'],
+    popularity: 80,
+    recentlyAdded: true,
+  },
+  'particle-burst': {
+    category: 'Particles',
+    tags: ['sparks', 'celebrate', 'click'],
+    difficulty: 'Advanced',
+    dependencies: ['@arsenal/fx'],
+    popularity: 80,
+    recentlyAdded: true,
+  },
+  'weather-canvas': {
+    category: 'Particles',
+    tags: ['rain', 'snow', 'ambient'],
+    difficulty: 'Advanced',
+    dependencies: ['@arsenal/fx'],
+    popularity: 80,
+    recentlyAdded: true,
+  },
   'vault-hero': {
     category: 'Layouts',
     tags: ['hero', 'particles', 'motion', 'landing'],
@@ -178,6 +266,278 @@ const showroomMeta: Record<string, ShowroomMeta> = {
     difficulty: 'Foundational',
     dependencies: ['clsx', 'tailwind-merge'],
     popularity: 90,
+  },
+  'animated-number': {
+    category: 'Data Display',
+    tags: ['number', 'count-up', 'metric', 'motion'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 82,
+    recentlyAdded: true,
+  },
+  'delta-pill': {
+    category: 'Data Display',
+    tags: ['change', 'trend', 'metric', 'status'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 78,
+    recentlyAdded: true,
+  },
+  sparkline: {
+    category: 'Charts',
+    tags: ['chart', 'trend', 'inline', 'data'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 86,
+    recentlyAdded: true,
+  },
+  'score-ring': {
+    category: 'Charts',
+    tags: ['score', 'progress', 'ring', 'metric'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 83,
+    recentlyAdded: true,
+  },
+  'semi-gauge': {
+    category: 'Charts',
+    tags: ['gauge', 'risk', 'progress', 'metric'],
+    difficulty: 'Intermediate',
+    dependencies: [],
+    popularity: 77,
+    recentlyAdded: true,
+  },
+  treemap: {
+    category: 'Charts',
+    tags: ['treemap', 'portfolio', 'distribution', 'data'],
+    difficulty: 'Advanced',
+    dependencies: [],
+    popularity: 80,
+    recentlyAdded: true,
+  },
+  'donut-chart': {
+    category: 'Charts',
+    tags: ['donut', 'allocation', 'legend', 'data'],
+    difficulty: 'Intermediate',
+    dependencies: [],
+    popularity: 85,
+    recentlyAdded: true,
+  },
+  'stacked-bar-chart': {
+    category: 'Charts',
+    tags: ['bar-chart', 'comparison', 'series', 'data'],
+    difficulty: 'Intermediate',
+    dependencies: [],
+    popularity: 79,
+    recentlyAdded: true,
+  },
+  'line-chart': {
+    category: 'Charts',
+    tags: ['line-chart', 'trend', 'time', 'data'],
+    difficulty: 'Intermediate',
+    dependencies: [],
+    popularity: 88,
+    recentlyAdded: true,
+  },
+  'distribution-bars': {
+    category: 'Charts',
+    tags: ['distribution', 'bars', 'buckets', 'data'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 75,
+    recentlyAdded: true,
+  },
+  'time-series-chart': {
+    category: 'Charts',
+    tags: ['time-series', 'equity', 'area', 'data'],
+    difficulty: 'Advanced',
+    dependencies: [],
+    popularity: 87,
+    recentlyAdded: true,
+  },
+  'drawdown-chart': {
+    category: 'Charts',
+    tags: ['drawdown', 'risk', 'equity', 'data'],
+    difficulty: 'Advanced',
+    dependencies: [],
+    popularity: 76,
+    recentlyAdded: true,
+  },
+  'data-ridge-background': {
+    category: 'Backgrounds',
+    tags: ['data', 'terrain', 'background', 'visualization'],
+    difficulty: 'Experimental',
+    dependencies: [],
+    popularity: 72,
+    recentlyAdded: true,
+  },
+  'form-fields': {
+    category: 'Forms',
+    tags: ['input', 'select', 'search', 'validation'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 92,
+    recentlyAdded: true,
+  },
+  card: {
+    category: 'Cards',
+    tags: ['status', 'pipeline', 'surface', 'action'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 89,
+    recentlyAdded: true,
+  },
+  skeleton: {
+    category: 'Loading',
+    tags: ['skeleton', 'placeholder', 'loading', 'layout'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 81,
+    recentlyAdded: true,
+  },
+  'error-state': {
+    category: 'Feedback',
+    tags: ['error', 'retry', 'recovery', 'feedback'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 84,
+    recentlyAdded: true,
+  },
+  tabs: {
+    category: 'Navigation',
+    tags: ['tabs', 'navigation', 'sections', 'state'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 90,
+    recentlyAdded: true,
+  },
+  'animated-tabs': {
+    category: 'Navigation',
+    tags: ['tabs', 'animation', 'range', 'navigation'],
+    difficulty: 'Intermediate',
+    dependencies: [],
+    popularity: 82,
+    recentlyAdded: true,
+  },
+  'filter-chip': {
+    category: 'Forms',
+    tags: ['filter', 'chip', 'selection', 'count'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 83,
+    recentlyAdded: true,
+  },
+  'facet-filter-dropdown': {
+    category: 'Forms',
+    tags: ['filter', 'dropdown', 'facet', 'count'],
+    difficulty: 'Intermediate',
+    dependencies: [],
+    popularity: 79,
+    recentlyAdded: true,
+  },
+  'table-view': {
+    category: 'Tables',
+    tags: ['table', 'sorting', 'pagination', 'data'],
+    difficulty: 'Intermediate',
+    dependencies: [],
+    popularity: 86,
+    recentlyAdded: true,
+  },
+  'kpi-card': {
+    category: 'Dashboards',
+    tags: ['kpi', 'metric', 'insight', 'action'],
+    difficulty: 'Intermediate',
+    dependencies: [],
+    popularity: 88,
+    recentlyAdded: true,
+  },
+  'confirm-dialog': {
+    category: 'Overlays',
+    tags: ['dialog', 'confirmation', 'destructive', 'action'],
+    difficulty: 'Intermediate',
+    dependencies: [],
+    popularity: 85,
+    recentlyAdded: true,
+  },
+  'side-panel': {
+    category: 'Overlays',
+    tags: ['panel', 'details', 'navigation', 'overlay'],
+    difficulty: 'Intermediate',
+    dependencies: [],
+    popularity: 81,
+    recentlyAdded: true,
+  },
+  'side-by-side-diff': {
+    category: 'Data Display',
+    tags: ['diff', 'code', 'review', 'comparison'],
+    difficulty: 'Advanced',
+    dependencies: [],
+    popularity: 84,
+    recentlyAdded: true,
+  },
+  'asset-icon': {
+    category: 'SVG',
+    tags: ['icon', 'asset', 'svg', 'trend'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 73,
+    recentlyAdded: true,
+  },
+  'initials-avatar': {
+    category: 'Cards',
+    tags: ['avatar', 'initials', 'identity', 'people'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 78,
+    recentlyAdded: true,
+  },
+  'upload-zone': {
+    category: 'Forms',
+    tags: ['upload', 'file', 'dropzone', 'progress'],
+    difficulty: 'Intermediate',
+    dependencies: [],
+    popularity: 82,
+    recentlyAdded: true,
+  },
+  'flip-clock': {
+    category: 'Data Display',
+    tags: ['clock', 'time', 'animation', 'display'],
+    difficulty: 'Experimental',
+    dependencies: [],
+    popularity: 70,
+    recentlyAdded: true,
+  },
+  'table-of-contents': {
+    category: 'Navigation',
+    tags: ['contents', 'anchor', 'documentation', 'navigation'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 77,
+    recentlyAdded: true,
+  },
+  'reading-progress': {
+    category: 'Utilities',
+    tags: ['reading', 'progress', 'scroll', 'indicator'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 75,
+    recentlyAdded: true,
+  },
+  seo: {
+    category: 'Utilities',
+    tags: ['metadata', 'search', 'preview', 'utilities'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 72,
+    recentlyAdded: true,
+  },
+  'orbit-radar': {
+    category: 'Charts',
+    tags: ['radar', 'status', 'orbit', 'visualization'],
+    difficulty: 'Experimental',
+    dependencies: [],
+    popularity: 74,
+    recentlyAdded: true,
   },
 };
 
@@ -732,9 +1092,24 @@ export function ComponentPreview({
     case 'state-panel':
       return (
         <div className="grid w-full gap-3 lg:grid-cols-3">
-          <StatePanel kind="empty" size="compact" title="Nothing here yet" description="Create the first item." />
-          <StatePanel kind="loading" size="compact" title="Loading data" description="This should only take a moment." />
-          <StatePanel kind="error" size="compact" title="Unable to load" description="Try the request again." />
+          <StatePanel
+            kind="empty"
+            size="compact"
+            title="Nothing here yet"
+            description="Create the first item."
+          />
+          <StatePanel
+            kind="loading"
+            size="compact"
+            title="Loading data"
+            description="This should only take a moment."
+          />
+          <StatePanel
+            kind="error"
+            size="compact"
+            title="Unable to load"
+            description="Try the request again."
+          />
         </div>
       );
     default:

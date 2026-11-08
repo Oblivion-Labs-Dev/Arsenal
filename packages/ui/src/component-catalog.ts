@@ -10,7 +10,8 @@ export type ComponentCategory =
   | 'navigation'
   | 'backgrounds'
   | 'motion'
-  | 'utilities';
+  | 'utilities'
+  | 'effects';
 
 export interface ComponentCatalogEntry {
   id: string;
@@ -1645,6 +1646,301 @@ export function Example() {
   );
 }`,
   },
+  {
+    id: "aurora-background",
+    name: "AuroraBackground",
+    description: "Four soft colour pools drifting slowly behind content: the calm cinematic backdrop.",
+    category: 'effects',
+    importLine: 'import { AuroraBackground } from "@arsenal/fx";',
+    props: [
+      "palette?: \"dark\" | \"light\" | \"auto\"",
+      "violet?, cyan?, indigo?, amber?: ColorInput",
+      "intensity?: number",
+      "vignette?: boolean",
+      "scrollParallax?: boolean",
+    ],
+    usage: "Use behind heroes and landing sections where you want atmosphere without busy motion.",
+    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
+    performance: "CSS-transformed blurred layers; static when motion is reduced.",
+    code: `import { AuroraBackground } from "@arsenal/fx";
+
+export function Example() {
+  return (
+    <section className="relative min-h-[420px] overflow-hidden">
+      <AuroraBackground intensity={0.9} vignette />
+      <h1 className="relative p-10 text-4xl font-semibold">Ship faster</h1>
+    </section>
+  );
+}`,
+  },
+  {
+    id: "cosmic-particle-background",
+    name: "CosmicParticleBackground",
+    description: "A diagonal band of layered stars that drifts, twinkles and parts around the pointer.",
+    category: 'effects',
+    importLine: 'import { CosmicParticleBackground } from "@arsenal/fx";',
+    props: [
+      "palette?: \"dark\" | \"light\" | \"auto\"",
+      "violet?, blue?, amber?: ColorInput",
+      "interactive?: boolean",
+      "scrollParallax?: boolean",
+      "seed?: number",
+    ],
+    usage: "Use as a full-bleed hero field for a night-sky, cinematic first screen.",
+    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
+    performance: "One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.",
+    code: `import { CosmicParticleBackground } from "@arsenal/fx";
+
+export function Example() {
+  return (
+    <section className="relative min-h-[420px] overflow-hidden">
+      <CosmicParticleBackground interactive />
+      <h1 className="relative p-10 text-4xl font-semibold">Ship faster</h1>
+    </section>
+  );
+}`,
+  },
+  {
+    id: "galaxy-particle-canvas",
+    name: "GalaxyParticleCanvas",
+    description: "An oblique spiral galaxy whose stars drift along their arms and part around the pointer.",
+    category: 'effects',
+    importLine: 'import { GalaxyParticleCanvas } from "@arsenal/fx";',
+    props: [
+      "accent?: ColorInput",
+      "ink?: ColorInput",
+      "palette?: \"dark\" | \"light\" | \"auto\"",
+      "interactive?: boolean",
+      "minCount?, maxCount?: number",
+    ],
+    usage: "Use as a signature hero visual; additive glow in dark mode, graphite ink on light paper.",
+    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
+    performance: "One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.",
+    code: `import { GalaxyParticleCanvas } from "@arsenal/fx";
+
+export function Example() {
+  return (
+    <section className="relative min-h-[420px] overflow-hidden">
+      <GalaxyParticleCanvas interactive maxCount={1200} />
+      <h1 className="relative p-10 text-4xl font-semibold">Ship faster</h1>
+    </section>
+  );
+}`,
+  },
+  {
+    id: "infinity-particle-canvas",
+    name: "InfinityParticleCanvas",
+    description: "A figure-eight of stars, warm on one lobe and cool on the other, that parts around the pointer.",
+    category: 'effects',
+    importLine: 'import { InfinityParticleCanvas } from "@arsenal/fx";',
+    props: [
+      "leftColor?, rightColor?: ColorInput",
+      "palette?: \"dark\" | \"light\" | \"auto\"",
+      "interactive?: boolean",
+      "minCount?, maxCount?: number",
+    ],
+    usage: "Use for brand marks about balance or loops, such as sync, pipelines or continuous delivery.",
+    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
+    performance: "One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.",
+    code: `import { InfinityParticleCanvas } from "@arsenal/fx";
+
+export function Example() {
+  return (
+    <section className="relative min-h-[420px] overflow-hidden">
+      <InfinityParticleCanvas interactive />
+      <h1 className="relative p-10 text-4xl font-semibold">Ship faster</h1>
+    </section>
+  );
+}`,
+  },
+  {
+    id: "interactive-particles",
+    name: "InteractiveParticles",
+    description: "A living constellation mesh in three depth layers: drifts up, parts on hover, gathers on hold.",
+    category: 'effects',
+    importLine: 'import { InteractiveParticles } from "@arsenal/fx";',
+    props: [
+      "intensity?: \"normal\" | \"intense\"",
+      "cyan?, amber?, violet?, accent?, highlight?: ColorInput",
+      "interactive?: boolean",
+      "scrollParallax?: boolean",
+      "seed?: number",
+    ],
+    usage: "Use where the visual should react to the visitor: hover to part the mesh, press and hold to gather it.",
+    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
+    performance: "One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.",
+    code: `import { InteractiveParticles } from "@arsenal/fx";
+
+export function Example() {
+  return (
+    <section className="relative min-h-[420px] overflow-hidden">
+      <InteractiveParticles interactive intensity="normal" />
+      <h1 className="relative p-10 text-4xl font-semibold">Ship faster</h1>
+    </section>
+  );
+}`,
+  },
+  {
+    id: "morphing-sphere",
+    name: "MorphingSphere",
+    description: "A point cloud that morphs between sphere, torus, wave and other shapes; drag to rotate.",
+    category: 'effects',
+    importLine: 'import { MorphingSphere } from "@arsenal/fx";',
+    props: [
+      "shape?: MorphShape (controlled)",
+      "defaultShape?: MorphShape",
+      "showControls?: boolean",
+      "colors?: ColorInput[]",
+      "links?: boolean",
+      "height?: number | string",
+      "interactive?: boolean",
+    ],
+    usage: "Use as a centrepiece in a hero or product section; the built-in controls switch shapes.",
+    accessibility: "Shape controls are real buttons with labels; the canvas itself is decorative.",
+    performance: "One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.",
+    code: `import { MorphingSphere } from "@arsenal/fx";
+
+export function Example() {
+  return (
+    <MorphingSphere showControls links height={380} />
+  );
+}`,
+  },
+  {
+    id: "noise-texture",
+    name: "NoiseTexture",
+    description: "A film-grain overlay that takes the banding off flat gradients. Static, no JS work.",
+    category: 'effects',
+    importLine: 'import { NoiseTexture } from "@arsenal/fx";',
+    props: [
+      "opacity?: number",
+      "frequency?: number",
+      "tileSize?: number",
+      "blendMode?: CSSProperties[\"mixBlendMode\"]",
+    ],
+    usage: "Layer over gradients and aurora backdrops to make them feel printed rather than digital.",
+    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
+    performance: "A tiled SVG data URL; no animation loop.",
+    code: `import { NoiseTexture } from "@arsenal/fx";
+
+export function Example() {
+  return (
+    <section className="relative min-h-[420px] overflow-hidden">
+      <NoiseTexture opacity={0.06} />
+      <h1 className="relative p-10 text-4xl font-semibold">Ship faster</h1>
+    </section>
+  );
+}`,
+  },
+  {
+    id: "particle-burst",
+    name: "ParticleBurst",
+    description: "A transparent overlay that throws sparks with gravity and soft wall bounces on demand.",
+    category: 'effects',
+    importLine: 'import { ParticleBurst } from "@arsenal/fx";',
+    props: [
+      "ref: ParticleBurstHandle (burst(at?, options?), clear())",
+      "colors?: ColorInput[]",
+      "burst?: BurstOptions",
+      "seed?: number",
+    ],
+    usage: "Call ref.current.burst(event) from a click handler to celebrate a completed action.",
+    accessibility: "Decorative and aria-hidden; skipped entirely with reduced motion, so never carry meaning in it alone.",
+    performance: "Canvas only runs while sparks are alive.",
+    code: `import { useRef } from "react";
+import { ParticleBurst, type ParticleBurstHandle } from "@arsenal/fx";
+
+export function Example() {
+  const ref = useRef<ParticleBurstHandle>(null);
+  return (
+    <div className="relative">
+      <ParticleBurst ref={ref} />
+      <button onClick={(e) => ref.current?.burst(e)}>Complete</button>
+    </div>
+  );
+}`,
+  },
+  {
+    id: "weather-canvas",
+    name: "WeatherCanvas",
+    description: "Rain, snow, petals or leaves with wind, ripples and lightning, driven by a weather state.",
+    category: 'effects',
+    importLine: 'import { WeatherCanvas } from "@arsenal/fx";',
+    props: [
+      "weather?: WeatherState",
+      "precip?: \"none\" | \"rain\" | \"snow\" | \"petals\" | \"leaves\"",
+      "intensity?: number",
+      "wind?: number",
+      "lightning?: boolean",
+      "ripples?: boolean",
+    ],
+    usage: "Use for ambient seasonal or live-weather scenes behind content.",
+    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
+    performance: "One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.",
+    code: `import { WeatherCanvas } from "@arsenal/fx";
+
+export function Example() {
+  return (
+    <section className="relative min-h-[420px] overflow-hidden">
+      <WeatherCanvas precip="rain" intensity={0.7} wind={0.3} ripples />
+      <h1 className="relative p-10 text-4xl font-semibold">Ship faster</h1>
+    </section>
+  );
+}`,
+  },
+  {
+    id: "gravity-well",
+    name: "GravityWell",
+    description: "A black hole with a two-armed Keplerian accretion disk, rendered in WebGL with React Three Fiber.",
+    category: 'effects',
+    importLine: 'import { GravityWell } from "@arsenal/three";',
+    props: [
+      "particleCount?: number",
+      "diskSpeed?: number",
+      "colorTheme?: \"theme\" | \"indigo\" | \"amber\" | \"emerald\"",
+      "autoColor?: boolean",
+      "palette?: \"dark\" | \"light\" | \"auto\"",
+    ],
+    usage: "Use as a signature hero visual or a section centrepiece. Needs the optional three and @react-three/fiber peers.",
+    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
+    performance: "Orbits run in the vertex shader (no per-frame CPU work); renders on demand when off screen, in a background tab or with reduced motion.",
+    code: `import { GravityWell } from "@arsenal/three";
+
+export function Example() {
+  return (
+    <section className="relative h-[420px]">
+      <GravityWell particleCount={2000} diskSpeed={1} />
+    </section>
+  );
+}`,
+  },
+  {
+    id: "anomaly-matrix",
+    name: "AnomalyMatrix",
+    description: "A noise-displaced wireframe sphere with a rim glow that breathes, in its own WebGL canvas (GodSphere mesh included).",
+    category: 'effects',
+    importLine: 'import { AnomalyMatrix, GodSphere } from "@arsenal/three";',
+    props: [
+      "speed?: number",
+      "scale?: number",
+      "charge?: number  // 0-1, eases between core and outer colour",
+      "detail?: number",
+      "colorTheme?: \"theme\" | \"indigo\" | \"amber\" | \"emerald\"",
+      "autoColor?: boolean",
+    ],
+    usage: "Use as a hero centrepiece or drop <GodSphere> into your own R3F scene. Drive charge from scroll or state.",
+    accessibility: "Decorative and aria-hidden; with reduced motion it renders one still frame.",
+    performance: "Displacement runs on the GPU; lower detail for small cards. Paused off screen and in background tabs.",
+    code: `import { AnomalyMatrix } from "@arsenal/three";
+
+export function Example() {
+  return (
+    <section className="relative h-[420px]">
+      <AnomalyMatrix speed={1} charge={0.3} />
+    </section>
+  );
+}`,
+  },
 ];
 
 export const COMPONENT_CATEGORIES: { id: ComponentCategory; label: string }[] = [
@@ -1660,4 +1956,5 @@ export const COMPONENT_CATEGORIES: { id: ComponentCategory; label: string }[] = 
   { id: 'backgrounds', label: 'Backgrounds' },
   { id: 'motion', label: 'Motion' },
   { id: 'utilities', label: 'Utilities' },
+  { id: 'effects', label: 'Cinematic effects' },
 ];

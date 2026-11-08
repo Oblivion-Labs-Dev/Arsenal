@@ -54,6 +54,12 @@ function systemScheme(): ColorScheme {
   return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
 }
 
+/** The tokens used where the page cannot be read: on the server and on the first client render. */
+function serverTheme(mode: PaletteMode): ArsenalThemeTokens {
+  const scheme: ColorScheme = mode === 'light' ? 'light' : 'dark';
+  return { scheme, ...(scheme === 'light' ? LIGHT_FALLBACK : DARK_FALLBACK) };
+}
+
 /**
  * Reads the Arsenal tokens from `element` (default `<html>`). `mode` forces a scheme; `auto`
  * decides from the luminance of `--arsenal-background`, then the OS setting.
@@ -62,10 +68,7 @@ export function readArsenalTheme(
   mode: PaletteMode = 'auto',
   element?: Element,
 ): ArsenalThemeTokens {
-  if (typeof window === 'undefined' || typeof document === 'undefined') {
-    const scheme: ColorScheme = mode === 'light' ? 'light' : 'dark';
-    return { scheme, ...(scheme === 'light' ? LIGHT_FALLBACK : DARK_FALLBACK) };
-  }
+  if (typeof window === 'undefined' || typeof document === 'undefined') return serverTheme(mode);
   const style = getComputedStyle(element ?? document.documentElement);
   const background = readVar(style, ['--arsenal-background']);
   const scheme: ColorScheme =
@@ -101,7 +104,8 @@ function sameTokens(a: ArsenalThemeTokens, b: ArsenalThemeTokens): boolean {
  * colour scheme flips, so canvases repaint with the new palette.
  */
 export function useArsenalTheme(mode: PaletteMode = 'auto'): ArsenalThemeTokens {
-  const [tokens, setTokens] = useState<ArsenalThemeTokens>(() => readArsenalTheme(mode));
+  // Start from the server's tokens so hydration matches; the effect switches to the page's tokens.
+  const [tokens, setTokens] = useState<ArsenalThemeTokens>(() => serverTheme(mode));
 
   useEffect(() => {
     const update = () =>
