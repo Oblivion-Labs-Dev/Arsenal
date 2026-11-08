@@ -1,6 +1,18 @@
 'use client';
 
-import { type ReactNode, useMemo, useState } from 'react';
+import { type ReactNode, useMemo, useRef, useState } from 'react';
+import {
+  AuroraBackground,
+  CosmicParticleBackground,
+  GalaxyParticleCanvas,
+  InfinityParticleCanvas,
+  InteractiveParticles,
+  MorphingSphere,
+  NoiseTexture,
+  ParticleBurst,
+  type ParticleBurstHandle,
+  WeatherCanvas,
+} from '@arsenal/fx';
 import {
   AnimatedNumber,
   AnimatedTabs,
@@ -319,6 +331,38 @@ function ErrorDemo() {
   );
 }
 
+/** A full-width scene box for the fx backgrounds, which fill their positioned parent. */
+function FxScene({ children, hint }: { children: ReactNode; hint?: string }) {
+  return (
+    <div className="relative h-[240px] w-full overflow-hidden rounded-xl">
+      {children}
+      {hint ? (
+        <span className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full border border-arsenal-border bg-arsenal-surface px-3 py-1 text-xs text-arsenal-primary">
+          {hint}
+        </span>
+      ) : null}
+    </div>
+  );
+}
+
+function ParticleBurstDemo() {
+  const ref = useRef<ParticleBurstHandle>(null);
+  return (
+    <FxScene>
+      <ParticleBurst ref={ref} />
+      <div className="absolute inset-0 grid place-items-center">
+        <button
+          type="button"
+          onClick={(event) => ref.current?.burst(event)}
+          className="rounded-full bg-arsenal-accent px-5 py-2 text-sm font-semibold text-arsenal-background"
+        >
+          Complete task
+        </button>
+      </div>
+    </FxScene>
+  );
+}
+
 const DEMOS: Record<string, () => ReactNode> = {
   'animated-number': () => (
     <p className="text-5xl font-semibold tabular-nums text-arsenal-primary">
@@ -592,6 +636,54 @@ const DEMOS: Record<string, () => ReactNode> = {
     <OrbitRadar status="running" size={180} label="Scanning repositories">
       <span className="text-lg font-semibold tabular-nums text-arsenal-primary">42</span>
     </OrbitRadar>
+  ),
+  'aurora-background': () => (
+    <FxScene>
+      <AuroraBackground intensity={0.9} vignette />
+    </FxScene>
+  ),
+  'cosmic-particle-background': () => (
+    <FxScene hint="Move the pointer through the stars">
+      <CosmicParticleBackground interactive />
+    </FxScene>
+  ),
+  'galaxy-particle-canvas': () => (
+    <FxScene hint="Move the pointer to part the arms">
+      <GalaxyParticleCanvas interactive maxCount={900} />
+    </FxScene>
+  ),
+  'infinity-particle-canvas': () => (
+    <FxScene hint="Move the pointer through the loop">
+      <InfinityParticleCanvas interactive />
+    </FxScene>
+  ),
+  'interactive-particles': () => (
+    <FxScene hint="Hover to part, press and hold to gather">
+      <InteractiveParticles interactive />
+    </FxScene>
+  ),
+  'morphing-sphere': () => (
+    <div className="w-full">
+      <MorphingSphere showControls links height={260} />
+    </div>
+  ),
+  'noise-texture': () => (
+    <FxScene>
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(135deg, color-mix(in srgb, var(--arsenal-accent) 45%, transparent), var(--arsenal-surface) 55%, var(--arsenal-background))',
+        }}
+      />
+      <NoiseTexture opacity={0.09} />
+    </FxScene>
+  ),
+  'particle-burst': () => <ParticleBurstDemo />,
+  'weather-canvas': () => (
+    <FxScene>
+      <WeatherCanvas precip="rain" intensity={0.7} wind={0.3} ripples />
+    </FxScene>
   ),
 };
 
