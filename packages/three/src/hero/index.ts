@@ -3,7 +3,9 @@
 export * from './shared';
 export * from './status';
 export * from './IslandBase';
-export * from './BonsaiTree';
+export * from './BonsaiTreeLite';
+// Temporary alias until the studio bonsai lands (feat/studio-bonsai).
+export { BonsaiTreeLite as BonsaiTree } from './BonsaiTreeLite';
 export * from './Waterfall';
 export * from './WaterBasin';
 export * from './OrbitalRing';

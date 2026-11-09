@@ -13,6 +13,11 @@ export interface HeroBloomProps {
   radius?: number;
   /** Only pixels brighter than this (linear) bloom: windows, packets, streaks and the core. */
   threshold?: number;
+  /**
+   * MSAA samples for the composer's render target (0 = none, the old behaviour). Alpha-to-coverage
+   * foliage needs multisampling to soften its cut-out edges once bloom takes over rendering.
+   */
+  samples?: number;
 }
 
 /**
@@ -24,6 +29,7 @@ export function HeroBloom({
   strength = 0.62,
   radius = 0.55,
   threshold = 0.82,
+  samples = 0,
 }: HeroBloomProps) {
   const composer = useRef<EffectComposer | null>(null);
   const bloomRef = useRef<UnrealBloomPass | null>(null);
@@ -31,7 +37,14 @@ export function HeroBloom({
 
   useEffect(() => {
     if (!enabled) return;
-    const pipeline = new EffectComposer(gl);
+    const target =
+      samples > 0
+        ? new THREE.WebGLRenderTarget(size.width, size.height, {
+            type: THREE.HalfFloatType,
+            samples,
+          })
+        : undefined;
+    const pipeline = new EffectComposer(gl, target);
     pipeline.addPass(new RenderPass(scene, camera));
     const bloom = new UnrealBloomPass(
       new THREE.Vector2(size.width, size.height),
@@ -54,7 +67,7 @@ export function HeroBloom({
     };
     // Tuning is applied live below; only structural changes rebuild the composer.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [camera, enabled, gl, scene, size.height, size.width]);
+  }, [camera, enabled, gl, samples, scene, size.height, size.width]);
 
   useEffect(() => {
     const bloom = bloomRef.current;

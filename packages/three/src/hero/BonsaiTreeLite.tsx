@@ -174,10 +174,11 @@ function foliageInstances(pads: number, lightMode: boolean) {
 }
 
 /**
- * A sculpted bonsai: one merged trunk-and-branch tube mesh and layered foliage pads that sway in a
+ * The original lightweight bonsai, kept as a fallback for weak devices and the island hero: one
+ * merged trunk-and-branch tube mesh and layered foliage pads that sway in a
  * shader wind (6–12s feel), the whole tree rocking a hair on a 9s cycle. Root sits at the origin.
  */
-export function BonsaiTree({
+export function BonsaiTreeLite({
   quality = 'high',
   reducedMotion: reducedProp,
   light: lightProp,
