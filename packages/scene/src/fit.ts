@@ -1,4 +1,4 @@
-import type { Orbit, Point, Rect, SceneMap } from "./types.js";
+import type { Orbit, Point, Rect, SceneMap } from './types.js';
 
 export interface StageFit {
   /** CSS px per plate px. */
@@ -18,10 +18,10 @@ const clamp = (value: number, min: number, max: number) => Math.min(Math.max(val
  * the full plate width instead of zooming in.
  */
 export function fitPlate(
-  map: Pick<SceneMap, "width" | "height" | "focus">,
+  map: Pick<SceneMap, 'width' | 'height' | 'focus'>,
   width: number,
   height: number,
-  { topSlack = 0.1, focus = map.focus }: { topSlack?: number; focus?: Rect } = {}
+  { topSlack = 0.1, focus = map.focus }: { topSlack?: number; focus?: Rect } = {},
 ): StageFit {
   if (width <= 0 || height <= 0) return { scale: 0, x: 0, y: 0 };
   const cover = Math.max(width / map.width, (height * (1 - topSlack)) / map.height);
@@ -36,8 +36,34 @@ export function fitPlate(
   return { scale, x: place(width, w, cx, 0.5), y: place(height, h, cy, 1) };
 }
 
+/**
+ * Zoom the plate onto one region (a single piece of the art): the crop rect is fitted whole and
+ * centred, and the surrounding plate fills the rest of the container. Where the plate is large
+ * enough, the placement is clamped so no empty edge shows.
+ */
+export function fitCrop(
+  map: Pick<SceneMap, 'width' | 'height'>,
+  crop: Rect,
+  width: number,
+  height: number,
+): StageFit {
+  const cw = crop.x1 - crop.x0;
+  const ch = crop.y1 - crop.y0;
+  if (width <= 0 || height <= 0 || cw <= 0 || ch <= 0) return { scale: 0, x: 0, y: 0 };
+  const scale = Math.min(width / cw, height / ch);
+  const place = (size: number, content: number, centre: number) => {
+    const ideal = size / 2 - centre;
+    return content >= size ? clamp(ideal, size - content, 0) : ideal;
+  };
+  return {
+    scale,
+    x: place(width, map.width * scale, ((crop.x0 + crop.x1) / 2) * scale),
+    y: place(height, map.height * scale, ((crop.y0 + crop.y1) / 2) * scale),
+  };
+}
+
 /** Plate pixel → percentage of the plate, for CSS positioning of hotspots and callouts. */
-export const platePercent = (map: Pick<SceneMap, "width" | "height">, point: Point) => ({
+export const platePercent = (map: Pick<SceneMap, 'width' | 'height'>, point: Point) => ({
   left: `${(point.x / map.width) * 100}%`,
   top: `${(point.y / map.height) * 100}%`,
 });

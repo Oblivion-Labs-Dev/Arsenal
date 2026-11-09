@@ -2,6 +2,7 @@
 
 import { type ReactNode, useMemo, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { HERO_PLATE_PIECES, type HeroPlatePieceId } from '@arsenal/scene';
 import {
   AuroraBackground,
   CosmicParticleBackground,
@@ -12,6 +13,7 @@ import {
   NoiseTexture,
   ParticleBurst,
   type ParticleBurstHandle,
+  useArsenalTheme,
   WeatherCanvas,
 } from '@arsenal/fx';
 import {
@@ -356,6 +358,85 @@ const AnomalyMatrix = dynamic(() => import('@arsenal/three').then((m) => m.Anoma
   ssr: false,
   loading: SceneLoading,
 });
+const CinematicPlate = dynamic(() => import('@arsenal/scene/react').then((m) => m.CinematicPlate), {
+  ssr: false,
+  loading: SceneLoading,
+});
+
+const HeroPieceDemo = dynamic(() => import('./hero-piece-demos').then((m) => m.HeroPieceDemo), {
+  ssr: false,
+  loading: SceneLoading,
+});
+
+/** The plate hero follows the playground theme: light plate and light grade in light mode. */
+function CinematicPlateDemo() {
+  const { scheme } = useArsenalTheme();
+  return (
+    <div className="relative h-[320px] w-full overflow-hidden rounded-xl bg-arsenal-surface">
+      <CinematicPlate
+        src="/assets/scene/plate-dark.webp"
+        srcLight="/assets/scene/plate-light.webp"
+        light={scheme === 'light'}
+      />
+    </div>
+  );
+}
+
+/** Hero piece pages open on the real-time model; the painted plate stays one click away. */
+export const HERO_PREVIEW_DEFAULT_MODE: 'art' | '3d' = '3d';
+
+/**
+ * A hero piece shown as its real-time 3D model by default; "Hero art" swaps in its region of the
+ * painted plate with that piece's live layers, for comparison.
+ */
+function HeroPiecePreview({ piece }: { piece: HeroPlatePieceId }) {
+  const { scheme } = useArsenalTheme();
+  const [mode, setMode] = useState<'art' | '3d'>(HERO_PREVIEW_DEFAULT_MODE);
+  const { crop, components } = HERO_PLATE_PIECES[piece];
+  return (
+    <div className="relative w-full">
+      {mode === 'art' ? (
+        <div className="relative h-[320px] w-full overflow-hidden rounded-xl">
+          <CinematicPlate
+            src="/assets/scene/plate-dark.webp"
+            srcLight="/assets/scene/plate-light.webp"
+            light={scheme === 'light'}
+            crop={crop}
+            components={components}
+          />
+        </div>
+      ) : (
+        <HeroPieceDemo piece={piece} />
+      )}
+      <div
+        role="group"
+        aria-label="Preview style"
+        className="absolute right-3 top-3 flex rounded-full border border-arsenal-border bg-arsenal-surface p-0.5 text-[11px] font-medium"
+      >
+        {(
+          [
+            ['3d', 'Live 3D'],
+            ['art', 'Hero art'],
+          ] as const
+        ).map(([id, label]) => (
+          <button
+            key={id}
+            type="button"
+            aria-pressed={mode === id}
+            onClick={() => setMode(id)}
+            className={`rounded-full px-2.5 py-1 transition-colors ${
+              mode === id
+                ? 'bg-arsenal-elevated text-arsenal-primary shadow-sm'
+                : 'text-arsenal-secondary hover:text-arsenal-primary'
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function ParticleBurstDemo() {
   const ref = useRef<ParticleBurstHandle>(null);
@@ -702,6 +783,16 @@ const DEMOS: Record<string, () => ReactNode> = {
       <AnomalyMatrix detail={40} scale={0.95} charge={0.35} />
     </FxScene>
   ),
+  'cinematic-plate': () => <CinematicPlateDemo />,
+  'island-base': () => <HeroPiecePreview piece='island-base' />,
+  'bonsai-tree': () => <HeroPiecePreview piece='bonsai-tree' />,
+  'waterfall': () => <HeroPiecePreview piece='waterfall' />,
+  'water-basin': () => <HeroPiecePreview piece='water-basin' />,
+  'orbital-ring': () => <HeroPiecePreview piece='orbital-ring' />,
+  'core-sphere': () => <HeroPiecePreview piece='core-sphere' />,
+  'service-node': () => <HeroPiecePreview piece='service-node' />,
+  'data-path': () => <HeroPiecePreview piece='data-path' />,
+  'scene-accents': () => <HeroPiecePreview piece='scene-accents' />,
   'weather-canvas': () => (
     <FxScene>
       <WeatherCanvas precip="rain" intensity={0.7} wind={0.3} ripples />

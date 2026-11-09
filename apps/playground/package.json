@@ -18,6 +18,7 @@
     "@arsenal/fx": "workspace:*",
     "@arsenal/layouts": "workspace:*",
     "@arsenal/motion": "workspace:*",
+    "@arsenal/scene": "workspace:*",
     "@arsenal/sections": "workspace:*",
     "@arsenal/stock-kit": "workspace:*",
     "@arsenal/themes": "workspace:*",

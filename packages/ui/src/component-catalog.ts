@@ -1915,6 +1915,286 @@ export function Example() {
 }`,
   },
   {
+    id: "island-base",
+    name: "IslandBase",
+    description: "The floating island on its own: layered rock strata under a mossy, noise-edged top with a small glassy pond. Static geometry.",
+    category: 'hero',
+    importLine: 'import { IslandBase } from "@arsenal/three";',
+    props: [
+      "light?: boolean",
+      "size?: Partial<{ width; depth; height }>",
+      "pond?: boolean",
+    ],
+    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
+    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
+    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    code: `import { HeroStage, IslandBase } from "@arsenal/three";
+
+export function Example() {
+  return (
+    <div className="h-[420px]">
+      <HeroStage>
+        <IslandBase />
+      </HeroStage>
+    </div>
+  );
+}`,
+  },
+  {
+    id: "bonsai-tree",
+    name: "BonsaiTree",
+    description: "A sculpted bonsai: one merged trunk mesh and layered foliage pads that sway in shader wind (6–12s feel).",
+    category: 'hero',
+    importLine: 'import { BonsaiTree } from "@arsenal/three";',
+    props: [
+      "quality?: \"high\" | \"medium\" | \"low\"",
+      "wind?: number  // 0 holds still",
+      "light?: boolean",
+      "reducedMotion?: boolean",
+    ],
+    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
+    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
+    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    code: `import { HeroStage, BonsaiTree } from "@arsenal/three";
+
+export function Example() {
+  return (
+    <div className="h-[420px]">
+      <HeroStage>
+        <BonsaiTree position={[0.4, 0.1, 0]} />
+      </HeroStage>
+    </div>
+  );
+}`,
+  },
+  {
+    id: "waterfall",
+    name: "Waterfall",
+    description: "A falling water sheet with scrolling shader streaks and mist where it lands. The origin is the lip.",
+    category: 'hero',
+    importLine: 'import { Waterfall } from "@arsenal/three";',
+    props: [
+      "width?: number",
+      "height?: number",
+      "speed?: number",
+      "opacity?: number",
+      "mist?: boolean",
+    ],
+    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
+    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
+    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    code: `import { HeroStage, Waterfall } from "@arsenal/three";
+
+export function Example() {
+  return (
+    <div className="h-[420px]">
+      <HeroStage>
+        <Waterfall position={[2.6, 0, 0.4]} height={1.2} />
+      </HeroStage>
+    </div>
+  );
+}`,
+  },
+  {
+    id: "water-basin",
+    name: "WaterBasin",
+    description: "Still, glossy dark water with slow amber ripple rings (4–8s) spreading from the points you give.",
+    category: 'hero',
+    importLine: 'import { WaterBasin } from "@arsenal/three";',
+    props: [
+      "size?: [number, number]",
+      "ripples?: Vec3[]",
+      "ripplePeriod?: number  // seconds",
+    ],
+    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
+    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
+    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    code: `import { HeroStage, WaterBasin } from "@arsenal/three";
+
+export function Example() {
+  return (
+    <div className="h-[420px]">
+      <HeroStage>
+        <WaterBasin position={[0, -1.2, 0]} ripples={[[2.6, 0, 0.4]]} />
+      </HeroStage>
+    </div>
+  );
+}`,
+  },
+  {
+    id: "orbital-ring",
+    name: "OrbitalRing",
+    description: "One glass orbital band with a warm light streak circling it every 20–40s. Stack several with different tilts.",
+    category: 'hero',
+    importLine: 'import { OrbitalRing } from "@arsenal/three";',
+    props: [
+      "radius?: number",
+      "tilt?: [x, z]  // radians",
+      "period?: number",
+      "phase?: number",
+      "active?: boolean",
+      "streak?: boolean",
+      "bandWidth?: number",
+    ],
+    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
+    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
+    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    code: `import { HeroStage, OrbitalRing } from "@arsenal/three";
+
+export function Example() {
+  return (
+    <div className="h-[420px]">
+      <HeroStage>
+        <OrbitalRing radius={2} tilt={[0.18, -0.08]} period={30} />
+      </HeroStage>
+    </div>
+  );
+}`,
+  },
+  {
+    id: "core-sphere",
+    name: "CoreSphere",
+    description: "The glass core: physical sphere, rim glow, a node graph on its surface (each node with its own status) and a light beam.",
+    category: 'hero',
+    importLine: 'import { CoreSphere } from "@arsenal/three";',
+    props: [
+      "radius?: number",
+      "nodes?: { direction: Vec3; status?: HeroStatus; hub?: boolean }[]",
+      "links?: [number, number][]",
+      "beam?: boolean",
+      "spin?: number",
+    ],
+    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
+    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
+    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    code: `import { HeroStage, CoreSphere } from "@arsenal/three";
+
+export function Example() {
+  return (
+    <div className="h-[420px]">
+      <HeroStage>
+        <CoreSphere position={[0, 1.4, 0]} />
+      </HeroStage>
+    </div>
+  );
+}`,
+  },
+  {
+    id: "service-node",
+    name: "ServiceNode",
+    description: "A service module block with lit windows and a status ring: idle, hover, selected, dependency, failure (red pulse) and recovery (red → green → amber).",
+    category: 'hero',
+    importLine: 'import { ServiceNode } from "@arsenal/three";',
+    props: [
+      "status?: \"idle\" | \"hover\" | \"selected\" | \"dependency\" | \"failure\" | \"recovery\"",
+      "height?: number",
+      "onHoverChange?: (hovered: boolean) => void",
+      "onSelect?: () => void",
+    ],
+    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
+    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
+    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    code: `import { HeroStage, ServiceNode } from "@arsenal/three";
+
+export function Example() {
+  return (
+    <div className="h-[420px]">
+      <HeroStage>
+        <ServiceNode position={[1.5, 0.2, 0]} status="failure" />
+      </HeroStage>
+    </div>
+  );
+}`,
+  },
+  {
+    id: "data-path",
+    name: "DataPath",
+    description: "An arc between two points with a packet travelling it every 1–2s. Request, response, telemetry and fallback styles, plus active, dimmed and error.",
+    category: 'hero',
+    importLine: 'import { DataPath } from "@arsenal/three";',
+    props: [
+      "from: Vec3",
+      "to: Vec3",
+      "kind?: \"request\" | \"response\" | \"telemetry\" | \"fallback\"",
+      "lift?: number",
+      "active?: boolean",
+      "dimmed?: boolean",
+      "error?: boolean",
+      "period?: number",
+    ],
+    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
+    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
+    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    code: `import { HeroStage, DataPath } from "@arsenal/three";
+
+export function Example() {
+  return (
+    <div className="h-[420px]">
+      <HeroStage>
+        <DataPath from={[-1.2, 0, 0]} to={[1.2, 0, 0]} kind="request" active />
+      </HeroStage>
+    </div>
+  );
+}`,
+  },
+  {
+    id: "scene-accents",
+    name: "SceneAccents",
+    description: "Scattered foliage cones and low-poly rocks on a deterministic golden-angle spiral, sized for the default island.",
+    category: 'hero',
+    importLine: 'import { SceneAccents } from "@arsenal/three";',
+    props: [
+      "quality?: \"high\" | \"medium\" | \"low\"",
+      "foliage?: boolean",
+      "rocks?: boolean",
+      "spread?: number",
+      "depth?: number",
+    ],
+    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
+    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
+    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    code: `import { HeroStage, SceneAccents } from "@arsenal/three";
+
+export function Example() {
+  return (
+    <div className="h-[420px]">
+      <HeroStage>
+        <SceneAccents />
+      </HeroStage>
+    </div>
+  );
+}`,
+  },
+  {
+    id: "cinematic-plate",
+    name: "CinematicPlate",
+    description: "A cinematic art-plate hero: one still image brought to life by a single WebGL pass (lake ripples, waterfall flow, glass-ring light, orbiting lights, core sparkle, beam) with a springed parallax camera.",
+    category: 'hero',
+    importLine: 'import { CinematicPlate } from "@arsenal/scene/react";',
+    props: [
+      "src: string  // plate image",
+      "srcLight?: string  // same composition, light theme",
+      "light?: boolean",
+      "map?: SceneMap  // where the live layers sit; defaults to HERO_PLATE",
+      "components?: (\"water\" | \"falls\" | \"rings\" | \"orbits\" | \"sphere\" | \"beam\")[]",
+      "camera?: boolean  // pointer parallax + scroll push-in",
+      "cameraTuning?: CameraTuning",
+      "onError?: (error: Error) => void",
+    ],
+    usage: "Use as a hero when you have (or generate) one art plate of the scene. Measure a SceneMap for your own plate; the bundled HERO_PLATE fits the sample plate.",
+    accessibility: "Decorative by default (empty alt). Reduced motion shows one still frame and holds the camera.",
+    performance: "One draw call per frame, WebGL 1, canvas capped at 2048px wide; paused off screen and in background tabs. Without WebGL the static plate stays and the error is logged.",
+    code: `import { CinematicPlate } from "@arsenal/scene/react";
+
+export function Hero() {
+  return (
+    <section className="relative h-[80vh]">
+      <CinematicPlate src="/plate-dark.webp" srcLight="/plate-light.webp" />
+    </section>
+  );
+}`,
+  },
+  {
     id: "anomaly-matrix",
     name: "AnomalyMatrix",
     description: "A noise-displaced wireframe sphere with a rim glow that breathes, in its own WebGL canvas (GodSphere mesh included).",

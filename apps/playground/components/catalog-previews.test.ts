@@ -1,8 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { COMPONENT_CATEGORIES, UI_COMPONENT_CATALOG } from '@arsenal/ui';
-import { hasCatalogPreview } from './catalog-previews';
+import { HERO_PREVIEW_DEFAULT_MODE, hasCatalogPreview } from './catalog-previews';
 
 describe('catalog previews', () => {
+  it('hero piece pages open on the live 3D model, not the painted plate', () => {
+    expect(HERO_PREVIEW_DEFAULT_MODE).toBe('3d');
+  });
+
   it('every cinematic effect has a live preview', () => {
     const missing = UI_COMPONENT_CATALOG.filter(
       (entry) => entry.category === 'effects' && !hasCatalogPreview(entry.id),
@@ -26,5 +30,23 @@ describe('catalog previews', () => {
       'particle-burst',
       'weather-canvas',
     ]);
+  });
+
+  it('every standalone hero piece and the cinematic plate are in the hero catalog with a live preview', () => {
+    const pieces = [
+      'bonsai-tree',
+      'core-sphere',
+      'data-path',
+      'island-base',
+      'orbital-ring',
+      'scene-accents',
+      'service-node',
+      'water-basin',
+      'waterfall',
+      'cinematic-plate',
+    ];
+    const ids = UI_COMPONENT_CATALOG.filter((entry) => entry.category === 'hero').map((e) => e.id);
+    expect(pieces.filter((id) => !ids.includes(id))).toEqual([]);
+    expect(pieces.filter((id) => !hasCatalogPreview(id))).toEqual([]);
   });
 });
