@@ -79,6 +79,27 @@ describe('bonsai studio helpers', () => {
   });
 });
 
+describe('bonsai pot', () => {
+  it('winds the pot wall outward so front-face culling never shows the trunk through the clay', () => {
+    const { clay } = buildPotGeometries('medium');
+    const position = clay.getAttribute('position');
+    const index = clay.getIndex()!;
+    const v = [new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()];
+    let checked = 0;
+    for (let i = 0; i < index.count; i += 3) {
+      v.forEach((vertex, k) => vertex.fromBufferAttribute(position, index.getX(i + k)));
+      const centroid = v[0].clone().add(v[1]).add(v[2]).divideScalar(3);
+      // Only the outer wall lives in this band: the inner wall stops above it and the stand sits below it.
+      if (centroid.y > -0.06 || centroid.y < -0.14) continue;
+      const normal = new THREE.Vector3().subVectors(v[1], v[0]).cross(new THREE.Vector3().subVectors(v[2], v[0])).normalize();
+      if (Math.abs(normal.y) > 0.7) continue;
+      checked += 1;
+      expect(normal.dot(new THREE.Vector3(centroid.x, 0, centroid.z)), `face ${i / 3}`).toBeGreaterThan(0);
+    }
+    expect(checked).toBeGreaterThan(100);
+  });
+});
+
 describe('contact shadow', () => {
   it('transforms instanced meshes in the occupancy pass', () => {
     expect(OCCUPANCY_VERTEX).toMatch(/#ifdef USE_INSTANCING[\s\S]*instanceMatrix[\s\S]*#endif/);

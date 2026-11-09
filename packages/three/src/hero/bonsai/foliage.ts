@@ -46,33 +46,68 @@ export interface LeafUniforms {
 
 /** Uniform identifiers injected into either leaf shader. */
 export const LEAF_UNIFORM_NAMES = [
-  'uWindTime', 'uWind', 'uSeason', 'uPaletteDeep', 'uPaletteMid', 'uPaletteTop',
-  'uAutumnDeep', 'uAutumnMid', 'uAutumnTop', 'uThicknessMap', 'uHasThicknessMap', 'uAtlasInset',
+  'uWindTime',
+  'uWind',
+  'uSeason',
+  'uPaletteDeep',
+  'uPaletteMid',
+  'uPaletteTop',
+  'uAutumnDeep',
+  'uAutumnMid',
+  'uAutumnTop',
+  'uThicknessMap',
+  'uHasThicknessMap',
+  'uAtlasInset',
 ] as const;
 
-const QUALITY_CARD_COUNTS: Record<HeroQuality, number> = { high: 220, medium: 121, low: 55 };
+const QUALITY_CARD_COUNTS: Record<HeroQuality, number> = { high: 400, medium: 380, low: 140 };
 const MAX_CARDS_PER_PAD = 400;
 const ATLAS_INSET = 0.5 / 1024;
 const GLSL_UNIFORMS = [
-  'uniform float uWindTime;', 'uniform float uWind;', 'uniform float uSeason;',
-  'uniform vec3 uPaletteDeep;', 'uniform vec3 uPaletteMid;', 'uniform vec3 uPaletteTop;',
-  'uniform vec3 uAutumnDeep;', 'uniform vec3 uAutumnMid;', 'uniform vec3 uAutumnTop;',
-  'uniform sampler2D uThicknessMap;', 'uniform float uHasThicknessMap;', 'uniform float uAtlasInset;',
+  'uniform float uWindTime;',
+  'uniform float uWind;',
+  'uniform float uSeason;',
+  'uniform vec3 uPaletteDeep;',
+  'uniform vec3 uPaletteMid;',
+  'uniform vec3 uPaletteTop;',
+  'uniform vec3 uAutumnDeep;',
+  'uniform vec3 uAutumnMid;',
+  'uniform vec3 uAutumnTop;',
+  'uniform sampler2D uThicknessMap;',
+  'uniform float uHasThicknessMap;',
+  'uniform float uAtlasInset;',
 ].join('\n');
 const GLSL_ATTRIBUTES = [
-  'attribute vec4 aPadData;', 'attribute vec4 aLeafData;', 'attribute vec3 aPadRadii;', 'attribute float aPadIndex;', 'attribute float aPadYaw;',
+  'attribute vec4 aPadData;',
+  'attribute vec4 aLeafData;',
+  'attribute vec3 aPadRadii;',
+  'attribute float aPadIndex;',
+  'attribute float aPadYaw;',
   'vec3 leafRotateY(vec3 p, float angle) { float s = sin(angle); float c = cos(angle); return vec3(c * p.x + s * p.z, p.y, -s * p.x + c * p.z); }',
+  // A function, not a local: three runs defaultnormal_vertex before begin_vertex, so both patches call it.
+  'vec3 leafCardCenter() {',
+  '#ifdef USE_INSTANCING',
+  '  return instanceMatrix[3].xyz;',
+  '#else',
+  '  return vec3(0.0);',
+  '#endif',
+  '}',
+  'vec3 leafEllipsoidNormal() {',
+  '  vec3 radii = max(aPadRadii, vec3(0.0001));',
+  '  vec3 relative = leafRotateY(leafCardCenter() - aPadData.xyz, -aPadYaw);',
+  '  return normalize(leafRotateY(relative / (radii * radii), aPadYaw));',
+  '}',
 ].join('\n');
 const GLSL_VARYINGS = [
-  'varying vec2 vLeafUv;', 'varying float vLeafSun;', 'varying float vLeafAo;',
+  'varying vec2 vLeafUv;',
+  'varying float vLeafSun;',
+  'varying float vLeafAo;',
   'varying float vLeafJitter;',
 ].join('\n');
 const GLSL_VERTEX_BEGIN = `
-vec3 leafCenter = instanceMatrix[3].xyz;
-vec3 leafRelative = leafRotateY(leafCenter - aPadData.xyz, -aPadYaw);
+vec3 leafCenter = leafCardCenter();
 vec3 leafRadii = max(aPadRadii, vec3(0.0001));
-vec3 ellipsoidNormal = leafRotateY(leafRelative / (leafRadii * leafRadii), aPadYaw);
-ellipsoidNormal = normalize(ellipsoidNormal);
+vec3 ellipsoidNormal = leafEllipsoidNormal();
 float leafUp = clamp(ellipsoidNormal.y * 0.5 + 0.5, 0.0, 1.0);
 float localHeight = clamp((leafCenter.y - aPadData.y) / (leafRadii.y * 2.0) + 0.5, 0.0, 1.0);
 vLeafSun = clamp(0.15 + 0.48 * localHeight + 0.52 * leafUp, 0.0, 1.0);
@@ -95,8 +130,13 @@ vMapUv = vMapUv * (0.5 - 2.0 * uAtlasInset) + vec2(atlasColumn, atlasRow) * 0.5 
 
 /** Return cards per pad for a quality and clamped density multiplier. */
 export function leafCardsPerPad(quality: HeroQuality, foliageDensity = 1): number {
-  const density = Number.isFinite(foliageDensity) ? THREE.MathUtils.clamp(foliageDensity, 0.25, 2) : 1;
-  return Math.min(MAX_CARDS_PER_PAD, Math.max(1, Math.round(QUALITY_CARD_COUNTS[quality] * density)));
+  const density = Number.isFinite(foliageDensity)
+    ? THREE.MathUtils.clamp(foliageDensity, 0.25, 2)
+    : 1;
+  return Math.min(
+    MAX_CARDS_PER_PAD,
+    Math.max(1, Math.round(QUALITY_CARD_COUNTS[quality] * density)),
+  );
 }
 
 /** Build a deterministic, top-heavy ellipsoid leaf field from bonsai pads. */
@@ -125,33 +165,59 @@ export function buildLeafField(pads: BonsaiPad[], options: LeafFieldOptions): Le
     const swayPhase = range(random, 0, Math.PI * 2);
     const yaw = new THREE.Quaternion().setFromAxisAngle(THREE.Object3D.DEFAULT_UP, pad.yaw);
     const padCenter = new THREE.Vector3(...pad.center);
+    // Foliage tufts: a few lobes biased to the top of the pad. Cards sit on a lumpy shell that bulges
+    // at each lobe, so the pad reads as clustered tufts with an uneven outline instead of a smooth disk.
+    const lobes = Array.from({ length: 7 }, () => {
+      const lobeAzimuth = range(random, 0, Math.PI * 2);
+      const lobeY = range(random, -0.15, 0.75);
+      const ring = Math.sqrt(1 - lobeY * lobeY);
+      return new THREE.Vector3(Math.cos(lobeAzimuth) * ring, lobeY, Math.sin(lobeAzimuth) * ring);
+    });
+    const direction = new THREE.Vector3();
     for (let card = 0; card < perPad; card += 1) {
       const index = padNumber * perPad + card;
-      const top = random() < 0.72;
+      const top = random() < 0.66;
       const y = top ? range(random, 0.015, 0.94) : -range(random, 0.015, 0.66);
       const azimuth = range(random, 0, Math.PI * 2);
-      const radial = Math.sqrt(Math.max(0, 1 - y * y)) * Math.pow(random(), 0.42) * 0.985;
-      const unit = new THREE.Vector3(Math.cos(azimuth) * radial, y * Math.pow(random(), 0.18), Math.sin(azimuth) * radial);
-      if (unit.lengthSq() > 0.99) unit.normalize().multiplyScalar(0.994);
+      const ringRadius = Math.sqrt(Math.max(0, 1 - y * y));
+      direction.set(Math.cos(azimuth) * ringRadius, y, Math.sin(azimuth) * ringRadius).normalize();
+      let lobe = 0;
+      for (const candidate of lobes)
+        lobe = Math.max(lobe, Math.exp((direction.dot(candidate) - 1) * 6));
+      const shell = 0.6 + 0.39 * lobe;
+      const unit = direction.clone().multiplyScalar(shell * (1 - 0.22 * Math.pow(random(), 1.6)));
       const local = new THREE.Vector3(unit.x * rx, unit.y * ry, unit.z * rz);
       const center = local.applyQuaternion(yaw).add(padCenter);
-      normal.set(unit.x / rx, unit.y / ry, unit.z / rz).normalize().applyQuaternion(yaw);
+      normal
+        .set(unit.x / rx, unit.y / ry, unit.z / rz)
+        .normalize()
+        .applyQuaternion(yaw);
       jitterSample.set(range(random, -1, 1), range(random, -1, 1), range(random, -1, 1));
       jitterAxis.crossVectors(normal, jitterSample);
-      if (jitterAxis.lengthSq() < 0.0001) jitterAxis.crossVectors(normal, jitterSample.set(1, 0, 0));
+      if (jitterAxis.lengthSq() < 0.0001)
+        jitterAxis.crossVectors(normal, jitterSample.set(1, 0, 0));
       jitterAxis.normalize();
-      jitteredNormal.copy(normal).applyAxisAngle(jitterAxis, range(random, -Math.PI / 7.2, Math.PI / 7.2));
+      jitteredNormal
+        .copy(normal)
+        .applyAxisAngle(jitterAxis, range(random, -Math.PI / 7.2, Math.PI / 7.2));
       baseRotation.setFromUnitVectors(new THREE.Vector3(0, 0, 1), jitteredNormal);
       rollRotation.setFromAxisAngle(new THREE.Vector3(0, 0, 1), range(random, 0, Math.PI * 2));
       object.position.copy(center);
       object.quaternion.copy(baseRotation).multiply(rollRotation);
-      const size = range(random, 0.07, 0.11);
+      const size = range(random, 0.058, 0.088);
       object.scale.set(size, size * range(random, 0.65, 0.88), 1);
       object.updateMatrix();
       object.matrix.toArray(matrices, index * 16);
       padData.set([pad.center[0], pad.center[1], pad.center[2], swayPhase], index * 4);
-      const depthAo = THREE.MathUtils.clamp(0.35 + 0.65 * Math.sqrt(unit.length()) - (unit.y < 0 ? 0.16 : 0), 0.35, 1);
-      leaf.set([Math.floor(random() * 4), depthAo, range(random, -1, 1), range(random, 0, Math.PI * 2)], index * 4);
+      const depthAo = THREE.MathUtils.clamp(
+        0.35 + 0.65 * Math.sqrt(unit.length()) - (unit.y < 0 ? 0.16 : 0),
+        0.35,
+        1,
+      );
+      leaf.set(
+        [Math.floor(random() * 4), depthAo, range(random, -1, 1), range(random, 0, Math.PI * 2)],
+        index * 4,
+      );
       padIndex[index] = padNumber;
     }
   });
@@ -161,8 +227,14 @@ export function buildLeafField(pads: BonsaiPad[], options: LeafFieldOptions): Le
 /** Create the unit leaf quad; per-instance matrices provide its small physical size. */
 export function createLeafGeometry(): THREE.BufferGeometry {
   const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute('position', new THREE.Float32BufferAttribute([-0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0], 3));
-  geometry.setAttribute('normal', new THREE.Float32BufferAttribute([0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1], 3));
+  geometry.setAttribute(
+    'position',
+    new THREE.Float32BufferAttribute([-0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0], 3),
+  );
+  geometry.setAttribute(
+    'normal',
+    new THREE.Float32BufferAttribute([0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1], 3),
+  );
   geometry.setAttribute('uv', new THREE.Float32BufferAttribute([0, 0, 1, 0, 1, 1, 0, 1], 2));
   geometry.setIndex([0, 1, 2, 0, 2, 3]);
   return geometry;
@@ -173,20 +245,38 @@ export function createLeafMaterials(options: {
   light: boolean;
   season?: BonsaiSeason;
   textures?: Pick<BonsaiTextures, 'leafAtlas' | 'leafThickness'>;
-}): { material: THREE.MeshStandardMaterial; depthMaterial: THREE.MeshDepthMaterial; uniforms: LeafUniforms } {
+}): {
+  material: THREE.MeshStandardMaterial;
+  depthMaterial: THREE.MeshDepthMaterial;
+  uniforms: LeafUniforms;
+} {
   const palette = options.light ? BONSAI_PALETTE.light : BONSAI_PALETTE.dark;
   const autumn = BONSAI_PALETTE.autumn;
   const uniforms: LeafUniforms = {
-    uWindTime: { value: 0 }, uWind: { value: 0 }, uSeason: { value: options.season === 'autumn' ? 1 : 0 },
-    uPaletteDeep: { value: new THREE.Color(palette.leafDeep) }, uPaletteMid: { value: new THREE.Color(palette.leafMid) },
-    uPaletteTop: { value: new THREE.Color(palette.leafTop) }, uAutumnDeep: { value: new THREE.Color(autumn.leafDeep) },
-    uAutumnMid: { value: new THREE.Color(autumn.leafMid) }, uAutumnTop: { value: new THREE.Color(autumn.leafTop) },
+    uWindTime: { value: 0 },
+    uWind: { value: 0 },
+    uSeason: { value: options.season === 'autumn' ? 1 : 0 },
+    uPaletteDeep: { value: new THREE.Color(palette.leafDeep) },
+    uPaletteMid: { value: new THREE.Color(palette.leafMid) },
+    uPaletteTop: { value: new THREE.Color(palette.leafTop) },
+    uAutumnDeep: { value: new THREE.Color(autumn.leafDeep) },
+    uAutumnMid: { value: new THREE.Color(autumn.leafMid) },
+    uAutumnTop: { value: new THREE.Color(autumn.leafTop) },
     uThicknessMap: { value: options.textures?.leafThickness ?? null },
-    uHasThicknessMap: { value: options.textures?.leafThickness ? 1 : 0 }, uAtlasInset: { value: ATLAS_INSET },
+    uHasThicknessMap: { value: options.textures?.leafThickness ? 1 : 0 },
+    uAtlasInset: { value: ATLAS_INSET },
   };
+  // Cut-out only exists with the atlas. Without it alpha is constant, fwidth folds to zero and
+  // three's alpha-to-coverage smoothstep becomes a compile-time divide by zero (D3D X4008).
+  const leafAtlas = options.textures?.leafAtlas ?? null;
+  const alphaTest = leafAtlas ? 0.5 : 0;
   const material = new THREE.MeshStandardMaterial({
-    color: '#ffffff', map: options.textures?.leafAtlas, roughness: 0.75, alphaTest: 0.5,
-    alphaToCoverage: true, side: THREE.DoubleSide,
+    color: '#ffffff',
+    map: leafAtlas,
+    roughness: 0.75,
+    alphaTest,
+    alphaToCoverage: leafAtlas !== null,
+    side: THREE.DoubleSide,
   });
   material.onBeforeCompile = (shader) => {
     Object.assign(shader.uniforms, uniforms);
@@ -194,7 +284,12 @@ export function createLeafMaterials(options: {
     shader.fragmentShader = patchLeafFragmentShader(shader.fragmentShader);
   };
   material.customProgramCacheKey = () => 'arsenal-bonsai-leaf-v1';
-  const depthMaterial = new THREE.MeshDepthMaterial({ depthPacking: THREE.RGBADepthPacking, map: options.textures?.leafAtlas, alphaTest: 0.5, side: THREE.DoubleSide });
+  const depthMaterial = new THREE.MeshDepthMaterial({
+    depthPacking: THREE.RGBADepthPacking,
+    map: leafAtlas,
+    alphaTest,
+    side: THREE.DoubleSide,
+  });
   depthMaterial.onBeforeCompile = (shader) => {
     shader.uniforms.uWindTime = uniforms.uWindTime;
     shader.uniforms.uWind = uniforms.uWind;
@@ -206,8 +301,13 @@ export function createLeafMaterials(options: {
 }
 
 /** Build the InstancedMesh and attach the per-card attributes required by both shaders. */
-export function createLeafMesh(field: LeafField, pads: BonsaiPad[], materials: ReturnType<typeof createLeafMaterials>): THREE.InstancedMesh {
-  if (field.padIndex.some((index) => index >= pads.length)) throw new RangeError('Leaf field references a pad that does not exist.');
+export function createLeafMesh(
+  field: LeafField,
+  pads: BonsaiPad[],
+  materials: ReturnType<typeof createLeafMaterials>,
+): THREE.InstancedMesh {
+  if (field.padIndex.some((index) => index >= pads.length))
+    throw new RangeError('Leaf field references a pad that does not exist.');
   const geometry = createLeafGeometry();
   const instanceRadii = new Float32Array(field.count * 3);
   const instanceYaw = new Float32Array(field.count);
@@ -241,22 +341,39 @@ export function updateLeafUniforms(uniforms: LeafUniforms, time: number, wind: n
 
 /** Inject per-card attributes, atlas addressing, ellipsoid normals and wind into a vertex shader. */
 export function patchLeafVertexShader(source: string): string {
-  let shader = source.replace('#include <common>', `#include <common>\n${GLSL_UNIFORMS}\n${GLSL_ATTRIBUTES}\n${GLSL_VARYINGS}`);
-  shader = shader.replace('#include <begin_vertex>', `#include <begin_vertex>\n// BONSAI_LEAF_VERTEX_PATCH\n${GLSL_VERTEX_BEGIN}`);
-  shader = shader.replace('#include <defaultnormal_vertex>', `#include <defaultnormal_vertex>\nvec3 padNormalView = normalize(normalMatrix * ellipsoidNormal);\ntransformedNormal = normalize(mix(transformedNormal, padNormalView, 0.85));`);
+  let shader = source.replace(
+    '#include <common>',
+    `#include <common>\n${GLSL_UNIFORMS}\n${GLSL_ATTRIBUTES}\n${GLSL_VARYINGS}`,
+  );
+  shader = shader.replace(
+    '#include <begin_vertex>',
+    `#include <begin_vertex>\n// BONSAI_LEAF_VERTEX_PATCH\n${GLSL_VERTEX_BEGIN}`,
+  );
+  shader = shader.replace(
+    '#include <defaultnormal_vertex>',
+    `#include <defaultnormal_vertex>\nvec3 padNormalView = normalize(normalMatrix * leafEllipsoidNormal());\ntransformedNormal = normalize(mix(transformedNormal, padNormalView, 0.85));`,
+  );
   return shader;
 }
 
 /** Inject palette shading, per-card AO and thickness-based warm backlight into a fragment shader. */
 export function patchLeafFragmentShader(source: string): string {
-  let shader = source.replace('#include <common>', `#include <common>\n// BONSAI_LEAF_FRAGMENT_PATCH\n${GLSL_UNIFORMS}\n${GLSL_VARYINGS}`);
+  let shader = source.replace(
+    '#include <common>',
+    `#include <common>\n// BONSAI_LEAF_FRAGMENT_PATCH\n${GLSL_UNIFORMS}\n${GLSL_VARYINGS}`,
+  );
   // Leaf normals come from the pad ellipsoid (foliage-normal trick), so both card faces must keep
   // the outward normal: undo three's DOUBLE_SIDED faceDirection flip (faceDirection is +-1).
-  shader = shader.replace('#include <normal_fragment_begin>', `#include <normal_fragment_begin>
+  shader = shader.replace(
+    '#include <normal_fragment_begin>',
+    `#include <normal_fragment_begin>
 #ifdef DOUBLE_SIDED
 normal *= faceDirection;
-#endif`);
-  shader = shader.replace('#include <color_fragment>', `#include <color_fragment>
+#endif`,
+  );
+  shader = shader.replace(
+    '#include <color_fragment>',
+    `#include <color_fragment>
 float leafSunniness = smoothstep(0.08, 0.94, vLeafSun);
 vec3 summerLeaf = mix(uPaletteDeep, uPaletteMid, smoothstep(0.04, 0.58, leafSunniness));
 summerLeaf = mix(summerLeaf, uPaletteTop, smoothstep(0.48, 0.98, leafSunniness));
@@ -266,9 +383,18 @@ vec3 leafPalette = mix(summerLeaf, autumnLeaf, clamp(uSeason, 0.0, 1.0));
 leafPalette *= 1.0 + vLeafJitter * 0.06;
 leafPalette.r += vLeafJitter * 0.01;
 leafPalette.g -= vLeafJitter * 0.012;
-diffuseColor.rgb *= leafPalette;`);
-  shader = shader.replace('#include <lights_fragment_end>', `#include <lights_fragment_end>
+// Keep the atlas' own frond structure: partly desaturate it and use its luminance as micro-shading
+// (gaps between fronds go dark), so the palette tints the leaves without flattening them into a blob.
+float leafLuma = dot(diffuseColor.rgb, vec3(0.299, 0.587, 0.114));
+diffuseColor.rgb = mix(vec3(leafLuma), diffuseColor.rgb, 0.5) * mix(0.35, 1.25, smoothstep(0.12, 0.78, leafLuma));
+diffuseColor.rgb *= leafPalette;`,
+  );
+  shader = shader.replace(
+    '#include <lights_fragment_end>',
+    `#include <lights_fragment_end>
 reflectedLight.indirectDiffuse *= vLeafAo;
+// Untinted env reflections on dark, downward-facing inner leaves read as grey patches: occlude them.
+reflectedLight.indirectSpecular *= vLeafAo * vLeafAo * 0.5;
 reflectedLight.directDiffuse *= mix(1.0, vLeafAo, 0.35);
 float leafBacklight = 0.0;
 #if NUM_DIR_LIGHTS > 0
@@ -279,8 +405,12 @@ reflectedLight.directDiffuse += diffuseColor.rgb * directionalLights[0].color * 
 leafBacklight = pow(max(dot(leafLightDir, -leafViewDir), 0.0), 1.5);
 #endif
 float leafThickness = uHasThicknessMap > 0.5 ? texture2D(uThicknessMap, vLeafUv).r : 0.0;
-`);
-  shader = shader.replace('vec3 outgoingLight = totalDiffuse + totalSpecular + totalEmissiveRadiance;', `vec3 outgoingLight = totalDiffuse + totalSpecular + totalEmissiveRadiance;
-outgoingLight += vec3(0.78, 0.62, 0.22) * leafBacklight * leafThickness * 0.42;`);
+`,
+  );
+  shader = shader.replace(
+    'vec3 outgoingLight = totalDiffuse + totalSpecular + totalEmissiveRadiance;',
+    `vec3 outgoingLight = totalDiffuse + totalSpecular + totalEmissiveRadiance;
+outgoingLight += vec3(0.78, 0.62, 0.22) * leafBacklight * leafThickness * 0.42;`,
+  );
   return shader;
 }

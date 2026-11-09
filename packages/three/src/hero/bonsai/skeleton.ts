@@ -1,4 +1,5 @@
 import type { BonsaiBranch, BonsaiOptions, BonsaiPad, BonsaiSkeleton, V3 } from './types';
+import { mossHeight } from './pot';
 import { createRandom, range } from './random';
 
 const add = (a: V3, b: V3): V3 => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -25,14 +26,14 @@ export function buildBonsaiSkeleton(options: BonsaiOptions = {}): BonsaiSkeleton
   const branches: BonsaiBranch[] = [];
   const pads: BonsaiPad[] = [];
   // Seeded moyogi S-curve: amplitude, phase and lean vary per seed, the overall form does not.
-  const swayX = range(random, 0.085, 0.125);
-  const swayZ = range(random, 0.075, 0.11);
+  const swayX = range(random, 0.13, 0.175);
+  const swayZ = range(random, 0.09, 0.13);
   const phaseX = range(random, -0.25, 0.25);
   const phaseZ = range(random, 0.05, 0.6);
   const lean = range(random, -0.055, -0.015);
   const trunkRaw = Array.from({ length: 9 }, (_, i): V3 => {
     const t = i / 8;
-    return [swayX * Math.sin(t * Math.PI * 2.15 + phaseX) - swayX * Math.sin(phaseX) + lean * t, 1.36 * t, swayZ * Math.sin(t * Math.PI * 3.1 + phaseZ) - swayZ * Math.sin(phaseZ)];
+    return [swayX * Math.sin(t * Math.PI * 2.15 + phaseX) - swayX * Math.sin(phaseX) + lean * t, 1.2 * t, swayZ * Math.sin(t * Math.PI * 3.1 + phaseZ) - swayZ * Math.sin(phaseZ)];
   });
   branches.push({ id: 0, kind: 'trunk', order: 0, points: line(trunkRaw, 32), radii: [], attach: null });
 
@@ -44,28 +45,32 @@ export function buildBonsaiSkeleton(options: BonsaiOptions = {}): BonsaiSkeleton
   const pointAt = (branch: BonsaiBranch, t: number): V3 => branch.points[Math.round(t * (branch.points.length - 1))];
   const baseAzimuth = 0.25 + range(random, -0.35, 0.35);
   for (let tier = 0; tier < 4; tier++) {
-    const t = 0.24 + tier * 0.19;
+    const t = 0.31 + tier * 0.175;
     const attachIndex = Math.round(t * 31);
     const base = branches[0].points[attachIndex];
     const az = baseAzimuth + tier * 2.18 + range(random, -0.16, 0.16);
     const direction: V3 = [Math.cos(az), 0, Math.sin(az)];
-    const distance = 0.63 - tier * 0.075;
-    const mid = add(base, [direction[0] * distance * 0.52, 0.12 + range(random, -0.02, 0.025), direction[2] * distance * 0.52]);
-    const tip = add(base, [direction[0] * distance, 0.065 + range(random, -0.015, 0.035), direction[2] * distance]);
+    const distance = 0.92 - tier * 0.12;
+    // Primaries rise, swing sideways and settle, so no limb reads as a straight rod.
+    const swing = range(random, 0.05, 0.09) * (tier % 2 === 0 ? 1 : -1);
+    const mid = add(base, [direction[0] * distance * 0.5 - direction[2] * swing, 0.1 + range(random, -0.02, 0.025), direction[2] * distance * 0.5 + direction[0] * swing]);
+    const tip = add(base, [direction[0] * distance, 0.03 + range(random, -0.015, 0.03), direction[2] * distance]);
     const primary = addBranch('branch', 1, { parent: 0, index: attachIndex }, [base, mid, tip], 11);
     for (let child = 0; child < 2; child++) {
       const at = child === 0 ? 0.45 : 0.73;
       const index = Math.round(at * 10);
       const origin = pointAt(branches[primary], at);
       const side = child === 0 ? 1 : -1;
-      const angle = az + side * (0.74 + range(random, 0, 0.22));
+      const angle = az + side * (0.98 + range(random, 0, 0.2));
       const direction2: V3 = [Math.cos(angle), 0, Math.sin(angle)];
-      const secondaryTip = add(origin, [direction2[0] * (0.34 - tier * 0.025), 0.07, direction2[2] * (0.34 - tier * 0.025)]);
-      const secondary = addBranch('branch', 2, { parent: primary, index }, [origin, add(origin, [direction2[0] * 0.16, 0.035, direction2[2] * 0.16]), secondaryTip], 7);
       const secondaryHasPad = child === 0 && (tier % 2 === 0 || tier === 3);
-      const twigCloud: V3 = secondaryHasPad
-        ? secondaryTip
-        : [tip[0] + direction[0] * 0.18, tip[1], tip[2] + direction[2] * 0.18];
+      // A secondary without its own pad sweeps back into the primary pad, so no bare stub ends in air.
+      const padCenter: V3 = [tip[0] + direction[0] * 0.18, tip[1], tip[2] + direction[2] * 0.18];
+      const secondaryTip: V3 = secondaryHasPad
+        ? add(origin, [direction2[0] * (0.5 - tier * 0.04), 0.05, direction2[2] * (0.5 - tier * 0.04)])
+        : add(padCenter, [direction2[0] * 0.12, -0.02, direction2[2] * 0.12]);
+      const secondary = addBranch('branch', 2, { parent: primary, index }, [origin, add(origin, [direction2[0] * 0.16, 0.035, direction2[2] * 0.16]), secondaryTip], 7);
+      const twigCloud: V3 = secondaryHasPad ? secondaryTip : padCenter;
       for (let twig = 0; twig < 2; twig++) {
         const twigAt = twig === 0 ? 0.45 : 0.72;
         const twigIndex = Math.round(twigAt * 6);
@@ -74,19 +79,19 @@ export function buildBonsaiSkeleton(options: BonsaiOptions = {}): BonsaiSkeleton
         const twigTip: V3 = [twigCloud[0] + range(random, -0.025, 0.025), twigCloud[1] + 0.075 + range(random, -0.018, 0.018), twigCloud[2] + range(random, -0.025, 0.025)];
         addBranch('branch', 3, { parent: secondary, index: twigIndex }, [twigOrigin, add(twigOrigin, [Math.cos(twigAngle) * 0.08, 0.035, Math.sin(twigAngle) * 0.08]), twigTip], 4);
       }
-      if (secondaryHasPad) pads.push({ center: [secondaryTip[0], secondaryTip[1] + 0.07, secondaryTip[2]], radii: [0.185, 0.082, 0.17], yaw: az, branch: secondary });
+      if (secondaryHasPad) pads.push({ center: [secondaryTip[0], secondaryTip[1] + 0.05, secondaryTip[2]], radii: [0.28 - tier * 0.024, 0.16, 0.26 - tier * 0.02], yaw: az, branch: secondary });
     }
-    pads.push({ center: [tip[0] + direction[0] * 0.18, tip[1] + 0.075, tip[2] + direction[2] * 0.18], radii: [0.205 - tier * 0.012, 0.086, 0.19 - tier * 0.012], yaw: az, branch: primary });
+    pads.push({ center: [tip[0] + direction[0] * 0.18, tip[1] + 0.05, tip[2] + direction[2] * 0.18], radii: [0.47 - tier * 0.045, 0.19 - tier * 0.011, 0.42 - tier * 0.035], yaw: az, branch: primary });
   }
-  const apex: V3 = [trunkRaw[8][0], 1.36, trunkRaw[8][2]];
-  const crown = addBranch('branch', 2, { parent: 0, index: 31 }, [apex, [apex[0] + 0.035, 1.43, apex[2] - 0.015], [apex[0] + 0.015, 1.48, apex[2] + 0.015]], 6);
+  const apex: V3 = [trunkRaw[8][0], 1.2, trunkRaw[8][2]];
+  const crown = addBranch('branch', 2, { parent: 0, index: 31 }, [apex, [apex[0] + 0.035, 1.27, apex[2] - 0.015], [apex[0] + 0.015, 1.32, apex[2] + 0.015]], 6);
   for (const side of [-1, 1]) {
     const origin = branches[crown].points[3];
     const angle = side * 1.1;
     const terminal = add(origin, [Math.cos(angle) * 0.12, 0.035, Math.sin(angle) * 0.12]);
     addBranch('branch', 3, { parent: crown, index: 3 }, [origin, add(origin, [Math.cos(angle) * 0.06, 0.025, Math.sin(angle) * 0.06]), terminal], 4);
   }
-  pads.push({ center: [apex[0], 1.51, apex[2]], radii: [0.19, 0.085, 0.18], yaw: 0, branch: crown });
+  pads.push({ center: [apex[0], 1.35, apex[2]], radii: [0.36, 0.19, 0.33], yaw: 0, branch: crown });
 
   // Jin and roots are deliberately excluded from the living pipe calculation.
   for (let j = 0; j < 2; j++) {
@@ -98,8 +103,14 @@ export function buildBonsaiSkeleton(options: BonsaiOptions = {}): BonsaiSkeleton
   }
   for (let root = 0; root < 6; root++) {
     const angle = root * Math.PI * 2 / 6 + range(random, -0.28, 0.28);
-    const reach = range(random, 0.27, 0.4);
-    addBranch('root', 0, { parent: 0, index: 0 }, [[0, 0.02, 0], [Math.cos(angle) * reach * 0.42, -0.005, Math.sin(angle) * reach * 0.42], [Math.cos(angle) * reach, range(random, -0.06, -0.03), Math.sin(angle) * reach]], 9);
+    const reach = range(random, 0.27, 0.37);
+    // Nebari hug the moss mound half-buried and dive under it at the tip, so no root ends as a spike in the air.
+    const along = (f: number, lift: number): V3 => {
+      const x = Math.cos(angle + f * 0.18) * reach * f;
+      const z = Math.sin(angle + f * 0.18) * reach * f;
+      return [x, mossHeight(x, z) + lift, z];
+    };
+    addBranch('root', 0, { parent: 0, index: 0 }, [[0, 0.09, 0], along(0.3, 0.03), along(0.62, 0.012), along(1, -0.03)], 9);
   }
 
   // Every living branch starts with a small twig radius; split radii accumulate from the tips.
@@ -118,7 +129,7 @@ export function buildBonsaiSkeleton(options: BonsaiOptions = {}): BonsaiSkeleton
     if (tipChildEnergy > 0) energy[last] = tipChildEnergy;
     for (let i = energy.length - 2; i >= 0; i--) {
       const childEnergy = childEnergyAt(i);
-      const gradualTaper = childEnergy > 0 ? 1 : branch.kind === 'trunk' ? 1.002 : 1.0012;
+      const gradualTaper = childEnergy > 0 ? 1 : branch.kind === 'trunk' ? 1.11 : 1.0012;
       energy[i] = energy[i + 1] * gradualTaper + childEnergy;
     }
     const base = Math.sqrt(energy[0]);
@@ -130,11 +141,11 @@ export function buildBonsaiSkeleton(options: BonsaiOptions = {}): BonsaiSkeleton
       return next;
     });
   }
-  const scale = 0.13 / (branches[0].radii[0] || 0.13);
+  const scale = 0.118 / (branches[0].radii[0] || 0.15);
   for (const branch of living) branch.radii = branch.radii.map((radius) => radius * scale);
   for (const branch of branches) {
-    if (branch.kind === 'jin') branch.radii = branch.points.map((_, i) => 0.027 * (1 - 0.78 * i / (branch.points.length - 1)));
-    if (branch.kind === 'root') branch.radii = branch.points.map((_, i) => (0.052 * (1 - i / (branch.points.length - 1) * 0.78)) * (0.9 + 0.1 * Math.sin(i * 0.7)));
+    if (branch.kind === 'jin') branch.radii = branch.points.map((_, i) => 0.018 * (1 - 0.8 * i / (branch.points.length - 1)));
+    if (branch.kind === 'root') branch.radii = branch.points.map((_, i) => (0.056 * (1 - i / (branch.points.length - 1) * 0.6)) * (0.9 + 0.1 * Math.sin(i * 0.7)));
   }
 
   const min: V3 = [Infinity, Infinity, Infinity];

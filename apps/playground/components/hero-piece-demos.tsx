@@ -2,6 +2,8 @@
 
 import { useEffect, useState, type ReactNode } from 'react';
 import {
+  BONSAI_DEFAULT_SEED,
+  BonsaiStudio,
   BonsaiTree,
   CoreSphere,
   DEFAULT_CORE_NODES,
@@ -129,17 +131,100 @@ function CoreSphereDemo() {
   );
 }
 
+/** The bonsai on its orbitable studio turntable, with the few knobs worth turning. */
+function BonsaiStudioDemo() {
+  const [seed, setSeed] = useState(BONSAI_DEFAULT_SEED);
+  const [density, setDensity] = useState(1);
+  const [wind, setWind] = useState(1);
+  const [pot, setPot] = useState(true);
+  const [turntable, setTurntable] = useState(true);
+  const [quality, setQuality] = useState<'high' | 'medium' | 'low'>('high');
+  const control = 'flex items-center gap-2 text-[11px] font-medium text-arsenal-secondary';
+  return (
+    <div className="relative w-full overflow-hidden rounded-xl bg-arsenal-surface">
+      <div className="h-[460px] w-full">
+        <BonsaiStudio autoRotate={turntable} quality={quality}>
+          <BonsaiTree seed={seed} foliageDensity={density} wind={wind} pot={pot} quality={quality} />
+        </BonsaiStudio>
+      </div>
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-arsenal-border px-4 py-2.5">
+        <label className={control}>
+          Seed
+          <input
+            type="number"
+            min={1}
+            max={9999}
+            value={seed}
+            onChange={(event) => setSeed(Math.max(1, Math.floor(Number(event.target.value) || 1)))}
+            className="w-16 rounded-md border border-arsenal-border bg-arsenal-elevated px-1.5 py-0.5 text-arsenal-primary tabular-nums"
+          />
+          <button
+            type="button"
+            onClick={() => setSeed((s) => (s % 9999) + 1)}
+            className="rounded-md border border-arsenal-border px-2 py-0.5 text-arsenal-primary hover:bg-arsenal-elevated"
+          >
+            Next
+          </button>
+        </label>
+        <label className={control}>
+          Density
+          <input
+            type="range"
+            min={0.25}
+            max={2}
+            step={0.05}
+            value={density}
+            onChange={(event) => setDensity(Number(event.target.value))}
+            className="w-24 accent-[var(--arsenal-accent)]"
+          />
+          <span className="w-8 tabular-nums text-arsenal-primary">{density.toFixed(2)}</span>
+        </label>
+        <label className={control}>
+          Wind
+          <input
+            type="range"
+            min={0}
+            max={2}
+            step={0.05}
+            value={wind}
+            onChange={(event) => setWind(Number(event.target.value))}
+            className="w-24 accent-[var(--arsenal-accent)]"
+          />
+          <span className="w-8 tabular-nums text-arsenal-primary">{wind.toFixed(2)}</span>
+        </label>
+        <label className={control}>
+          <input type="checkbox" checked={pot} onChange={(event) => setPot(event.target.checked)} />
+          Pot
+        </label>
+        <label className={control}>
+          <input type="checkbox" checked={turntable} onChange={(event) => setTurntable(event.target.checked)} />
+          Turntable
+        </label>
+        <label className={control}>
+          Quality
+          <select
+            value={quality}
+            onChange={(event) => setQuality(event.target.value as 'high' | 'medium' | 'low')}
+            className="rounded-md border border-arsenal-border bg-arsenal-elevated px-1.5 py-0.5 text-arsenal-primary"
+          >
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </label>
+        <span className="ml-auto text-[11px] text-arsenal-secondary">Drag to orbit, scroll to zoom</span>
+      </div>
+    </div>
+  );
+}
+
 const DEMOS: Record<HeroPieceId, () => ReactNode> = {
   'island-base': () => (
     <Frame camera={{ position: [0, 2.2, 7.4], target: [0, -0.5, 0], fov: 34 }}>
       <IslandBase />
     </Frame>
   ),
-  'bonsai-tree': () => (
-    <Frame camera={{ position: [0, 1.5, 5.6], target: [0, 1.0, 0], fov: 34 }}>
-      <BonsaiTree />
-    </Frame>
-  ),
+  'bonsai-tree': () => <BonsaiStudioDemo />,
   waterfall: () => (
     <Frame camera={{ position: [0, -0.4, 2.8], target: [0, -0.6, 0], fov: 34 }}>
       <Waterfall position={[0, 0, 0]} />

@@ -39,9 +39,9 @@ export function BonsaiStudio({ children, light: lightProp, autoRotate = true, ba
   const dpr = quality === 'high' ? 1.75 : quality === 'medium' ? 1.5 : 1.25;
 
   return <div ref={host} className={className} role="img" aria-label="Bonsai, drag to orbit" style={{ position: 'relative', width: '100%', height: '100%', cursor: 'grab', touchAction: 'none', ...style }}>
-    <Canvas frameloop={frameloop} dpr={[1, dpr]} shadows gl={{ antialias: true, alpha: background === 'transparent', powerPreference: 'high-performance' }} camera={{ position: [...position], fov: camera?.fov ?? 36, near: 0.1, far: 40 }} onCreated={({ gl, camera: activeCamera }) => {
+    <Canvas frameloop={frameloop} dpr={[1, dpr]} shadows="percentage" gl={{ antialias: true, alpha: background === 'transparent', powerPreference: 'high-performance' }} camera={{ position: [...position], fov: camera?.fov ?? 36, near: 0.1, far: 40 }} onCreated={({ gl, camera: activeCamera }) => {
       gl.shadowMap.enabled = true;
-      gl.shadowMap.type = THREE.PCFSoftShadowMap;
+      gl.shadowMap.type = THREE.PCFShadowMap; // PCFSoft is deprecated in three 0.184; light.shadow.radius softens PCF.
       gl.domElement.style.touchAction = 'none';
       activeCamera.lookAt(...target);
     }}>
@@ -59,15 +59,15 @@ export function BonsaiStudio({ children, light: lightProp, autoRotate = true, ba
   </div>;
 }
 
-const DEFAULT_CAMERA_POSITION: Vec3 = [3.6, 2.8, 5.4];
-const DEFAULT_CAMERA_TARGET: Vec3 = [0, 0.75, 0];
+const DEFAULT_CAMERA_POSITION: Vec3 = [1.72, 1.16, 2.62];
+const DEFAULT_CAMERA_TARGET: Vec3 = [0, 0.7, 0];
 
 /** ACES with a per-theme exposure that follows theme changes (not just the first render). */
 function StudioExposure({ light }: { light: boolean }) {
   const { gl, invalidate } = useThree();
   useEffect(() => {
     gl.toneMapping = THREE.ACESFilmicToneMapping;
-    gl.toneMappingExposure = light ? 1 : 1.12;
+    gl.toneMappingExposure = light ? 1 : 1.25;
     invalidate();
   }, [gl, invalidate, light]);
   return null;
@@ -82,7 +82,7 @@ function StudioEnvironment({ light }: { light: boolean }) {
     const previous = scene.environment;
     const previousIntensity = scene.environmentIntensity;
     scene.environment = target.texture;
-    scene.environmentIntensity = light ? 0.6 : 0.35;
+    scene.environmentIntensity = light ? 0.6 : 0.5;
     return () => {
       scene.environment = previous;
       scene.environmentIntensity = previousIntensity;
@@ -95,11 +95,11 @@ function StudioEnvironment({ light }: { light: boolean }) {
 function StudioLighting({ light, quality }: { light: boolean; quality: HeroQuality }) {
   const mapSize = quality === 'high' ? 2048 : quality === 'medium' ? 1024 : 512;
   return <>
-    <hemisphereLight args={[light ? '#fff4df' : '#8796a0', light ? '#887761' : '#171411', light ? 0.72 : 0.28]} />
-    <directionalLight position={[-3.8, 5.5, 4.5]} color={light ? '#fff0d7' : '#ffd9a3'} intensity={light ? 2.15 : 1.6} castShadow shadow-mapSize-width={mapSize} shadow-mapSize-height={mapSize} shadow-camera-left={-2.2} shadow-camera-right={2.2} shadow-camera-top={2.2} shadow-camera-bottom={-2.2} shadow-camera-near={0.1} shadow-camera-far={14} shadow-radius={4} shadow-bias={-0.00012} shadow-normalBias={0.018} />
-    <directionalLight position={[4, 4.5, -3.8]} color={light ? '#f2c98d' : '#ffad45'} intensity={light ? 1.35 : 2.7} />
-    <directionalLight position={[3.2, 2.8, 4]} color={light ? '#d9e1e6' : '#8aa0b0'} intensity={light ? 1.1 : 0.55} />
-    <ambientLight color={light ? '#fff7ed' : '#82909c'} intensity={light ? 0.22 : 0.1} />
+    <hemisphereLight args={[light ? '#fff4df' : '#8796a0', light ? '#887761' : '#171411', light ? 0.72 : 0.42]} />
+    <directionalLight position={[3.6, 5.2, 3.4]} color={light ? '#fff0d7' : '#ffdcae'} intensity={light ? 2.3 : 3.9} castShadow shadow-mapSize-width={mapSize} shadow-mapSize-height={mapSize} shadow-camera-left={-2.2} shadow-camera-right={2.2} shadow-camera-top={2.2} shadow-camera-bottom={-2.2} shadow-camera-near={0.1} shadow-camera-far={14} shadow-radius={4} shadow-bias={-0.00012} shadow-normalBias={0.018} />
+    <directionalLight position={[4, 4.5, -3.8]} color={light ? '#f2c98d' : '#ffc580'} intensity={light ? 1.35 : 3.0} />
+    <directionalLight position={[-3.6, 2.8, 3.8]} color={light ? '#d9e1e6' : '#8aa0b0'} intensity={light ? 1.1 : 0.9} />
+    <ambientLight color={light ? '#fff7ed' : '#82909c'} intensity={light ? 0.22 : 0.18} />
   </>;
 }
 

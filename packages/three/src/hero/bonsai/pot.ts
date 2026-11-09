@@ -122,10 +122,10 @@ function buildBody(around: number): THREE.BufferGeometry {
     for (let c = 0; c < around; c += 1) {
       const a = r * cols + c;
       const b = a + cols;
-      indices.push(a, a + 1, b, b, a + 1, b + 1);
+      indices.push(a, b, a + 1, b, b + 1, a + 1);
     }
   }
-  for (let c = 0; c < around; c += 1) indices.push(centre, c + 1, c);
+  for (let c = 0; c < around; c += 1) indices.push(centre, c, c + 1);
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   geometry.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
@@ -163,7 +163,7 @@ function roundedBox(
 function buildClay(quality: HeroQuality): THREE.BufferGeometry {
   const { around, boxSegments } = DETAIL[quality];
   const clay = [1, 1, 1] as const;
-  const stand = [0.58, 0.55, 0.52] as const;
+  const stand = [0.3, 0.22, 0.16] as const;
   const footY = PROFILE[0]![1] - 0.014;
   const parts: THREE.BufferGeometry[] = [withColor(buildBody(around), clay)];
   for (const [x, z] of [

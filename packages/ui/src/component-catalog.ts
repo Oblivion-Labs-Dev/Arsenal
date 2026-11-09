@@ -1943,26 +1943,31 @@ export function Example() {
   {
     id: "bonsai-tree",
     name: "BonsaiTree",
-    description: "A sculpted bonsai: one merged trunk mesh and layered foliage pads that sway in shader wind (6–12s feel).",
+    description: "A studio-grade procedural bonsai: a seeded moyogi trunk with jin, shari and nebari, bark-plate relief, 6–10 pads of instanced leaf cards in shader wind, and a clay pot. BonsaiStudio adds the turntable, environment, contact shadow and cyclorama.",
     category: 'hero',
-    importLine: 'import { BonsaiTree } from "@arsenal/three";',
+    importLine: 'import { BonsaiStudio, BonsaiTree } from "@arsenal/three";',
     props: [
-      "quality?: \"high\" | \"medium\" | \"low\"",
+      "seed?: number  // same seed, same tree",
+      "quality?: \"high\" | \"medium\" | \"low\"  // ~120k / 60k / 25k triangles",
+      "foliageDensity?: number  // 0.25–2 leaf cards per pad",
+      "pot?: boolean",
+      "season?: BonsaiSeason",
       "wind?: number  // 0 holds still",
+      "textureBase?: string  // where the 1024² WebP bark, leaf, moss and clay maps are served (default /assets/bonsai/)",
       "light?: boolean",
       "reducedMotion?: boolean",
     ],
-    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
-    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
-    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
-    code: `import { HeroStage, BonsaiTree } from "@arsenal/three";
+    usage: "Drop BonsaiTree into BonsaiStudio for the full showcase (orbit, auto-rotate that resumes after 4 s, PMREM environment, ACES and bloom), or into HeroStage or any R3F Canvas as a hero piece. BonsaiTreeLite stays available as the lightweight stylised version.",
+    accessibility: "Decorative; keep meaning and copy in HTML. Reduced motion freezes wind and the turntable on a composed still.",
+    performance: "One merged trunk mesh, one instanced leaf draw per tree, shared textures released on unmount; wind and turntable pause offscreen. Holds 60 fps at medium quality at 1280×720.",
+    code: `import { BonsaiStudio, BonsaiTree } from "@arsenal/three";
 
 export function Example() {
   return (
-    <div className="h-[420px]">
-      <HeroStage>
-        <BonsaiTree position={[0.4, 0.1, 0]} />
-      </HeroStage>
+    <div className="h-[520px]">
+      <BonsaiStudio quality="medium">
+        <BonsaiTree seed={7} quality="medium" />
+      </BonsaiStudio>
     </div>
   );
 }`,

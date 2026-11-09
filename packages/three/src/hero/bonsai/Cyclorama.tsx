@@ -50,7 +50,7 @@ export function Cyclorama({ objectRef }: CycloramaProps) {
   const uniforms = useMemo(() => ({
     uBase: { value: new THREE.Color() }, uPool: { value: new THREE.Color() }, uLight: { value: 0 },
   }), []);
-  uniforms.uBase.value.set(light ? '#efe7d8' : '#0d0e10');
+  uniforms.uBase.value.set(light ? '#efe7d8' : '#18191c');
   uniforms.uPool.value.set(light ? '#f7dcae' : '#3a2610');
   uniforms.uLight.value = light ? 1 : 0;
   return <group ref={objectRef}>

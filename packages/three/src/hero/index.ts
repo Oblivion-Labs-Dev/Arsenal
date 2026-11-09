@@ -4,8 +4,12 @@ export * from './shared';
 export * from './status';
 export * from './IslandBase';
 export * from './BonsaiTreeLite';
-// Temporary alias until the studio bonsai lands (feat/studio-bonsai).
-export { BonsaiTreeLite as BonsaiTree } from './BonsaiTreeLite';
+export * from './bonsai/BonsaiTree';
+export * from './bonsai/BonsaiStudio';
+export * from './bonsai/BonsaiPot';
+export * from './bonsai/types';
+export { buildBonsaiSkeleton } from './bonsai/skeleton';
+export { acquireBonsaiTextures, releaseBonsaiTextures, type BonsaiTextures } from './bonsai/textures';
 export * from './Waterfall';
 export * from './WaterBasin';
 export * from './OrbitalRing';
