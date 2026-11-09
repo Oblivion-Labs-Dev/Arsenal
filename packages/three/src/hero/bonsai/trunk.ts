@@ -151,8 +151,10 @@ export function buildBonsaiTrunk(
         // Bark plates: |sin|^0.45 gives broad rounded plates split by sharp V cracks, twisting
         // slowly up the trunk with an irregular wobble so the cracks never line up like fluting.
         const plate = (frequency: number, twist: number) =>
-          Math.pow(Math.abs(Math.sin(angle * frequency + t * twist + 0.7 * Math.sin(t * 11 + angle * 2))), 0.45) -
-          0.75;
+          Math.pow(
+            Math.abs(Math.sin(angle * frequency + t * twist + 0.7 * Math.sin(t * 11 + angle * 2))),
+            0.45,
+          ) - 0.75;
         const ridge =
           branch.kind === 'trunk'
             ? 0.16 * plate(3.5, 6) + 0.02 * Math.sin(angle * 2 - t * 4)
@@ -310,7 +312,7 @@ diffuseColor.rgb = mix(diffuseColor.rgb, shariGrain, clamp(vBark.y, 0.0, 1.0));`
   // Shari is bleached, smoother deadwood: drier and with flatter relief than the living bark.
   nextFragment = nextFragment.replace(
     '#include <roughnessmap_fragment>',
-    '#include <roughnessmap_fragment>\nroughnessFactor = max(roughnessFactor, 0.78);\nroughnessFactor = mix(roughnessFactor, 0.82, clamp(vBark.y, 0.0, 1.0));',
+    '#include <roughnessmap_fragment>\nroughnessFactor = max(roughnessFactor, 0.7);\nroughnessFactor = mix(roughnessFactor, 0.8, clamp(vBark.y, 0.0, 1.0));',
   );
   return { vertex: nextVertex, fragment: nextFragment };
 }
@@ -342,7 +344,7 @@ export function createBarkMaterial(options: {
     shader.fragmentShader = patched.fragment;
   };
   material.customProgramCacheKey = () =>
-    `arsenal-bonsai-bark-v2-${options.light ? 'light' : 'dark'}-${textured ? 'textures' : 'plain'}`;
+    `arsenal-bonsai-bark-v3-${options.light ? 'light' : 'dark'}-${textured ? 'textures' : 'plain'}`;
   return material;
 }
 

@@ -26,6 +26,8 @@ export interface LeafField {
   padYaw: Float32Array;
   /** Pad index for every card. */
   padIndex: Uint16Array;
+  /** 1 float per card: height inside its foliage tuft (0 underside, 1 sunlit crest). */
+  tuft: Float32Array;
 }
 
 /** GPU uniforms consumed by the leaf shader patches. */
@@ -83,6 +85,7 @@ const GLSL_ATTRIBUTES = [
   'attribute vec3 aPadRadii;',
   'attribute float aPadIndex;',
   'attribute float aPadYaw;',
+  'attribute float aLeafTuft;',
   'vec3 leafRotateY(vec3 p, float angle) { float s = sin(angle); float c = cos(angle); return vec3(c * p.x + s * p.z, p.y, -s * p.x + c * p.z); }',
   // A function, not a local: three runs defaultnormal_vertex before begin_vertex, so both patches call it.
   'vec3 leafCardCenter() {',
@@ -110,7 +113,8 @@ vec3 leafRadii = max(aPadRadii, vec3(0.0001));
 vec3 ellipsoidNormal = leafEllipsoidNormal();
 float leafUp = clamp(ellipsoidNormal.y * 0.5 + 0.5, 0.0, 1.0);
 float localHeight = clamp((leafCenter.y - aPadData.y) / (leafRadii.y * 2.0) + 0.5, 0.0, 1.0);
-vLeafSun = clamp(0.15 + 0.48 * localHeight + 0.52 * leafUp, 0.0, 1.0);
+// Each tuft has a sunlit crest and a shaded underside; the pad adds a broader top-to-bottom falloff.
+vLeafSun = clamp(0.08 + 0.62 * aLeafTuft + 0.18 * localHeight + 0.24 * leafUp, 0.0, 1.0);
 vLeafAo = clamp(aLeafData.y, 0.35, 1.0);
 vLeafJitter = aLeafData.z;
 float atlasColumn = mod(aLeafData.x, 2.0); float atlasRow = floor(aLeafData.x / 2.0);
@@ -149,6 +153,7 @@ export function buildLeafField(pads: BonsaiPad[], options: LeafFieldOptions): Le
   const padRadii = new Float32Array(pads.length * 3);
   const padYaw = new Float32Array(pads.length);
   const padIndex = new Uint16Array(count);
+  const tuft = new Float32Array(count);
   const random = createRandom(options.seed ?? 7);
   const object = new THREE.Object3D();
   const normal = new THREE.Vector3();
@@ -165,27 +170,44 @@ export function buildLeafField(pads: BonsaiPad[], options: LeafFieldOptions): Le
     const swayPhase = range(random, 0, Math.PI * 2);
     const yaw = new THREE.Quaternion().setFromAxisAngle(THREE.Object3D.DEFAULT_UP, pad.yaw);
     const padCenter = new THREE.Vector3(...pad.center);
-    // Foliage tufts: a few lobes biased to the top of the pad. Cards sit on a lumpy shell that bulges
-    // at each lobe, so the pad reads as clustered tufts with an uneven outline instead of a smooth disk.
-    const lobes = Array.from({ length: 7 }, () => {
-      const lobeAzimuth = range(random, 0, Math.PI * 2);
-      const lobeY = range(random, -0.15, 0.75);
-      const ring = Math.sqrt(1 - lobeY * lobeY);
-      return new THREE.Vector3(Math.cos(lobeAzimuth) * ring, lobeY, Math.sin(lobeAzimuth) * ring);
+    // Foliage tufts: small domes spread over the upper shell of the pad. Most cards sit on a tuft,
+    // so the pad reads as dense clumps with sunlit crests and dark undersides, not a smooth disk.
+    const tuftCount = Math.max(10, Math.round(14 + 24 * Math.max(rx, rz)));
+    const tufts = Array.from({ length: tuftCount }, () => {
+      const tuftAzimuth = range(random, 0, Math.PI * 2);
+      const tuftY = range(random, -0.2, 0.6);
+      const ring = Math.sqrt(1 - tuftY * tuftY) * Math.sqrt(range(random, 0.15, 1));
+      const unit = new THREE.Vector3(Math.cos(tuftAzimuth) * ring, tuftY, Math.sin(tuftAzimuth) * ring);
+      return { unit, radius: Math.min(rx, rz) * range(random, 0.24, 0.36) };
     });
     const direction = new THREE.Vector3();
+    const unit = new THREE.Vector3();
     for (let card = 0; card < perPad; card += 1) {
       const index = padNumber * perPad + card;
-      const top = random() < 0.66;
-      const y = top ? range(random, 0.015, 0.94) : -range(random, 0.015, 0.66);
-      const azimuth = range(random, 0, Math.PI * 2);
-      const ringRadius = Math.sqrt(Math.max(0, 1 - y * y));
-      direction.set(Math.cos(azimuth) * ringRadius, y, Math.sin(azimuth) * ringRadius).normalize();
-      let lobe = 0;
-      for (const candidate of lobes)
-        lobe = Math.max(lobe, Math.exp((direction.dot(candidate) - 1) * 6));
-      const shell = 0.6 + 0.39 * lobe;
-      const unit = direction.clone().multiplyScalar(shell * (1 - 0.22 * Math.pow(random(), 1.6)));
+      let tuftHeight: number;
+      if (random() < 0.88) {
+        const tuft = tufts[Math.floor(random() * tufts.length)];
+        // A dome: points biased to the crest, a few hanging below to close the clump.
+        const dy = range(random, -0.55, 1);
+        const ring = Math.sqrt(Math.max(0, 1 - dy * dy)) * Math.sqrt(random());
+        const angle = range(random, 0, Math.PI * 2);
+        unit.set(
+          tuft.unit.x * 0.86 + (Math.cos(angle) * ring * tuft.radius) / rx,
+          tuft.unit.y * 0.86 + (dy * tuft.radius) / ry,
+          tuft.unit.z * 0.86 + (Math.sin(angle) * ring * tuft.radius) / rz,
+        );
+        tuftHeight = dy * 0.5 + 0.5;
+      } else {
+        // Filler deep in the pad hides the gaps between tufts and stays in shade.
+        const y = range(random, -0.6, 0.7);
+        const azimuth = range(random, 0, Math.PI * 2);
+        const ringRadius = Math.sqrt(Math.max(0, 1 - y * y));
+        direction.set(Math.cos(azimuth) * ringRadius, y, Math.sin(azimuth) * ringRadius);
+        unit.copy(direction).multiplyScalar(range(random, 0.4, 0.72));
+        tuftHeight = range(random, 0.05, 0.3);
+      }
+      // Cards never leave the pad cloud.
+      if (unit.length() > 0.97) unit.multiplyScalar(0.97 / unit.length());
       const local = new THREE.Vector3(unit.x * rx, unit.y * ry, unit.z * rz);
       const center = local.applyQuaternion(yaw).add(padCenter);
       normal
@@ -204,10 +226,11 @@ export function buildLeafField(pads: BonsaiPad[], options: LeafFieldOptions): Le
       rollRotation.setFromAxisAngle(new THREE.Vector3(0, 0, 1), range(random, 0, Math.PI * 2));
       object.position.copy(center);
       object.quaternion.copy(baseRotation).multiply(rollRotation);
-      const size = range(random, 0.058, 0.088);
-      object.scale.set(size, size * range(random, 0.65, 0.88), 1);
+      const size = range(random, 0.1, 0.145);
+      object.scale.set(size, size * range(random, 0.62, 0.86), 1);
       object.updateMatrix();
       object.matrix.toArray(matrices, index * 16);
+      tuft[index] = tuftHeight;
       padData.set([pad.center[0], pad.center[1], pad.center[2], swayPhase], index * 4);
       const depthAo = THREE.MathUtils.clamp(
         0.35 + 0.65 * Math.sqrt(unit.length()) - (unit.y < 0 ? 0.16 : 0),
@@ -221,7 +244,7 @@ export function buildLeafField(pads: BonsaiPad[], options: LeafFieldOptions): Le
       padIndex[index] = padNumber;
     }
   });
-  return { count, matrices, pad: padData, leaf, padRadii, padYaw, padIndex };
+  return { count, matrices, pad: padData, leaf, padRadii, padYaw, padIndex, tuft };
 }
 
 /** Create the unit leaf quad; per-instance matrices provide its small physical size. */
@@ -283,7 +306,7 @@ export function createLeafMaterials(options: {
     shader.vertexShader = patchLeafVertexShader(shader.vertexShader);
     shader.fragmentShader = patchLeafFragmentShader(shader.fragmentShader);
   };
-  material.customProgramCacheKey = () => 'arsenal-bonsai-leaf-v1';
+  material.customProgramCacheKey = () => 'arsenal-bonsai-leaf-v3';
   const depthMaterial = new THREE.MeshDepthMaterial({
     depthPacking: THREE.RGBADepthPacking,
     map: leafAtlas,
@@ -296,7 +319,7 @@ export function createLeafMaterials(options: {
     shader.uniforms.uAtlasInset = uniforms.uAtlasInset;
     shader.vertexShader = patchLeafVertexShader(shader.vertexShader);
   };
-  depthMaterial.customProgramCacheKey = () => 'arsenal-bonsai-leaf-depth-v1';
+  depthMaterial.customProgramCacheKey = () => 'arsenal-bonsai-leaf-depth-v3';
   return { material, depthMaterial, uniforms };
 }
 
@@ -321,6 +344,7 @@ export function createLeafMesh(
   geometry.setAttribute('aPadRadii', new THREE.InstancedBufferAttribute(instanceRadii, 3));
   geometry.setAttribute('aPadIndex', new THREE.InstancedBufferAttribute(field.padIndex, 1));
   geometry.setAttribute('aPadYaw', new THREE.InstancedBufferAttribute(instanceYaw, 1));
+  geometry.setAttribute('aLeafTuft', new THREE.InstancedBufferAttribute(field.tuft, 1));
   const mesh = new THREE.InstancedMesh(geometry, materials.material, field.count);
   const matrix = new THREE.Matrix4();
   for (let index = 0; index < field.count; index += 1) {
@@ -386,7 +410,7 @@ leafPalette.g -= vLeafJitter * 0.012;
 // Keep the atlas' own frond structure: partly desaturate it and use its luminance as micro-shading
 // (gaps between fronds go dark), so the palette tints the leaves without flattening them into a blob.
 float leafLuma = dot(diffuseColor.rgb, vec3(0.299, 0.587, 0.114));
-diffuseColor.rgb = mix(vec3(leafLuma), diffuseColor.rgb, 0.5) * mix(0.35, 1.25, smoothstep(0.12, 0.78, leafLuma));
+diffuseColor.rgb = mix(vec3(leafLuma), diffuseColor.rgb, 0.75) * mix(0.3, 1.3, smoothstep(0.12, 0.78, leafLuma));
 diffuseColor.rgb *= leafPalette;`,
   );
   shader = shader.replace(

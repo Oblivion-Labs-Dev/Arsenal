@@ -115,17 +115,17 @@ export const BONSAI_TEXTURE_BASE = '/assets/bonsai/';
 /** Palettes. Dark matches the plate: chartreuse sunlit tops falling to deep olive undersides. */
 export const BONSAI_PALETTE = {
   dark: {
-    leafTop: '#80a83a',
-    leafMid: '#4b702c',
-    leafDeep: '#1e3014',
-    bark: '#664a36',
+    leafTop: '#d4dc3c',
+    leafMid: '#74a02c',
+    leafDeep: '#2c4416',
+    bark: '#7a5638',
     shari: '#4a4036',
   },
   light: {
-    leafTop: '#8fb23c',
-    leafMid: '#4d7a24',
+    leafTop: '#b6c43a',
+    leafMid: '#5e8c24',
     leafDeep: '#25401a',
-    bark: '#6a5139',
+    bark: '#73553a',
     shari: '#a89a86',
   },
   autumn: { leafTop: '#e0a33a', leafMid: '#b8562a', leafDeep: '#5a2414' },

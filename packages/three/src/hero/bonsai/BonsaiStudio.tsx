@@ -96,7 +96,7 @@ function StudioLighting({ light, quality }: { light: boolean; quality: HeroQuali
   const mapSize = quality === 'high' ? 2048 : quality === 'medium' ? 1024 : 512;
   return <>
     <hemisphereLight args={[light ? '#fff4df' : '#8796a0', light ? '#887761' : '#171411', light ? 0.72 : 0.42]} />
-    <directionalLight position={[3.6, 5.2, 3.4]} color={light ? '#fff0d7' : '#ffdcae'} intensity={light ? 2.3 : 3.9} castShadow shadow-mapSize-width={mapSize} shadow-mapSize-height={mapSize} shadow-camera-left={-2.2} shadow-camera-right={2.2} shadow-camera-top={2.2} shadow-camera-bottom={-2.2} shadow-camera-near={0.1} shadow-camera-far={14} shadow-radius={4} shadow-bias={-0.00012} shadow-normalBias={0.018} />
+    <directionalLight position={[3.6, 5.2, 3.4]} color={light ? '#fff0d7' : '#ffcf86'} intensity={light ? 2.3 : 4.3} castShadow shadow-mapSize-width={mapSize} shadow-mapSize-height={mapSize} shadow-camera-left={-2.2} shadow-camera-right={2.2} shadow-camera-top={2.2} shadow-camera-bottom={-2.2} shadow-camera-near={0.1} shadow-camera-far={14} shadow-radius={4} shadow-bias={-0.00012} shadow-normalBias={0.018} />
     <directionalLight position={[4, 4.5, -3.8]} color={light ? '#f2c98d' : '#ffc580'} intensity={light ? 1.35 : 3.0} />
     <directionalLight position={[-3.6, 2.8, 3.8]} color={light ? '#d9e1e6' : '#8aa0b0'} intensity={light ? 1.1 : 0.9} />
     <ambientLight color={light ? '#fff7ed' : '#82909c'} intensity={light ? 0.22 : 0.18} />

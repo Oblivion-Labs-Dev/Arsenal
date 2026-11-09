@@ -25,16 +25,19 @@ export function buildBonsaiSkeleton(options: BonsaiOptions = {}): BonsaiSkeleton
   const random = createRandom(seed);
   const branches: BonsaiBranch[] = [];
   const pads: BonsaiPad[] = [];
-  // Seeded moyogi S-curve: amplitude, phase and lean vary per seed, the overall form does not.
-  const swayX = range(random, 0.13, 0.175);
-  const swayZ = range(random, 0.09, 0.13);
-  const phaseX = range(random, -0.25, 0.25);
-  const phaseZ = range(random, 0.05, 0.6);
-  const lean = range(random, -0.055, -0.015);
-  const trunkRaw = Array.from({ length: 9 }, (_, i): V3 => {
-    const t = i / 8;
-    return [swayX * Math.sin(t * Math.PI * 2.15 + phaseX) - swayX * Math.sin(phaseX) + lean * t, 1.2 * t, swayZ * Math.sin(t * Math.PI * 3.1 + phaseZ) - swayZ * Math.sin(phaseZ)];
-  });
+  // The silhouette follows a windswept moyogi: the trunk leans left in an S, a wide layered canopy
+  // sits over it and one lower-left pad hangs out past the pot. Positions are authored in a view
+  // frame (x right, y up, z toward the default camera) and seeded so every tree differs a little.
+  const S = 0.85;
+  const swayGain = range(random, 0.86, 1.1);
+  const trunkView: V3[] = [[0, 0, 0], [-0.1, 0.14, 0.04], [-0.27, 0.3, 0.07], [-0.42, 0.47, 0.06], [-0.52, 0.63, 0.02], [-0.54, 0.78, -0.03], [-0.47, 0.93, -0.05], [-0.38, 1.08, -0.05], [-0.3, 1.24, -0.04]];
+  // The view frame faces the default camera at [1.72, 1.16, 2.62]; a small seeded yaw keeps trees distinct.
+  const facing = Math.atan2(2.62, 1.72) - Math.PI / 2 + range(random, -0.12, 0.12);
+  const right: V3 = [Math.cos(facing), 0, -Math.sin(facing)];
+  const toward: V3 = [Math.sin(facing), 0, Math.cos(facing)];
+  const world = (p: V3): V3 => [S * (p[0] * right[0] + p[2] * toward[0]), S * p[1], S * (p[0] * right[2] + p[2] * toward[2])];
+  const jitter = (amount: number): V3 => [range(random, -amount, amount), range(random, -amount, amount) * 0.5, range(random, -amount, amount)];
+  const trunkRaw = trunkView.map((p, i): V3 => world([p[0] * (i === 0 ? 1 : swayGain), p[1], p[2] * swayGain]));
   branches.push({ id: 0, kind: 'trunk', order: 0, points: line(trunkRaw, 32), radii: [], attach: null });
 
   const addBranch = (kind: BonsaiBranch['kind'], order: number, attach: BonsaiBranch['attach'], raw: V3[], samples: number): number => {
@@ -43,55 +46,73 @@ export function buildBonsaiSkeleton(options: BonsaiOptions = {}): BonsaiSkeleton
     return id;
   };
   const pointAt = (branch: BonsaiBranch, t: number): V3 => branch.points[Math.round(t * (branch.points.length - 1))];
-  const baseAzimuth = 0.25 + range(random, -0.35, 0.35);
-  for (let tier = 0; tier < 4; tier++) {
-    const t = 0.31 + tier * 0.175;
-    const attachIndex = Math.round(t * 31);
+  const padYaw = (from: V3, to: V3) => -Math.atan2(to[2] - from[2], to[0] - from[0]);
+  type PadSpec = { center: V3; rx: number; rz: number };
+  // Lower-left hanging pad, upper-left shelf (with a front pad), right shelf (with a drooping tip
+  // pad) and a back shelf; the crown sits on the apex. Spacing keeps the pads distinct clouds.
+  const primarySpecs: Array<{ t: number; sag: number; pad: PadSpec; sub?: PadSpec; sub2?: PadSpec }> = [
+    { t: 0.5, sag: -0.08, pad: { center: [-1.25, 0.72, 0.1], rx: 0.55, rz: 0.4 } },
+    { t: 0.64, sag: 0.05, pad: { center: [-1.05, 1.36, -0.35], rx: 0.45, rz: 0.38 }, sub: { center: [-0.55, 1.2, 0.42], rx: 0.32, rz: 0.27 } },
+    { t: 0.76, sag: 0.04, pad: { center: [0.38, 1.28, 0.2], rx: 0.4, rz: 0.34 }, sub: { center: [0.82, 1.02, 0.3], rx: 0.25, rz: 0.21 }, sub2: { center: [-0.1, 1.3, 0.55], rx: 0.3, rz: 0.26 } },
+    { t: 0.86, sag: 0.03, pad: { center: [-0.35, 1.15, -0.6], rx: 0.4, rz: 0.34 } },
+  ];
+  const twigsInto = (secondary: number, cloud: V3, angle: number) => {
+    for (let twig = 0; twig < 2; twig++) {
+      const twigAt = twig === 0 ? 0.45 : 0.72;
+      const twigOrigin = pointAt(branches[secondary], twigAt);
+      const twigAngle = angle + (twig === 0 ? -0.8 : 0.8);
+      const twigTip: V3 = [cloud[0] + range(random, -0.025, 0.025), cloud[1] + 0.06 + range(random, -0.015, 0.015), cloud[2] + range(random, -0.025, 0.025)];
+      addBranch('branch', 3, { parent: secondary, index: Math.round(twigAt * 6) }, [twigOrigin, add(twigOrigin, [Math.cos(twigAngle) * 0.07, 0.03, Math.sin(twigAngle) * 0.07]), twigTip], 4);
+    }
+  };
+  for (const spec of primarySpecs) {
+    const attachIndex = Math.round(spec.t * 31);
     const base = branches[0].points[attachIndex];
-    const az = baseAzimuth + tier * 2.18 + range(random, -0.16, 0.16);
-    const direction: V3 = [Math.cos(az), 0, Math.sin(az)];
-    const distance = 0.92 - tier * 0.12;
-    // Primaries rise, swing sideways and settle, so no limb reads as a straight rod.
-    const swing = range(random, 0.05, 0.09) * (tier % 2 === 0 ? 1 : -1);
-    const mid = add(base, [direction[0] * distance * 0.5 - direction[2] * swing, 0.1 + range(random, -0.02, 0.025), direction[2] * distance * 0.5 + direction[0] * swing]);
-    const tip = add(base, [direction[0] * distance, 0.03 + range(random, -0.015, 0.03), direction[2] * distance]);
+    const padCenter = add(world(spec.pad.center), jitter(0.035));
+    const flat: V3 = [padCenter[0] - base[0], 0, padCenter[2] - base[2]];
+    const reach = Math.max(1e-6, Math.hypot(flat[0], flat[2]));
+    const direction: V3 = [flat[0] / reach, 0, flat[2] / reach];
+    const az = Math.atan2(direction[2], direction[0]);
+    const rx = spec.pad.rx * S;
+    // The limb enters its pad from underneath, a third of the way in from the trunk side.
+    const tip: V3 = [padCenter[0] - direction[0] * rx * 0.35, padCenter[1] - 0.07, padCenter[2] - direction[2] * rx * 0.35];
+    const swing = range(random, 0.04, 0.08) * (attachIndex % 2 === 0 ? 1 : -1);
+    const mid: V3 = [base[0] + (tip[0] - base[0]) * 0.5 - direction[2] * swing, base[1] + (tip[1] - base[1]) * 0.5 + spec.sag, base[2] + (tip[2] - base[2]) * 0.5 + direction[0] * swing];
     const primary = addBranch('branch', 1, { parent: 0, index: attachIndex }, [base, mid, tip], 11);
     for (let child = 0; child < 2; child++) {
       const at = child === 0 ? 0.45 : 0.73;
-      const index = Math.round(at * 10);
       const origin = pointAt(branches[primary], at);
+      const sub = child === 0 ? spec.sub : spec.sub2;
       const side = child === 0 ? 1 : -1;
-      const angle = az + side * (0.98 + range(random, 0, 0.2));
-      const direction2: V3 = [Math.cos(angle), 0, Math.sin(angle)];
-      const secondaryHasPad = child === 0 && (tier % 2 === 0 || tier === 3);
-      // A secondary without its own pad sweeps back into the primary pad, so no bare stub ends in air.
-      const padCenter: V3 = [tip[0] + direction[0] * 0.18, tip[1], tip[2] + direction[2] * 0.18];
-      const secondaryTip: V3 = secondaryHasPad
-        ? add(origin, [direction2[0] * (0.5 - tier * 0.04), 0.05, direction2[2] * (0.5 - tier * 0.04)])
-        : add(padCenter, [direction2[0] * 0.12, -0.02, direction2[2] * 0.12]);
-      const secondary = addBranch('branch', 2, { parent: primary, index }, [origin, add(origin, [direction2[0] * 0.16, 0.035, direction2[2] * 0.16]), secondaryTip], 7);
-      const twigCloud: V3 = secondaryHasPad ? secondaryTip : padCenter;
-      for (let twig = 0; twig < 2; twig++) {
-        const twigAt = twig === 0 ? 0.45 : 0.72;
-        const twigIndex = Math.round(twigAt * 6);
-        const twigOrigin = pointAt(branches[secondary], twigAt);
-        const twigAngle = angle + (twig === 0 ? -0.8 : 0.8);
-        const twigTip: V3 = [twigCloud[0] + range(random, -0.025, 0.025), twigCloud[1] + 0.075 + range(random, -0.018, 0.018), twigCloud[2] + range(random, -0.025, 0.025)];
-        addBranch('branch', 3, { parent: secondary, index: twigIndex }, [twigOrigin, add(twigOrigin, [Math.cos(twigAngle) * 0.08, 0.035, Math.sin(twigAngle) * 0.08]), twigTip], 4);
+      let secondaryTip: V3;
+      let angle: number;
+      if (sub) {
+        const subCenter = add(world(sub.center), jitter(0.03));
+        secondaryTip = [subCenter[0], subCenter[1] - 0.05, subCenter[2]];
+        angle = Math.atan2(secondaryTip[2] - origin[2], secondaryTip[0] - origin[0]);
+        pads.push({ center: subCenter, radii: [sub.rx * S, Math.max(sub.rx, sub.rz) * S * 0.44, sub.rz * S], yaw: padYaw(origin, subCenter), branch: -1 });
+      } else {
+        // A secondary without its own pad sweeps into the primary pad, so no bare stub ends in air.
+        angle = az + side * (0.98 + range(random, 0, 0.2));
+        secondaryTip = add(padCenter, [Math.cos(angle) * rx * 0.3, -0.03, Math.sin(angle) * rx * 0.3]);
       }
-      if (secondaryHasPad) pads.push({ center: [secondaryTip[0], secondaryTip[1] + 0.05, secondaryTip[2]], radii: [0.28 - tier * 0.024, 0.16, 0.26 - tier * 0.02], yaw: az, branch: secondary });
+      const lead: V3 = [Math.cos(angle) * 0.14, 0.03, Math.sin(angle) * 0.14];
+      const secondary = addBranch('branch', 2, { parent: primary, index: Math.round(at * 10) }, [origin, add(origin, lead), secondaryTip], 7);
+      if (sub) pads[pads.length - 1].branch = secondary;
+      twigsInto(secondary, sub ? secondaryTip : padCenter, angle);
     }
-    pads.push({ center: [tip[0] + direction[0] * 0.18, tip[1] + 0.05, tip[2] + direction[2] * 0.18], radii: [0.47 - tier * 0.045, 0.19 - tier * 0.011, 0.42 - tier * 0.035], yaw: az, branch: primary });
+    pads.push({ center: padCenter, radii: [rx, Math.max(spec.pad.rx, spec.pad.rz) * S * 0.42, spec.pad.rz * S], yaw: -az, branch: primary });
   }
-  const apex: V3 = [trunkRaw[8][0], 1.2, trunkRaw[8][2]];
-  const crown = addBranch('branch', 2, { parent: 0, index: 31 }, [apex, [apex[0] + 0.035, 1.27, apex[2] - 0.015], [apex[0] + 0.015, 1.32, apex[2] + 0.015]], 6);
+  const apex = trunkRaw[trunkRaw.length - 1];
+  const crownCenter = add(world([-0.2, 1.6, -0.05]), jitter(0.03));
+  const crown = addBranch('branch', 2, { parent: 0, index: 31 }, [apex, mix(apex, crownCenter, 0.5), [crownCenter[0], crownCenter[1] - 0.06, crownCenter[2]]], 6);
   for (const side of [-1, 1]) {
     const origin = branches[crown].points[3];
     const angle = side * 1.1;
-    const terminal = add(origin, [Math.cos(angle) * 0.12, 0.035, Math.sin(angle) * 0.12]);
-    addBranch('branch', 3, { parent: crown, index: 3 }, [origin, add(origin, [Math.cos(angle) * 0.06, 0.025, Math.sin(angle) * 0.06]), terminal], 4);
+    const terminal = add(origin, [Math.cos(angle) * 0.11, 0.04, Math.sin(angle) * 0.11]);
+    addBranch('branch', 3, { parent: crown, index: 3 }, [origin, add(origin, [Math.cos(angle) * 0.05, 0.025, Math.sin(angle) * 0.05]), terminal], 4);
   }
-  pads.push({ center: [apex[0], 1.35, apex[2]], radii: [0.36, 0.19, 0.33], yaw: 0, branch: crown });
+  pads.push({ center: crownCenter, radii: [0.45 * S, 0.45 * S * 0.42, 0.4 * S], yaw: facing, branch: crown });
 
   // Jin and roots are deliberately excluded from the living pipe calculation.
   for (let j = 0; j < 2; j++) {
@@ -110,7 +131,7 @@ export function buildBonsaiSkeleton(options: BonsaiOptions = {}): BonsaiSkeleton
       const z = Math.sin(angle + f * 0.18) * reach * f;
       return [x, mossHeight(x, z) + lift, z];
     };
-    addBranch('root', 0, { parent: 0, index: 0 }, [[0, 0.09, 0], along(0.3, 0.03), along(0.62, 0.012), along(1, -0.03)], 9);
+    addBranch('root', 0, { parent: 0, index: 0 }, [branches[0].points[2], along(0.3, 0.03), along(0.62, 0.012), along(1, -0.03)], 9);
   }
 
   // Every living branch starts with a small twig radius; split radii accumulate from the tips.
@@ -141,11 +162,11 @@ export function buildBonsaiSkeleton(options: BonsaiOptions = {}): BonsaiSkeleton
       return next;
     });
   }
-  const scale = 0.118 / (branches[0].radii[0] || 0.15);
+  const scale = 0.15 / (branches[0].radii[0] || 0.15);
   for (const branch of living) branch.radii = branch.radii.map((radius) => radius * scale);
   for (const branch of branches) {
     if (branch.kind === 'jin') branch.radii = branch.points.map((_, i) => 0.018 * (1 - 0.8 * i / (branch.points.length - 1)));
-    if (branch.kind === 'root') branch.radii = branch.points.map((_, i) => (0.056 * (1 - i / (branch.points.length - 1) * 0.6)) * (0.9 + 0.1 * Math.sin(i * 0.7)));
+    if (branch.kind === 'root') branch.radii = branch.points.map((_, i) => (0.07 * (1 - i / (branch.points.length - 1) * 0.65)) * (0.9 + 0.1 * Math.sin(i * 0.7)));
   }
 
   const min: V3 = [Infinity, Infinity, Infinity];
