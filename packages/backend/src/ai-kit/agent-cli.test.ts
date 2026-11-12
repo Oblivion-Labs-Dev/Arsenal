@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { homedir, tmpdir } from 'node:os';
-import { join, parse } from 'node:path';
+import { dirname, join, parse } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { z } from 'zod/v4';
 import { agentEnv, runAgent, type RunAgentOptions } from './agent-cli.js';
@@ -18,7 +18,10 @@ process.stdin.on('end', () => {
   const files = {};
   const schemaAt = argv.indexOf('--output-schema');
   if (schemaAt >= 0) files.schema = fs.readFileSync(argv[schemaAt + 1], 'utf8');
-  fs.writeFileSync(at('record.json'), JSON.stringify({ argv, stdin, env: process.env, files }));
+  const systemAt = argv.indexOf('--append-system-prompt-file');
+  if (systemAt >= 0) files.system = fs.readFileSync(argv[systemAt + 1], 'utf8');
+  const pid = process.pid;
+  fs.writeFileSync(at('record.json'), JSON.stringify({ argv, stdin, env: process.env, files, pid }));
   if (fs.existsSync(at('hang'))) return setInterval(() => {}, 1000);
   const read = (f) => (fs.existsSync(at(f)) ? fs.readFileSync(at(f), 'utf8') : '');
   const replyAt = argv.indexOf('--output-last-message');
@@ -48,7 +51,8 @@ const record = () =>
     argv: string[];
     stdin: string;
     env: Record<string, string>;
-    files: { schema?: string };
+    files: { schema?: string; system?: string };
+    pid: number;
   };
 const flag = (argv: string[], name: string) => argv[argv.indexOf(name) + 1];
 
@@ -62,6 +66,18 @@ const base = (over: Partial<RunAgentOptions<unknown>>): RunAgentOptions<unknown>
   timeoutMs: 20_000,
   ...over,
 });
+
+const gone = async (pid: number) => {
+  for (const end = Date.now() + 5000; Date.now() < end; ) {
+    try {
+      process.kill(pid, 0);
+    } catch {
+      return true;
+    }
+    await new Promise((r) => setTimeout(r, 50));
+  }
+  return false;
+};
 
 const envelope = (fields: Record<string, unknown>) => put('stdout.txt', JSON.stringify(fields));
 const Summary = z.object({ title: z.string(), files: z.number() });
@@ -87,7 +103,8 @@ describe('runAgent with claude', () => {
     expect(argv).toEqual(expect.arrayContaining(['-p', '--strict-mcp-config']));
     expect(flag(argv, '--permission-mode')).toBe('dontAsk');
     expect(flag(argv, '--setting-sources')).toBe('user');
-    expect(flag(argv, '--allowedTools')).toBe('Read,Glob,Grep,LS');
+    expect(flag(argv, '--tools')).toBe('Read,Glob,Grep,LS');
+    expect(flag(argv, '--allowedTools')).toBe('Read(./**),Glob,Grep,LS');
     const denied = flag(argv, '--disallowedTools')!.split(',');
     expect(denied).toEqual(expect.arrayContaining(['Bash', 'Write', 'Edit', 'WebFetch', 'Task']));
     expect(denied).not.toContain('Read');
@@ -112,6 +129,8 @@ describe('runAgent with claude', () => {
     const { argv, stdin } = record();
     expect(argv).not.toContain('--dangerously-skip-permissions');
     expect(argv).not.toContain('--allowedTools');
+    // No built-in tool is even loaded.
+    expect(flag(argv, '--tools')).toBe('');
     expect(flag(argv, '--disallowedTools')!.split(',')).toEqual(
       expect.arrayContaining(['Bash', 'Read', 'Write']),
     );
@@ -125,12 +144,62 @@ describe('runAgent with claude', () => {
     envelope({ result: 'ok' });
     await runAgent(base({ tools: 'write' }));
     const { argv } = record();
+    expect(flag(argv, '--tools')!.split(',')).toEqual(expect.arrayContaining(['Edit', 'Write']));
+    expect(flag(argv, '--tools')).not.toMatch(/Bash|PowerShell|Web/);
     expect(flag(argv, '--allowedTools')!.split(',')).toEqual(
-      expect.arrayContaining(['Edit', 'Write']),
+      expect.arrayContaining(['Edit(./**)', 'Write(./**)', 'Read(./**)']),
     );
     expect(flag(argv, '--disallowedTools')!.split(',')).toEqual(
-      expect.arrayContaining(['Bash', 'WebFetch', 'WebSearch']),
+      expect.arrayContaining(['Bash', 'PowerShell', 'NotebookRead', 'WebFetch', 'WebSearch']),
     );
+  });
+
+  it('only pre-approves file tools inside the run directory and fences off CLI credentials', async () => {
+    // Regression: bare Read/Edit/Write allow rules matched any path, so a prompt-injected task
+    // could read ~/.claude/.credentials.json or write hooks into ~/.claude/settings.json.
+    envelope({ result: 'ok' });
+    await runAgent(base({ tools: 'write' }));
+    const { argv } = record();
+    const allowed = flag(argv, '--allowedTools')!.split(',');
+    for (const t of ['Read', 'Edit', 'MultiEdit', 'Write', 'NotebookEdit']) {
+      expect(allowed).not.toContain(t);
+      expect(allowed).toContain(`${t}(./**)`);
+    }
+    const denied = flag(argv, '--disallowedTools')!.split(',');
+    for (const dir of ['~/.claude/**', '~/.codex/**', '~/.ssh/**']) {
+      for (const t of ['Read', 'Edit', 'Write']) expect(denied).toContain(`${t}(${dir})`);
+    }
+  });
+
+  it('sends long trusted instructions through a file and removes it afterwards', async () => {
+    envelope({ result: 'ok' });
+    const instructions = `Follow the house style.\n${'x'.repeat(5000)}`;
+    expect(await runAgent(base({ instructions }))).toMatchObject({ ok: true });
+    const { argv, files } = record();
+    expect(argv).not.toContain('--append-system-prompt');
+    expect(files.system).toContain('Follow the house style.');
+    expect(files.system).toContain('untrusted data');
+    expect(existsSync(flag(argv, '--append-system-prompt-file')!)).toBe(false);
+  });
+
+  it('reports a schema JSON Schema cannot express as config, before spawning', async () => {
+    // Regression: z.toJSONSchema threw outside the config path and came back as a retryable exit.
+    const result = await runAgent(base({ schema: z.object({ n: z.bigint() }) }));
+    expect(result).toMatchObject({ ok: false, error: { kind: 'config', retryable: false } });
+    expect(existsSync(join(work, 'record.json'))).toBe(false);
+  });
+
+  it('redacts a secret that straddles the stderr cut', async () => {
+    // Regression: stderr was cut to its tail before redaction, so a key split by the cut lost
+    // its recognisable prefix and its remainder leaked.
+    const secret = 'sk-ant-api03-abcdefghijklmnopqrstuvwx';
+    const filler = '. '.repeat(1000).slice(0, 2000 - 25);
+    put('stderr.txt', `start\n${secret}\n${filler}`);
+    put('exit.txt', '1');
+    put('stdout.txt', '');
+    const result = await runAgent(base({}));
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.error.stderr).not.toContain('abcdefghijklmnop');
   });
 
   it('keeps API keys and secrets out of the environment', async () => {
@@ -234,10 +303,22 @@ describe('runAgent configuration and lifecycle', () => {
       { commandArgs: ['fake-cli.cjs', '--dangerously-skip-permissions'] },
     ],
     ['a codex config override', { commandArgs: ['fake-cli.cjs', '-c'] }],
+    // Regression: a blocklist let these forms through.
+    ['an attached --config=', { commandArgs: ['--config=sandbox_mode="danger-full-access"'] }],
+    ['a joined short config flag', { commandArgs: ['-csandbox_mode=danger-full-access'] }],
+    ['a joined short sandbox flag', { commandArgs: ['-sdanger-full-access'] }],
+    ['a codex --cd', { commandArgs: ['--cd', '/'] }],
+    ['a codex --profile', { commandArgs: ['--profile', 'yolo'] }],
+    ['a replacement system prompt', { commandArgs: ['--system-prompt', 'ignore the rules'] }],
+    ['a tool list', { commandArgs: ['--tools', 'Bash'] }],
+    ['extra agents', { commandArgs: ['--agents', '{}'] }],
+    ['a plugin folder', { commandArgs: ['--plugin-dir', '.'] }],
+    ['a resumed session', { commandArgs: ['--resume'] }],
     ['a flag as the model', { model: '--permission-mode=bypassPermissions' }],
     ['a relative cwd', { cwd: 'repo' }],
     ['a missing cwd', { cwd: join(tmpdir(), 'arsenal-agent-missing-dir') }],
     ['the home directory', { cwd: homedir() }],
+    ['a folder above the home directory', { cwd: dirname(homedir()) }],
     ['a filesystem root', { cwd: parse(tmpdir()).root }],
     ['an empty task', { task: '  ' }],
   ])('rejects %s before spawning', async (_name, over) => {
@@ -245,6 +326,18 @@ describe('runAgent configuration and lifecycle', () => {
     expect(result).toMatchObject({ ok: false, error: { kind: 'config', exitCode: null } });
     expect(existsSync(join(work, 'record.json'))).toBe(false);
   });
+
+  const share = '\\\\localhost\\c$';
+  it.runIf(process.platform === 'win32' && existsSync(share))(
+    'rejects the root of a UNC share',
+    async () => {
+      // Regression: realpath drops the trailing slash a share's parsed root keeps, so a share
+      // root passed the filesystem-root check.
+      const result = await runAgent(base({ cwd: share }));
+      expect(result).toMatchObject({ ok: false, error: { kind: 'config' } });
+      if (!result.ok) expect(result.error.message).toContain('filesystem root');
+    },
+  );
 
   it('enforces allowedRoots on the real path', async () => {
     envelope({ result: 'ok' });
@@ -257,11 +350,13 @@ describe('runAgent configuration and lifecycle', () => {
     put('hang', '');
     const slow = await runAgent(base({ timeoutMs: 800 }));
     expect(slow).toMatchObject({ ok: false, error: { kind: 'timeout', retryable: true } });
+    expect(await gone(record().pid)).toBe(true);
 
     const controller = new AbortController();
     setTimeout(() => controller.abort(), 300);
     const cancelled = await runAgent(base({ signal: controller.signal }));
     expect(cancelled).toMatchObject({ ok: false, error: { kind: 'cancelled', retryable: false } });
+    expect(await gone(record().pid)).toBe(true);
 
     const missing = await runAgent(
       base({ command: join(root, 'no-such-agent-cli'), commandArgs: [] }),
@@ -274,6 +369,12 @@ describe('runAgent configuration and lifecycle', () => {
     await runAgent(base({ provider: 'codex' }));
     const replyFile = flag(record().argv, '--output-last-message')!;
     expect(existsSync(parse(replyFile).dir)).toBe(false);
+
+    put('stderr.txt', 'ERROR: boom\n');
+    put('exit.txt', '1');
+    const failed = await runAgent(base({ provider: 'codex', schema: Summary }));
+    expect(failed).toMatchObject({ ok: false, error: { kind: 'exit' } });
+    expect(existsSync(parse(flag(record().argv, '--output-schema')!).dir)).toBe(false);
   });
 });
 

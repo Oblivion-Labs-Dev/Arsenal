@@ -60,7 +60,10 @@ export interface RunAgentOptions<T = unknown> {
   maxOutputBytes?: number;
   /** The executable. Default `claude` or `codex`. Never parsed or split. */
   command?: string;
-  /** Fixed leading arguments, for a wrapper or a test fake (`command: process.execPath`). */
+  /**
+   * Fixed leading arguments, for a wrapper script or a test fake (`command: process.execPath`).
+   * Flags are refused: options here could override the permission flags runAgent sets.
+   */
   commandArgs?: readonly string[];
   /** Extra environment variable names to pass through, beyond the allow-list. */
   passEnv?: readonly string[];
@@ -161,17 +164,25 @@ const CLAUDE_TOOLS = [
   'Skill',
   'SlashCommand',
   'TodoWrite',
+  'PowerShell',
+  'NotebookRead',
 ] as const;
 
+/** The built-in tools each policy loads (`--tools`); every other tool is not even offered. */
 const CLAUDE_ALLOWED: Record<AgentToolPolicy, readonly string[]> = {
   none: [],
   read: ['Read', 'Glob', 'Grep', 'LS'],
   write: ['Read', 'Glob', 'Grep', 'LS', 'Edit', 'MultiEdit', 'Write', 'NotebookEdit'],
 };
 
-/** Flags that would change permissions or policy; they may not arrive via `commandArgs`. */
-const POLICY_FLAG =
-  /^(--dangerously|--yolo|--full-auto|--permission|--sandbox|-s$|--allowed-?tools|--disallowed-?tools|--add-dir|--settings|--setting-sources|--mcp-config|--strict-mcp-config|--config$|-c$|--ask-for-approval|-a$)/i;
+/** File tools are only pre-approved inside the run directory (`./` is the cwd in rule syntax). */
+const SCOPED = new Set(['Read', 'Edit', 'MultiEdit', 'Write', 'NotebookEdit']);
+const claudeAllowRules = (tools: readonly string[]) =>
+  tools.map((t) => (SCOPED.has(t) ? `${t}(./**)` : t));
+
+/** Agent and CLI credentials and config: never readable or writable, even inside the cwd. */
+const PRIVATE_DIRS = ['~/.claude/**', '~/.codex/**', '~/.ssh/**', '~/.aws/**', '~/.config/gh/**'];
+const CLAUDE_DENY_RULES = PRIVATE_DIRS.flatMap((d) => [`Read(${d})`, `Edit(${d})`, `Write(${d})`]);
 
 const SAFE_MODEL = /^[A-Za-z0-9][\w.:/[\]-]{0,127}$/;
 
@@ -245,10 +256,14 @@ export function resolveAgentCwd(cwd: string, allowedRoots?: readonly string[]): 
     throw new AgentConfigError('cwd does not exist');
   }
   if (!statSync(real).isDirectory()) throw new AgentConfigError('cwd is not a directory');
-  if (parse(real).root === real) throw new AgentConfigError('cwd may not be a filesystem root');
-  const same = (a: string, b: string) => relative(a, b) === '';
-  if (same(real, realpathSync(homedir()))) {
-    throw new AgentConfigError('cwd may not be the home directory');
+  const bare = (p: string) => p.replace(/[\\/]+$/, '');
+  // A UNC share (`\\srv\share`) resolves without the trailing slash its parsed root keeps.
+  if (bare(parse(real).root) === bare(real)) {
+    throw new AgentConfigError('cwd may not be a filesystem root');
+  }
+  const toHome = relative(real, realpathSync(homedir()));
+  if (toHome === '' || (!toHome.startsWith('..') && !isAbsolute(toHome))) {
+    throw new AgentConfigError('cwd may not be the home directory or a folder above it');
   }
   if (allowedRoots) {
     const inside = allowedRoots.some((root) => {
@@ -287,8 +302,10 @@ const claudeEnvelope = z.object({
 });
 
 const STDERR_TAIL = 2000;
-const tail = (text: string) => redactText(text.slice(-STDERR_TAIL));
-const clip = (text: string) => redactText(text.slice(0, 500));
+// Redact before cutting, so a secret that straddles the cut is still recognised whole. The wider
+// window only bounds the work on a huge stderr.
+const tail = (text: string) => redactText(text.slice(-4 * STDERR_TAIL)).slice(-STDERR_TAIL);
+const clip = (text: string) => redactText(text.slice(0, 2000)).slice(0, 500);
 
 const RETRYABLE: Record<AgentErrorKind, boolean> = {
   config: false,
@@ -395,7 +412,14 @@ export async function runAgent<T = string>(
       },
     };
   } finally {
-    for (const dir of scratch) rmSync(dir, { recursive: true, force: true });
+    for (const dir of scratch) {
+      try {
+        rmSync(dir, { recursive: true, force: true, maxRetries: 3 });
+      } catch (error) {
+        // The run's result stands; a leftover temp folder is reported, not thrown.
+        console.warn(`runAgent: could not remove scratch folder ${dir}: ${String(error)}`);
+      }
+    }
   }
 }
 
@@ -418,10 +442,12 @@ function planRun<T>(options: RunAgentOptions<T>, scratch: string[]): RunPlan {
   if (model !== undefined && !SAFE_MODEL.test(model)) {
     throw new AgentConfigError('model is not a plain model name');
   }
+  // commandArgs exist for a wrapper script path, never for options: any flag there could change
+  // permissions (`--config=…`, `-csandbox=…`, `--tools`, `--system-prompt`, `--resume`, …).
   const fixed = [...(options.commandArgs ?? [])];
-  const bad = fixed.find((a) => POLICY_FLAG.test(a));
-  if (bad)
-    throw new AgentConfigError(`commandArgs may not set policy flags (${bad.split('=')[0]})`);
+  if (fixed.some((a) => typeof a !== 'string' || a.startsWith('-'))) {
+    throw new AgentConfigError('commandArgs may not contain flags');
+  }
   const cwd = resolveAgentCwd(options.cwd, options.allowedRoots);
 
   const nonce = randomBytes(8).toString('hex');
@@ -443,7 +469,12 @@ function planRun<T>(options: RunAgentOptions<T>, scratch: string[]): RunPlan {
     }
     let schemaArgs: string[] = [];
     if (options.schema) {
-      const json = z.toJSONSchema(options.schema) as Record<string, unknown>;
+      let json: Record<string, unknown>;
+      try {
+        json = z.toJSONSchema(options.schema) as Record<string, unknown>;
+      } catch (error) {
+        throw new AgentConfigError(`schema: ${(error as Error).message}`);
+      }
       delete json.$schema;
       schemaArgs = ['--json-schema', JSON.stringify(json)];
     }
@@ -459,11 +490,14 @@ function planRun<T>(options: RunAgentOptions<T>, scratch: string[]): RunPlan {
         'dontAsk',
         '--permission-prompts',
         'none',
+        // Deny by default: only these built-in tools are loaded at all ("" loads none).
+        '--tools',
+        CLAUDE_ALLOWED[tools].join(','),
         ...(CLAUDE_ALLOWED[tools].length
-          ? ['--allowedTools', CLAUDE_ALLOWED[tools].join(',')]
+          ? ['--allowedTools', claudeAllowRules(CLAUDE_ALLOWED[tools]).join(',')]
           : []),
         '--disallowedTools',
-        denied.join(','),
+        [...denied, ...CLAUDE_DENY_RULES].join(','),
         '--strict-mcp-config',
         '--setting-sources',
         'user',
