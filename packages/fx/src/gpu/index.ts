@@ -18,3 +18,5 @@ export {
   type GlowCanvasOptions,
 } from './glow-canvas';
 export * from './usePageLight';
+export * from './frame-governor';
+export * from './useFrameGovernor';
