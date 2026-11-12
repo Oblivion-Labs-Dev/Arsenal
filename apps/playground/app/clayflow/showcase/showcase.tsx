@@ -91,7 +91,7 @@ export function ClayFlowShowcase() {
         </section>
 
         <section className="showcase-section" aria-labelledby="recipes-title">
-          <div className="section-heading"><div><p className="showcase-kicker">04 / Transformations</p><h2 id="recipes-title">Change what a node means.</h2></div><p>Transform steps update a node's kind and label while the rest of its flow stays in place.</p></div>
+          <div className="section-heading"><div><p className="showcase-kicker">04 / Transformations</p><h2 id="recipes-title">Change what a node means.</h2></div><p>Transform steps update a node&apos;s kind and label while the rest of its flow stays in place.</p></div>
           <div className="recipe-grid">{TRANSFORMATION_RECIPES.map((spec) => <article className="showcase-card recipe-card" key={spec.id}><h3>{spec.title}</h3><p>{spec.summary}</p><ClayFlowDiagram spec={spec} /></article>)}</div>
         </section>
 

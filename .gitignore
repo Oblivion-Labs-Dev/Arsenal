@@ -9,3 +9,5 @@ dist/
 
 .arsenal/
 !.arsenal/config.json.example
+.vercel
+.env*
