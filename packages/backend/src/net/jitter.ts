@@ -40,6 +40,11 @@ export interface JitterRetryOptions extends Pick<RetryOptions, 'attempts' | 'sho
   random?: () => number;
   /** Injected for tests; defaults to the backend `sleep`. */
   sleepFn?: (ms: number) => Promise<void>;
+  /**
+   * Adjusts the jittered delay for one failure, e.g. to honour a server's Retry-After. Receives
+   * the jittered delay and returns the delay to wait; the result is clamped to `[0, maxMs]`.
+   */
+  delayFor?: (error: unknown, attempt: number, jitteredMs: number) => number;
 }
 
 /**
@@ -67,7 +72,9 @@ export async function retryWithJitter<T>(
         options.strategy === 'full'
           ? fullJitter(baseMs, maxMs, attempt, random)
           : decorrelatedJitter(baseMs, maxMs, previous, random);
-      await wait(previous);
+      const asked = options.delayFor ? options.delayFor(error, attempt, previous) : previous;
+      const delay = Number.isFinite(asked) ? Math.min(maxMs, Math.max(0, asked)) : previous;
+      await wait(delay);
     }
   }
 }

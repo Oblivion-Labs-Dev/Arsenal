@@ -7,3 +7,4 @@ export * from './pricing.js';
 export * from './model-router.js';
 export * from './telemetry.js';
 export * from './jobs.js';
+export * from './resilience/index.js';

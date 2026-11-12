@@ -300,6 +300,24 @@ describe('jitter', () => {
     ).rejects.toThrow('fatal');
     expect(fatal).toHaveBeenCalledTimes(1);
   });
+
+  it('lets delayFor override the jittered delay, clamped to [0, maxMs]', async () => {
+    const sleeps: number[] = [];
+    let calls = 0;
+    await retryWithJitter(
+      async () => {
+        if (++calls < 4) throw new Error('flaky');
+      },
+      {
+        attempts: 4,
+        maxMs: 1000,
+        random: () => 0,
+        sleepFn: async (ms) => void sleeps.push(ms),
+        delayFor: (_e, attempt) => [5000, -5, Number.NaN][attempt - 1]!,
+      },
+    );
+    expect(sleeps).toEqual([1000, 0, 250]);
+  });
 });
 
 describe('runCli', () => {
