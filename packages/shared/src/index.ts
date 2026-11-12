@@ -29,3 +29,15 @@ export {
   buildPeriodOptions,
   type PeriodOption,
 } from "./date/periodFilters.js";
+
+export {
+  createRedactor,
+  isSensitiveKey,
+  redactText,
+  redactValue,
+  type PiiOptions,
+  type RedactOptions,
+  type RedactionReport,
+  type RedactionRule,
+  type Redactor,
+} from "./redact/index.js";

@@ -417,6 +417,31 @@ describe('TelemetrySink', () => {
     });
   });
 
+  it('redacts secrets in attributes before export and local write', async () => {
+    dir = mkdtempSync(join(tmpdir(), 'arsenal-telemetry-'));
+    const localLogPath = join(dir, 'telemetry.log');
+    const token = ['ghp_', 'aB3dE5gH7jK9mN1pQ3sT5vW7yZ9'].join('');
+    const bodies: string[] = [];
+    const sink = new TelemetrySink({
+      otlpEndpoint: 'http://otel.test',
+      localLogPath,
+      onExportError: () => {},
+      fetch: (async (_url: string | URL | Request, init?: RequestInit) => {
+        bodies.push(String(init?.body));
+        return new Response('boom', { status: 500 });
+      }) as typeof fetch,
+    });
+    const attributes = { prompt: `use ${token}`, apiKey: 'abc123456', tokens: 512 };
+    await sink.emitSpan({ name: 's', traceId: 't', spanId: 'x', startTime: 0, endTime: 1, attributes });
+    const local = readFileSync(localLogPath, 'utf8');
+    for (const out of [bodies[0]!, local]) {
+      expect(out).not.toContain(token);
+      expect(out).not.toContain('abc123456');
+      expect(JSON.parse(out).attributes.tokens).toBe(512);
+    }
+    expect(attributes.apiKey).toBe('abc123456');
+  });
+
   it('noopTracer runs the step', async () => {
     await expect(noopTracer.step('s', 'deterministic', async () => 5)).resolves.toBe(5);
   });

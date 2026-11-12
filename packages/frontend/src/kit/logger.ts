@@ -1,4 +1,6 @@
-/** Prefixed console logger that redacts email addresses (from AdhocPluginAndExtention `shared/logger.ts`). */
+/** Prefixed console logger that redacts secrets and email addresses (from AdhocPluginAndExtention `shared/logger.ts`). */
+
+import { createRedactor } from '@oblivion-labs-dev/arsenal-shared/redact';
 
 const EMAIL = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
 
@@ -10,20 +12,26 @@ export type LogSink = Pick<Console, 'debug' | 'info' | 'warn' | 'error'>;
 export type Logger = Record<keyof LogSink, (...args: unknown[]) => void>;
 
 export interface LoggerOptions {
-  /** String redactor applied to every string argument and Error message/stack. Default `redactEmails`. */
+  /**
+   * String redactor applied to every string argument and Error message/stack. By default the
+   * shared redactor (secrets plus emails) runs over strings, Errors and nested object values.
+   */
   redact?: (s: string) => string;
   sink?: LogSink;
 }
 
+const defaultRedactor = createRedactor({ pii: { email: true } });
+
 export function createLogger(prefix: string, options: LoggerOptions = {}): Logger {
-  const redact = options.redact ?? redactEmails;
   const sink = options.sink ?? console;
+  const custom = options.redact;
   const clean = (v: unknown): unknown => {
-    if (typeof v === 'string') return redact(v);
+    if (!custom) return defaultRedactor.value(v);
+    if (typeof v === 'string') return custom(v);
     if (v instanceof Error) {
-      const copy = new Error(redact(v.message));
+      const copy = new Error(custom(v.message));
       copy.name = v.name;
-      copy.stack = v.stack === undefined ? undefined : redact(v.stack);
+      copy.stack = v.stack === undefined ? undefined : custom(v.stack);
       return copy;
     }
     return v;

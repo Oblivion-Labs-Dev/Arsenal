@@ -2,6 +2,7 @@
 // interface. Ported from Sutra packages/core/src/telemetry-sink.ts and tracing.ts.
 import { appendFileSync, mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
+import { redactValue } from '@oblivion-labs-dev/arsenal-shared/redact';
 import { errorMessage, logger } from '../logging/logger.js';
 
 type Attributes = Record<string, string | number | boolean>;
@@ -68,7 +69,9 @@ export class TelemetrySink {
     await this.#emit('span', '/v1/traces', { type: 'span', ...span });
   }
 
-  async #emit(kind: 'metric' | 'span', path: string, record: object): Promise<void> {
+  async #emit(kind: 'metric' | 'span', path: string, raw: object): Promise<void> {
+    // Attributes often carry request context; scrub secrets before the record leaves the process.
+    const record = redactValue(raw);
     if (this.#endpoint) {
       try {
         const res = await this.#fetch(`${this.#endpoint}${path}`, {

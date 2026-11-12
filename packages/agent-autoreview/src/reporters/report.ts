@@ -1,11 +1,14 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { redactText, redactValue } from "@oblivion-labs-dev/arsenal-shared/redact";
 import type { AutoreviewReport } from "../types.js";
 
+/**
+ * Redacts credentials from report text.
+ * @deprecated Use `redactText` from `@oblivion-labs-dev/arsenal-shared/redact`; kept as an alias.
+ */
 export function redactSecrets(text: string): string {
-  return text
-    .replace(/(api[_-]?key|token|secret|password|authorization)\s*[:=]\s*["']?[^\s"']+/gi, "$1=[REDACTED]")
-    .replace(/Bearer\s+[A-Za-z0-9\-._~+/]+=*/g, "Bearer [REDACTED]");
+  return redactText(text);
 }
 
 export function writeReports(cwd: string, reportDir: string, report: AutoreviewReport): {
@@ -16,8 +19,11 @@ export function writeReports(cwd: string, reportDir: string, report: AutoreviewR
   mkdirSync(dir, { recursive: true });
   const jsonPath = join(dir, "latest.json");
   const markdownPath = join(dir, "latest.md");
-  writeFileSync(jsonPath, redactSecrets(JSON.stringify(report, null, 2)), "utf8");
-  writeFileSync(markdownPath, redactSecrets(renderMarkdown(report)), "utf8");
+  // Redact the structure first (sensitive keys, nested strings), then the rendered text, so a
+  // secret split across fields or introduced by rendering is still caught.
+  const safe = redactValue(report);
+  writeFileSync(jsonPath, redactText(JSON.stringify(safe, null, 2)), "utf8");
+  writeFileSync(markdownPath, redactText(renderMarkdown(safe)), "utf8");
   return { markdownPath, jsonPath };
 }
 

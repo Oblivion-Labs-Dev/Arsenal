@@ -10,9 +10,15 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./redact": {
+      "types": "./dist/redact/index.d.ts",
+      "import": "./dist/redact/index.js",
+      "default": "./dist/redact/index.js"
     }
   },
-  "files": ["dist"],
+  "files": ["dist"
+  ],
   "scripts": {
     "build": "tsup",
     "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",

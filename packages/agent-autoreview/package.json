@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "@arsenal/agent-memory": "workspace:*",
+    "@oblivion-labs-dev/arsenal-shared": "workspace:*",
     "yaml": "^2.7.0",
     "zod": "^3.24.2"
   },
