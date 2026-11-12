@@ -1681,6 +1681,37 @@ export function Example() {
 }`,
   },
   {
+    id: "ambient-creatures",
+    name: "AmbientCreatures",
+    description: "Fireflies in dark mode and butterflies in light mode that scatter from a moving pointer and perch on a still one.",
+    category: 'effects',
+    importLine: 'import { AmbientCreatures } from "@arsenal/fx";',
+    props: [
+      "species?: \"auto\" | \"fireflies\" | \"butterflies\"",
+      "fireflies?, butterflies?: [wide, narrow]",
+      "wings?: [wing, patch][]",
+      "glow?: ColorInput",
+      "quietZone?: [start, end] | null",
+      "behavior?: { stillDelay, landingSlots, fleeRadius, fearSeconds }",
+      "interactive?: boolean",
+      "placement?: \"absolute\" | \"fixed\"",
+      "seed?: number",
+    ],
+    usage: "Use as quiet ambient life behind a reading page or hero; set a quietZone over the text column.",
+    accessibility: "Decorative and aria-hidden; renders nothing when the user prefers reduced motion.",
+    performance: "One canvas on a shared rAF loop; paused when hidden or off-screen, and the frame governor halves the count when frames run long.",
+    code: `import { AmbientCreatures } from "@arsenal/fx";
+
+export function Example() {
+  return (
+    <section className="relative min-h-[420px] overflow-hidden">
+      <AmbientCreatures quietZone={[0.25, 0.75]} />
+      <h1 className="relative p-10 text-4xl font-semibold">Ship faster</h1>
+    </section>
+  );
+}`,
+  },
+  {
     id: "aurora-background",
     name: "AuroraBackground",
     description: "Four soft colour pools drifting slowly behind content: the calm cinematic backdrop.",

@@ -169,6 +169,14 @@ const showroomMeta: Record<string, ShowroomMeta> = {
     popularity: 80,
     recentlyAdded: true,
   },
+  'ambient-creatures': {
+    category: 'Particles',
+    tags: ['fireflies', 'butterflies', 'pointer', 'ambient'],
+    difficulty: 'Advanced',
+    dependencies: ['@arsenal/fx'],
+    popularity: 80,
+    recentlyAdded: true,
+  },
   'cosmic-particle-background': {
     category: 'Particles',
     tags: ['stars', 'pointer', 'hero'],

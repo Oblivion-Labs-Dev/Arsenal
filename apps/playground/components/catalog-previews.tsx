@@ -4,6 +4,7 @@ import { type ReactNode, useMemo, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { HERO_PLATE_PIECES, type HeroPlatePieceId } from '@arsenal/scene';
 import {
+  AmbientCreatures,
   AuroraBackground,
   CosmicParticleBackground,
   GalaxyParticleCanvas,
@@ -762,6 +763,11 @@ const DEMOS: Record<string, () => ReactNode> = {
     <OrbitRadar status="running" size={180} label="Scanning repositories">
       <span className="text-lg font-semibold tabular-nums text-arsenal-primary">42</span>
     </OrbitRadar>
+  ),
+  'ambient-creatures': () => (
+    <FxScene hint="Move the pointer to scatter them, then rest it to let one land">
+      <AmbientCreatures />
+    </FxScene>
   ),
   'aurora-background': () => (
     <FxScene>

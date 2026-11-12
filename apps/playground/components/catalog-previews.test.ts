@@ -18,6 +18,7 @@ describe('catalog previews', () => {
     expect(COMPONENT_CATEGORIES.map((c) => c.id)).toContain('effects');
     const effects = UI_COMPONENT_CATALOG.filter((entry) => entry.category === 'effects');
     expect(effects.map((entry) => entry.id).sort()).toEqual([
+      'ambient-creatures',
       'anomaly-matrix',
       'aurora-background',
       'cosmic-particle-background',
