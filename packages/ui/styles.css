@@ -3614,3 +3614,216 @@ kbd {
   ::view-transition-new(root) { animation: none !important; }
   .theme-fade, .theme-fade * { transition: none !important; }
 }
+
+/* ChapterRail (src/content/chapter-rail.tsx): fixed or sticky stops on wide screens, a compact
+   pill with previous/next below that. Merged from the Sutra and portfolio rails. */
+.arsenal-chapter-rail {
+  --rail-stop: 2.75rem;
+  display: none;
+  z-index: 40;
+}
+.arsenal-chapter-rail[data-placement='fixed'] {
+  position: fixed;
+  right: 1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.arsenal-chapter-rail[data-placement='sticky'] {
+  position: sticky;
+  top: 50vh;
+  transform: translateY(-50%);
+  margin-left: auto;
+  width: max-content;
+}
+.arsenal-chapter-rail[data-dense] {
+  --rail-stop: min(2.75rem, calc(72svh / var(--rail-count)));
+}
+@media (min-width: 1280px) and (min-height: 560px) {
+  .arsenal-chapter-rail { display: block; }
+}
+.arsenal-chapter-rail__stops {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.arsenal-chapter-rail__track {
+  position: absolute;
+  right: calc(0.75rem - 0.5px);
+  top: calc(var(--rail-stop) / 2);
+  bottom: calc(var(--rail-stop) / 2);
+  width: 1px;
+  background: var(--arsenal-border);
+}
+.arsenal-chapter-rail__fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: top;
+  transform: scaleY(var(--rail-fill, 0));
+  background: var(--arsenal-accent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--arsenal-accent) 55%, transparent);
+  transition: transform var(--arsenal-duration-normal) var(--arsenal-ease-out);
+}
+.arsenal-chapter-rail__stop {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  height: var(--rail-stop);
+  padding-right: 0.25rem;
+  border-radius: var(--arsenal-radius-sm);
+  color: var(--arsenal-text-secondary);
+  text-decoration: none;
+  outline: none;
+}
+.arsenal-chapter-rail__label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--arsenal-elevated);
+  border: 1px solid var(--arsenal-border);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  transform: translateX(6px);
+  pointer-events: none;
+  transition:
+    opacity var(--arsenal-duration-normal) var(--arsenal-ease-out),
+    transform var(--arsenal-duration-normal) var(--arsenal-ease-out);
+}
+.arsenal-chapter-rail:hover .arsenal-chapter-rail__label,
+.arsenal-chapter-rail:focus-within .arsenal-chapter-rail__label {
+  opacity: 1;
+  transform: none;
+}
+.arsenal-chapter-rail[data-dense]:hover .arsenal-chapter-rail__label,
+.arsenal-chapter-rail[data-dense]:focus-within .arsenal-chapter-rail__label {
+  opacity: 0;
+}
+.arsenal-chapter-rail[data-dense] .arsenal-chapter-rail__stop:hover .arsenal-chapter-rail__label,
+.arsenal-chapter-rail[data-dense] .arsenal-chapter-rail__stop:focus-visible .arsenal-chapter-rail__label {
+  opacity: 1;
+  transform: none;
+}
+.arsenal-chapter-rail__stop[aria-current] .arsenal-chapter-rail__label {
+  color: var(--arsenal-text-primary);
+  border-color: color-mix(in srgb, var(--arsenal-accent) 45%, var(--arsenal-border));
+}
+.arsenal-chapter-rail__dot {
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.25rem;
+  border-radius: 999px;
+  background: var(--arsenal-surface);
+  border: 1px solid var(--arsenal-border-hover);
+  transition:
+    background-color var(--arsenal-duration-normal) var(--arsenal-ease-out),
+    border-color var(--arsenal-duration-normal) var(--arsenal-ease-out),
+    transform var(--arsenal-duration-normal) var(--arsenal-ease-out),
+    box-shadow var(--arsenal-duration-normal) var(--arsenal-ease-out);
+}
+.arsenal-chapter-rail__stop[data-passed] .arsenal-chapter-rail__dot {
+  border-color: color-mix(in srgb, var(--arsenal-accent) 60%, var(--arsenal-border));
+}
+.arsenal-chapter-rail__stop:hover .arsenal-chapter-rail__dot {
+  border-color: var(--arsenal-accent);
+}
+.arsenal-chapter-rail__stop[aria-current] .arsenal-chapter-rail__dot {
+  background: var(--arsenal-accent);
+  border-color: var(--arsenal-accent);
+  transform: scale(1.3);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--arsenal-accent) 18%, transparent);
+}
+.arsenal-chapter-rail__stop:focus-visible .arsenal-chapter-rail__dot {
+  outline: 2px solid var(--arsenal-accent);
+  outline-offset: 3px;
+}
+
+.arsenal-chapter-rail-compact {
+  position: fixed;
+  left: 50%;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: max-content;
+  max-width: calc(100vw - 2rem);
+  padding: 0.3rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--arsenal-elevated);
+  border: 1px solid var(--arsenal-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+@media (min-width: 1280px) and (min-height: 560px) {
+  .arsenal-chapter-rail-compact { display: none; }
+}
+.arsenal-chapter-rail-compact__step {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  border: 0;
+  background: transparent;
+  color: var(--arsenal-text-primary);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.arsenal-chapter-rail-compact__step:hover:not(:disabled) {
+  background: var(--arsenal-surface);
+}
+.arsenal-chapter-rail-compact__step:disabled {
+  color: var(--arsenal-muted);
+  cursor: default;
+}
+.arsenal-chapter-rail-compact__step:focus-visible {
+  outline: 2px solid var(--arsenal-accent);
+  outline-offset: -2px;
+}
+.arsenal-chapter-rail-compact__now {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 0 0.4rem;
+}
+.arsenal-chapter-rail-compact__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--arsenal-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.arsenal-chapter-rail-compact__count {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--arsenal-text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.arsenal-chapter-rail-compact__fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  transform-origin: left;
+  transform: scaleX(var(--rail-fill, 0));
+  background: var(--arsenal-accent);
+  transition: transform var(--arsenal-duration-normal) var(--arsenal-ease-out);
+}
+@media (prefers-reduced-motion: reduce) {
+  .arsenal-chapter-rail__fill,
+  .arsenal-chapter-rail__label,
+  .arsenal-chapter-rail__dot,
+  .arsenal-chapter-rail-compact__fill { transition: none; }
+}

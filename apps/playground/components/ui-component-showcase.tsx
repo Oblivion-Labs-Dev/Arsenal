@@ -595,6 +595,14 @@ const showroomMeta: Record<string, ShowroomMeta> = {
     popularity: 77,
     recentlyAdded: true,
   },
+  'chapter-rail': {
+    category: 'Navigation',
+    tags: ['chapters', 'scroll', 'progress', 'navigation'],
+    difficulty: 'Foundational',
+    dependencies: [],
+    popularity: 74,
+    recentlyAdded: true,
+  },
   'reading-progress': {
     category: 'Utilities',
     tags: ['reading', 'progress', 'scroll', 'indicator'],

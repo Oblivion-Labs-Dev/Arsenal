@@ -19,6 +19,7 @@ import {
 import {
   AnimatedNumber,
   AnimatedTabs,
+  ChapterRail,
   AssetIcon,
   Card,
   CardBody,
@@ -301,6 +302,37 @@ function SeoDemo() {
         </p>
         <p className="text-sm text-arsenal-secondary">Browse the shared UI library.</p>
       </div>
+    </div>
+  );
+}
+
+const RAIL_DEMO = [
+  { id: 'rail-demo-brief', label: 'The brief' },
+  { id: 'rail-demo-research', label: 'Research' },
+  { id: 'rail-demo-build', label: 'Build' },
+  { id: 'rail-demo-launch', label: 'Launch' },
+  { id: 'rail-demo-results', label: 'Results' },
+];
+
+function ChapterRailDemo() {
+  // A transform makes the fixed rail and pill sit inside this frame instead of the window.
+  return (
+    <div className="relative w-full overflow-hidden rounded-arsenal border border-arsenal-border bg-arsenal-elevated [transform:translateZ(0)]">
+      <ChapterRail chapters={RAIL_DEMO} label="Case study chapters" progress="scroll" />
+      {RAIL_DEMO.map((chapter, i) => (
+        <section
+          key={chapter.id}
+          id={chapter.id}
+          className="min-h-[38vh] border-b border-arsenal-border px-6 py-8 pr-48 last:border-b-0"
+        >
+          <p className="m-0 font-mono text-xs text-arsenal-muted">0{i + 1}</p>
+          <h3 className="m-0 mt-1 text-lg font-semibold text-arsenal-primary">{chapter.label}</h3>
+          <p className="m-0 mt-2 max-w-md text-sm text-arsenal-secondary">
+            Scroll the page: the stop for the section in the middle of the window lights up. Click
+            a stop or use the arrow keys, Home and End to move between them.
+          </p>
+        </section>
+      ))}
     </div>
   );
 }
@@ -723,6 +755,7 @@ const DEMOS: Record<string, () => ReactNode> = {
       ]}
     />
   ),
+  'chapter-rail': () => <ChapterRailDemo />,
   'reading-progress': () => <ReadingProgressDemo />,
   seo: () => <SeoDemo />,
   'orbit-radar': () => (

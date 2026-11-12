@@ -1542,6 +1542,40 @@ export function Example() {
 }`,
   },
   {
+    id: 'chapter-rail',
+    name: 'ChapterRail',
+    description: 'Chapter stops on the page edge that light up as you scroll.',
+    category: 'navigation',
+    importLine: 'import { ChapterRail } from "@arsenal/ui";',
+    props: [
+      'chapters: { id, label }[]',
+      'label?: string',
+      'activeId?: string',
+      "progress?: 'chapters' | 'scroll' | selector | false",
+      "placement?: 'fixed' | 'sticky'",
+      'hideCompact?: boolean',
+    ],
+    usage:
+      'Use on long single pages with a handful of named sections. Below 1280px wide it becomes a pill with previous and next.',
+    accessibility:
+      'A labelled nav of in-page links with aria-current; arrow keys, Home and End move between stops; clicking moves focus to the section. Reduced motion jumps instead of scrolling smoothly.',
+    performance:
+      'One IntersectionObserver for tracking; scroll-linked fill is updated once per animation frame.',
+    code: `import { ChapterRail } from "@arsenal/ui";
+
+export function Example() {
+  return (
+    <ChapterRail
+      chapters={[
+        { id: "brief", label: "The brief" },
+        { id: "build", label: "Build" },
+        { id: "results", label: "Results" },
+      ]}
+    />
+  );
+}`,
+  },
+  {
     id: 'table-of-contents',
     name: 'TableOfContents',
     description: 'Heading list with an active-section highlight.',
@@ -1554,7 +1588,7 @@ export function Example() {
       'activeId?: string',
     ],
     usage:
-      'Use beside long reading pages. Pass activeId to control the highlight, otherwise it follows scroll.',
+      'Use beside long reading pages. Drive activeId with useActiveSection(ids) to follow scroll.',
     accessibility: 'Rendered as a labelled nav with in-page links.',
     performance: 'Avoids per-scroll layout work.',
     code: `import { TableOfContents } from "@arsenal/ui";
