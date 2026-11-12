@@ -1,6 +1,10 @@
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { describe, expect, it, vi } from 'vitest';
 import {
+  CliOutputLimitError,
   CliTimeoutError,
   SafeFetchError,
   createProxyRoute,
@@ -174,13 +178,15 @@ describe('robots.txt', () => {
 
   it('treats a missing robots.txt as allowed but fails closed on a server error', async () => {
     const missing = fakeFetch({});
-    await expect(fetchRobots(missing.fetch, 'https://example.com', { now: new Date('2026-01-01T00:00:00Z') })).resolves.toBe('');
+    await expect(
+      fetchRobots(missing.fetch, 'https://example.com', { now: new Date('2026-01-01T00:00:00Z') }),
+    ).resolves.toBe('');
     const broken = fakeFetch({
       'https://example.com/robots.txt': () => new Response('oops', { status: 503 }),
     });
-    await expect(fetchRobots(broken.fetch, 'https://example.com', { now: new Date('2026-01-01T00:00:00Z') })).rejects.toThrow(
-      'Could not read https://example.com/robots.txt',
-    );
+    await expect(
+      fetchRobots(broken.fetch, 'https://example.com', { now: new Date('2026-01-01T00:00:00Z') }),
+    ).rejects.toThrow('Could not read https://example.com/robots.txt');
   });
 
   it('fetchHtmlLinks refuses a page robots.txt disallows', async () => {
@@ -188,7 +194,11 @@ describe('robots.txt', () => {
       'https://example.com/robots.txt': () => new Response('User-agent: *\nDisallow: /blog'),
     });
     await expect(
-      fetchHtmlLinks(fetch, { url: 'https://example.com/blog', linkPattern: '^/blog/' }, { now: new Date('2026-01-01T00:00:00Z') }),
+      fetchHtmlLinks(
+        fetch,
+        { url: 'https://example.com/blog', linkPattern: '^/blog/' },
+        { now: new Date('2026-01-01T00:00:00Z') },
+      ),
     ).rejects.toThrow('asks crawlers not to read');
   });
 });
@@ -351,6 +361,90 @@ describe('runCli', () => {
     setTimeout(() => controller.abort(new Error('cancelled')), 100);
     await expect(running).rejects.toThrow('cancelled');
   });
+
+  const alive = (pid: number) => {
+    try {
+      process.kill(pid, 0);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+  const waitFor = async (check: () => boolean, ms = 5000) => {
+    for (const end = Date.now() + ms; Date.now() < end;) {
+      if (check()) return true;
+      await new Promise((r) => setTimeout(r, 50));
+    }
+    return check();
+  };
+
+  it('kills the whole process tree on timeout, not only the direct child', async () => {
+    // Regression: a CLI behind a wrapper (a .cmd shim, `npx`, a node launcher) left its real
+    // process running after a timeout because only the direct child was signalled.
+    const dir = mkdtempSync(join(tmpdir(), 'arsenal-runcli-'));
+    const pidFile = join(dir, 'grandchild.pid');
+    const parent = [
+      'const { spawn } = require("node:child_process");',
+      // On Windows, Node puts its own children in a kill-on-close job; `detached` breaks away
+      // from it the way a .cmd shim's native exe does, so the test covers the real case.
+      `const g = spawn(process.execPath, ["-e", "setInterval(() => {}, 1000)"], { stdio: "ignore", detached: ${process.platform === 'win32'} });`,
+      `require("node:fs").writeFileSync(${JSON.stringify(pidFile)}, String(g.pid));`,
+      'setInterval(() => {}, 1000);',
+    ].join('\n');
+    let pid = 0;
+    try {
+      await expect(runCli([node, '-e', parent], '', dir, 1500)).rejects.toBeInstanceOf(
+        CliTimeoutError,
+      );
+      pid = Number(readFileSync(pidFile, 'utf8'));
+      expect(pid).toBeGreaterThan(0);
+      expect(await waitFor(() => !alive(pid))).toBe(true);
+    } finally {
+      // Never leak the grandchild when the assertion fails.
+      if (pid && alive(pid)) process.kill(pid);
+      rmSync(dir, { recursive: true, force: true });
+    }
+  }, 15_000);
+
+  it('stops a child whose output passes the byte limit', async () => {
+    await expect(
+      runCli(
+        [node, '-e', 'setInterval(() => process.stdout.write("x".repeat(4096)), 5)'],
+        '',
+        process.cwd(),
+        10_000,
+        undefined,
+        undefined,
+        { maxOutputBytes: 64 * 1024 },
+      ),
+    ).rejects.toBeInstanceOf(CliOutputLimitError);
+  });
+
+  it.runIf(process.platform === 'win32')(
+    'runs an npm-style .cmd shim without a shell (Node refuses to spawn .cmd directly)',
+    async () => {
+      // Regression: the `.cmd` retry called spawn on the shim, which Node >= 18.20.2 rejects with
+      // EINVAL unless `shell: true`, so no npm-installed CLI could run on Windows.
+      const dir = mkdtempSync(join(tmpdir(), 'arsenal shim '));
+      writeFileSync(
+        join(dir, 'tool.js'),
+        'process.stdout.write(JSON.stringify(process.argv.slice(2)))',
+      );
+      writeFileSync(join(dir, 'fake-tool.cmd'), '@echo off\r\nnode "%~dp0\\tool.js" fixed %*\r\n');
+      try {
+        const result = await runCli(
+          [join(dir, 'fake-tool'), 'a b', '& echo pwned', '%PATH%'],
+          '',
+          dir,
+          10_000,
+        );
+        expect(result.code).toBe(0);
+        expect(JSON.parse(result.stdout)).toEqual(['fixed', 'a b', '& echo pwned', '%PATH%']);
+      } finally {
+        rmSync(dir, { recursive: true, force: true });
+      }
+    },
+  );
 });
 
 describe('createProxyRoute', () => {
