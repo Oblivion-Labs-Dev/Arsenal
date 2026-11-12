@@ -1,5 +1,10 @@
 import { useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { cn } from '../lib/cn';
+import {
+  nextInDirection,
+  spatialDirectionForKey,
+  type SpatialDirection,
+} from '../primitives/spatial-focus';
 import { ChartDataTable } from './chart-data-table';
 import { rectToPercent, squarify, type TreemapRect } from './treemap-layout';
 import { useInViewActive } from './use-in-view-active';
@@ -26,7 +31,7 @@ export function treemapLabelLevel(width: number, height: number): 'detail' | 'na
   return 'none';
 }
 
-export type TreemapDirection = 'left' | 'right' | 'up' | 'down';
+export type TreemapDirection = SpatialDirection;
 
 /**
  * Spatial arrow-key focus: the nearest tile whose centre lies in `direction`, scored by distance
@@ -37,36 +42,8 @@ export function treemapMoveFocus(
   from: number,
   direction: TreemapDirection,
 ): number {
-  const origin = rects[from];
-  if (!origin) return from;
-  const cx = origin.x + origin.width / 2;
-  const cy = origin.y + origin.height / 2;
-  let best = from;
-  let bestScore = Number.POSITIVE_INFINITY;
-  rects.forEach((rect, index) => {
-    if (index === from || rect.width <= 0 || rect.height <= 0) return;
-    const dx = rect.x + rect.width / 2 - cx;
-    const dy = rect.y + rect.height / 2 - cy;
-    const horizontal = direction === 'left' || direction === 'right';
-    const primary = horizontal ? dx : dy;
-    const secondary = Math.abs(horizontal ? dy : dx);
-    const forward = direction === 'left' || direction === 'up' ? -primary : primary;
-    if (forward <= 0) return;
-    const score = forward + secondary * 2;
-    if (score < bestScore) {
-      bestScore = score;
-      best = index;
-    }
-  });
-  return best;
+  return nextInDirection(rects, from, direction);
 }
-
-const KEY_DIRECTION: Record<string, TreemapDirection> = {
-  ArrowLeft: 'left',
-  ArrowRight: 'right',
-  ArrowUp: 'up',
-  ArrowDown: 'down',
-};
 
 export interface TreemapProps<T> {
   items: readonly T[];
@@ -134,7 +111,7 @@ export function Treemap<T>({
   }
 
   const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
-    const direction = KEY_DIRECTION[event.key];
+    const direction = spatialDirectionForKey(event.key);
     if (!direction) return;
     event.preventDefault();
     const next = treemapMoveFocus(rects, index, direction);

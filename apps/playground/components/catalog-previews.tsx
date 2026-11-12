@@ -61,6 +61,7 @@ import {
   UploadZone,
   absoluteUrl,
   formatPageTitle,
+  useSpatialFocus,
   useTableView,
 } from '@arsenal/ui';
 
@@ -186,6 +187,62 @@ function TabsDemo() {
         { id: 'archived', label: 'Archived', disabled: true },
       ]}
     />
+  );
+}
+
+function SpatialFocusDemo() {
+  const [opened, setOpened] = useState<string | null>(null);
+  const nav = useSpatialFocus<HTMLDivElement>({
+    restoreKey: 'playground-spatial-focus',
+    sideWeight: 2.7,
+    onActivate: (id) => setOpened(id),
+  });
+  const tile =
+    'grid h-14 place-items-center rounded-arsenal border border-arsenal-border bg-arsenal-elevated text-sm font-medium text-arsenal-primary outline-none transition-[transform,border-color] duration-150 focus-visible:scale-[1.04] focus-visible:border-arsenal-accent focus-visible:ring-2 focus-visible:ring-arsenal-accent/40 motion-reduce:transition-none motion-reduce:focus-visible:scale-100';
+  const rows = [
+    ['Continue', ['Arrival', 'Tenet', 'Dune']],
+    ['Apps', ['Music', 'Photos', 'Weather', 'Clock']],
+  ] as const;
+  return (
+    <Frame wide>
+      <div
+        ref={nav.ref}
+        role="application"
+        aria-label="Spatial focus demo. Use the arrow keys to move and Enter to open."
+        className="grid grid-cols-[7rem_1fr] gap-4"
+      >
+        <nav data-spatial-region="sidebar" aria-label="Sections" className="grid content-start gap-2">
+          {['Home', 'Search', 'Settings'].map((label) => (
+            <button
+              key={label}
+              type="button"
+              data-spatial-item={label.toLowerCase()}
+              onClick={() => setOpened(label.toLowerCase())}
+              className={tile}
+            >
+              {label}
+            </button>
+          ))}
+        </nav>
+        <div data-spatial-region="content" className="grid gap-4">
+          {rows.map(([title, items]) => (
+            <section key={title} data-spatial-region={title} aria-label={title} className="grid gap-2">
+              <h4 className="text-xs uppercase tracking-wide text-arsenal-secondary">{title}</h4>
+              <div className="grid grid-cols-4 gap-2">
+                {items.map((label) => (
+                  <div key={label} role="button" data-spatial-item={label.toLowerCase()} className={tile}>
+                    {label}
+                  </div>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      </div>
+      <p className="mt-4 text-sm text-arsenal-secondary" aria-live="polite">
+        {opened ? `Opened ${opened}.` : 'Click a tile or press Tab, then use the arrow keys and Enter.'}
+      </p>
+    </Frame>
   );
 }
 
@@ -653,6 +710,7 @@ const DEMOS: Record<string, () => ReactNode> = {
   ),
   'error-state': () => <ErrorDemo />,
   tabs: () => <TabsDemo />,
+  'spatial-focus': () => <SpatialFocusDemo />,
   'animated-tabs': () => <AnimatedTabsDemo />,
   'filter-chip': () => <FilterChipDemo />,
   'facet-filter-dropdown': () => <FacetDemo />,

@@ -1117,6 +1117,47 @@ export function Example() {
 }`,
   },
   {
+    id: 'spatial-focus',
+    name: 'useSpatialFocus',
+    description:
+      'D-pad and arrow-key focus for tile grids, irregular layouts and nested regions, with focus memory.',
+    category: 'navigation',
+    importLine: 'import { useSpatialFocus } from "@arsenal/ui";',
+    props: [
+      'restoreKey?: string',
+      'autoFocus?: boolean',
+      'roving?: boolean',
+      'sideWeight?: number',
+      'minForward?: number',
+      'onActivate?: (id, element) => void',
+      'onEdge?: (direction, fromId) => void',
+      'enabled?: boolean',
+    ],
+    usage:
+      'Attach ref to a container and mark targets with data-spatial-item="id" and groups with data-spatial-region="id". Arrows move to the nearest item in that direction and cross into neighbouring regions only when the current one has nothing that way. Returns focus(id), move(direction) and restore() for programmatic focus. The pure scorer (nextInDirection, resolveSpatialMove) is exported for canvas or non-DOM layouts.',
+    accessibility:
+      'Keeps one tab stop for the container (roving tabindex), leaves text inputs and modified arrows alone, activates non-native tiles on Enter, and restores focus to the remembered or nearest item when the focused one is removed.',
+    performance:
+      'Measures rects only on a key press or focus change; no per-frame work. A MutationObserver keeps tab stops current.',
+    code: `import { useSpatialFocus } from "@arsenal/ui";
+
+export function Home({ apps, open }) {
+  const nav = useSpatialFocus<HTMLDivElement>({ restoreKey: "home", autoFocus: true, onActivate: open });
+  return (
+    <div ref={nav.ref}>
+      <nav data-spatial-region="sidebar">
+        <button data-spatial-item="search">Search</button>
+      </nav>
+      <section data-spatial-region="apps">
+        {apps.map((app) => (
+          <div key={app.id} role="button" data-spatial-item={app.id}>{app.title}</div>
+        ))}
+      </section>
+    </div>
+  );
+}`,
+  },
+  {
     id: 'animated-tabs',
     name: 'AnimatedTabs',
     description: 'Scrollable tab strip with a sliding indicator and edge fades.',

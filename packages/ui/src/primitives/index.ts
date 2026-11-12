@@ -39,6 +39,23 @@ export {
 export { nextTabIndex, tabId, tabPanelId, type TabOrientation } from './tab-keys';
 export { Tabs, type TabItem, type TabsProps } from './tabs';
 export {
+  nextInDirection,
+  pickInDirection,
+  resolveSpatialMove,
+  spatialDirectionForKey,
+  SPATIAL_DOM_MIN_FORWARD,
+  type SpatialDirection,
+  type SpatialMoveOptions,
+  type SpatialNode,
+  type SpatialRect,
+  type SpatialScoreOptions,
+} from './spatial-focus';
+export {
+  useSpatialFocus,
+  type SpatialFocusApi,
+  type UseSpatialFocusOptions,
+} from './use-spatial-focus';
+export {
   AnimatedTabs,
   edgeFadeMask,
   scrollEdges,

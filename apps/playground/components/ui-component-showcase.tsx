@@ -499,6 +499,14 @@ const showroomMeta: Record<string, ShowroomMeta> = {
     popularity: 90,
     recentlyAdded: true,
   },
+  'spatial-focus': {
+    category: 'Navigation',
+    tags: ['focus', 'keyboard', 'd-pad', 'tv', 'grid', 'accessibility'],
+    difficulty: 'Advanced',
+    dependencies: [],
+    popularity: 70,
+    recentlyAdded: true,
+  },
   'animated-tabs': {
     category: 'Navigation',
     tags: ['tabs', 'animation', 'range', 'navigation'],
