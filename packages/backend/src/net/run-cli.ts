@@ -61,8 +61,10 @@ const IS_WIN = process.platform === 'win32';
  */
 function killTree(child: ChildProcessWithoutNullStreams) {
   const pid = child.pid;
-  if (pid === undefined || child.exitCode !== null || child.signalCode !== null) return;
+  if (pid === undefined) return;
   if (IS_WIN) {
+    // Windows keeps no tree link once the parent has exited, so there is nothing left to walk.
+    if (child.exitCode !== null || child.signalCode !== null) return;
     const result = spawnSync('taskkill.exe', ['/PID', String(pid), '/T', '/F'], {
       stdio: 'ignore',
       windowsHide: true,
@@ -70,6 +72,8 @@ function killTree(child: ChildProcessWithoutNullStreams) {
     if (result.status !== 0) child.kill();
     return;
   }
+  // The group is signalled even when the direct child already exited: a grandchild still holding
+  // the pipes open is why the run timed out in the first place.
   try {
     process.kill(-pid, 'SIGTERM');
   } catch {
@@ -185,10 +189,13 @@ export function resolveCmdShim(shimPath: string, text = readFileSync(shimPath, '
   let command = line.slice(0, line.lastIndexOf('%*'));
   command = command.slice(command.lastIndexOf('&') + 1).replace(/^\s*@/, '');
   const tokens = [...command.matchAll(/"([^"]*)"|(\S+)/g)].map((m) => m[1] ?? m[2]!);
-  const argv = tokens.map((t) => t.replace(/%~dp0|%dp0%/gi, dir).replace(/^%_prog%$/i, 'node'));
-  if (argv.length === 0 || argv.some((t) => /[%&|<>^()]/.test(t))) {
+  // Shell syntax is judged on the shim's own text, before its folder is put in: an install folder
+  // such as `Program Files (x86)` is a path, not syntax.
+  const PLACEHOLDER = /%~dp0|%dp0%|^%_prog%$/gi;
+  if (tokens.length === 0 || tokens.some((t) => /[%&|<>^()]/.test(t.replace(PLACEHOLDER, '')))) {
     throw new Error(`Cannot run ${shimPath} without a shell: unsupported shim syntax`);
   }
+  const argv = tokens.map((t) => t.replace(/%~dp0|%dp0%/gi, dir).replace(/^%_prog%$/i, 'node'));
   const [prog, ...fixed] = argv.map((t) => (/[\\/]/.test(t) ? win32.normalize(t) : t));
   return [/^node(\.exe)?$/i.test(prog!) ? process.execPath : prog!, ...fixed];
 }

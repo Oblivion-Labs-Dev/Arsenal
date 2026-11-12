@@ -25,6 +25,7 @@ import {
   readPath,
   retryWithJitter,
   robotsDisallows,
+  resolveCmdShim,
   runCli,
   type LookupCallback,
 } from './index.js';
@@ -406,6 +407,36 @@ describe('runCli', () => {
     }
   }, 15_000);
 
+  it.skipIf(process.platform === 'win32')(
+    'still kills the process group when the direct child already exited',
+    async () => {
+      // Regression: killTree returned early once the direct child had exited, so a grandchild
+      // holding the output pipes (the reason the run never closed) survived the timeout. POSIX
+      // only: Windows keeps no tree link to walk once the parent is gone.
+      const dir = mkdtempSync(join(tmpdir(), 'arsenal-runcli-'));
+      const pidFile = join(dir, 'grandchild.pid');
+      const parent = [
+        'const { spawn } = require("node:child_process");',
+        'const g = spawn(process.execPath, ["-e", "setInterval(() => {}, 1000)"], { stdio: "inherit" });',
+        `require("node:fs").writeFileSync(${JSON.stringify(pidFile)}, String(g.pid));`,
+        'g.unref();',
+        'process.exit(0);',
+      ].join('\n');
+      let pid = 0;
+      try {
+        await expect(runCli([node, '-e', parent], '', dir, 1500)).rejects.toBeInstanceOf(
+          CliTimeoutError,
+        );
+        pid = Number(readFileSync(pidFile, 'utf8'));
+        expect(await waitFor(() => !alive(pid))).toBe(true);
+      } finally {
+        if (pid && alive(pid)) process.kill(pid);
+        rmSync(dir, { recursive: true, force: true });
+      }
+    },
+    15_000,
+  );
+
   it('stops a child whose output passes the byte limit', async () => {
     await expect(
       runCli(
@@ -445,6 +476,27 @@ describe('runCli', () => {
       }
     },
   );
+});
+
+describe('resolveCmdShim', () => {
+  it.runIf(process.platform === 'win32')(
+    'accepts a shim installed under a folder with brackets, such as Program Files (x86)',
+    () => {
+      // Regression: the shell-syntax check ran after %~dp0 was replaced by the shim's folder, so
+      // the brackets in `Program Files (x86)` made every CLI installed there unrunnable.
+      const shim = 'C:\\Program Files (x86)\\nodejs\\claude.cmd';
+      expect(resolveCmdShim(shim, '@node "%~dp0\\node_modules\\x\\cli.js" %*\r\n')).toEqual([
+        process.execPath,
+        'C:\\Program Files (x86)\\nodejs\\node_modules\\x\\cli.js',
+      ]);
+    },
+  );
+
+  it('still refuses shell syntax in the shim text itself', () => {
+    for (const line of ['node a.js > out %*', 'node %FOO% %*', 'node (a.js) %*', 'x | y %*']) {
+      expect(() => resolveCmdShim('C:\\tools\\x.cmd', line)).toThrow('unsupported shim syntax');
+    }
+  });
 });
 
 describe('createProxyRoute', () => {
