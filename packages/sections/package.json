@@ -10,7 +10,8 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    }
+    },
+    "./technical-sheet.css": "./src/technical-sheet.css"
   },
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --external react --external react-dom --external framer-motion --external @arsenal/ui --external @arsenal/motion --external @arsenal/config --external @arsenal/themes --clean",

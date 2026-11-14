@@ -1,0 +1,29 @@
+/* Self-drawing SVG ink: strokes trace themselves in once on mount.
+   Origin: amsborse.github.io redesign, src/designs/design-art.css (.bp-draw).
+   Lift-and-shift: copy this file. Give each <path>/<rect> class="arsenal-draw-in" and
+   pathLength="1" so the dash maths is length-independent; add --late to start it after the frame. */
+.arsenal-draw-in {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: arsenal-draw-in var(--arsenal-draw-in-duration, 1.3s)
+    var(--arsenal-draw-in-ease, cubic-bezier(0.65, 0, 0.35, 1))
+    var(--arsenal-draw-in-delay, 0.1s) forwards;
+}
+.arsenal-draw-in--late {
+  --arsenal-draw-in-delay: var(--arsenal-draw-in-late-delay, 0.35s);
+}
+@keyframes arsenal-draw-in {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .arsenal-draw-in {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+:root[data-motion="paused"] .arsenal-draw-in {
+  animation: none;
+  stroke-dashoffset: 0;
+}

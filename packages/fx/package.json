@@ -11,7 +11,8 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    }
+    },
+    "./print-plate.css": "./src/print/print-plate.css"
   },
   "scripts": {
     "build": "tsup",

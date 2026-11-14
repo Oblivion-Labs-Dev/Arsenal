@@ -2226,6 +2226,217 @@ export function Example() {
   );
 }`,
   },
+  {
+    id: 'print-plate',
+    name: 'PrintPlate',
+    description:
+      'Re-prints a photo as ink on paper: a two-screen halftone or Sobel linework on a canvas, coloured from your theme tokens.',
+    category: 'backgrounds',
+    importLine:
+      'import { PrintPlate } from "@arsenal/fx";\nimport "@arsenal/fx/print-plate.css";',
+    props: [
+      'src: string',
+      'treatment: "halftone" | "linework"',
+      'ink?: string  // defaults to inkVar, then #161412',
+      'accent?: string  // defaults to accentVar, then #46c8ea',
+      'inkVar?: string',
+      'accentVar?: string',
+      'dark?: boolean  // pass your theme so it redraws',
+      'width?: number',
+      'height?: number',
+      'className?: string',
+      'onStateChange?: (state: "true" | "failed") => void',
+    ],
+    usage:
+      'Place behind a hero or chapter heading. The pure helpers (halftone, sobel, luminance, warmth) are exported for your own canvases.',
+    accessibility:
+      'Decorative canvas, aria-hidden. The canvas exposes data-ready="false" | "true" | "failed"; a failed load is logged with console.error, not swallowed.',
+    performance:
+      'Draws once per src/treatment/theme, not per frame. Size the canvas backing to the display size; the full source keeps linework crisp.',
+    code: `import { PrintPlate } from "@arsenal/fx";
+import "@arsenal/fx/print-plate.css";
+
+export function Masthead({ dark }: { dark: boolean }) {
+  return (
+    <section className="relative h-[60vh]">
+      <PrintPlate src="/plates/city.webp" treatment="halftone" dark={dark} accentVar="--color-accent" />
+    </section>
+  );
+}`,
+  },
+  {
+    id: 'crosshair-cursor',
+    name: 'Crosshair cursor',
+    description:
+      'Drafting-table crosshair that follows a fine pointer with a live X/Y readout. Framework-free; returns a cleanup function.',
+    category: 'motion',
+    importLine:
+      'import { mountCrosshairCursor } from "@arsenal/motion";\nimport "@arsenal/motion/crosshair-cursor.css";',
+    props: [
+      'classPrefix?: string  // default "arsenal-crosshair"',
+      'formatLabel?: (x: number, y: number) => string  // "" hides the label',
+      'zIndex?: number',
+      'container?: HTMLElement  // default document.body',
+    ],
+    usage:
+      'Mount once per page (or in a useEffect) and call the returned function on unmount. Pairs with TechnicalSheet and Blueprint tokens.',
+    accessibility:
+      'Overlay is aria-hidden and pointer-events: none. Only mounts on hover-capable fine pointers, hides over text inputs, and is skipped under reduced motion.',
+    performance:
+      'rAF-throttled paint per pointer move. Hidden when the pointer leaves, the tab is hidden or the window loses focus; cleanup removes every listener.',
+    code: `import { useEffect } from "react";
+import { mountCrosshairCursor } from "@arsenal/motion";
+import "@arsenal/motion/crosshair-cursor.css";
+
+export function useCrosshair() {
+  useEffect(() => mountCrosshairCursor(), []);
+}`,
+  },
+  {
+    id: 'technical-sheet',
+    name: 'TechnicalSheet',
+    description:
+      'An architecture drawn as a self-drawing engineering sheet: boxed nodes, request and response arrows, telemetry, a title block and packets walking the trip.',
+    category: 'hero',
+    importLine:
+      'import { TechnicalSheet } from "@arsenal/sections";\nimport "@arsenal/sections/technical-sheet.css";\nimport "@arsenal/motion/draw-in.css";',
+    props: [
+      'ariaLabel: string',
+      'nodes: { id; name; meta?; x; y; ariaLabel? }[]',
+      'rows?: { id; label; x; y }[]',
+      'requests?: / responses?: { id; d; label?; labelX?; labelY?; labelAnchor? }[]',
+      'telemetry?: string[]',
+      'trip?: string[]  // edge ids the packet walks',
+      'titleBlock?: { x; y; title; subtitle?; sheet?; scale? }',
+      'dimension?: { label; from; to; y }',
+      'width? / height? / nodeWidth? / nodeHeight?',
+      'legSeconds? / packetBeginSeconds?',
+      'hovered? / failed?: string',
+      'reducedMotion?: boolean',
+      'onHover? / onSelect?: (id) => void',
+    ],
+    usage:
+      'Hero or explainer for any pipeline. All data comes in as props; validateTechnicalSheet throws on duplicate ids, unknown trip legs and bad sizes.',
+    accessibility:
+      'role="group" with your aria-label; nodes are focusable buttons that select on Enter or Space. No packets under reduced motion; the drawing stays complete.',
+    performance:
+      'Pure SVG; packets are SMIL animateMotion paused while the sheet is off screen. Server render ships no packets.',
+    code: `import { TechnicalSheet } from "@arsenal/sections";
+import "@arsenal/sections/technical-sheet.css";
+import "@arsenal/motion/draw-in.css";
+
+export function Pipeline() {
+  return (
+    <TechnicalSheet
+      ariaLabel="Request pipeline"
+      nodes={[
+        { id: "edge", name: "Gateway", meta: "API EDGE", x: 40, y: 70 },
+        { id: "model", name: "Model", x: 325, y: 70 },
+      ]}
+      requests={[{ id: "edge>model", d: "M190 98 H325", label: "CALL", labelX: 257, labelY: 92 }]}
+      responses={[{ id: "model>edge", d: "M325 120 H190" }]}
+      trip={["edge>model", "model>edge"]}
+      onSelect={(id) => console.log(id)}
+    />
+  );
+}`,
+  },
+  {
+    id: 'print-interactions',
+    name: 'Print interactions',
+    description:
+      'Editorial micro-interactions: headings rise in once, and underlines grow from the side the pointer entered. Selectors are options.',
+    category: 'motion',
+    importLine:
+      'import { mountPrintInteractions } from "@arsenal/motion";\nimport "@arsenal/motion/print-interactions.css";',
+    props: [
+      'headingSelector?: string  // "main h2, .print-heading"',
+      'interactiveSelector?: string  // "a, .print-underline, .print-card"',
+      'titleSelector?: string',
+      'revealedClass?: string',
+      'pausedClass?: string',
+      'originProperty?: string  // "--print-origin"',
+      'root?: HTMLElement',
+    ],
+    usage:
+      'Mount once at the layout level; headings rendered later by routing are picked up through a MutationObserver. Returns a cleanup function.',
+    accessibility:
+      'Keyboard focus gets the same underline as hover. Under reduced motion headings are shown immediately and nothing animates.',
+    performance:
+      'One IntersectionObserver for all headings, unobserved after reveal; CSS-only transitions; paused while the tab is hidden.',
+    code: `import { useEffect } from "react";
+import { mountPrintInteractions } from "@arsenal/motion";
+import "@arsenal/motion/print-interactions.css";
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  useEffect(() => mountPrintInteractions({ headingSelector: "article h2" }), []);
+  return <main>{children}</main>;
+}`,
+  },
+  {
+    id: 'path-packets',
+    name: 'PathPackets + SVG helpers',
+    description:
+      'Packets that walk a list of SVG paths in turn, a CSS draw-in for pathLength=1 ink, and a hook that pauses SVG animation off screen.',
+    category: 'motion',
+    importLine:
+      'import { PathPackets, packetTimings, usePauseSvgOffscreen } from "@arsenal/motion";\nimport "@arsenal/motion/draw-in.css";',
+    props: [
+      'paths: readonly string[]',
+      'legSeconds?: number',
+      'beginSeconds?: number',
+      'radius?: number',
+      'className?: string',
+      'circleProps?: SVGProps<SVGCircleElement>',
+    ],
+    usage:
+      'Inside any <svg>: draw edges with className="arsenal-draw-in" and pathLength={1}, then let PathPackets travel them.',
+    accessibility:
+      'Packets are aria-hidden decoration; render none under reduced motion (the caller decides). Draw-in shows finished ink under reduced motion.',
+    performance:
+      'SMIL animateMotion with no JS per frame; usePauseSvgOffscreen calls pauseAnimations() while the svg is out of view.',
+    code: `import { useRef } from "react";
+import { PathPackets, usePauseSvgOffscreen } from "@arsenal/motion";
+import "@arsenal/motion/draw-in.css";
+
+const legs = ["M10 50 H190", "M190 50 V150"];
+
+export function Wire() {
+  const svg = useRef<SVGSVGElement>(null);
+  usePauseSvgOffscreen(svg, true);
+  return (
+    <svg ref={svg} viewBox="0 0 200 200">
+      {legs.map((d) => <path key={d} d={d} pathLength={1} className="arsenal-draw-in" fill="none" stroke="currentColor" />)}
+      <PathPackets paths={legs} />
+    </svg>
+  );
+}`,
+  },
+  {
+    id: 'design-token-skins',
+    name: 'Design token skins',
+    description:
+      'Blueprint (dark drafting sheet, cyan ink) and Broadsheet (warm newsprint, vermilion, Didot) as opt-in token sets, light and dark.',
+    category: 'backgrounds',
+    importLine:
+      'import { designSkinAttributes, DESIGN_TOKEN_SKINS } from "@arsenal/themes";\nimport "@arsenal/themes/designs/blueprint.css";',
+    props: [
+      'designSkinAttributes(id: "blueprint" | "broadsheet", mode?: "light" | "dark")',
+      'DESIGN_TOKEN_SKINS: Record<id, { label; defaultMode; cssImport; fonts; radius; accent; background }>',
+      'DESIGN_SKIN_SITE_SELECTORS: string[]  // what the full site skins also style',
+    ],
+    usage:
+      'Import the CSS, then put data-design="<id>" on <html> or any container; data-theme flips it to the other mode. Nothing changes until the attribute is set.',
+    accessibility:
+      'Each skin sets color-scheme so native controls follow the mode. Token values are copied verbatim from the redesign site.',
+    performance: 'Custom properties only: no runtime, no layout cost. Fonts are system stacks (Inter optional).',
+    code: `import { designSkinAttributes } from "@arsenal/themes";
+import "@arsenal/themes/designs/broadsheet.css";
+
+export function Paper({ children }: { children: React.ReactNode }) {
+  return <div {...designSkinAttributes("broadsheet")}>{children}</div>;
+}`,
+  },
 ];
 
 export const COMPONENT_CATEGORIES: { id: ComponentCategory; label: string }[] = [

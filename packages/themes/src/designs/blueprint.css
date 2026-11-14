@@ -1,0 +1,95 @@
+/* Blueprint: a technical sheet. Dark (navy) by default; light under data-theme=light.
+   Origin: amsborse.github.io redesign, src/styles/designs/blueprint.css (token blocks only, values
+   copied verbatim). Lift-and-shift: copy this file. Opt in by putting data-design="blueprint" on
+   <html> or any container; data-theme="light" on the same element or an ancestor switches mode.
+   Tokens only: the site's full skin (layout and decoration rules) is not part of this file; see
+   docs/design/redesign-kit.md for the selectors that skin targets. */
+[data-design="blueprint"] {
+  color-scheme: dark;
+  --font-sans: "Inter", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  --font-serif: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
+  --editorial-card-radius: 2px;
+  --color-ink: #e5f1f8;
+  --color-ink-soft: #cbdde9;
+  --color-body: #afc5d6;
+  --color-ink-muted: #99b4c9;
+  --color-bg: #0a1626;
+  --color-surface: #0e2033;
+  --color-surface-alt: #11283e;
+  --color-surface-mid: #10253a;
+  --color-surface-elevated: #152e45;
+  --color-surface-wash: #0c1b2d;
+  --color-chrome-bg: #0b192a;
+  --color-accent: #46c8ea;
+  --color-accent-bright: #8ddff3;
+  --color-accent-dim: #63b8d0;
+  --color-accent-soft: rgb(70 200 234 / 10%);
+  --color-accent-line: rgb(70 200 234 / 42%);
+  --color-on-accent: #071c2c;
+  --color-border: #294359;
+  --color-border-strong: #46667f;
+  --color-reading-canvas: #0d1d2e;
+  --color-water: #0f2238;
+  --color-section-sage: var(--color-bg);
+  --color-section-lavender: var(--color-bg);
+  --color-section-blush: var(--color-bg);
+  --color-section-parchment: var(--color-bg);
+  --color-gold: var(--color-accent);
+  --color-gold-muted: var(--color-accent-dim);
+  --color-gold-soft: var(--color-accent-soft);
+  --color-gold-faint: color-mix(in srgb, var(--color-accent) 5%, transparent);
+  --color-moss: var(--color-accent);
+  --color-moss-soft: var(--color-accent-soft);
+  --shadow-card: 0 1px 0 rgb(70 200 234 / 5%);
+  --shadow-card-hover: var(--shadow-card);
+  --chrome-shadow: 0 1px 0 var(--color-border);
+  --hub-card-bg: var(--color-surface);
+  --hub-card-bg-gradient: linear-gradient(135deg, var(--color-surface-mid), var(--color-surface));
+  --hub-card-border: var(--color-border-strong);
+  --hub-card-border-hover: var(--color-accent);
+  --hub-title-gradient: linear-gradient(var(--color-ink), var(--color-ink));
+  --backdrop-scrim: rgb(4 15 28 / 88%);
+  --body-noise-opacity: 0;
+  --body-glow-opacity: 0;
+  --motif-crease: none;
+  --cosmic-grid-rgb: 70, 200, 234;
+  --bp-grid: rgb(70 200 234 / 5%);
+  --bp-grid-major: rgb(70 200 234 / 10%);
+}
+[data-design="blueprint"][data-theme="light"],
+[data-theme="light"] [data-design="blueprint"] {
+  color-scheme: light;
+  --color-ink: #122d40;
+  --color-ink-soft: #254358;
+  --color-body: #38546a;
+  --color-ink-muted: #48657b;
+  --color-bg: #eef2f4;
+  --color-surface: #f6f9fa;
+  --color-surface-alt: #e7eef2;
+  --color-surface-mid: #edf3f6;
+  --color-surface-elevated: #ffffff;
+  --color-surface-wash: #e6eef3;
+  --color-chrome-bg: #eef2f4;
+  --color-accent: #0b5f8a;
+  --color-accent-bright: #084b70;
+  --color-accent-dim: #285f7a;
+  --color-accent-soft: rgb(11 95 138 / 8%);
+  --color-accent-line: rgb(11 95 138 / 42%);
+  --color-on-accent: #ffffff;
+  --color-border: #c0cfd9;
+  --color-border-strong: #849eaf;
+  --color-reading-canvas: #f7fafb;
+  --color-water: #dde8ee;
+  --shadow-card: 0 2px 6px rgb(22 55 77 / 5%);
+  --shadow-card-hover: var(--shadow-card);
+  --backdrop-scrim: rgb(238 242 244 / 94%);
+  --cosmic-grid-rgb: 11, 95, 138;
+  --bp-grid: rgb(11 95 138 / 5%);
+  --bp-grid-major: rgb(11 95 138 / 9%);
+}

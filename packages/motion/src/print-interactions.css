@@ -1,0 +1,91 @@
+/* Print interactions for mountPrintInteractions() with its default class names.
+   Origin: amsborse.github.io redesign, src/styles/designs/broadsheet.css (print rules).
+   Lift-and-shift: copy with print-interactions.ts. Opt in per element:
+     .print-underline  links/titles whose underline grows from the pointer's side (--print-origin)
+     .print-card       cards that lift and tilt on hover (fine pointers only)
+     .print-revealed   added by the script to headings as they enter the viewport
+     .print-paused     added to <body> while the tab is hidden
+   Renamed classes or the origin property in options? Rename them here too. */
+.print-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: var(--print-origin, left) bottom;
+  transition: background-size var(--print-underline-duration, 260ms) ease;
+}
+.print-underline:focus-visible,
+:focus-visible > .print-underline,
+.print-card:focus-within .print-underline {
+  background-size: 100% 1px;
+}
+.print-card:focus-within {
+  box-shadow: var(--shadow-card-hover, 6px 6px 0 rgb(22 20 18 / 18%));
+}
+
+.print-revealed {
+  position: relative;
+  transition:
+    translate var(--print-reveal-duration, 600ms) cubic-bezier(0.16, 1, 0.3, 1),
+    border-color var(--print-reveal-duration, 600ms) ease;
+}
+.print-revealed::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: var(--print-rule-color, var(--color-ink, currentColor));
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform var(--print-reveal-duration, 600ms) cubic-bezier(0.16, 1, 0.3, 1);
+}
+@starting-style {
+  .print-revealed {
+    translate: 0 0.65rem;
+    border-top-color: transparent;
+  }
+  .print-revealed::before {
+    transform: scaleX(0);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .print-underline:hover,
+  .print-card:hover .print-underline {
+    background-size: 100% 1px;
+  }
+  .print-card {
+    transition:
+      transform 260ms ease,
+      box-shadow 260ms ease,
+      border-color 260ms ease;
+  }
+  .print-card:hover {
+    transform: translateY(-3px) rotate(-0.4deg);
+    box-shadow: var(--shadow-card-hover, 6px 6px 0 rgb(22 20 18 / 18%));
+    border-color: var(--color-ink, currentColor);
+  }
+}
+.print-card:active {
+  transform: none;
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .print-underline,
+  .print-card,
+  .print-revealed,
+  .print-revealed::before {
+    transition: none;
+  }
+  .print-revealed,
+  .print-card:hover {
+    translate: none;
+    transform: none;
+  }
+}
+.print-paused *,
+.print-paused *::before,
+.print-paused *::after {
+  animation-play-state: paused !important;
+  transition: none !important;
+}

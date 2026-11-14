@@ -1,0 +1,103 @@
+/* Broadsheet: ink, rules and paper. Light (paper) by default; dark under data-theme=dark.
+   Origin: amsborse.github.io redesign, src/styles/designs/broadsheet.css (token blocks only, values
+   copied verbatim). Lift-and-shift: copy this file. Opt in by putting data-design="broadsheet" on
+   <html> or any container; data-theme="dark" on the same element or an ancestor switches mode.
+   Tokens only: the site's full skin (layout and decoration rules) is not part of this file; see
+   docs/design/redesign-kit.md for the selectors that skin targets. */
+[data-design="broadsheet"] {
+  color-scheme: light;
+  --font-sans: "Franklin Gothic Medium", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --font-display:
+    Didot, "Bodoni MT", "Bodoni 72", "Playfair Display", "Iowan Old Style", Georgia, serif;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --color-ink: #161412;
+  --color-ink-soft: #302b26;
+  --color-body: #443d35;
+  --color-ink-muted: #62584e;
+  --color-bg: #f1ece1;
+  --color-surface: #f7f2e8;
+  --color-surface-alt: #ece5d8;
+  --color-surface-mid: #eee7db;
+  --color-surface-elevated: #faf5eb;
+  --color-surface-wash: #e9e1d3;
+  --color-section-sage: #eee8dc;
+  --color-section-lavender: #f1ece1;
+  --color-section-blush: #eee8dc;
+  --color-section-parchment: #f1ece1;
+  --color-border: #b6ac9d;
+  --color-border-strong: #766b5e;
+  --color-accent: #b9311d;
+  --color-accent-bright: #a02a18;
+  --color-accent-dim: #982918;
+  --color-accent-soft: rgb(185 49 29 / 9%);
+  --color-accent-line: rgb(185 49 29 / 45%);
+  --color-gold: var(--color-accent);
+  --color-gold-muted: var(--color-accent-dim);
+  --color-gold-soft: var(--color-accent-soft);
+  --color-gold-faint: rgb(185 49 29 / 5%);
+  --color-on-accent: #fff9f0;
+  --color-reading-canvas: #f4eee3;
+  --color-moss: var(--color-accent);
+  --color-moss-soft: var(--color-accent-soft);
+  --color-water: #ded5c6;
+  --color-chrome-bg: #f1ece1;
+  --shadow-card: 2px 2px 0 rgb(22 20 18 / 8%);
+  --shadow-card-hover: 6px 6px 0 rgb(22 20 18 / 18%);
+  --hub-title-gradient: linear-gradient(var(--color-ink), var(--color-ink));
+  --hub-card-bg: var(--color-surface);
+  --hub-card-bg-gradient: linear-gradient(var(--color-surface), var(--color-surface));
+  --hub-card-border: var(--color-border);
+  --hub-card-border-hover: var(--color-ink);
+  --chrome-shadow: 0 3px 0 var(--color-bg), 0 5px 0 var(--color-ink);
+  --backdrop-scrim: rgb(36 29 22 / 70%);
+  --body-noise-opacity: 0.035;
+  --body-glow-opacity: 0.22;
+  --motif-crease: linear-gradient(115deg, transparent, rgb(80 59 36 / 4%), transparent);
+  --cosmic-grid-rgb: 98, 88, 78;
+  --broadsheet-pool: rgb(137 101 65 / 10%);
+}
+
+[data-design="broadsheet"][data-theme="dark"],
+[data-theme="dark"] [data-design="broadsheet"] {
+  color-scheme: dark;
+  --color-ink: #f5ecdf;
+  --color-ink-soft: #e6dbcb;
+  --color-body: #d0c4b4;
+  --color-ink-muted: #b6a795;
+  --color-bg: #141312;
+  --color-surface: #211e1a;
+  --color-surface-alt: #27221d;
+  --color-surface-mid: #1d1b19;
+  --color-surface-elevated: #2c2620;
+  --color-surface-wash: #191715;
+  --color-section-sage: #1d1b19;
+  --color-section-lavender: #141312;
+  --color-section-blush: #1d1b19;
+  --color-section-parchment: #141312;
+  --color-border: #5c5145;
+  --color-border-strong: #998775;
+  --color-accent: #ff6a4d;
+  --color-accent-bright: #ff967c;
+  --color-accent-dim: #ee755c;
+  --color-accent-soft: rgb(255 106 77 / 10%);
+  --color-accent-line: rgb(255 106 77 / 48%);
+  --color-gold-faint: rgb(255 106 77 / 5%);
+  --color-on-accent: #20130e;
+  --color-reading-canvas: #1a1815;
+  --color-water: #1d1b19;
+  --color-chrome-bg: #1a1815;
+  --shadow-card: 2px 2px 0 rgb(0 0 0 / 35%);
+  --shadow-card-hover: 6px 6px 0 rgb(245 236 223 / 18%);
+  --backdrop-scrim: rgb(10 8 6 / 85%);
+  --body-noise-opacity: 0.045;
+  --body-glow-opacity: 0.7;
+  --motif-crease: linear-gradient(115deg, transparent, rgb(245 236 223 / 3%), transparent);
+  --cosmic-grid-rgb: 182, 167, 149;
+  --broadsheet-pool: rgb(159 104 65 / 12%);
+}

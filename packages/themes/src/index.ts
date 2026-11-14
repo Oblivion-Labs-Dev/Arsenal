@@ -135,3 +135,5 @@ export function createTailwindPreset(themeId: ThemeId = "deep-forge") {
     },
   };
 }
+
+export * from "./designs";

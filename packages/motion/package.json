@@ -10,7 +10,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    }
+    },
+    "./crosshair-cursor.css": "./src/crosshair-cursor.css",
+    "./draw-in.css": "./src/draw-in.css",
+    "./print-interactions.css": "./src/print-interactions.css"
   },
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --external react --external react-dom --external framer-motion --external lenis --clean",

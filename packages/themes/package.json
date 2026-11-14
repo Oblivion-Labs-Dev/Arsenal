@@ -10,7 +10,9 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./styles.css": "./src/styles.css"
+    "./styles.css": "./src/styles.css",
+    "./designs/blueprint.css": "./src/designs/blueprint.css",
+    "./designs/broadsheet.css": "./src/designs/broadsheet.css"
   },
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean",

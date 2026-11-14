@@ -1,0 +1,163 @@
+/* TechnicalSheet styles. Origin: amsborse.github.io redesign, src/designs/design-art.css (.bp-hero).
+   Lift-and-shift: copy with technical-sheet.tsx, and load @arsenal/motion/draw-in.css for the
+   self-drawing ink. Every colour is a custom property with a fallback:
+     --arsenal-tsheet-accent   ink, arrows, packets        (falls back to --color-accent)
+     --arsenal-tsheet-ink      node names, title           (falls back to --color-ink)
+     --arsenal-tsheet-ink-soft labels and meta             (falls back to --color-ink-soft)
+     --arsenal-tsheet-bg       paper behind boxes/labels   (falls back to --color-bg)
+     --arsenal-tsheet-rule     frame and telemetry         (falls back to --color-border-strong)
+     --arsenal-tsheet-failed   failed node                 (#e5484d)
+     --arsenal-tsheet-font     mono family                 (falls back to --font-mono) */
+.arsenal-tsheet {
+  --_accent: var(--arsenal-tsheet-accent, var(--color-accent, #2f6fed));
+  --_ink: var(--arsenal-tsheet-ink, var(--color-ink, #10131a));
+  --_ink-soft: var(--arsenal-tsheet-ink-soft, var(--color-ink-soft, var(--_ink)));
+  --_bg: var(--arsenal-tsheet-bg, var(--color-bg, #ffffff));
+  --_rule: var(--arsenal-tsheet-rule, var(--color-border-strong, #8a93a6));
+  --_failed: var(--arsenal-tsheet-failed, #e5484d);
+  display: grid;
+  place-items: center;
+  color: var(--_accent);
+  font-family: var(
+    --arsenal-tsheet-font,
+    var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace)
+  );
+}
+.arsenal-tsheet__sheet {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.arsenal-tsheet__sheet text {
+  fill: var(--_ink-soft);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+}
+.arsenal-tsheet__frame {
+  fill: color-mix(in srgb, var(--_bg) 55%, transparent);
+  stroke: var(--_rule);
+  stroke-width: 1;
+}
+.arsenal-tsheet__dimension path {
+  fill: none;
+  stroke: var(--_accent);
+  stroke-width: 0.8;
+}
+.arsenal-tsheet__sheet .arsenal-tsheet__dim-label {
+  fill: var(--_accent);
+  paint-order: stroke;
+  stroke: var(--_bg);
+  stroke-width: 6px;
+  font-size: 9px;
+}
+.arsenal-tsheet__sheet .arsenal-tsheet__row-label {
+  fill: var(--_accent);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  paint-order: stroke;
+  stroke: var(--_bg);
+  stroke-width: 5px;
+}
+.arsenal-tsheet__arrowhead {
+  fill: var(--_accent);
+}
+.arsenal-tsheet__requests path {
+  fill: none;
+  stroke: var(--_accent);
+  stroke-width: 1.6;
+}
+.arsenal-tsheet__sheet .arsenal-tsheet__requests text {
+  fill: var(--_accent);
+  font-size: 8.5px;
+  paint-order: stroke;
+  stroke: var(--_bg);
+  stroke-width: 5px;
+}
+.arsenal-tsheet__responses path {
+  fill: none;
+  stroke: var(--_accent);
+  stroke-width: 1.1;
+  stroke-dasharray: 6 4;
+  opacity: 0.75;
+}
+.arsenal-tsheet__telemetry path {
+  fill: none;
+  stroke: var(--_rule);
+  stroke-width: 1;
+  stroke-dasharray: 1.5 4;
+  stroke-linecap: round;
+}
+.arsenal-tsheet__node {
+  cursor: pointer;
+  outline: none;
+}
+.arsenal-tsheet__box {
+  fill: var(--_bg);
+  stroke: var(--_accent);
+  stroke-width: 1.4;
+  transition: stroke-width 200ms ease;
+}
+.arsenal-tsheet__box-fill {
+  fill: transparent;
+  transition: fill 200ms ease;
+}
+.arsenal-tsheet__ticks {
+  fill: none;
+  stroke: var(--_accent);
+  stroke-width: 1;
+}
+.arsenal-tsheet__sheet .arsenal-tsheet__node-name {
+  fill: var(--_ink);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.arsenal-tsheet__sheet .arsenal-tsheet__node-meta {
+  fill: var(--_ink-soft);
+  font-size: 7px;
+  letter-spacing: 0.06em;
+}
+.arsenal-tsheet__node:is(:hover, :focus-visible, [data-state='hover']) .arsenal-tsheet__box {
+  stroke-width: 2.6;
+}
+.arsenal-tsheet__node:is(:hover, :focus-visible, [data-state='hover']) .arsenal-tsheet__box-fill {
+  /* The pattern id is per instance; the component sets this property on its <svg>. */
+  fill: var(--arsenal-tsheet-hatch, transparent);
+}
+.arsenal-tsheet__node:focus-visible .arsenal-tsheet__box {
+  stroke-dasharray: 4 3;
+}
+.arsenal-tsheet__hatch {
+  stroke: color-mix(in srgb, var(--_accent) 28%, transparent);
+  stroke-width: 1.2;
+}
+.arsenal-tsheet__node[data-state='failed'] .arsenal-tsheet__box,
+.arsenal-tsheet__node[data-state='failed'] .arsenal-tsheet__ticks {
+  stroke: var(--_failed);
+}
+.arsenal-tsheet__title-block rect,
+.arsenal-tsheet__title-block path {
+  fill: var(--_bg);
+  stroke: var(--_accent);
+  stroke-width: 1;
+}
+.arsenal-tsheet__title-block path {
+  fill: none;
+}
+.arsenal-tsheet__sheet .arsenal-tsheet__tb-strong {
+  fill: var(--_ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+.arsenal-tsheet__packet {
+  fill: var(--_accent);
+  stroke: var(--_bg);
+  stroke-width: 2;
+}
+@media (prefers-reduced-motion: reduce) {
+  .arsenal-tsheet__box,
+  .arsenal-tsheet__box-fill {
+    transition: none;
+  }
+}

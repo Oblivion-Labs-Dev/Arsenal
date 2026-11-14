@@ -1,0 +1,50 @@
+/* Crosshair cursor overlay for mountCrosshairCursor() with the default class prefix.
+   Origin: amsborse.github.io redesign, src/styles/designs/blueprint.css (.bp-crosshair).
+   Lift-and-shift: copy with crosshair-cursor.ts. Using a custom classPrefix? Rename the
+   selectors below. Position comes from --crosshair-x / --crosshair-y set on the overlay. */
+.arsenal-crosshair {
+  position: fixed;
+  inset: 0;
+  z-index: var(--arsenal-crosshair-z, 45);
+  pointer-events: none;
+  color: var(--arsenal-crosshair-color, var(--color-accent, #46c8ea));
+}
+.arsenal-crosshair[hidden],
+.arsenal-crosshair__label[hidden] {
+  display: none;
+}
+.arsenal-crosshair__x {
+  position: absolute;
+  left: 0;
+  top: var(--crosshair-y, -10px);
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  opacity: var(--arsenal-crosshair-line-opacity, 0.15);
+}
+.arsenal-crosshair__y {
+  position: absolute;
+  top: 0;
+  left: var(--crosshair-x, -10px);
+  width: 1px;
+  height: 100%;
+  background: currentColor;
+  opacity: var(--arsenal-crosshair-line-opacity, 0.15);
+}
+.arsenal-crosshair__label {
+  position: absolute;
+  left: clamp(8px, var(--crosshair-x, 0px), calc(100% - 148px));
+  top: clamp(8px, calc(var(--crosshair-y, 0px) + 14px), calc(100% - 32px));
+  padding: 3px 6px;
+  background: var(--arsenal-crosshair-label-bg, var(--color-chrome-bg, var(--color-bg, #0b192a)));
+  border: 1px solid currentColor;
+  color: currentColor;
+  font: 10px/1.4 var(--font-mono, ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, monospace);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  .arsenal-crosshair {
+    display: none;
+  }
+}
