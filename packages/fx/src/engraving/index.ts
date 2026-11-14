@@ -11,6 +11,9 @@ export {
   beamLight,
   beamCone,
   engrave,
+  cutRibbons,
+  clamp01,
+  smooth,
   paintRibbons,
   paintDetails,
   type Point as EngravingPoint,
@@ -19,6 +22,17 @@ export {
   type Ribbon,
   type EngraveOptions,
   type EngravingInk,
+  type ToneField,
 } from './engraving';
+/** Chapter scenes: one deterministic picture per site chapter, engraved as ribbons or traced as contours. */
+export {
+  CHAPTERS,
+  chapterScene,
+  contours,
+  type Chapter,
+  type Spot,
+  type ChapterScene,
+  type Segment,
+} from './chapterScenes';
 /** Engraving hero canvas: prints in on load, the beam follows the pointer; pauses offscreen. */
 export { EngravingHero, readEngravingInk, type EngravingHeroProps } from './EngravingHero';

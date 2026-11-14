@@ -65,8 +65,8 @@ export function fbm(x: number, y: number, octaves = 4) {
   return sum / norm;
 }
 
-const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
-const smooth = (edge0: number, edge1: number, value: number) => {
+export const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
+export const smooth = (edge0: number, edge1: number, value: number) => {
   const t = clamp01((value - edge0) / (edge1 - edge0));
   return t * t * (3 - 2 * t);
 };
@@ -213,12 +213,22 @@ export type EngraveOptions = {
   invert?: boolean;
 };
 
+/** Any picture the burin can cut: tone (0 paper .. 1 ink) and how far each line wanders. */
+export type ToneField = {
+  aspect: number;
+  tone: (x: number, y: number) => number;
+  displace?: (x: number, y: number) => number;
+};
+
 /**
- * Cut the scene into ribbons. A ribbon's thickness follows the tone, and it breaks wherever
+ * Cut a tone field into ribbons. A ribbon's thickness follows the tone, and it breaks wherever
  * the tone falls to paper, so highlights read as clean white cuts.
  */
-export function engrave(scene: Scene, options: EngraveOptions): Ribbon[][] {
-  const { spacing, step, fill = 0.92, beam = null, lift = 0, invert = false } = options;
+export function cutRibbons(
+  field: ToneField,
+  options: Pick<EngraveOptions, 'spacing' | 'step' | 'fill' | 'invert'>,
+): Ribbon[][] {
+  const { spacing, step, fill = 0.92, invert = false } = options;
   const lines: Ribbon[][] = [];
   for (let base = spacing / 2; base < 1 + spacing; base += spacing) {
     const ribbons: Ribbon[] = [];
@@ -229,10 +239,9 @@ export function engrave(scene: Scene, options: EngraveOptions): Ribbon[][] {
       top = [];
       bottom = [];
     };
-    for (let x = 0; x <= scene.aspect + step; x += step) {
-      const y = base + lineDisplacement(scene, x, base);
-      const lit = beam ? beamLight(scene, beam, x, y) : lift;
-      const tone = toneAt(scene, x, y, lit);
+    for (let x = 0; x <= field.aspect + step; x += step) {
+      const y = base + (field.displace ? field.displace(x, base) : 0);
+      const tone = field.tone(x, y);
       const weight = invert ? (1 - tone) * 0.78 : tone;
       const half = (spacing * fill * weight ** 1.15) / 2;
       if (half < spacing * 0.03) {
@@ -246,6 +255,19 @@ export function engrave(scene: Scene, options: EngraveOptions): Ribbon[][] {
     lines.push(ribbons);
   }
   return lines;
+}
+
+/** Cut the lighthouse scene, lit by the beam (or an even lift) where it falls. */
+export function engrave(scene: Scene, options: EngraveOptions): Ribbon[][] {
+  const { beam = null, lift = 0 } = options;
+  return cutRibbons(
+    {
+      aspect: scene.aspect,
+      displace: (x, y) => lineDisplacement(scene, x, y),
+      tone: (x, y) => toneAt(scene, x, y, beam ? beamLight(scene, beam, x, y) : lift),
+    },
+    options,
+  );
 }
 
 export type EngravingInk = { ink: string; paper: string; spot: string };

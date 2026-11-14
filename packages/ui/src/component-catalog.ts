@@ -2296,6 +2296,33 @@ export function FrontPage({ dark }: { dark: boolean }) {
 }`,
   },
   {
+    id: 'chapter-scenes',
+    name: 'chapterScene',
+    description:
+      'Procedural chapter scenes: one deterministic picture per site chapter (horizon, about, experience, projects, writing, learning, contact) as a tone field, engraved as ribbons with cutRibbons or traced as survey contours with contours.',
+    category: 'backgrounds',
+    importLine: 'import { chapterScene, cutRibbons, contours, paintRibbons } from "@arsenal/fx";',
+    props: [
+      'chapterScene(chapter: Chapter, aspect: number, texture?: number): ChapterScene  // a ToneField with spots',
+      'cutRibbons(field: ToneField, { spacing, step, fill?, invert? }): Ribbon[][]',
+      'contours(field: ToneField, level: number, cols: number, rows: number): Segment[]',
+    ],
+    usage:
+      'Art for print designs that should not filter photographs: engrave a chapter for an editorial look, or trace its contours for a drafting look. Draw in unit space (setTransform by the canvas height). Spots mark where an accent mark belongs.',
+    accessibility:
+      'Pure functions with no motion; the canvas that draws them needs role="img" and a label naming the chapter.',
+    performance:
+      'Render once per size and theme; a 420x236 contour grid or a 0.0085 ribbon spacing draws in tens of milliseconds.',
+    code: `import { chapterScene, cutRibbons, paintRibbons } from "@arsenal/fx";
+
+export function drawPlate(ctx: CanvasRenderingContext2D, ink: string) {
+  const { height, width } = ctx.canvas;
+  ctx.setTransform(height, 0, 0, height, 0, 0);
+  const scene = chapterScene("about", width / height);
+  paintRibbons(ctx, cutRibbons(scene, { spacing: 0.0085, step: 0.0025 }), ink);
+}`,
+  },
+  {
     id: 'design-registry',
     name: 'createDesignRegistry',
     description:

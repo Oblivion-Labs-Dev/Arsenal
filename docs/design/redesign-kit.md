@@ -150,3 +150,23 @@ on the canvas (`inkVars` renames them). Copy: `packages/fx/src/engraving/engravi
 geometry and two painters) and `EngravingHero.tsx` (the canvas binding). The site keeps its
 dateline and caption around it. Pauses offscreen, ignores touch, and draws the finished print
 at once under reduced motion.
+
+## Chapter scenes (`@arsenal/fx`)
+
+One procedural picture per chapter (horizon, about, experience, projects, writing, learning,
+contact) as a tone field, so print designs get their own art instead of filtering photographs.
+The same field feeds two media: `cutRibbons` engraves it (Broadsheet), `contours` traces it as
+survey lines (Blueprint). Deterministic, subjects right of centre, `Spot`s mark where an accent
+belongs.
+
+```ts
+import { chapterScene, cutRibbons, contours, paintRibbons } from "@arsenal/fx";
+const scene = chapterScene("about", 16 / 9);
+paintRibbons(ctx, cutRibbons(scene, { spacing: 0.0085, step: 0.0025 }), ink); // engraving
+const lines = contours(chapterScene("about", 16 / 9, 0.3), 0.5, 420, 236); // [x1,y1,x2,y2][]
+```
+
+Draw in unit space (`ctx.setTransform(h, 0, 0, h, 0, 0)`). Tips from the site: map the faintest
+tones to paper (`(tone - 0.18) / 0.82`) and feather the edges so the cut never prints as a grey
+block; soften the field by a fraction of a grid cell before `contours` so thin wires close into
+outlines. Copy: `packages/fx/src/engraving/chapterScenes.ts` with `engraving.ts` and the test.
