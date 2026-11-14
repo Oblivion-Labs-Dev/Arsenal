@@ -108,7 +108,45 @@ container; there are no `:root` or element rules. `DESIGN_TOKEN_SKINS` describes
 - Atmosphere: `.sky`, `.sky-field`, `.cosmic-background`, `.page-depth`,
   `body::before`, `body::after`
 
-## Not ported here
+## Design registry (`@arsenal/themes`)
 
-- **The design registry** (switching between designs at runtime) and **the Broadsheet engraving
-  hero** are still being built on the site and will be ported from there once stable.
+Switch between N designs at runtime. One typed list; the first entry is the original design
+and the fallback for anything unknown. A `?design=` query wins over the saved choice, so a link
+opens a specific design.
+
+```ts
+import { createDesignRegistry } from "@arsenal/themes";
+
+const designs = createDesignRegistry([
+  { id: "editorial", label: "Editorial" },
+  { id: "blueprint", label: "Blueprint", plate: "linework", effects: () => import("./crosshair") },
+  { id: "broadsheet", label: "Broadsheet", plate: "halftone", hero: () => import("./FrontPage") },
+]);
+const id = designs.resolveInitial();   // ?design= -> localStorage -> default
+designs.apply(id);                     // <html data-design="...">
+designs.save(id);                      // when the switcher changes it
+```
+
+Copy: `packages/themes/src/designs/registry.ts` and its test. No dependencies; storage and
+the root element can be passed in, and blocked storage never throws. Adding design N is one
+entry, one skin scoped to `[data-design="<id>"]`, and lazy hooks that cost nothing until
+picked.
+
+## EngravingHero (`@arsenal/fx`)
+
+Broadsheet's hero: a procedural wood engraving of a lighthouse over a storm. It prints itself
+in line by line on load; the beam follows the pointer with a damped spring and lifts the storm
+where it falls.
+
+```tsx
+import { EngravingHero } from "@arsenal/fx";
+
+<EngravingHero theme={dark ? "dark" : "light"} reducedMotion={reduced}
+  style={{ width: "100%", aspectRatio: "7 / 5" }} />
+```
+
+Colours come from `ink` or, by default, from `--color-ink`, `--color-bg` and `--color-accent`
+on the canvas (`inkVars` renames them). Copy: `packages/fx/src/engraving/engraving.ts` (pure
+geometry and two painters) and `EngravingHero.tsx` (the canvas binding). The site keeps its
+dateline and caption around it. Pauses offscreen, ignores touch, and draws the finished print
+at once under reduced motion.

@@ -95,3 +95,11 @@ export const DESIGN_SKIN_SITE_SELECTORS: readonly string[] = [
   'main h2',
   'body::before / body::after',
 ];
+
+export {
+  createDesignRegistry,
+  type DesignEntry,
+  type DesignHooks,
+  type DesignRegistry,
+  type DesignRegistryOptions,
+} from './registry';

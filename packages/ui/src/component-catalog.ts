@@ -2265,6 +2265,66 @@ export function Masthead({ dark }: { dark: boolean }) {
 }`,
   },
   {
+    id: 'engraving-hero',
+    name: 'EngravingHero',
+    description:
+      'A procedural wood engraving of a lighthouse over a storm that prints itself in on load; the beam follows the pointer and lifts the storm where it falls.',
+    category: 'backgrounds',
+    importLine: 'import { EngravingHero } from "@arsenal/fx";',
+    props: [
+      'theme?: "light" | "dark"',
+      'reducedMotion?: boolean',
+      'ink?: Partial<{ ink: string; paper: string; spot: string }>',
+      'inkVars?: { ink: string; paper: string; spot: string }  // default --color-ink / --color-bg / --color-accent',
+      'printMs?: number  // default 1400',
+      'maxDpr?: number  // default 1.5',
+      'interactive?: boolean',
+      'label?: string',
+      'className?: string',
+      'onReady?: () => void',
+    ],
+    usage:
+      'A hero image for print or editorial designs. Give the canvas a size with CSS; it fills it. The pure engraving core (createScene, engrave, toneAt, aimBeam) is exported for other scenes.',
+    accessibility:
+      'role="img" with a descriptive label. Reduced motion draws the finished print at once with no beam motion; touch pointers are ignored.',
+    performance:
+      'Two engraved layers are rendered once per size/theme; frames run only while printing or while the beam spring settles, and pause offscreen.',
+    code: `import { EngravingHero } from "@arsenal/fx";
+
+export function FrontPage({ dark }: { dark: boolean }) {
+  return <EngravingHero theme={dark ? "dark" : "light"} style={{ width: "100%", aspectRatio: "7 / 5" }} />;
+}`,
+  },
+  {
+    id: 'design-registry',
+    name: 'createDesignRegistry',
+    description:
+      'N selectable site designs in one typed list: ?design= and saved choice resolution, data-design on <html>, lazy hero/effects/plate hooks per design.',
+    category: 'utilities',
+    importLine: 'import { createDesignRegistry } from "@arsenal/themes";',
+    props: [
+      'designs: readonly { id; label; hint?; hero?; effects?; plate? }[]',
+      'options.defaultId?: id  // default: first entry',
+      'options.storageKey?: string  // default "site-design"',
+      'options.queryParam?: string  // default "design"',
+      'options.attribute?: string  // default "data-design"',
+    ],
+    usage:
+      'One registry per site; adding design N is one entry plus one CSS skin scoped to [data-design="id"]. Pair with DESIGN_TOKEN_SKINS for Blueprint and Broadsheet tokens.',
+    accessibility:
+      'Content and routes never change between designs, only presentation; build the switcher as a labelled menu from registry.menu().',
+    performance:
+      'Hooks are lazy loaders, so the default design ships none of the other designs\' code. Never throws on blocked storage.',
+    code: `import { createDesignRegistry } from "@arsenal/themes";
+
+export const designs = createDesignRegistry([
+  { id: "editorial", label: "Editorial" },
+  { id: "broadsheet", label: "Broadsheet", hero: () => import("./BroadsheetHero") },
+]);
+
+designs.apply(designs.resolveInitial());`,
+  },
+  {
     id: 'crosshair-cursor',
     name: 'Crosshair cursor',
     description:
