@@ -99,6 +99,13 @@ export function lineDisplacement(scene: Scene, x: number, y: number) {
   return (fbm(x * 2.2, y * 5) - 0.5) * 0.03;
 }
 
+/** Open water: darker with depth, broken by pale wave crests. */
+function seaTone(scene: Scene, x: number, y: number) {
+  const depth = (y - scene.horizon) / (1 - scene.horizon);
+  const crest = smooth(0.62, 0.8, fbm(x * 7, y * 18));
+  return 0.42 + depth * 0.3 - crest * 0.38;
+}
+
 /**
  * Ink tone at a point: 0 paper, 1 solid. `lit` is how much of the lighthouse beam falls on the
  * point (0..1), which lifts the ink off the storm.
@@ -127,11 +134,13 @@ export function toneAt(scene: Scene, x: number, y: number, lit = 0): number {
     // Weathered rock: a pale lip where it meets the weather, crags and shadow beneath.
     const crag = fbm(x * 16, y * 16);
     const strata = Math.sin((y + fbm(x * 5, y * 3) * 0.08) * 160) * 0.5 + 0.5;
-    tone = 0.34 + crag * 0.4 + strata * 0.12 + smooth(rock, rock + 0.14, y) * 0.22;
+    const rockTone = 0.34 + crag * 0.4 + strata * 0.12 + smooth(rock, rock + 0.14, y) * 0.22;
+    // Where the headland first rises it is still awash, so it fades in from the sea; without
+    // this the rock starts on a straight vertical line.
+    const emerged = smooth(0, 0.3, (x - scene.aspect * 0.5) / (scene.aspect * 0.5));
+    tone = y > scene.horizon ? seaTone(scene, x, y) * (1 - emerged) + rockTone * emerged : rockTone;
   } else if (y > scene.horizon) {
-    const depth = (y - scene.horizon) / (1 - scene.horizon);
-    const crest = smooth(0.62, 0.8, fbm(x * 7, y * 18));
-    tone = 0.42 + depth * 0.3 - crest * 0.38;
+    tone = seaTone(scene, x, y);
   } else {
     // Storm sky: heavier towards the top, torn by cloud.
     const height = 1 - y / scene.horizon;

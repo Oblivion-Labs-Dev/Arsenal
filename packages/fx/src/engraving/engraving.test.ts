@@ -22,6 +22,15 @@ describe('broadsheet engraving', () => {
     }
   });
 
+  it('lets the headland rise out of the sea without a straight seam where it starts', () => {
+    const start = scene.aspect * 0.5;
+    for (let y = scene.horizon + 0.06; y < 1; y += 0.02) {
+      const left = toneAt(scene, start - 0.002, y);
+      const right = toneAt(scene, start + 0.002, y);
+      expect(Math.abs(right - left)).toBeLessThan(0.05);
+    }
+  });
+
   it('prints the lantern glass as near paper and the tower cap as near solid', () => {
     const { lantern } = scene;
     expect(toneAt(scene, lantern.x, lantern.y)).toBeLessThan(0.1);
