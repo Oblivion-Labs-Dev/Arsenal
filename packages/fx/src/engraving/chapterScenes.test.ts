@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CHAPTERS, chapterScene, contours } from './chapterScenes';
+import { CHAPTERS, chapterScene, contourLevels, contours } from './chapterScenes';
 import { cutRibbons } from './engraving';
 
 const ASPECT = 1672 / 941;
@@ -87,5 +87,20 @@ describe('contours', () => {
     // A circle of radius 0.3 is about 1.88 long; grid cells cut corners, never double it.
     expect(length).toBeGreaterThan(1.6);
     expect(length).toBeLessThan(2.2);
+  });
+
+  it('samples the field once for many levels, so a survey plate never freezes the page', () => {
+    let calls = 0;
+    const counted = {
+      aspect: 1,
+      tone: (x: number, y: number) => {
+        calls += 1;
+        return ramp.tone(x, y);
+      },
+    };
+    const levels = [0.2, 0.35, 0.5];
+    const all = contourLevels(counted, levels, 40, 40);
+    expect(calls).toBe(41 * 41);
+    levels.forEach((level, index) => expect(all[index]).toEqual(contours(ramp, level, 40, 40)));
   });
 });

@@ -29,6 +29,7 @@ export {
   CHAPTERS,
   chapterScene,
   contours,
+  contourLevels,
   type Chapter,
   type Spot,
   type ChapterScene,

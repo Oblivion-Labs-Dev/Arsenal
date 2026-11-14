@@ -302,12 +302,36 @@ export type Segment = [number, number, number, number];
  * grid over the scene. Each segment is [x1, y1, x2, y2] in unit space.
  */
 export function contours(field: ToneField, level: number, cols: number, rows: number): Segment[] {
+  return contourLevels(field, [level], cols, rows)[0];
+}
+
+/**
+ * Several level sets of one field. The field is sampled once and shared by every level, so a
+ * survey of five levels costs one pass over the tone field, not five.
+ */
+export function contourLevels(
+  field: ToneField,
+  levels: readonly number[],
+  cols: number,
+  rows: number,
+): Segment[][] {
   const dx = field.aspect / cols;
   const dy = 1 / rows;
   const grid = new Float32Array((cols + 1) * (rows + 1));
   for (let j = 0; j <= rows; j += 1) {
     for (let i = 0; i <= cols; i += 1) grid[j * (cols + 1) + i] = field.tone(i * dx, j * dy);
   }
+  return levels.map((level) => traceLevel(grid, level, cols, rows, dx, dy));
+}
+
+function traceLevel(
+  grid: Float32Array,
+  level: number,
+  cols: number,
+  rows: number,
+  dx: number,
+  dy: number,
+): Segment[] {
   const at = (i: number, j: number) => grid[j * (cols + 1) + i];
   const cross = (v0: number, v1: number) => (level - v0) / (v1 - v0);
   const segments: Segment[] = [];

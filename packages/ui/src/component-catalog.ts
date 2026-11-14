@@ -424,7 +424,8 @@ export function Example() {
   {
     id: 'segmented-control',
     name: 'SegmentedControl',
-    description: 'Typed single-select control backed by native radios for keyboard and form support.',
+    description:
+      'Typed single-select control backed by native radios for keyboard and form support.',
     category: 'controls',
     importLine: 'import { SegmentedControl } from "@arsenal/ui";',
     props: [
@@ -463,7 +464,8 @@ export function Example() {
   {
     id: 'disclosure-section',
     name: 'DisclosureSection',
-    description: 'Controlled or uncontrolled accessible section with summary, metadata, and action slots.',
+    description:
+      'Controlled or uncontrolled accessible section with summary, metadata, and action slots.',
     category: 'controls',
     importLine: 'import { DisclosureSection } from "@arsenal/ui";',
     props: [
@@ -527,7 +529,8 @@ export function Example() {
   {
     id: 'animated-number',
     name: 'AnimatedNumber',
-    description: 'Tabular figure that counts up to its value and re-animates when the value changes.',
+    description:
+      'Tabular figure that counts up to its value and re-animates when the value changes.',
     category: 'data-display',
     importLine: 'import { AnimatedNumber } from "@arsenal/ui";',
     props: [
@@ -1131,8 +1134,7 @@ export function Example() {
     ],
     usage:
       'Use for many tabs that may overflow, where the indicator should glide to the active tab.',
-    accessibility:
-      'Same tablist keyboard model as Tabs; indicator motion respects reduced motion.',
+    accessibility: 'Same tablist keyboard model as Tabs; indicator motion respects reduced motion.',
     performance:
       'One transformed indicator element; scroll edges are measured on scroll and resize only.',
     code: `import { useState } from "react";
@@ -1333,7 +1335,8 @@ export function Example() {
     ],
     usage:
       'Use before destructive or irreversible actions. Surface failures from onConfirm through error.',
-    accessibility: 'Modal dialog with focus trap, Escape to cancel, and labelled title and description.',
+    accessibility:
+      'Modal dialog with focus trap, Escape to cancel, and labelled title and description.',
     performance: 'Renders its panel only while open.',
     code: `import { ConfirmDialog } from "@arsenal/ui";
 
@@ -1531,7 +1534,13 @@ export function Example() {
     description: 'Live flip-style clock with optional seconds, 12-hour mode, and time zone.',
     category: 'motion',
     importLine: 'import { FlipClock } from "@arsenal/ui";',
-    props: ['hour12?: boolean', 'seconds?: boolean', 'locale?: string', 'timeZone?: string', 'scale?: number'],
+    props: [
+      'hour12?: boolean',
+      'seconds?: boolean',
+      'locale?: string',
+      'timeZone?: string',
+      'scale?: number',
+    ],
     usage: 'Use as a header or hero accent, for example showing market time in a given zone.',
     accessibility: 'Flip motion respects prefers-reduced-motion.',
     performance: 'Ticks once per second and updates only digits that change.',
@@ -1597,7 +1606,8 @@ export function Example() {
   {
     id: 'seo',
     name: 'Seo',
-    description: 'Client-side document title and meta tags, including Open Graph and canonical URL.',
+    description:
+      'Client-side document title and meta tags, including Open Graph and canonical URL.',
     category: 'utilities',
     importLine: 'import { Seo } from "@arsenal/ui";',
     props: [
@@ -1632,9 +1642,15 @@ export function Example() {
     description: 'Animated orbital radar that signals idle, running, or done.',
     category: 'motion',
     importLine: 'import { OrbitRadar } from "@arsenal/ui";',
-    props: ['status: idle | running | done', 'children?: ReactNode', 'size?: number', 'label?: string'],
+    props: [
+      'status: idle | running | done',
+      'children?: ReactNode',
+      'size?: number',
+      'label?: string',
+    ],
     usage: 'Use as a scan or analysis progress indicator with a centre slot for an icon or count.',
-    accessibility: 'Status is conveyed through the label; motion stops under prefers-reduced-motion.',
+    accessibility:
+      'Status is conveyed through the label; motion stops under prefers-reduced-motion.',
     performance: 'Animation only runs while status is running.',
     code: `import { OrbitRadar } from "@arsenal/ui";
 
@@ -1647,21 +1663,22 @@ export function Example() {
 }`,
   },
   {
-    id: "aurora-background",
-    name: "AuroraBackground",
-    description: "Four soft colour pools drifting slowly behind content: the calm cinematic backdrop.",
+    id: 'aurora-background',
+    name: 'AuroraBackground',
+    description:
+      'Four soft colour pools drifting slowly behind content: the calm cinematic backdrop.',
     category: 'effects',
     importLine: 'import { AuroraBackground } from "@arsenal/fx";',
     props: [
-      "palette?: \"dark\" | \"light\" | \"auto\"",
-      "violet?, cyan?, indigo?, amber?: ColorInput",
-      "intensity?: number",
-      "vignette?: boolean",
-      "scrollParallax?: boolean",
+      'palette?: "dark" | "light" | "auto"',
+      'violet?, cyan?, indigo?, amber?: ColorInput',
+      'intensity?: number',
+      'vignette?: boolean',
+      'scrollParallax?: boolean',
     ],
-    usage: "Use behind heroes and landing sections where you want atmosphere without busy motion.",
-    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
-    performance: "CSS-transformed blurred layers; static when motion is reduced.",
+    usage: 'Use behind heroes and landing sections where you want atmosphere without busy motion.',
+    accessibility: 'Decorative and aria-hidden; keep all copy in regular HTML above it.',
+    performance: 'CSS-transformed blurred layers; static when motion is reduced.',
     code: `import { AuroraBackground } from "@arsenal/fx";
 
 export function Example() {
@@ -1674,21 +1691,23 @@ export function Example() {
 }`,
   },
   {
-    id: "cosmic-particle-background",
-    name: "CosmicParticleBackground",
-    description: "A diagonal band of layered stars that drifts, twinkles and parts around the pointer.",
+    id: 'cosmic-particle-background',
+    name: 'CosmicParticleBackground',
+    description:
+      'A diagonal band of layered stars that drifts, twinkles and parts around the pointer.',
     category: 'effects',
     importLine: 'import { CosmicParticleBackground } from "@arsenal/fx";',
     props: [
-      "palette?: \"dark\" | \"light\" | \"auto\"",
-      "violet?, blue?, amber?: ColorInput",
-      "interactive?: boolean",
-      "scrollParallax?: boolean",
-      "seed?: number",
+      'palette?: "dark" | "light" | "auto"',
+      'violet?, blue?, amber?: ColorInput',
+      'interactive?: boolean',
+      'scrollParallax?: boolean',
+      'seed?: number',
     ],
-    usage: "Use as a full-bleed hero field for a night-sky, cinematic first screen.",
-    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
-    performance: "One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.",
+    usage: 'Use as a full-bleed hero field for a night-sky, cinematic first screen.',
+    accessibility: 'Decorative and aria-hidden; keep all copy in regular HTML above it.',
+    performance:
+      'One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.',
     code: `import { CosmicParticleBackground } from "@arsenal/fx";
 
 export function Example() {
@@ -1701,21 +1720,24 @@ export function Example() {
 }`,
   },
   {
-    id: "galaxy-particle-canvas",
-    name: "GalaxyParticleCanvas",
-    description: "An oblique spiral galaxy whose stars drift along their arms and part around the pointer.",
+    id: 'galaxy-particle-canvas',
+    name: 'GalaxyParticleCanvas',
+    description:
+      'An oblique spiral galaxy whose stars drift along their arms and part around the pointer.',
     category: 'effects',
     importLine: 'import { GalaxyParticleCanvas } from "@arsenal/fx";',
     props: [
-      "accent?: ColorInput",
-      "ink?: ColorInput",
-      "palette?: \"dark\" | \"light\" | \"auto\"",
-      "interactive?: boolean",
-      "minCount?, maxCount?: number",
+      'accent?: ColorInput',
+      'ink?: ColorInput',
+      'palette?: "dark" | "light" | "auto"',
+      'interactive?: boolean',
+      'minCount?, maxCount?: number',
     ],
-    usage: "Use as a signature hero visual; additive glow in dark mode, graphite ink on light paper.",
-    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
-    performance: "One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.",
+    usage:
+      'Use as a signature hero visual; additive glow in dark mode, graphite ink on light paper.',
+    accessibility: 'Decorative and aria-hidden; keep all copy in regular HTML above it.',
+    performance:
+      'One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.',
     code: `import { GalaxyParticleCanvas } from "@arsenal/fx";
 
 export function Example() {
@@ -1728,20 +1750,23 @@ export function Example() {
 }`,
   },
   {
-    id: "infinity-particle-canvas",
-    name: "InfinityParticleCanvas",
-    description: "A figure-eight of stars, warm on one lobe and cool on the other, that parts around the pointer.",
+    id: 'infinity-particle-canvas',
+    name: 'InfinityParticleCanvas',
+    description:
+      'A figure-eight of stars, warm on one lobe and cool on the other, that parts around the pointer.',
     category: 'effects',
     importLine: 'import { InfinityParticleCanvas } from "@arsenal/fx";',
     props: [
-      "leftColor?, rightColor?: ColorInput",
-      "palette?: \"dark\" | \"light\" | \"auto\"",
-      "interactive?: boolean",
-      "minCount?, maxCount?: number",
+      'leftColor?, rightColor?: ColorInput',
+      'palette?: "dark" | "light" | "auto"',
+      'interactive?: boolean',
+      'minCount?, maxCount?: number',
     ],
-    usage: "Use for brand marks about balance or loops, such as sync, pipelines or continuous delivery.",
-    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
-    performance: "One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.",
+    usage:
+      'Use for brand marks about balance or loops, such as sync, pipelines or continuous delivery.',
+    accessibility: 'Decorative and aria-hidden; keep all copy in regular HTML above it.',
+    performance:
+      'One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.',
     code: `import { InfinityParticleCanvas } from "@arsenal/fx";
 
 export function Example() {
@@ -1754,21 +1779,24 @@ export function Example() {
 }`,
   },
   {
-    id: "interactive-particles",
-    name: "InteractiveParticles",
-    description: "A living constellation mesh in three depth layers: drifts up, parts on hover, gathers on hold.",
+    id: 'interactive-particles',
+    name: 'InteractiveParticles',
+    description:
+      'A living constellation mesh in three depth layers: drifts up, parts on hover, gathers on hold.',
     category: 'effects',
     importLine: 'import { InteractiveParticles } from "@arsenal/fx";',
     props: [
-      "intensity?: \"normal\" | \"intense\"",
-      "cyan?, amber?, violet?, accent?, highlight?: ColorInput",
-      "interactive?: boolean",
-      "scrollParallax?: boolean",
-      "seed?: number",
+      'intensity?: "normal" | "intense"',
+      'cyan?, amber?, violet?, accent?, highlight?: ColorInput',
+      'interactive?: boolean',
+      'scrollParallax?: boolean',
+      'seed?: number',
     ],
-    usage: "Use where the visual should react to the visitor: hover to part the mesh, press and hold to gather it.",
-    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
-    performance: "One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.",
+    usage:
+      'Use where the visual should react to the visitor: hover to part the mesh, press and hold to gather it.',
+    accessibility: 'Decorative and aria-hidden; keep all copy in regular HTML above it.',
+    performance:
+      'One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.',
     code: `import { InteractiveParticles } from "@arsenal/fx";
 
 export function Example() {
@@ -1781,23 +1809,26 @@ export function Example() {
 }`,
   },
   {
-    id: "morphing-sphere",
-    name: "MorphingSphere",
-    description: "A point cloud that morphs between sphere, torus, wave and other shapes; drag to rotate.",
+    id: 'morphing-sphere',
+    name: 'MorphingSphere',
+    description:
+      'A point cloud that morphs between sphere, torus, wave and other shapes; drag to rotate.',
     category: 'effects',
     importLine: 'import { MorphingSphere } from "@arsenal/fx";',
     props: [
-      "shape?: MorphShape (controlled)",
-      "defaultShape?: MorphShape",
-      "showControls?: boolean",
-      "colors?: ColorInput[]",
-      "links?: boolean",
-      "height?: number | string",
-      "interactive?: boolean",
+      'shape?: MorphShape (controlled)',
+      'defaultShape?: MorphShape',
+      'showControls?: boolean',
+      'colors?: ColorInput[]',
+      'links?: boolean',
+      'height?: number | string',
+      'interactive?: boolean',
     ],
-    usage: "Use as a centrepiece in a hero or product section; the built-in controls switch shapes.",
-    accessibility: "Shape controls are real buttons with labels; the canvas itself is decorative.",
-    performance: "One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.",
+    usage:
+      'Use as a centrepiece in a hero or product section; the built-in controls switch shapes.',
+    accessibility: 'Shape controls are real buttons with labels; the canvas itself is decorative.',
+    performance:
+      'One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.',
     code: `import { MorphingSphere } from "@arsenal/fx";
 
 export function Example() {
@@ -1807,20 +1838,22 @@ export function Example() {
 }`,
   },
   {
-    id: "noise-texture",
-    name: "NoiseTexture",
-    description: "A film-grain overlay that takes the banding off flat gradients. Static, no JS work.",
+    id: 'noise-texture',
+    name: 'NoiseTexture',
+    description:
+      'A film-grain overlay that takes the banding off flat gradients. Static, no JS work.',
     category: 'effects',
     importLine: 'import { NoiseTexture } from "@arsenal/fx";',
     props: [
-      "opacity?: number",
-      "frequency?: number",
-      "tileSize?: number",
-      "blendMode?: CSSProperties[\"mixBlendMode\"]",
+      'opacity?: number',
+      'frequency?: number',
+      'tileSize?: number',
+      'blendMode?: CSSProperties["mixBlendMode"]',
     ],
-    usage: "Layer over gradients and aurora backdrops to make them feel printed rather than digital.",
-    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
-    performance: "A tiled SVG data URL; no animation loop.",
+    usage:
+      'Layer over gradients and aurora backdrops to make them feel printed rather than digital.',
+    accessibility: 'Decorative and aria-hidden; keep all copy in regular HTML above it.',
+    performance: 'A tiled SVG data URL; no animation loop.',
     code: `import { NoiseTexture } from "@arsenal/fx";
 
 export function Example() {
@@ -1833,20 +1866,22 @@ export function Example() {
 }`,
   },
   {
-    id: "particle-burst",
-    name: "ParticleBurst",
-    description: "A transparent overlay that throws sparks with gravity and soft wall bounces on demand.",
+    id: 'particle-burst',
+    name: 'ParticleBurst',
+    description:
+      'A transparent overlay that throws sparks with gravity and soft wall bounces on demand.',
     category: 'effects',
     importLine: 'import { ParticleBurst } from "@arsenal/fx";',
     props: [
-      "ref: ParticleBurstHandle (burst(at?, options?), clear())",
-      "colors?: ColorInput[]",
-      "burst?: BurstOptions",
-      "seed?: number",
+      'ref: ParticleBurstHandle (burst(at?, options?), clear())',
+      'colors?: ColorInput[]',
+      'burst?: BurstOptions',
+      'seed?: number',
     ],
-    usage: "Call ref.current.burst(event) from a click handler to celebrate a completed action.",
-    accessibility: "Decorative and aria-hidden; skipped entirely with reduced motion, so never carry meaning in it alone.",
-    performance: "Canvas only runs while sparks are alive.",
+    usage: 'Call ref.current.burst(event) from a click handler to celebrate a completed action.',
+    accessibility:
+      'Decorative and aria-hidden; skipped entirely with reduced motion, so never carry meaning in it alone.',
+    performance: 'Canvas only runs while sparks are alive.',
     code: `import { useRef } from "react";
 import { ParticleBurst, type ParticleBurstHandle } from "@arsenal/fx";
 
@@ -1861,22 +1896,24 @@ export function Example() {
 }`,
   },
   {
-    id: "weather-canvas",
-    name: "WeatherCanvas",
-    description: "Rain, snow, petals or leaves with wind, ripples and lightning, driven by a weather state.",
+    id: 'weather-canvas',
+    name: 'WeatherCanvas',
+    description:
+      'Rain, snow, petals or leaves with wind, ripples and lightning, driven by a weather state.',
     category: 'effects',
     importLine: 'import { WeatherCanvas } from "@arsenal/fx";',
     props: [
-      "weather?: WeatherState",
-      "precip?: \"none\" | \"rain\" | \"snow\" | \"petals\" | \"leaves\"",
-      "intensity?: number",
-      "wind?: number",
-      "lightning?: boolean",
-      "ripples?: boolean",
+      'weather?: WeatherState',
+      'precip?: "none" | "rain" | "snow" | "petals" | "leaves"',
+      'intensity?: number',
+      'wind?: number',
+      'lightning?: boolean',
+      'ripples?: boolean',
     ],
-    usage: "Use for ambient seasonal or live-weather scenes behind content.",
-    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
-    performance: "One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.",
+    usage: 'Use for ambient seasonal or live-weather scenes behind content.',
+    accessibility: 'Decorative and aria-hidden; keep all copy in regular HTML above it.',
+    performance:
+      'One canvas on a shared rAF loop; paused off-screen and frozen when the user prefers reduced motion.',
     code: `import { WeatherCanvas } from "@arsenal/fx";
 
 export function Example() {
@@ -1889,21 +1926,24 @@ export function Example() {
 }`,
   },
   {
-    id: "gravity-well",
-    name: "GravityWell",
-    description: "A black hole with a two-armed Keplerian accretion disk, rendered in WebGL with React Three Fiber.",
+    id: 'gravity-well',
+    name: 'GravityWell',
+    description:
+      'A black hole with a two-armed Keplerian accretion disk, rendered in WebGL with React Three Fiber.',
     category: 'effects',
     importLine: 'import { GravityWell } from "@arsenal/three";',
     props: [
-      "particleCount?: number",
-      "diskSpeed?: number",
-      "colorTheme?: \"theme\" | \"indigo\" | \"amber\" | \"emerald\"",
-      "autoColor?: boolean",
-      "palette?: \"dark\" | \"light\" | \"auto\"",
+      'particleCount?: number',
+      'diskSpeed?: number',
+      'colorTheme?: "theme" | "indigo" | "amber" | "emerald"',
+      'autoColor?: boolean',
+      'palette?: "dark" | "light" | "auto"',
     ],
-    usage: "Use as a signature hero visual or a section centrepiece. Needs the optional three and @react-three/fiber peers.",
-    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML above it.",
-    performance: "Orbits run in the vertex shader (no per-frame CPU work); renders on demand when off screen, in a background tab or with reduced motion.",
+    usage:
+      'Use as a signature hero visual or a section centrepiece. Needs the optional three and @react-three/fiber peers.',
+    accessibility: 'Decorative and aria-hidden; keep all copy in regular HTML above it.',
+    performance:
+      'Orbits run in the vertex shader (no per-frame CPU work); renders on demand when off screen, in a background tab or with reduced motion.',
     code: `import { GravityWell } from "@arsenal/three";
 
 export function Example() {
@@ -1915,19 +1955,19 @@ export function Example() {
 }`,
   },
   {
-    id: "island-base",
-    name: "IslandBase",
-    description: "The floating island on its own: layered rock strata under a mossy, noise-edged top with a small glassy pond. Static geometry.",
+    id: 'island-base',
+    name: 'IslandBase',
+    description:
+      'The floating island on its own: layered rock strata under a mossy, noise-edged top with a small glassy pond. Static geometry.',
     category: 'hero',
     importLine: 'import { IslandBase } from "@arsenal/three";',
-    props: [
-      "light?: boolean",
-      "size?: Partial<{ width; depth; height }>",
-      "pond?: boolean",
-    ],
-    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
-    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
-    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    props: ['light?: boolean', 'size?: Partial<{ width; depth; height }>', 'pond?: boolean'],
+    usage:
+      'A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.',
+    accessibility:
+      'Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.',
+    performance:
+      'Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.',
     code: `import { HeroStage, IslandBase } from "@arsenal/three";
 
 export function Example() {
@@ -1941,25 +1981,29 @@ export function Example() {
 }`,
   },
   {
-    id: "bonsai-tree",
-    name: "BonsaiTree",
-    description: "A studio-grade procedural bonsai: a seeded moyogi trunk with jin, shari and nebari, bark-plate relief, 6–10 pads of instanced leaf cards in shader wind, and a clay pot. BonsaiStudio adds the turntable, environment, contact shadow and cyclorama.",
+    id: 'bonsai-tree',
+    name: 'BonsaiTree',
+    description:
+      'A studio-grade procedural bonsai: a seeded moyogi trunk with jin, shari and nebari, bark-plate relief, 6–10 pads of instanced leaf cards in shader wind, and a clay pot. BonsaiStudio adds the turntable, environment, contact shadow and cyclorama.',
     category: 'hero',
     importLine: 'import { BonsaiStudio, BonsaiTree } from "@arsenal/three";',
     props: [
-      "seed?: number  // same seed, same tree",
-      "quality?: \"high\" | \"medium\" | \"low\"  // ~120k / 60k / 25k triangles",
-      "foliageDensity?: number  // 0.25–2 leaf cards per pad",
-      "pot?: boolean",
-      "season?: BonsaiSeason",
-      "wind?: number  // 0 holds still",
-      "textureBase?: string  // where the 1024² WebP bark, leaf, moss and clay maps are served (default /assets/bonsai/)",
-      "light?: boolean",
-      "reducedMotion?: boolean",
+      'seed?: number  // same seed, same tree',
+      'quality?: "high" | "medium" | "low"  // ~120k / 60k / 25k triangles',
+      'foliageDensity?: number  // 0.25–2 leaf cards per pad',
+      'pot?: boolean',
+      'season?: BonsaiSeason',
+      'wind?: number  // 0 holds still',
+      'textureBase?: string  // where the 1024² WebP bark, leaf, moss and clay maps are served (default /assets/bonsai/)',
+      'light?: boolean',
+      'reducedMotion?: boolean',
     ],
-    usage: "Drop BonsaiTree into BonsaiStudio for the full showcase (orbit, auto-rotate that resumes after 4 s, PMREM environment, ACES and bloom), or into HeroStage or any R3F Canvas as a hero piece. BonsaiTreeLite stays available as the lightweight stylised version.",
-    accessibility: "Decorative; keep meaning and copy in HTML. Reduced motion freezes wind and the turntable on a composed still.",
-    performance: "One merged trunk mesh, one instanced leaf draw per tree, shared textures released on unmount; wind and turntable pause offscreen. Holds 60 fps at medium quality at 1280×720.",
+    usage:
+      'Drop BonsaiTree into BonsaiStudio for the full showcase (orbit, auto-rotate that resumes after 4 s, PMREM environment, ACES and bloom), or into HeroStage or any R3F Canvas as a hero piece. BonsaiTreeLite stays available as the lightweight stylised version.',
+    accessibility:
+      'Decorative; keep meaning and copy in HTML. Reduced motion freezes wind and the turntable on a composed still.',
+    performance:
+      'One merged trunk mesh, one instanced leaf draw per tree, shared textures released on unmount; wind and turntable pause offscreen. Holds 60 fps at medium quality at 1280×720.',
     code: `import { BonsaiStudio, BonsaiTree } from "@arsenal/three";
 
 export function Example() {
@@ -1973,21 +2017,25 @@ export function Example() {
 }`,
   },
   {
-    id: "waterfall",
-    name: "Waterfall",
-    description: "A falling water sheet with scrolling shader streaks and mist where it lands. The origin is the lip.",
+    id: 'waterfall',
+    name: 'Waterfall',
+    description:
+      'A falling water sheet with scrolling shader streaks and mist where it lands. The origin is the lip.',
     category: 'hero',
     importLine: 'import { Waterfall } from "@arsenal/three";',
     props: [
-      "width?: number",
-      "height?: number",
-      "speed?: number",
-      "opacity?: number",
-      "mist?: boolean",
+      'width?: number',
+      'height?: number',
+      'speed?: number',
+      'opacity?: number',
+      'mist?: boolean',
     ],
-    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
-    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
-    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    usage:
+      'A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.',
+    accessibility:
+      'Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.',
+    performance:
+      'Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.',
     code: `import { HeroStage, Waterfall } from "@arsenal/three";
 
 export function Example() {
@@ -2001,19 +2049,19 @@ export function Example() {
 }`,
   },
   {
-    id: "water-basin",
-    name: "WaterBasin",
-    description: "Still, glossy dark water with slow amber ripple rings (4–8s) spreading from the points you give.",
+    id: 'water-basin',
+    name: 'WaterBasin',
+    description:
+      'Still, glossy dark water with slow amber ripple rings (4–8s) spreading from the points you give.',
     category: 'hero',
     importLine: 'import { WaterBasin } from "@arsenal/three";',
-    props: [
-      "size?: [number, number]",
-      "ripples?: Vec3[]",
-      "ripplePeriod?: number  // seconds",
-    ],
-    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
-    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
-    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    props: ['size?: [number, number]', 'ripples?: Vec3[]', 'ripplePeriod?: number  // seconds'],
+    usage:
+      'A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.',
+    accessibility:
+      'Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.',
+    performance:
+      'Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.',
     code: `import { HeroStage, WaterBasin } from "@arsenal/three";
 
 export function Example() {
@@ -2027,23 +2075,27 @@ export function Example() {
 }`,
   },
   {
-    id: "orbital-ring",
-    name: "OrbitalRing",
-    description: "One glass orbital band with a warm light streak circling it every 20–40s. Stack several with different tilts.",
+    id: 'orbital-ring',
+    name: 'OrbitalRing',
+    description:
+      'One glass orbital band with a warm light streak circling it every 20–40s. Stack several with different tilts.',
     category: 'hero',
     importLine: 'import { OrbitalRing } from "@arsenal/three";',
     props: [
-      "radius?: number",
-      "tilt?: [x, z]  // radians",
-      "period?: number",
-      "phase?: number",
-      "active?: boolean",
-      "streak?: boolean",
-      "bandWidth?: number",
+      'radius?: number',
+      'tilt?: [x, z]  // radians',
+      'period?: number',
+      'phase?: number',
+      'active?: boolean',
+      'streak?: boolean',
+      'bandWidth?: number',
     ],
-    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
-    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
-    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    usage:
+      'A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.',
+    accessibility:
+      'Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.',
+    performance:
+      'Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.',
     code: `import { HeroStage, OrbitalRing } from "@arsenal/three";
 
 export function Example() {
@@ -2057,21 +2109,25 @@ export function Example() {
 }`,
   },
   {
-    id: "core-sphere",
-    name: "CoreSphere",
-    description: "The glass core: physical sphere, rim glow, a node graph on its surface (each node with its own status) and a light beam.",
+    id: 'core-sphere',
+    name: 'CoreSphere',
+    description:
+      'The glass core: physical sphere, rim glow, a node graph on its surface (each node with its own status) and a light beam.',
     category: 'hero',
     importLine: 'import { CoreSphere } from "@arsenal/three";',
     props: [
-      "radius?: number",
-      "nodes?: { direction: Vec3; status?: HeroStatus; hub?: boolean }[]",
-      "links?: [number, number][]",
-      "beam?: boolean",
-      "spin?: number",
+      'radius?: number',
+      'nodes?: { direction: Vec3; status?: HeroStatus; hub?: boolean }[]',
+      'links?: [number, number][]',
+      'beam?: boolean',
+      'spin?: number',
     ],
-    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
-    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
-    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    usage:
+      'A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.',
+    accessibility:
+      'Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.',
+    performance:
+      'Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.',
     code: `import { HeroStage, CoreSphere } from "@arsenal/three";
 
 export function Example() {
@@ -2085,20 +2141,24 @@ export function Example() {
 }`,
   },
   {
-    id: "service-node",
-    name: "ServiceNode",
-    description: "A service module block with lit windows and a status ring: idle, hover, selected, dependency, failure (red pulse) and recovery (red → green → amber).",
+    id: 'service-node',
+    name: 'ServiceNode',
+    description:
+      'A service module block with lit windows and a status ring: idle, hover, selected, dependency, failure (red pulse) and recovery (red → green → amber).',
     category: 'hero',
     importLine: 'import { ServiceNode } from "@arsenal/three";',
     props: [
-      "status?: \"idle\" | \"hover\" | \"selected\" | \"dependency\" | \"failure\" | \"recovery\"",
-      "height?: number",
-      "onHoverChange?: (hovered: boolean) => void",
-      "onSelect?: () => void",
+      'status?: "idle" | "hover" | "selected" | "dependency" | "failure" | "recovery"',
+      'height?: number',
+      'onHoverChange?: (hovered: boolean) => void',
+      'onSelect?: () => void',
     ],
-    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
-    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
-    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    usage:
+      'A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.',
+    accessibility:
+      'Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.',
+    performance:
+      'Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.',
     code: `import { HeroStage, ServiceNode } from "@arsenal/three";
 
 export function Example() {
@@ -2112,24 +2172,28 @@ export function Example() {
 }`,
   },
   {
-    id: "data-path",
-    name: "DataPath",
-    description: "An arc between two points with a packet travelling it every 1–2s. Request, response, telemetry and fallback styles, plus active, dimmed and error.",
+    id: 'data-path',
+    name: 'DataPath',
+    description:
+      'An arc between two points with a packet travelling it every 1–2s. Request, response, telemetry and fallback styles, plus active, dimmed and error.',
     category: 'hero',
     importLine: 'import { DataPath } from "@arsenal/three";',
     props: [
-      "from: Vec3",
-      "to: Vec3",
-      "kind?: \"request\" | \"response\" | \"telemetry\" | \"fallback\"",
-      "lift?: number",
-      "active?: boolean",
-      "dimmed?: boolean",
-      "error?: boolean",
-      "period?: number",
+      'from: Vec3',
+      'to: Vec3',
+      'kind?: "request" | "response" | "telemetry" | "fallback"',
+      'lift?: number',
+      'active?: boolean',
+      'dimmed?: boolean',
+      'error?: boolean',
+      'period?: number',
     ],
-    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
-    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
-    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    usage:
+      'A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.',
+    accessibility:
+      'Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.',
+    performance:
+      'Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.',
     code: `import { HeroStage, DataPath } from "@arsenal/three";
 
 export function Example() {
@@ -2143,21 +2207,25 @@ export function Example() {
 }`,
   },
   {
-    id: "scene-accents",
-    name: "SceneAccents",
-    description: "Scattered foliage cones and low-poly rocks on a deterministic golden-angle spiral, sized for the default island.",
+    id: 'scene-accents',
+    name: 'SceneAccents',
+    description:
+      'Scattered foliage cones and low-poly rocks on a deterministic golden-angle spiral, sized for the default island.',
     category: 'hero',
     importLine: 'import { SceneAccents } from "@arsenal/three";',
     props: [
-      "quality?: \"high\" | \"medium\" | \"low\"",
-      "foliage?: boolean",
-      "rocks?: boolean",
-      "spread?: number",
-      "depth?: number",
+      'quality?: "high" | "medium" | "low"',
+      'foliage?: boolean',
+      'rocks?: boolean',
+      'spread?: number',
+      'depth?: number',
     ],
-    usage: "A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.",
-    accessibility: "Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.",
-    performance: "Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.",
+    usage:
+      'A standalone hero piece. Put it in any React Three Fiber Canvas, or in HeroStage for the camera, light rig, bloom, theme and reduced motion. Combine pieces freely.',
+    accessibility:
+      'Decorative and aria-hidden inside HeroStage; keep meaning and copy in HTML. Reduced motion freezes it on a composed still.',
+    performance:
+      'Shared geometries and materials, instancing where it repeats, disposed on unmount; HeroStage only animates on screen.',
     code: `import { HeroStage, SceneAccents } from "@arsenal/three";
 
 export function Example() {
@@ -2171,24 +2239,28 @@ export function Example() {
 }`,
   },
   {
-    id: "cinematic-plate",
-    name: "CinematicPlate",
-    description: "A cinematic art-plate hero: one still image brought to life by a single WebGL pass (lake ripples, waterfall flow, glass-ring light, orbiting lights, core sparkle, beam) with a springed parallax camera.",
+    id: 'cinematic-plate',
+    name: 'CinematicPlate',
+    description:
+      'A cinematic art-plate hero: one still image brought to life by a single WebGL pass (lake ripples, waterfall flow, glass-ring light, orbiting lights, core sparkle, beam) with a springed parallax camera.',
     category: 'hero',
     importLine: 'import { CinematicPlate } from "@arsenal/scene/react";',
     props: [
-      "src: string  // plate image",
-      "srcLight?: string  // same composition, light theme",
-      "light?: boolean",
-      "map?: SceneMap  // where the live layers sit; defaults to HERO_PLATE",
-      "components?: (\"water\" | \"falls\" | \"rings\" | \"orbits\" | \"sphere\" | \"beam\")[]",
-      "camera?: boolean  // pointer parallax + scroll push-in",
-      "cameraTuning?: CameraTuning",
-      "onError?: (error: Error) => void",
+      'src: string  // plate image',
+      'srcLight?: string  // same composition, light theme',
+      'light?: boolean',
+      'map?: SceneMap  // where the live layers sit; defaults to HERO_PLATE',
+      'components?: ("water" | "falls" | "rings" | "orbits" | "sphere" | "beam")[]',
+      'camera?: boolean  // pointer parallax + scroll push-in',
+      'cameraTuning?: CameraTuning',
+      'onError?: (error: Error) => void',
     ],
-    usage: "Use as a hero when you have (or generate) one art plate of the scene. Measure a SceneMap for your own plate; the bundled HERO_PLATE fits the sample plate.",
-    accessibility: "Decorative by default (empty alt). Reduced motion shows one still frame and holds the camera.",
-    performance: "One draw call per frame, WebGL 1, canvas capped at 2048px wide; paused off screen and in background tabs. Without WebGL the static plate stays and the error is logged.",
+    usage:
+      'Use as a hero when you have (or generate) one art plate of the scene. Measure a SceneMap for your own plate; the bundled HERO_PLATE fits the sample plate.',
+    accessibility:
+      'Decorative by default (empty alt). Reduced motion shows one still frame and holds the camera.',
+    performance:
+      'One draw call per frame, WebGL 1, canvas capped at 2048px wide; paused off screen and in background tabs. Without WebGL the static plate stays and the error is logged.',
     code: `import { CinematicPlate } from "@arsenal/scene/react";
 
 export function Hero() {
@@ -2200,22 +2272,25 @@ export function Hero() {
 }`,
   },
   {
-    id: "anomaly-matrix",
-    name: "AnomalyMatrix",
-    description: "A noise-displaced wireframe sphere with a rim glow that breathes, in its own WebGL canvas (GodSphere mesh included).",
+    id: 'anomaly-matrix',
+    name: 'AnomalyMatrix',
+    description:
+      'A noise-displaced wireframe sphere with a rim glow that breathes, in its own WebGL canvas (GodSphere mesh included).',
     category: 'effects',
     importLine: 'import { AnomalyMatrix, GodSphere } from "@arsenal/three";',
     props: [
-      "speed?: number",
-      "scale?: number",
-      "charge?: number  // 0-1, eases between core and outer colour",
-      "detail?: number",
-      "colorTheme?: \"theme\" | \"indigo\" | \"amber\" | \"emerald\"",
-      "autoColor?: boolean",
+      'speed?: number',
+      'scale?: number',
+      'charge?: number  // 0-1, eases between core and outer colour',
+      'detail?: number',
+      'colorTheme?: "theme" | "indigo" | "amber" | "emerald"',
+      'autoColor?: boolean',
     ],
-    usage: "Use as a hero centrepiece or drop <GodSphere> into your own R3F scene. Drive charge from scroll or state.",
-    accessibility: "Decorative and aria-hidden; with reduced motion it renders one still frame.",
-    performance: "Displacement runs on the GPU; lower detail for small cards. Paused off screen and in background tabs.",
+    usage:
+      'Use as a hero centrepiece or drop <GodSphere> into your own R3F scene. Drive charge from scroll or state.',
+    accessibility: 'Decorative and aria-hidden; with reduced motion it renders one still frame.',
+    performance:
+      'Displacement runs on the GPU; lower detail for small cards. Paused off screen and in background tabs.',
     code: `import { AnomalyMatrix } from "@arsenal/three";
 
 export function Example() {
@@ -2232,8 +2307,7 @@ export function Example() {
     description:
       'Re-prints a photo as ink on paper: a two-screen halftone or Sobel linework on a canvas, coloured from your theme tokens.',
     category: 'backgrounds',
-    importLine:
-      'import { PrintPlate } from "@arsenal/fx";\nimport "@arsenal/fx/print-plate.css";',
+    importLine: 'import { PrintPlate } from "@arsenal/fx";\nimport "@arsenal/fx/print-plate.css";',
     props: [
       'src: string',
       'treatment: "halftone" | "linework"',
@@ -2306,6 +2380,7 @@ export function FrontPage({ dark }: { dark: boolean }) {
       'chapterScene(chapter: Chapter, aspect: number, texture?: number): ChapterScene  // a ToneField with spots',
       'cutRibbons(field: ToneField, { spacing, step, fill?, invert? }): Ribbon[][]',
       'contours(field: ToneField, level: number, cols: number, rows: number): Segment[]',
+      'contourLevels(field: ToneField, levels: number[], cols: number, rows: number): Segment[][]',
     ],
     usage:
       'Art for print designs that should not filter photographs: engrave a chapter for an editorial look, or trace its contours for a drafting look. Draw in unit space (setTransform by the canvas height). Spots mark where an accent mark belongs.',
@@ -2341,7 +2416,7 @@ export function drawPlate(ctx: CanvasRenderingContext2D, ink: string) {
     accessibility:
       'Content and routes never change between designs, only presentation; build the switcher as a labelled menu from registry.menu().',
     performance:
-      'Hooks are lazy loaders, so the default design ships none of the other designs\' code. Never throws on blocked storage.',
+      "Hooks are lazy loaders, so the default design ships none of the other designs' code. Never throws on blocked storage.",
     code: `import { createDesignRegistry } from "@arsenal/themes";
 
 export const designs = createDesignRegistry([
@@ -2516,7 +2591,8 @@ export function Wire() {
       'Import the CSS, then put data-design="<id>" on <html> or any container; data-theme flips it to the other mode. Nothing changes until the attribute is set.',
     accessibility:
       'Each skin sets color-scheme so native controls follow the mode. Token values are copied verbatim from the redesign site.',
-    performance: 'Custom properties only: no runtime, no layout cost. Fonts are system stacks (Inter optional).',
+    performance:
+      'Custom properties only: no runtime, no layout cost. Fonts are system stacks (Inter optional).',
     code: `import { designSkinAttributes } from "@arsenal/themes";
 import "@arsenal/themes/designs/broadsheet.css";
 

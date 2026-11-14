@@ -160,10 +160,12 @@ survey lines (Blueprint). Deterministic, subjects right of centre, `Spot`s mark 
 belongs.
 
 ```ts
-import { chapterScene, cutRibbons, contours, paintRibbons } from "@arsenal/fx";
+import { chapterScene, cutRibbons, contours, contourLevels, paintRibbons } from "@arsenal/fx";
 const scene = chapterScene("about", 16 / 9);
 paintRibbons(ctx, cutRibbons(scene, { spacing: 0.0085, step: 0.0025 }), ink); // engraving
 const lines = contours(chapterScene("about", 16 / 9, 0.3), 0.5, 420, 236); // [x1,y1,x2,y2][]
+// Several levels: sample the field once and trace each, not one contours() call per level.
+const survey = contourLevels(chapterScene("about", 16 / 9, 0.3), [0.2, 0.5, 0.8], 420, 236);
 ```
 
 Draw in unit space (`ctx.setTransform(h, 0, 0, h, 0, 0)`). Tips from the site: map the faintest
