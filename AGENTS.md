@@ -13,6 +13,26 @@
 
 ---
 
+## Context Policy (`.arsenal/` Knowledge Layer)
+
+Use `.arsenal/` context files before reading raw source to keep token usage lean.
+
+**Priority order before editing:**
+1. `.arsenal/memory/active-task.md`
+2. `.arsenal/summaries/architecture.md`
+3. `.arsenal/repo-map.json`
+4. `.arsenal/knowledge-graph.json`
+5. Relevant file summaries
+6. Raw source files only when required
+
+**After editing:**
+- Update `.arsenal/memory/active-task.md`
+- Update summaries if architecture changed
+- Run relevant tests (`pnpm build` / `pnpm test`)
+- Prefer precise edits; avoid rewriting whole files unless necessary.
+
+---
+
 ## Repository Layout
 - `packages/*` - Core reusable blocks. Product-agnostic.
 
