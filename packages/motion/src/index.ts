@@ -4,6 +4,7 @@ export { Reveal } from "./reveal";
 export { ParallaxSection } from "./parallax";
 export { SmoothScrollProvider } from "./smooth-scroll";
 export { MagneticButton } from "./magnetic-button";
+export { MagneticLink, magneticOffset, type MagneticLinkProps } from "./magnetic-link";
 export {
   ANIMATION_PRESETS,
   getAnimationPreset,

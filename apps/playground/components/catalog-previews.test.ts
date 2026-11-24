@@ -22,12 +22,17 @@ describe('catalog previews', () => {
       'aurora-background',
       'cosmic-particle-background',
       'galaxy-particle-canvas',
+      'galaxy-scene',
       'gravity-well',
+      'immersive-background',
+      'infinity-mark',
       'infinity-particle-canvas',
+      'infinity-scene',
       'interactive-particles',
       'morphing-sphere',
       'noise-texture',
       'particle-burst',
+      'spotlight-card',
       'weather-canvas',
     ]);
   });

@@ -1728,6 +1728,53 @@ export function Example() {
 }`,
   },
   {
+    id: "immersive-background",
+    name: "ImmersiveBackground",
+    description: "A whole-page atmosphere in three depth layers (colour pools, drifting particles, aurora and grain) that slide at different speeds on scroll.",
+    category: 'effects',
+    importLine: 'import { ImmersiveBackground } from "@arsenal/fx";',
+    props: [
+      "palette?: \"dark\" | \"light\" | \"auto\"",
+      "fixed?, scrollParallax?: boolean",
+      "particles?, aurora?, noise?, interactive?: boolean",
+      "zIndex?: number",
+    ],
+    usage: "Render once near the root, behind the content. Pass fixed={false} to fill a positioned parent instead of the viewport.",
+    accessibility: "Decorative and aria-hidden; it never takes pointer events. Scroll drift is off under reduced motion.",
+    performance: "Scroll writes three transforms per frame at most, with no React re-render; the particle canvas pauses off-screen.",
+    code: `import { ImmersiveBackground } from "@arsenal/fx";
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <ImmersiveBackground />
+      <main className="relative z-10">{children}</main>
+    </>
+  );
+}`,
+  },
+  {
+    id: "infinity-mark",
+    name: "InfinityMark",
+    description: "The infinity symbol as a crisp SVG mark: a two-colour stroke with a soft glow and a slow pulse where the loops cross.",
+    category: 'effects',
+    importLine: 'import { InfinityMark } from "@arsenal/fx";',
+    props: [
+      "leftColor?, rightColor?, centerColor?: ColorInput",
+      "palette?: \"dark\" | \"light\" | \"auto\"",
+      "animated?, halo?: boolean",
+      "title?: string",
+    ],
+    usage: "Use as a logo-size brand mark in headers, loaders and cards. It scales with its width.",
+    accessibility: "Decorative by default. Pass title to expose it as an image with that label.",
+    performance: "Pure SVG; a single looping pulse that is still under reduced motion.",
+    code: `import { InfinityMark } from "@arsenal/fx";
+
+export function Example() {
+  return <InfinityMark title="Infinity" style={{ width: 160 }} />;
+}`,
+  },
+  {
     id: "infinity-particle-canvas",
     name: "InfinityParticleCanvas",
     description: "A figure-eight of stars, warm on one lobe and cool on the other, that parts around the pointer.",
@@ -1750,6 +1797,57 @@ export function Example() {
       <InfinityParticleCanvas interactive />
       <h1 className="relative p-10 text-4xl font-semibold">Ship faster</h1>
     </section>
+  );
+}`,
+  },
+  {
+    id: "infinity-scene",
+    name: "InfinityScene",
+    description: "The complete infinity hero: the particle symbol wrapped in haze, bloom and grain, melting into the page and drifting with pointer and scroll.",
+    category: 'effects',
+    importLine: 'import { InfinityScene } from "@arsenal/fx";',
+    props: [
+      "leftColor?, rightColor?, background?: ColorInput",
+      "palette?: \"dark\" | \"light\" | \"auto\"",
+      "interactive?, pointerParallax?, scrollParallax?, grain?: boolean",
+      "parallaxStrength?: number",
+    ],
+    usage: "Use as the signature hero visual. Place it straight on the page, not in a card: its edges fade into the page background.",
+    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML next to it.",
+    performance: "One canvas plus blurred CSS layers; pointer and scroll drift write transforms at most once per frame and stop under reduced motion.",
+    code: `import { InfinityScene } from "@arsenal/fx";
+
+export function Hero() {
+  return (
+    <header>
+      <InfinityScene />
+      <h1 className="text-center text-5xl font-semibold">Build without limits</h1>
+    </header>
+  );
+}`,
+  },
+  {
+    id: "magnetic-link",
+    name: "MagneticLink",
+    description: "A link that leans toward the pointer and carries a soft highlight under it.",
+    category: 'motion',
+    importLine: 'import { MagneticLink } from "@arsenal/motion";',
+    props: [
+      "strength?: number",
+      "sheen?: boolean",
+      "sheenColor?: string",
+      "...anchor props",
+    ],
+    usage: "Use for the one or two primary links in a hero or nav. Style it like any anchor; --mx, --my and data-hover are exposed for custom effects.",
+    accessibility: "A real anchor with normal focus and keyboard behaviour. The lean is off under reduced motion.",
+    performance: "Pointer moves write CSS variables and one transform directly, with no re-render per move.",
+    code: `import { MagneticLink } from "@arsenal/motion";
+
+export function Example() {
+  return (
+    <MagneticLink href="/work" className="rounded-full border px-5 py-2">
+      See the work
+    </MagneticLink>
   );
 }`,
   },
@@ -1861,6 +1959,32 @@ export function Example() {
 }`,
   },
   {
+    id: "spotlight-card",
+    name: "SpotlightCard",
+    description: "A glass card that answers the pointer: a spotlight follows it, a rim light swings round the border toward it, and the card tilts a few degrees.",
+    category: 'effects',
+    importLine: 'import { SpotlightCard } from "@arsenal/fx";',
+    props: [
+      "accent?, secondary?: ColorInput",
+      "palette?: \"dark\" | \"light\" | \"auto\"",
+      "maxTilt?, radius?: number",
+      "padding?: string | number",
+    ],
+    usage: "Use for a short row of feature or pillar cards. Any content goes inside; it also accepts every div prop.",
+    accessibility: "A plain div: content keeps its own semantics. The light layers are aria-hidden and the tilt is off under reduced motion.",
+    performance: "Pointer moves write CSS variables and one transform directly; React only re-renders on hover in and out.",
+    code: `import { SpotlightCard } from "@arsenal/fx";
+
+export function Example() {
+  return (
+    <SpotlightCard>
+      <h3 className="text-lg font-semibold">Systems thinking</h3>
+      <p className="mt-2 text-sm">Design the whole pipeline, not one step.</p>
+    </SpotlightCard>
+  );
+}`,
+  },
+  {
     id: "weather-canvas",
     name: "WeatherCanvas",
     description: "Rain, snow, petals or leaves with wind, ripples and lightning, driven by a weather state.",
@@ -1884,6 +2008,31 @@ export function Example() {
     <section className="relative min-h-[420px] overflow-hidden">
       <WeatherCanvas precip="rain" intensity={0.7} wind={0.3} ripples />
       <h1 className="relative p-10 text-4xl font-semibold">Ship faster</h1>
+    </section>
+  );
+}`,
+  },
+  {
+    id: "galaxy-scene",
+    name: "GalaxyScene",
+    description: "The spiral galaxy as a finished section visual: haze, bloom, a soft edge fade and film grain around the particle galaxy.",
+    category: 'effects',
+    importLine: 'import { GalaxyScene } from "@arsenal/fx";',
+    props: [
+      "accent?, background?: ColorInput",
+      "palette?: \"dark\" | \"light\" | \"auto\"",
+      "interactive?, backdrop?, grain?: boolean",
+      "seed?: number",
+    ],
+    usage: "Use as a full-width section visual between content blocks. Set a height through style, or keep the tall default.",
+    accessibility: "Decorative and aria-hidden; keep all copy in regular HTML next to it.",
+    performance: "One canvas plus a few blurred CSS layers; the canvas pauses off-screen and freezes under reduced motion.",
+    code: `import { GalaxyScene } from "@arsenal/fx";
+
+export function Example() {
+  return (
+    <section aria-label="Spiral galaxy">
+      <GalaxyScene />
     </section>
   );
 }`,

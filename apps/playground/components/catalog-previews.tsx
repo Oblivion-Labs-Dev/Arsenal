@@ -3,16 +3,22 @@
 import { type ReactNode, useMemo, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { HERO_PLATE_PIECES, type HeroPlatePieceId } from '@arsenal/scene';
+import { MagneticLink } from '@arsenal/motion';
 import {
   AuroraBackground,
   CosmicParticleBackground,
   GalaxyParticleCanvas,
+  GalaxyScene,
+  ImmersiveBackground,
+  InfinityMark,
   InfinityParticleCanvas,
+  InfinityScene,
   InteractiveParticles,
   MorphingSphere,
   NoiseTexture,
   ParticleBurst,
   type ParticleBurstHandle,
+  SpotlightCard,
   useArsenalTheme,
   WeatherCanvas,
 } from '@arsenal/fx';
@@ -745,10 +751,41 @@ const DEMOS: Record<string, () => ReactNode> = {
       <GalaxyParticleCanvas interactive maxCount={900} />
     </FxScene>
   ),
+  'galaxy-scene': () => (
+    <div className="w-full">
+      <GalaxyScene style={{ minHeight: 460 }} />
+    </div>
+  ),
+  'immersive-background': () => (
+    <FxScene>
+      <ImmersiveBackground fixed={false} />
+    </FxScene>
+  ),
+  'infinity-mark': () => (
+    <div className="flex h-[240px] w-full items-center justify-center">
+      <InfinityMark title="Infinity" style={{ width: 220 }} />
+    </div>
+  ),
   'infinity-particle-canvas': () => (
     <FxScene hint="Move the pointer through the loop">
       <InfinityParticleCanvas interactive />
     </FxScene>
+  ),
+  'infinity-scene': () => (
+    <div className="w-full">
+      <InfinityScene />
+    </div>
+  ),
+  'magnetic-link': () => (
+    <div className="flex h-[160px] w-full items-center justify-center">
+      <MagneticLink
+        href="#magnetic-link"
+        onClick={(event) => event.preventDefault()}
+        className="rounded-full border border-arsenal-border bg-arsenal-surface px-6 py-3 text-sm font-medium text-arsenal-primary"
+      >
+        Hover and move across me
+      </MagneticLink>
+    </div>
   ),
   'interactive-particles': () => (
     <FxScene hint="Hover to part, press and hold to gather">
@@ -793,6 +830,16 @@ const DEMOS: Record<string, () => ReactNode> = {
   'service-node': () => <HeroPiecePreview piece='service-node' />,
   'data-path': () => <HeroPiecePreview piece='data-path' />,
   'scene-accents': () => <HeroPiecePreview piece='scene-accents' />,
+  'spotlight-card': () => (
+    <div className="flex w-full justify-center p-6">
+      <SpotlightCard style={{ maxWidth: 340 }}>
+        <h3 className="text-lg font-semibold">Systems thinking</h3>
+        <p className="mt-2 text-sm leading-relaxed">
+          Move the pointer across the card: the light and the rim follow it.
+        </p>
+      </SpotlightCard>
+    </div>
+  ),
   'weather-canvas': () => (
     <FxScene>
       <WeatherCanvas precip="rain" intensity={0.7} wind={0.3} ripples />
